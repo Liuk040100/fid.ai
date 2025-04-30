@@ -11,24 +11,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
-    // 2. Gestione simulata per il form di contatto (Apple Style)
-    // ----------------------------------------------------------
-    const contactFormApple = document.getElementById('contactFormApple');
-    if (contactFormApple) {
-        contactFormApple.addEventListener('submit', function(event) {
-            event.preventDefault(); // Impedisce l'invio reale del form
-
-            const name = document.getElementById('appleName').value;
-            const email = document.getElementById('appleEmail').value;
-
-            if (name && email) {
-                 alert(`Grazie, ${name}! La tua richiesta è stata ricevuta.\nTi contatteremo presto a ${email}.\n(Simulazione - Nessun dato inviato).`);
-                contactFormApple.reset();
-            } else {
-                 alert('Per favore, compila nome ed email.');
-            }
-        });
-    }
+    // 2. Gestione simulata per il form di contatto RIMOSSA
+    // ---------------------------------------------------
+    // const contactFormApple = document.getElementById('contactFormApple');
+    // if (contactFormApple) {
+    //     contactFormApple.addEventListener('submit', function(event) {
+    //         event.preventDefault(); // <-- RIMOSSO: Ora il form verrà inviato al PHP
+    //         // ... logica alert rimossa ...
+    //     });
+    // }
+    // Ora il form verrà gestito dal file specificato nell'attributo "action"
 
 
     // 3. Chiude la navbar mobile dopo aver cliccato un link (Apple Style)

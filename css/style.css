@@ -403,7 +403,7 @@ a:hover, .apple-link:hover {
 /* Responsive Adjustments */
 /* ========================================= */
 @media (max-width: 991.98px) {
-    body { padding-top: 60px; }
+    body { padding-top: 60px; } /* Considera l'altezza navbar */
     .navbar { padding-top: 0.6rem; padding-bottom: 0.6rem; }
     .apple-nav-link { margin: 0.2rem 0; }
     .apple-hero { padding-top: calc(60px + 3rem); min-height: auto; }

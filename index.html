@@ -14,7 +14,7 @@
     <!-- Bootstrap CSS (Base per layout e grid) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <!-- Font Awesome (Icone - ancora usate per alcune features) -->
+    <!-- Font Awesome (Icone) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- AOS - Animate On Scroll Library CSS -->
@@ -30,7 +30,6 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light-translucent fixed-top" id="mainNavbar">
         <div class="container">
             <a class="navbar-brand apple-nav-brand" href="#hero">
-                <!-- LOGO NOME AZIENDA: Assicurati che 'images/logo-nome-azienda.png' esista -->
                 <img src="images/logo-nome-azienda.png" alt="Segreteria Intelligente Logo" class="navbar-logo-img">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavApple" aria-controls="navbarNavApple" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +63,6 @@
                 <a href="#features" class="btn btn-outline-secondary apple-cta-secondary">Scopri di più <i class="fas fa-arrow-right small ms-1"></i></a>
             </div>
             <div class="hero-image-placeholder mt-5" data-aos="fade-up" data-aos-delay="300">
-                 <!-- IMMAGINE HERO PLACEHOLDER -->
                  <img src="images/placeholder-hero-apple.png" alt="Fid.ai per Desktop" class="img-fluid">
             </div>
         </div>
@@ -79,7 +77,6 @@
                 <div class="col-md-6 col-lg-3" data-aos="fade-up">
                     <div class="feature-card-apple text-center">
                          <div class="feature-icon-apple bg-blue-soft">
-                            <!-- LOGO TESTA SIMBOLO: Assicurati che 'images/logo-testa-simbolo.png' esista -->
                             <img src="images/logo-testa-simbolo.png" alt="AI Icon" class="feature-icon-image">
                          </div>
                         <h3 class="apple-h3 mt-3 mb-2">Risposte intelligenti</h3>
@@ -93,7 +90,7 @@
                             <i class="fas fa-plug-circle-check text-green"></i>
                          </div>
                         <h3 class="apple-h3 mt-3 mb-2">Configurazione rapida</h3>
-                        <p class="apple-p-small">Collega il tuo WhatsApp Business in pochi minuti tramite partner tecnologici affidabili (Twilio).</p>
+                        <p class="apple-p-small">Collega il tuo WhatsApp Business in pochi minuti tramite partner tecnologici affidabili (Sinch).</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
@@ -155,9 +152,9 @@
                  <span class="apple-tag">Consulenti</span>
                  <span class="apple-tag">Artigiani</span>
                  <span class="apple-tag">Formatori</span>
-                 <span class="apple-tag">Studi Medici</span>
+                 <span class="apple-tag">Studi medici</span>
                  <span class="apple-tag">Negozi</span>
-                 <span class="apple-tag">Agenti Immobiliari</span>
+                 <span class="apple-tag">Agenti immobiliari</span>
              </div>
          </div>
     </section>
@@ -175,14 +172,14 @@
                         <h3 class="apple-h3">Programma early access</h3>
                         <p class="apple-p mt-2 mb-4">Ricevi aggiornamenti, fornisci feedback e ottieni un prezzo di lancio vantaggioso.</p>
                         <a href="#contact" class="btn btn-primary apple-cta-main">Richiedi accesso ora</a>
-                        <p class="apple-p-small text-muted mt-3">(Costi infrastruttura WhatsApp/Twilio inclusi!)</p>
+                        <p class="apple-p-small text-muted mt-3">(Costi infrastruttura WhatsApp/Sinch inclusi!)</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section con placeholder aggiornati -->
+    <!-- Contact Section con form funzionante -->
     <section id="contact" class="contact-apple py-5">
         <div class="container">
             <h2 class="apple-h2 text-center mb-3" data-aos="fade-up">Mettiti in contatto</h2>
@@ -191,26 +188,31 @@
             </p>
             <div class="row justify-content-center">
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                    <form id="contactFormApple">
+                    <!-- <<<=== IL FORM ORA PUNTA A process_form.php ===>>> -->
+                    <form id="contactFormApple" method="POST" action="process_form.php">
                         <div class="mb-3">
                             <label for="appleName" class="form-label apple-form-label visually-hidden">Nome</label>
-                            <input type="text" class="form-control apple-input" id="appleName" placeholder="Nome" required>
+                            <!-- <<<=== Aggiunto name="nome" ===>>> -->
+                            <input type="text" class="form-control apple-input" id="appleName" name="nome" placeholder="Nome" required>
                         </div>
                         <div class="mb-3">
                              <label for="appleEmail" class="form-label apple-form-label visually-hidden">Email</label>
-                            <input type="email" class="form-control apple-input" id="appleEmail" placeholder="Email" required>
+                             <!-- <<<=== Aggiunto name="email" ===>>> -->
+                            <input type="email" class="form-control apple-input" id="appleEmail" name="email" placeholder="Email" required>
                         </div>
                         <div class="mb-4">
                             <label for="appleMessage" class="form-label apple-form-label visually-hidden">Messaggio</label>
-                            <textarea class="form-control apple-input" id="appleMessage" rows="4" placeholder="Messaggio (opzionale)"></textarea>
+                            <!-- <<<=== Aggiunto name="messaggio" ===>>> -->
+                            <textarea class="form-control apple-input" id="appleMessage" name="messaggio" rows="4" placeholder="Messaggio (opzionale)"></textarea>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary apple-cta-main">Invia richiesta</button>
                         </div>
                     </form>
                      <p class="text-center apple-p-small text-muted mt-4">
-                        In alternativa, scrivici a: <a href="mailto:services.fidai@gmail.com" class="apple-link">services.fidai@gmail.com</a>
-                        <!-- SOSTITUIRE EMAIL! -->
+                        In alternativa, scrivici a:
+                        <!-- <<<=== SOSTITUISCI CON LA TUA EMAIL PROFESSIONALE! ===>>> -->
+                        <a href="mailto:contatti@TUO-DOMINIO.com" class="apple-link">contatti@TUO-DOMINIO.com</a>
                     </p>
                 </div>
             </div>
@@ -221,28 +223,22 @@
     <footer class="apple-footer text-center py-5">
         <div class="container">
             <p class="apple-footer-text mb-2">
-                Copyright © 2025 Fid.ai. Tutti i diritti riservati.
+                Copyright © 2025 Fid.ai. Tutti i diritti riservati. <!-- Aggiorna l'anno se necessario -->
             </p>
-            <div class="apple-footer-links mb-3"> <!-- Aggiunto mb-3 -->
+            <div class="apple-footer-links mb-3">
+                 <!-- <<<=== SOSTITUIRE LINK REALI! ===>>> -->
                 <a href="#" class="apple-footer-link">Privacy Policy</a>
                 <span class="mx-1">|</span>
                 <a href="#" class="apple-footer-link">Termini di Servizio</a>
                 <span class="mx-1">|</span>
-                <a href="#contact" class="apple-footer-link">Contatti</a> <!-- Link alla sezione contatti -->
-                 <!-- SOSTITUIRE LINK REALI! -->
+                <a href="#contact" class="apple-footer-link">Contatti</a>
             </div>
             <div class="apple-social-icons">
-                <a href="https://www.linkedin.com/in/tuo-profilo" aria-label="LinkedIn">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://www.facebook.com/tuo-profilo" aria-label="Facebook">
-                  <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://x.com/tuo-profilo" aria-label="X">
-                  <i class="fab fa-x-twitter"></i>
-                </a>
-              </div>
-              
+                 <!-- <<<=== SOSTITUIRE LINK REALI AI TUOI PROFILI SOCIAL! ===>>> -->
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+            </div>
         </div>
     </footer>
 
