@@ -1,0 +1,421 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ========================================= */
+/* Apple-Inspired Style Variables & Resets */
+/* ========================================= */
+:root {
+    /* Palette Colori */
+    --apple-bg: #ffffff;
+    --apple-bg-light-gray: #f5f5f7;
+    --apple-text-primary: #1d1d1f;
+    --apple-text-secondary: #6e6e73;
+    --apple-link: #007AFF;
+    --apple-link-hover: #0056b3;
+    --apple-border: rgba(0, 0, 0, 0.15);
+    --apple-border-light: rgba(0, 0, 0, 0.08);
+
+    /* Colori Accento */
+    --accent-blue: var(--apple-link);
+    --accent-blue-soft: #e5f2ff;
+    --accent-green: #34c759;
+    --accent-green-soft: #eaf8ec;
+    --accent-gray: var(--apple-text-secondary);
+    --accent-gray-soft: var(--apple-bg-light-gray);
+
+    /* Tipografia */
+    --apple-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --apple-font-size-base: 16px;
+    --apple-line-height-base: 1.65;
+
+    /* Spaziature & Bordi */
+    --apple-section-padding: 6rem 0;
+    --apple-border-radius: 12px;
+    --apple-border-radius-small: 8px;
+
+    /* Bootstrap Overrides */
+    --bs-body-font-family: var(--apple-font-family);
+    --bs-body-color: var(--apple-text-primary);
+    --bs-body-bg: var(--apple-bg);
+    --bs-link-color: var(--apple-link);
+    --bs-link-hover-color: var(--apple-link-hover);
+    --bs-border-radius: var(--apple-border-radius-small);
+    --bs-border-radius-lg: var(--apple-border-radius);
+    --bs-primary: var(--apple-link);
+    --bs-primary-rgb: 0, 122, 255;
+    --bs-secondary: var(--apple-text-secondary);
+    --bs-light: var(--apple-bg-light-gray);
+}
+
+/* ========================================= */
+/* Stili Globali */
+/* ========================================= */
+body {
+    font-size: var(--apple-font-size-base);
+    line-height: var(--apple-line-height-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, .apple-h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: var(--apple-text-primary);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
+
+h2, .apple-h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--apple-text-primary);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+}
+
+h3, .apple-h3 {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+    color: var(--apple-text-primary);
+    line-height: 1.3;
+}
+
+p, .apple-p {
+    font-size: 1.05rem;
+    color: var(--apple-text-secondary);
+    line-height: 1.7;
+}
+
+p.lead, .apple-subheadline {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    color: var(--apple-text-secondary);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.apple-p-small {
+    font-size: 0.95rem;
+    color: var(--apple-text-secondary);
+    line-height: 1.6;
+}
+
+a, .apple-link {
+    color: var(--apple-link);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+a:hover, .apple-link:hover {
+    color: var(--apple-link-hover);
+    text-decoration: underline;
+}
+
+.bg-light-gray { background-color: var(--apple-bg-light-gray) !important; }
+
+/* ========================================= */
+/* Navbar con Logo Immagine */
+/* ========================================= */
+.navbar {
+    transition: background-color 0.5s ease, box-shadow 0.3s ease;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+.bg-light-translucent {
+    background-color: rgba(248, 249, 250, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.apple-nav-brand {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--apple-text-primary);
+    display: inline-flex; /* Per allineare img verticalmente se necessario */
+    align-items: center;
+}
+/* Stile per l'immagine logo nella navbar */
+.navbar-logo-img {
+    height: 28px; /* Altezza fissa per il logo */
+    width: auto; /* Mantiene proporzioni */
+    vertical-align: middle; /* Buon fallback */
+}
+
+.apple-nav-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--apple-text-primary) !important;
+    margin: 0 0.75rem;
+    padding: 0.5rem 0;
+    transition: color 0.2s ease;
+}
+.apple-nav-link:hover { color: var(--apple-link) !important; }
+.navbar-toggler { font-size: 1.2rem; }
+.navbar-toggler:focus { box-shadow: none; }
+.apple-cta-nav {
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.4rem 0.9rem;
+    border-radius: 15px;
+    background-color: var(--apple-link);
+    border-color: var(--apple-link);
+    color: #fff;
+    transition: background-color 0.2s ease;
+}
+.apple-cta-nav:hover {
+    background-color: var(--apple-link-hover);
+    border-color: var(--apple-link-hover);
+    color: #fff;
+}
+
+/* ========================================= */
+/* Hero Section */
+/* ========================================= */
+.apple-hero {
+    padding-top: calc(70px + 4rem);
+    padding-bottom: 4rem;
+    min-height: 90vh;
+    background-color: var(--apple-bg);
+}
+.hero-image-placeholder img {
+    max-width: 80%;
+    margin: 0 auto;
+    border-radius: var(--apple-border-radius);
+}
+
+/* CTA Buttons (Apple Style) */
+.btn.apple-cta-main {
+    background-color: var(--apple-link);
+    border-color: var(--apple-link);
+    color: #fff;
+    font-weight: 600; /* Bottone primario più bold */
+    padding: 0.8rem 1.75rem;
+    border-radius: 30px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    font-size: 1rem;
+}
+.btn.apple-cta-main:hover {
+    background-color: var(--apple-link-hover);
+    border-color: var(--apple-link-hover);
+    color: #fff;
+    transform: scale(1.03);
+}
+
+.btn.apple-cta-secondary {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--apple-link);
+    font-weight: 500;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+     font-size: 1rem;
+}
+.btn.apple-cta-secondary:hover {
+    color: var(--apple-link-hover);
+    background-color: rgba(0, 122, 255, 0.08);
+    text-decoration: none;
+}
+.btn.apple-cta-secondary .fas {
+     font-size: 0.8em;
+     transition: transform 0.2s ease;
+}
+.btn.apple-cta-secondary:hover .fas { transform: translateX(3px); }
+
+
+/* ========================================= */
+/* Features Section con Logo Immagine */
+/* ========================================= */
+.feature-section-apple { padding: var(--apple-section-padding); }
+.feature-card-apple { padding: 1rem; }
+
+/* Contenitore per tutte le icone (FA o Img) */
+.feature-icon-apple {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px; /* Aumentata dimensione */
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 1.5rem; /* Più spazio sotto */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Aggiunta ombra sottile */
+    transition: transform 0.3s ease; /* Transizione per hover */
+}
+.feature-card-apple:hover .feature-icon-apple {
+    transform: scale(1.08); /* Leggero zoom su hover card */
+}
+
+/* Stili per colori di sfondo e testo specifici */
+.feature-icon-apple.bg-blue-soft { background-color: var(--accent-blue-soft); }
+.feature-icon-apple .text-blue { color: var(--accent-blue); }
+.feature-icon-apple.bg-green-soft { background-color: var(--accent-green-soft); }
+.feature-icon-apple .text-green { color: var(--accent-green); }
+.feature-icon-apple.bg-gray-soft { background-color: var(--accent-gray-soft); }
+.feature-icon-apple .text-gray { color: var(--accent-gray); }
+
+/* Stili per icone FontAwesome DENTRO .feature-icon-apple */
+.feature-icon-apple i {
+    font-size: 2rem; /* Dimensione icona FA */
+    line-height: 1; /* Assicura che non alteri altezza */
+}
+
+/* Stili specifici per l'immagine logo DENTRO .feature-icon-apple */
+.feature-icon-image {
+    width: 60%; /* Dimensione immagine relativa al contenitore */
+    height: 60%;
+    object-fit: contain; /* Mantiene proporzioni immagine */
+}
+
+/* ========================================= */
+/* How it Works Section */
+/* ========================================= */
+.how-it-works-apple { padding: var(--apple-section-padding); }
+.step-number-apple {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    border: 2px solid var(--apple-text-primary);
+    color: var(--apple-text-primary);
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem; /* Più spazio */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+/* Effetto hover per step (opzionale) */
+/* .col-md-4:hover .step-number-apple {
+    background-color: var(--apple-link);
+    color: var(--apple-bg);
+    border-color: var(--apple-link);
+} */
+
+
+/* ========================================= */
+/* Target Audience Section */
+/* ========================================= */
+.target-apple { padding: var(--apple-section-padding); }
+.apple-tag {
+    display: inline-block;
+    background-color: var(--apple-bg-light-gray);
+    color: var(--apple-text-secondary);
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    margin: 0.4rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+.apple-tag:hover {
+    background-color: var(--accent-blue-soft);
+    color: var(--apple-link);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.06);
+}
+
+/* ========================================= */
+/* Pricing Section */
+/* ========================================= */
+.pricing-apple { padding: var(--apple-section-padding); }
+.apple-pricing-card {
+    background-color: var(--apple-bg);
+    padding: 3rem;
+    border-radius: var(--apple-border-radius);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* ========================================= */
+/* Contact Section */
+/* ========================================= */
+.contact-apple { padding: var(--apple-section-padding); }
+.apple-form-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--apple-text-secondary);
+    margin-bottom: 0.5rem;
+}
+.apple-input {
+    background-color: var(--apple-bg-light-gray);
+    border: 1px solid transparent;
+    border-radius: var(--apple-border-radius-small);
+    padding: 0.9rem 1.1rem;
+    font-size: 1rem;
+    color: var(--apple-text-primary);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.apple-input::placeholder {
+    color: var(--apple-text-secondary);
+    opacity: 0.8;
+}
+.apple-input:focus {
+    background-color: var(--apple-bg);
+    border-color: var(--apple-link);
+    box-shadow: none;
+    outline: none;
+}
+
+/* ========================================= */
+/* Footer */
+/* ========================================= */
+.apple-footer {
+    background-color: var(--apple-bg-light-gray);
+    border-top: 1px solid var(--apple-border-light);
+}
+.apple-footer-text {
+    font-size: 0.85rem;
+    color: var(--apple-text-secondary);
+    margin-bottom: 0.8rem;
+}
+.apple-footer-links {
+    margin-bottom: 1rem;
+}
+.apple-footer-links a,
+.apple-footer-links span {
+    font-size: 0.85rem;
+    color: var(--apple-text-secondary);
+    text-decoration: none;
+}
+.apple-footer-links a:hover {
+    color: var(--apple-link);
+    text-decoration: underline;
+}
+.apple-social-icons a {
+    color: var(--apple-text-secondary);
+    font-size: 1rem;
+    margin: 0 0.9rem;
+    transition: color 0.2s ease;
+}
+.apple-social-icons a:hover {
+    color: var(--apple-link);
+}
+
+/* ========================================= */
+/* AOS Animation Overrides (Opzionale) */
+/* ========================================= */
+[data-aos] {
+    /* transition-duration: 600ms !important; */
+}
+
+/* ========================================= */
+/* Responsive Adjustments */
+/* ========================================= */
+@media (max-width: 991.98px) {
+    body { padding-top: 60px; }
+    .navbar { padding-top: 0.6rem; padding-bottom: 0.6rem; }
+    .apple-nav-link { margin: 0.2rem 0; }
+    .apple-hero { padding-top: calc(60px + 3rem); min-height: auto; }
+}
+
+@media (max-width: 767.98px) {
+    :root { --apple-section-padding: 4rem 0; }
+    h1, .apple-h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+    h2, .apple-h2 { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+    p.lead, .apple-subheadline { font-size: clamp(1rem, 4vw, 1.2rem); }
+    .hero-image-placeholder img { max-width: 90%; }
+    .apple-pricing-card { padding: 2rem; }
+    .apple-tag { margin: 0.3rem; padding: 0.5rem 1rem; font-size: 0.9rem;}
+    .feature-card-apple { margin-bottom: 1.5rem; } /* Aggiunge spazio tra feature su mobile */
+}
