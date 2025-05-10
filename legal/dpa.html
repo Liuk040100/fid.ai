@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addendum Trattamento Dati (DPA) - fid.ai</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="../images/favicon.png" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style> /* Stili per l'indice e tabelle DPA */
+        .document-index {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            border-radius: var(--card-border-radius-small);
+        }
+        .document-index h2 {
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--text-primary-dark);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color-dark);
+        }
+        .document-index ul { list-style-type: none; padding-left: 0; }
+        .document-index ul li a { text-decoration: none; color: var(--text-accent); font-family: var(--font-secondary); font-weight: 600; display: block; padding: 0.3rem 0; }
+        .document-index ul li a:hover { color: var(--primary-accent-hover); text-decoration: underline; }
+        .document-index ul ul { padding-left: 1.5rem; margin-top: 0.2rem; margin-bottom: 0.5rem; }
+        .document-index ul ul li a { font-weight: 400; font-size: 0.95rem; }
+
+        .table-dpa {
+            width: 100%;
+            margin-bottom: 1.5rem;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .table-dpa th, .table-dpa td {
+            border: 1px solid var(--border-color-light);
+            padding: 0.6rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        .table-dpa th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: var(--text-primary-dark);
+        }
+        .table-dpa tr:nth-child(even) td {
+            background-color: #fdfdfd;
+        }
+        .document-content h3 + .table-dpa {
+             margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand nav-logo" href="../index.html#hero">
+                <img src="../images/logo-nome-azienda.png" alt="fid.ai Logo" class="navbar-logo-img">
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavContent" aria-controls="navbarNavContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavContent">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="soluzioneDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Soluzione </a>
+                        <ul class="dropdown-menu" aria-labelledby="soluzioneDropdown">
+                            <li><a class="dropdown-item" href="../index.html#features">Funzionalità</a></li>
+                            <li><a class="dropdown-item" href="../index.html#how-it-works">Come funziona</a></li>
+                            <li><a class="dropdown-item" href="../resources/partner.html">Partner</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="risorseDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Risorse </a>
+                        <ul class="dropdown-menu" aria-labelledby="risorseDropdown">
+                            <li><a class="dropdown-item" href="../index.html#target">Ideale per</a></li>
+                            <li><a class="dropdown-item" href="../resources/suggerimenti.html">Suggerimenti</a></li>
+                            <li><a class="dropdown-item" href="../resources/faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"> <a class="nav-link" href="../prezzi.html">Prezzi</a> </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0"> <a class="btn btn-primary btn-sm cta-nav-button" href="../index.html#contact">Richiedi accesso</a> </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Document Content Section -->
+    <section class="page-container">
+        <div class="container">
+            <article class="document-content">
+                <h1>Addendum sul trattamento dei dati (DPA)</h1>
+                <p><em>tra Cliente e fid.ai</em></p>
+                <p><em>Data ultimo aggiornamento: 9 Maggio 2025</em></p>
+
+                <!-- Indice del Documento -->
+                <nav class="document-index" aria-labelledby="documentIndexTitleDPA">
+                    <h2 class="index-title" id="documentIndexTitleDPA">Indice dei contenuti</h2>
+                    <ul>
+                        <li><a href="#dpa-parti-data">Parti e data di efficacia</a></li>
+                        <li><a href="#dpa-premesse">Premesse</a></li>
+                        <li><a href="#dpa-definizioni">1. Definizioni</a></li>
+                        <li><a href="#dpa-dettagli-trattamento">2. Oggetto, durata, natura e finalità del trattamento, tipi di dati personali e categorie di interessati</a></li>
+                        <li><a href="#dpa-obblighi-responsabile">3. Obblighi del responsabile del trattamento (fid.ai)</a></li>
+                        <li><a href="#dpa-obblighi-titolare">4. Obblighi del titolare del trattamento (cliente)</a></li>
+                        <li><a href="#dpa-misure-sicurezza">5. Misure tecniche e organizzative di sicurezza</a></li>
+                        <li><a href="#dpa-elenco-subprocessor">6. Elenco dei sub-processor autorizzati</a></li>
+                        <li><a href="#dpa-disposizioni-finali">7. Disposizioni finali</a></li>
+                        <li><a href="#dpa-allegato1">Allegato 1: Misure tecniche e organizzative di sicurezza</a></li>
+                        <li><a href="#dpa-allegato2">Allegato 2: Elenco dei sub-responsabili autorizzati</a></li>
+                    </ul>
+                </nav>
+                <!-- Fine Indice -->
+
+                <p id="dpa-parti-data">Il presente Addendum sul Trattamento dei Dati ("DPA") è stipulato tra:</p>
+                <p><strong>Il cliente</strong> (come definito nei <a href="termini-di-servizio.html">termini di servizio</a> di fid.ai, di seguito il "titolare del trattamento" o "controller")</p>
+                <p>E</p>
+                <p><strong>fid.ai S.r.l.</strong>, con sede legale in Torino, Italy, P.IVA IT01234567890 (di seguito "fid.ai", il "responsabile del trattamento" o "processor").</p>
+                <p>(Il titolare del trattamento e il responsabile del trattamento sono di seguito denominati congiuntamente le "parti" e singolarmente la "parte").</p>
+                <p><strong>Data di efficacia:</strong> il presente DPA entra in vigore alla data di accettazione da parte del cliente dei <a href="termini-di-servizio.html">termini di servizio</a> di fid.ai ("ToS") o, se successiva, alla data in cui il cliente inizia a utilizzare i servizi fid.ai che comportano il trattamento di dati personali degli utenti finali del cliente.</p>
+
+                <h2 id="dpa-premesse">Premesse</h2>
+                <ol type="A">
+                    <li>Il titolare del trattamento ha sottoscritto i ToS di fid.ai ("contratto principale") per l'utilizzo della piattaforma SaaS "Segreteria Intelligente" ("servizio principale" o "piattaforma") fornita da fid.ai, che consente al titolare del trattamento di utilizzare il proprio numero di telefono WhatsApp Business per comunicare con i propri utenti finali ("interessati").</li>
+                    <li>Nell'ambito della fornitura del servizio principale, fid.ai tratterà dati personali per conto del titolare del trattamento.</li>
+                    <li>Il presente DPA ha lo scopo di garantire che tale trattamento avvenga in conformità con le leggi applicabili sulla protezione dei dati, in particolare con l'Articolo 28 del Regolamento (UE) 2016/679 ("GDPR").</li>
+                    <li>Il presente DPA è parte integrante e sostanziale del contratto principale. In caso di conflitto tra le disposizioni del presente DPA e quelle del contratto principale in materia di trattamento dei dati personali, prevarranno le disposizioni del presente DPA.</li>
+                </ol>
+                <p>LE PARTI CONVENGONO QUANTO SEGUE:</p>
+
+                <h2 id="dpa-definizioni">1. Definizioni</h2>
+                <p>1.1. I termini utilizzati nel presente DPA avranno il significato loro attribuito nel GDPR, salvo ove diversamente specificato. In particolare:</p>
+                <ul>
+                    <li><strong>"Dati personali":</strong> qualsiasi informazione riguardante una persona fisica identificata o identificabile ("interessato"); si considera identificabile la persona fisica che può essere identificata, direttamente o indirettamente, con particolare riferimento a un identificativo come il nome, un numero di identificazione, dati relativi all'ubicazione, un identificativo online o a uno o più elementi caratteristici della sua identità fisica, fisiologica, genetica, psichica, economica, culturale o sociale. Ai fini del presente DPA, i dati personali si riferiscono ai dati degli utenti finali del titolare del trattamento.</li>
+                    <li><strong>"Trattamento":</strong> qualsiasi operazione o insieme di operazioni, compiute con o senza l'ausilio di processi automatizzati e applicate a dati personali o insiemi di dati personali, come la raccolta, la registrazione, l'organizzazione, la strutturazione, la conservazione, l'adattamento o la modifica, l'estrazione, la consultazione, l'uso, la comunicazione mediante trasmissione, diffusione o qualsiasi altra forma di messa a disposizione, il raffronto o l'interconnessione, la limitazione, la cancellazione o la distruzione.</li>
+                    <li><strong>"Titolare del trattamento" (o "controller"):</strong> la persona fisica o giuridica, l'autorità pubblica, il servizio o altro organismo che, singolarmente o insieme ad altri, determina le finalità e i mezzi del trattamento di dati personali (in questo caso, il cliente di fid.ai).</li>
+                    <li><strong>"Responsabile del trattamento" (o "processor"):</strong> la persona fisica o giuridica, l'autorità pubblica, il servizio o altro organismo che tratta dati personali per conto del titolare del trattamento (in questo caso, fid.ai).</li>
+                    <li><strong>"Sub-responsabile del trattamento" (o "sub-processor"):</strong> qualsiasi soggetto terzo incaricato dal responsabile del trattamento per effettuare specifiche attività di trattamento di dati personali per conto del titolare del trattamento.</li>
+                    <li><strong>"Violazione dei dati personali" (o "data breach"):</strong> la violazione di sicurezza che comporta accidentalmente o in modo illecito la distruzione, la perdita, la modifica, la divulgazione non autorizzata o l'accesso ai dati personali trasmessi, conservati o comunque trattati.</li>
+                    <li><strong>"Leggi applicabili sulla protezione dei dati":</strong> tutte le leggi e i regolamenti applicabili in materia di protezione dei dati e privacy, inclusi, a titolo esemplificativo, il GDPR e le relative legislazioni nazionali di attuazione.</li>
+                    <li><strong>"Misure tecniche e organizzative adeguate":</strong> le misure volte a garantire un livello di sicurezza adeguato al rischio del trattamento, come previsto dall'Art. 32 del GDPR.</li>
+                </ul>
+                <p>1.2. Altri termini con lettera maiuscola non definiti nel presente DPA avranno il significato loro attribuito nel contratto principale.</p>
+
+                <h2 id="dpa-dettagli-trattamento">2. Oggetto, durata, natura e finalità del trattamento, tipi di dati personali e categorie di interessati</h2>
+                <p><strong>2.1. Oggetto del trattamento:</strong> la fornitura del servizio principale da parte di fid.ai al titolare del trattamento, che implica il trattamento di dati personali degli interessati del titolare del trattamento per consentire le comunicazioni tramite WhatsApp Business.</p>
+                <p><strong>2.2. Durata del trattamento:</strong> la durata del trattamento dei dati personali da parte di fid.ai corrisponderà alla durata del contratto principale, salvo diversa istruzione scritta del titolare del trattamento o requisiti di conservazione imposti dalla legge.</p>
+                <p><strong>2.3. Natura del trattamento:</strong> le operazioni di trattamento includono la ricezione, la trasmissione, la conservazione (temporanea o secondo le configurazioni del cliente), la visualizzazione, l'organizzazione, l'analisi (se prevista dalle funzionalità della piattaforma e attivata dal cliente) e la cancellazione dei messaggi WhatsApp e dei relativi metadati.</p>
+                <p><strong>2.4. Finalità del trattamento:</strong> il trattamento dei dati personali è effettuato al solo scopo di:</p>
+                <ol type="a">
+                    <li>Eseguire le istruzioni documentate del titolare del trattamento, come specificato nel contratto principale e nel presente DPA.</li>
+                    <li>Consentire al titolare del trattamento di inviare, ricevere e gestire le comunicazioni WhatsApp con i propri interessati attraverso la piattaforma fid.ai.</li>
+                    <li>Fornire le funzionalità della piattaforma sottoscritte dal titolare del trattamento.</li>
+                </ol>
+                <p><strong>2.5. Tipi di dati personali trattati:</strong></p>
+                <ol type="a">
+                    <li>Numeri di telefono degli interessati.</li>
+                    <li>Identificativi WhatsApp (es. WhatsApp ID).</li>
+                    <li>Contenuto dei messaggi scambiati tra il titolare del trattamento e i suoi interessati tramite WhatsApp (testo, immagini, video, audio, documenti, a seconda di quanto trasmesso).</li>
+                    <li>Metadati relativi ai messaggi (es. data, ora, stato di consegna, tipo di messaggio).</li>
+                    <li>Informazioni del profilo WhatsApp dell'interessato (se visibili e trasmesse).</li>
+                    <li>Dati relativi al consenso (opt-in) e alla revoca del consenso (opt-out) degli interessati, se gestiti o registrati tramite la piattaforma su istruzione del titolare del trattamento.</li>
+                    <li>Qualsiasi altro dato personale che il titolare del trattamento sceglie di far transitare o memorizzare sulla piattaforma in relazione alle comunicazioni con i propri interessati.</li>
+                </ol>
+                <p><strong>2.6. Categorie di interessati:</strong> gli interessati sono i clienti, i pazienti, i contatti commerciali o qualsiasi altra persona fisica con cui il titolare del trattamento comunica utilizzando il servizio principale.</p>
+
+                <h2 id="dpa-obblighi-responsabile">3. Obblighi del responsabile del trattamento (fid.ai)</h2>
+                <p>fid.ai, in qualità di responsabile del trattamento, si impegna a:</p>
+                <p><strong>3.1. Trattamento secondo le istruzioni:</strong> trattare i dati personali esclusivamente su istruzione documentata del titolare del trattamento, che si considera fornita attraverso il contratto principale, il presente DPA, l'utilizzo e la configurazione della piattaforma da parte del titolare del trattamento e qualsiasi altra istruzione scritta fornita dal titolare del trattamento. fid.ai informerà immediatamente il titolare del trattamento qualora, a suo parere, un'istruzione violi il GDPR o altre disposizioni dell'Unione o degli Stati membri relative alla protezione dei dati.</p>
+                <p><strong>3.2. Riservatezza:</strong> garantire che le persone autorizzate al trattamento dei dati personali (es. dipendenti, collaboratori) si siano impegnate alla riservatezza o siano soggette a un adeguato obbligo legale di riservatezza.</p>
+                <p><strong>3.3. Misure di sicurezza (Art. 32 GDPR):</strong> adottare e mantenere misure tecniche e organizzative adeguate per garantire un livello di sicurezza proporzionato al rischio del trattamento, tenendo conto dello stato dell'arte, dei costi di attuazione, nonché della natura, dell'oggetto, del contesto e delle finalità del trattamento, come anche del rischio di varia probabilità e gravità per i diritti e le libertà delle persone fisiche. Tali misure sono descritte più in dettaglio nell'<a href="#dpa-allegato1">Allegato 1 ("Misure tecniche e organizzative di sicurezza")</a> al presente DPA.</p>
+                <p><strong>3.4. Ricorso a sub-responsabili (Art. 28.2 e 28.4 GDPR):</strong></p>
+                <ol type="a">
+                    <li>Autorizzazione generale: il titolare del trattamento, con la sottoscrizione del presente DPA, concede a fid.ai un'autorizzazione generale a ricorrere a sub-responsabili per l'erogazione del servizio principale.</li>
+                    <li>Sub-responsabili essenziali: il titolare del trattamento riconosce e accetta specificamente che fid.ai utilizzerà i sub-responsabili essenziali Twilio Ireland Limited (o Twilio Inc.) e Meta Platforms Ireland Limited (o Meta Platforms, Inc.) per la fornitura dei servizi di messaggistica WhatsApp.</li>
+                    <li>Elenco degli altri sub-responsabili: fid.ai manterrà un elenco aggiornato degli altri sub-responsabili utilizzati per servizi accessori (es. hosting, IA, pagamenti, supporto), disponibile nell'<a href="#dpa-allegato2">Allegato 2 ("Elenco dei sub-responsabili autorizzati")</a>.</li>
+                    <li>Obblighi contrattuali con i sub-responsabili: fid.ai si impegna a stipulare con ciascun sub-responsabile un accordo scritto che imponga obblighi di protezione dei dati non meno rigorosi di quelli previsti dal presente DPA.</li>
+                    <li>Notifica di nuovi sub-responsabili e diritto di obiezione: fid.ai informerà il titolare del trattamento di qualsiasi modifica prevista riguardante l'aggiunta o la sostituzione di sub-responsabili (diversi da Twilio e Meta), dando al titolare del trattamento la possibilità di opporsi entro 14 giorni. In caso di obiezione motivata e persistente, e qualora non sia possibile trovare una soluzione alternativa, il titolare del trattamento potrà recedere dal contratto principale limitatamente ai servizi impattati.</li>
+                    <li>Responsabilità: fid.ai rimane pienamente responsabile nei confronti del titolare del trattamento per l'operato dei propri sub-responsabili.</li>
+                </ol>
+                <p><strong>3.5. Diritti degli interessati:</strong> assistere il titolare del trattamento, per quanto possibile, con misure tecniche e organizzative adeguate, a soddisfare l'obbligo del titolare del trattamento di dare seguito alle richieste per l'esercizio dei diritti dell'interessato (Capo III del GDPR).</p>
+                <p><strong>3.6. Assistenza al titolare del trattamento (Art. 32-36 GDPR):</strong> assistere il titolare del trattamento nel garantire il rispetto degli obblighi di cui agli articoli da 32 a 36 del GDPR (sicurezza, notifica data breach, DPIA, consultazione preventiva).</p>
+                <p><strong>3.7. Cancellazione o restituzione dei dati:</strong> al termine della prestazione dei servizi, su scelta del titolare del trattamento (da comunicare entro 30 giorni), fid.ai cancellerà o restituirà tutti i dati personali e cancellerà le copie esistenti, salvo obblighi di legge. In assenza di comunicazione, fid.ai procederà alla cancellazione entro 60-90 giorni dai sistemi attivi, e successivamente dai backup.</p>
+                <p><strong>3.8. Informazioni e audit (Art. 28.3.h GDPR):</strong> mettere a disposizione del titolare del trattamento tutte le informazioni necessarie per dimostrare il rispetto degli obblighi e consentire e contribuire alle attività di verifica, su richiesta scritta (non più di una volta all'anno, salvo incidenti) e a spese del titolare.</p>
+                <p><strong>3.9. Trasferimenti internazionali di dati personali:</strong> non trasferire dati personali extra-SEE senza adeguate garanzie (Capo V GDPR). L'uso di Twilio e Meta può comportare trasferimenti verso Paesi extra-SEE (es. USA), per i quali fid.ai garantisce che tali sub-responsabili abbiano meccanismi di trasferimento validi (es. SCC, DPF).</p>
+                <p><strong>3.10. Notifica di violazioni dei dati personali al titolare del trattamento:</strong> in caso di violazione dei dati personali, fid.ai informerà il titolare del trattamento senza ingiustificato ritardo, fornendo i dettagli necessari e collaborando per gli adempimenti di notifica.</p>
+
+                <h2 id="dpa-obblighi-titolare">4. Obblighi del titolare del trattamento (cliente)</h2>
+                <p>Il titolare del trattamento si impegna a:</p>
+                <p><strong>4.1. Liceità del trattamento e delle istruzioni:</strong> garantire che il trattamento dei dati personali e le istruzioni fornite a fid.ai siano leciti e conformi alle leggi applicabili, inclusa la responsabilità dell'ottenimento di una valida base giuridica (es. consenso) per l'invio di comunicazioni WhatsApp.</p>
+                <p><strong>4.2. Accuratezza e qualità dei dati:</strong> essere responsabile dell'accuratezza, qualità e liceità dei dati personali forniti a fid.ai.</p>
+                <p><strong>4.3. Informativa agli interessati:</strong> fornire ai propri interessati tutte le informazioni necessarie sul trattamento dei loro dati personali (Art. 13-14 GDPR).</p>
+                <p><strong>4.4. Gestione delle richieste degli interessati:</strong> essere l'unico responsabile della gestione delle richieste degli interessati per l'esercizio dei loro diritti.</p>
+                <p><strong>4.5. Notifica di requisiti specifici:</strong> informare fid.ai di eventuali requisiti di trattamento specifici.</p>
+                <p><strong>4.6. Rispetto delle policy di terze parti:</strong> garantire che l'utilizzo dei servizi WhatsApp tramite fid.ai sia conforme alle policy di Meta/WhatsApp e Twilio.</p>
+
+                <h2 id="dpa-misure-sicurezza">5. Misure tecniche e organizzative di sicurezza</h2>
+                <p>Le misure tecniche e organizzative di sicurezza adottate da fid.ai per proteggere i dati personali sono descritte nell'<a href="#dpa-allegato1">Allegato 1</a> al presente DPA. fid.ai si riserva il diritto di aggiornare tali misure, purché il livello di sicurezza complessivo non venga ridotto.</p>
+
+                <h2 id="dpa-elenco-subprocessor">6. Elenco dei sub-processor autorizzati</h2>
+                <p>L'elenco dei sub-responsabili autorizzati da fid.ai, oltre a Twilio e Meta, è disponibile nell'<a href="#dpa-allegato2">Allegato 2</a> al presente DPA. Tale elenco include il nome del sub-responsabile, il servizio fornito e il Paese in cui il servizio è prevalentemente erogato o dove i dati potrebbero essere trattati.</p>
+
+                <h2 id="dpa-disposizioni-finali">7. Disposizioni finali</h2>
+                <p><strong>7.1. Legge applicabile e foro competente:</strong> il presente DPA è disciplinato dalla legge italiana. Foro competente esclusivo: Torino.</p>
+                <p><strong>7.2. Prevalenza:</strong> in caso di conflitto tra DPA e contratto principale sui dati personali, prevale il DPA.</p>
+                <p><strong>7.3. Modifiche al DPA:</strong> fid.ai si riserva il diritto di modificare il DPA. Le modifiche sostanziali saranno comunicate con preavviso. L'uso continuato implica l'accettazione.</p>
+                <p><strong>7.4. Accordo integrale:</strong> DPA, allegati e contratto principale costituiscono l'intero accordo.</p>
+                <p><strong>7.5. Validità:</strong> se una clausola è invalida, le altre rimangono efficaci. La clausola invalida sarà sostituita.</p>
+
+                <hr style="margin: 3rem 0;">
+
+                <h2 id="dpa-allegato1">Allegato 1: Misure tecniche e organizzative di sicurezza</h2>
+                <p>Il responsabile del trattamento (fid.ai S.r.l.) adotta le seguenti misure tecniche e organizzative per garantire un livello di sicurezza adeguato al rischio del trattamento dei dati personali per conto del titolare del trattamento, in conformità all'Art. 32 del GDPR:</p>
+                <h3>A. Pseudonimizzazione e crittografia dei dati personali:</h3>
+                <ul>
+                    <li><strong>Crittografia in transito:</strong> tutte le comunicazioni tra il cliente e la piattaforma fid.ai, tra la piattaforma fid.ai e i servizi di terze parti (inclusi Twilio e Meta), e le comunicazioni interne tra i servizi della piattaforma avvengono tramite protocolli crittografati sicuri (es. HTTPS con TLS 1.2 o superiore).</li>
+                    <li><strong>Crittografia a riposo:</strong> i dati personali sensibili, inclusi i contenuti dei messaggi WhatsApp e le credenziali di accesso, sono conservati in forma crittografata nei database e nei sistemi di storage (es. utilizzando crittografia a livello di database come AES-256 o meccanismi di crittografia forniti dal provider cloud AWS). Le chiavi di crittografia sono gestite in modo sicuro.</li>
+                    <li><strong>Pseudonimizzazione:</strong> ove possibile e appropriato per finalità di analisi o sviluppo, i dati vengono pseudonimizzati o aggregati per ridurre i rischi per la privacy.</li>
+                </ul>
+                <h3>B. Misure per garantire la riservatezza, integrità, disponibilità e resilienza dei sistemi e dei servizi di trattamento:</h3>
+                <ul>
+                    <li><strong>Controllo degli accessi logici:</strong>
+                        <ul>
+                            <li>Autenticazione: accesso ai sistemi di gestione della piattaforma e ai database protetto da credenziali univoche. Per il personale di fid.ai con accesso a sistemi critici o dati sensibili, è implementata l'autenticazione a più fattori (MFA). Le policy per le password richiedono complessità adeguata e cambi periodici.</li>
+                            <li>Autorizzazioni: applicazione del principio del minimo privilegio ("least privilege"). L'accesso ai dati personali da parte del personale di fid.ai è limitato ai soli individui che ne hanno necessità per lo svolgimento delle proprie mansioni e sulla base di ruoli definiti. Gli accessi sono regolarmente revisionati.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Integrità dei dati:</strong> utilizzo di meccanismi per garantire l'integrità dei dati durante la trasmissione e la conservazione (es. checksum, logging delle modifiche ove appropriato).</li>
+                    <li><strong>Disponibilità e resilienza:</strong> la piattaforma è ospitata su infrastruttura cloud (AWS) progettata per alta disponibilità e resilienza, con ridondanza dei componenti critici e meccanismi di failover. Viene effettuato un monitoraggio continuo delle prestazioni e della disponibilità del servizio.</li>
+                </ul>
+                <h3>C. Misure per ripristinare tempestivamente la disponibilità e l'accesso ai dati personali in caso di incidente fisico o tecnico:</h3>
+                <ul>
+                    <li><strong>Backup dei dati:</strong> vengono eseguiti backup regolari e automatizzati dei dati personali trattati sulla piattaforma. I backup sono conservati in modo sicuro, crittografati e in località geograficamente separate dalla infrastruttura di produzione (sfruttando le funzionalità di AWS).</li>
+                    <li><strong>Disaster recovery:</strong> esiste un piano di disaster recovery volto a ripristinare i servizi e l'accesso ai dati entro tempi definiti in caso di grave incidente. Tale piano è periodicamente testato e aggiornato.</li>
+                </ul>
+                <h3>D. Procedure per testare, verificare e valutare regolarmente l'efficacia delle misure tecniche e organizzative:</h3>
+                <ul>
+                    <li><strong>Gestione delle vulnerabilità:</strong> vengono effettuate scansioni periodiche di vulnerabilità sui sistemi e sulle applicazioni. Le vulnerabilità identificate sono valutate e corrette in base alla loro criticità. Viene implementato un processo di patch management per applicare tempestivamente gli aggiornamenti di sicurezza.</li>
+                    <li><strong>Test di sicurezza:</strong> vengono condotti test di sicurezza, inclusi penetration test (da terze parti o interni), con frequenza commisurata al rischio, per identificare e correggere potenziali debolezze.</li>
+                    <li><strong>Revisioni interne:</strong> le policy e le procedure di sicurezza sono soggette a revisione e aggiornamento periodici.</li>
+                </ul>
+                <h3>E. Sicurezza fisica:</h3>
+                <ul>
+                    <li><strong>Data center:</strong> i server e l'infrastruttura che ospitano la piattaforma fid.ai sono localizzati presso data center di Amazon Web Services (AWS) all'interno dello Spazio Economico Europeo (SEE) (principalmente Francoforte e/o Irlanda). Questi data center sono protetti da rigorose misure di sicurezza fisica implementate da AWS. AWS detiene certificazioni di sicurezza riconosciute (es. ISO 27001, SOC 2).</li>
+                    <li><strong>Locali di fid.ai:</strong> l'accesso fisico ai locali di fid.ai S.r.l. è controllato e limitato al personale autorizzato.</li>
+                </ul>
+                <h3>F. Sviluppo sicuro (Secure Software Development Lifecycle - SSDLC):</h3>
+                <ul>
+                    <li>fid.ai adotta pratiche di sviluppo sicuro, inclusa la considerazione dei principi di "security by design" e "privacy by design".</li>
+                    <li>Il personale di sviluppo riceve formazione sulle pratiche di codifica sicura.</li>
+                    <li>Vengono effettuate revisioni del codice (code review) focalizzate anche sugli aspetti di sicurezza.</li>
+                </ul>
+                <h3>G. Monitoraggio e logging:</h3>
+                <ul>
+                    <li>Vengono raccolti e conservati log di accesso e di attività sui sistemi e sulla piattaforma per finalità di sicurezza, audit e troubleshooting (conservazione per 12 mesi come da informativa privacy).</li>
+                    <li>I sistemi di monitoraggio sono configurati per rilevare attività sospette o non autorizzate.</li>
+                </ul>
+                <h3>H. Gestione degli incidenti di sicurezza:</h3>
+                <p>fid.ai ha implementato un piano di gestione e risposta agli incidenti di sicurezza, che include procedure per l'identificazione, la valutazione, il contenimento, l'eradicazione, il recupero e le lezioni apprese, inclusa la gestione di una violazione dei dati personali e le relative notifiche.</p>
+                <h3>I. Formazione del personale:</h3>
+                <p>Tutto il personale di fid.ai con accesso ai dati personali riceve formazione periodica obbligatoria in materia di protezione dei dati, privacy e sicurezza.</p>
+                <h3>J. Sicurezza dei sub-processor (due diligence):</h3>
+                <p>fid.ai adotta un processo di valutazione per i nuovi sub-responsabili e stipula DPA che impongono obblighi di sicurezza e protezione dei dati.</p>
+                <p><em>Nota: Questa sezione è fornita come bozza rappresentativa delle misure tipicamente adottate e dovrà essere ulteriormente personalizzata da fid.ai S.r.l. per riflettere accuratamente le misure tecniche e organizzative effettivamente in atto.</em></p>
+
+
+                <hr style="margin: 3rem 0;">
+
+                <h2 id="dpa-allegato2">Allegato 2: Elenco dei sub-responsabili autorizzati</h2>
+                <p>Il titolare del trattamento autorizza il responsabile del trattamento (fid.ai S.r.l.) a ricorrere ai seguenti sub-responsabili per il trattamento dei dati personali:</p>
+                
+                <h3>Sub-responsabili essenziali (come da Sezione 3.4.b del DPA):</h3>
+                <table class="table-dpa">
+                    <thead>
+                        <tr>
+                            <th>Nome del sub-responsabile</th>
+                            <th>Servizio fornito</th>
+                            <th>Paese di trattamento principale</th>
+                            <th>Meccanismo di trasferimento (se extra-SEE)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Twilio Ireland Limited (o Twilio Inc. per alcuni servizi)</td>
+                            <td>Infrastruttura API WhatsApp Business, trasmissione messaggi</td>
+                            <td>Irlanda, USA</td>
+                            <td>SCC, DPF (EU-U.S.)</td>
+                        </tr>
+                        <tr>
+                            <td>Meta Platforms Ireland Limited (o Meta Platforms, Inc.)</td>
+                            <td>Piattaforma WhatsApp Business</td>
+                            <td>Irlanda, USA</td>
+                            <td>SCC, DPF (EU-U.S.)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Altri sub-responsabili autorizzati:</h3>
+                <table class="table-dpa">
+                    <thead>
+                        <tr>
+                            <th>Nome del sub-responsabile</th>
+                            <th>Servizio fornito</th>
+                            <th>Paese di trattamento principale</th>
+                            <th>Meccanismo di trasferimento (se extra-SEE)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AWS EMEA SARL (Amazon Web Services)</td>
+                            <td>Servizi di hosting e cloud infrastruttura</td>
+                            <td>SEE (es. Francoforte, Irlanda)</td>
+                            <td>N/A (Dati nel SEE) / SCC (se backup o servizi di gestione da USA)</td>
+                        </tr>
+                        <tr>
+                            <td>Google Cloud EMEA Limited / Google LLC (per servizi Gemini 1.5 Flash)</td>
+                            <td>Servizi di intelligenza artificiale generativa (elaborazione contenuto messaggi per risposte automatiche)</td>
+                            <td>USA, SEE</td>
+                            <td>DPF (EU-U.S.), SCC</td>
+                        </tr>
+                        <tr>
+                            <td>Stripe Payments Europe, Ltd.</td>
+                            <td>Elaborazione pagamenti online</td>
+                            <td>Irlanda (SEE)</td>
+                            <td>N/A (Dati nel SEE) / SCC (per alcuni servizi di supporto da USA)</td>
+                        </tr>
+                         <tr>
+                            <td>SendGrid, Inc. (parte di Twilio)</td>
+                            <td>Invio email transazionali e di servizio</td>
+                            <td>USA</td>
+                            <td>DPF (EU-U.S.), SCC</td>
+                        </tr>
+                        <tr>
+                            <td>Zendesk, Inc.</td>
+                            <td>Piattaforma per supporto clienti</td>
+                            <td>USA, SEE</td>
+                            <td>DPF (EU-U.S.), SCC</td>
+                        </tr>
+                        <tr>
+                            <td>Google Ireland Limited / Google LLC</td>
+                            <td>Analisi utilizzo sito web (Google Analytics - dati aggregati/pseudonimizzati)</td>
+                            <td>Irlanda, USA</td>
+                            <td>DPF (EU-U.S.), SCC</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Il responsabile del trattamento si impegna a mantenere aggiornato questo elenco e a informare il titolare del trattamento di qualsiasi modifica conformemente a quanto previsto nella Sezione 3.4.e del presente DPA.</p>
+
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section text-center py-5">
+        <div class="container">
+            <div class="mb-3">
+                <img src="../images/logo-nome-azienda.png" alt="fid.ai Logo Footer" class="footer-logo-img mb-2">
+                 <p class="footer-tagline">La tua segreteria non è mai stata così intelligente.</p>
+            </div>
+            <div class="footer-legal-links mb-3">
+                <h5 class="footer-subtitle">Documentazione</h5>
+                <a href="termini-di-servizio.html" class="footer-link">Termini di Servizio</a>
+                <span class="mx-1 footer-link-separator">|</span>
+                <a href="informativa-privacy.html" class="footer-link">Informativa sulla Privacy</a>
+                <span class="mx-1 footer-link-separator">|</span>
+                <a href="dpa.html" class="footer-link active">Trattamento dei Dati (DPA)</a>
+            </div>
+            <div class="footer-social-icons mb-3">
+                <h5 class="footer-subtitle">Seguici</h5>
+                <a href="#" aria-label="LinkedIn" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Facebook" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="X (Twitter)" class="social-icon"><i class="fab fa-x-twitter"></i></a>
+            </div>
+            <p class="footer-copyright">
+                © <span id="currentYear"></span> fid.ai S.r.l. - P.IVA IT01234567890. Tutti i diritti riservati.
+            </p>
+            <p class="footer-address">Torino, Italy</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>

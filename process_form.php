@@ -45,8 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // --- 4. Prepara l'Email ---
 
-    // <<<=== SOSTITUISCI CON LA TUA EMAIL PROFESSIONALE REALE! ===>>>
-    $destinatario = "tua_email_professionale@tuo-dominio.com";
+    $destinatario = "info@fidai.it";
 
     $oggetto = "Nuova Richiesta Accesso Anticipato Fid.ai da " . $nome;
 
@@ -59,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $corpo_email .= "Messaggio: (Nessuno)\n";
     }
-    $corpo_email .= "\n---\nInviato tramite il form su tuo-dominio.com"; // <<<=== Aggiorna con il tuo dominio
+    $corpo_email .= "\n---\nInviato tramite il form su fidai.it"; // <<<=== Aggiorna con il tuo dominio
 
     // Intestazioni Email (Headers) - IMPORTANTI!
     // Usa un indirizzo "From" del tuo dominio (es. noreply@) per migliorare la recapitabilità

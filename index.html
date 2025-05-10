@@ -3,46 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fid.ai - L'automazione WhatsApp per professionisti</title>
-    <meta name="description" content="Libera il tuo tempo con Fid.ai. Risposte AI automatiche su WhatsApp per gestire clienti e far crescere il tuo business.">
+    <title>fid.ai - La tua segreteria intelligente per WhatsApp</title>
+    <meta name="description" content="Risparmia ore ogni settimana con fid.ai. Automatizza le risposte WhatsApp con l'IA e fai crescere il tuo business.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
 
-    <!-- Google Fonts (Inter) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap CSS (Base per layout e grid) -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    <!-- Font Awesome (Icone) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- AOS - Animate On Scroll Library CSS -->
+    <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Custom CSS (Stile Apple-Inspired) -->
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 <body>
 
-    <!-- Navbar Minimalista con Logo Immagine -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light-translucent fixed-top" id="mainNavbar">
+    <!-- Navbar con Dropdown -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
         <div class="container">
-            <a class="navbar-brand apple-nav-brand" href="#hero">
-                <img src="images/logo-nome-azienda.png" alt="Segreteria Intelligente Logo" class="navbar-logo-img">
+            <a class="navbar-brand nav-logo" href="#hero">
+                <img src="images/logo-intero.png" alt="fid.ai Logo" class="navbar-logo-img">
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavApple" aria-controls="navbarNavApple" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavContent" aria-controls="navbarNavContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavApple">
+            <div class="collapse navbar-collapse" id="navbarNavContent">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item"><a class="nav-link apple-nav-link" href="#features">Funzionalità</a></li>
-                    <li class="nav-item"><a class="nav-link apple-nav-link" href="#how-it-works">Come funziona</a></li>
-                    <li class="nav-item"><a class="nav-link apple-nav-link" href="#target">Per chi è</a></li>
-                    <li class="nav-item"><a class="nav-link apple-nav-link" href="#pricing">Prezzi</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="soluzioneDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Soluzione</a>
+                        <ul class="dropdown-menu" aria-labelledby="soluzioneDropdown">
+                            <li><a class="dropdown-item" href="#features">Funzionalità</a></li>
+                            <li><a class="dropdown-item" href="#how-it-works">Come funziona</a></li>
+                            <li><a class="dropdown-item" href="resources/partner.html">Partner</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="risorseDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Risorse</a>
+                        <ul class="dropdown-menu" aria-labelledby="risorseDropdown">
+                            <li><a class="dropdown-item" href="#target">Ideale per</a></li>
+                            <li><a class="dropdown-item" href="resources/suggerimenti.html">Suggerimenti</a></li>
+                            <li><a class="dropdown-item" href="resources/faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="prezzi.html">Prezzi</a>
+                    </li>
                     <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-                        <a class="btn btn-primary btn-sm apple-cta-nav" href="#contact">Richiedi accesso</a>
+                        <a class="btn btn-primary btn-sm cta-nav-button" href="#contact">Richiedi accesso</a>
                     </li>
                 </ul>
             </div>
@@ -50,65 +62,63 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="apple-hero text-center d-flex flex-column justify-content-center">
+    <section id="hero" class="hero-section text-center d-flex flex-column justify-content-center">
         <div class="container">
-            <h1 class="apple-h1" data-aos="fade-up">
+            <h1 class="hero-title" data-aos="fade-up">
                 La tua segreteria <br class="d-none d-md-block"> non è mai stata così intelligente
             </h1>
-            <p class="apple-subheadline lead mx-auto mt-3 mb-4" data-aos="fade-up" data-aos-delay="100">
-                Risparmia ore ogni settimana. Automatizza le risposte WhatsApp ripetitive con l'AI e dedicati a ciò che conta davvero.
+            <p class="hero-subheadline lead mx-auto mt-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                Risparmia ore ogni settimana. Automatizza le risposte WhatsApp ripetitive con l'IA e dedicati a ciò che conta davvero per il tuo business.
             </p>
             <div data-aos="fade-up" data-aos-delay="200">
-                <a href="#contact" class="btn btn-primary apple-cta-main me-2">Richiedi accesso anticipato</a>
-                <a href="#features" class="btn btn-outline-secondary apple-cta-secondary">Scopri di più <i class="fas fa-arrow-right small ms-1"></i></a>
+                <a href="#contact" class="btn btn-primary btn-lg me-2">Richiedi accesso anticipato</a>
+                <a href="#features" class="btn btn-outline-secondary">Scopri di più <i class="fas fa-arrow-right small ms-1"></i></a>
             </div>
-            <div class="hero-image-placeholder mt-5" data-aos="fade-up" data-aos-delay="300">
-                 <img src="images/placeholder-hero-apple.png" alt="Fid.ai per Desktop" class="img-fluid">
+            <div data-aos="fade-up" data-aos-delay="300">
+                 <img src="images/placeholder-hero-apple.png" alt="fid.ai su Desktop e Mobile" class="img-fluid hero-img">
             </div>
         </div>
     </section>
 
-    <!-- Features Section con Logo Testa -->
-    <section id="features" class="feature-section-apple py-5">
+    <!-- Features Section -->
+    <section id="features" class="features-section py-5">
         <div class="container">
-            <h2 class="apple-h2 text-center mb-5" data-aos="fade-up">Progettato per la tua efficienza</h2>
+            <h2 class="section-title text-center" data-aos="fade-up">Progettato per la tua efficienza</h2>
             <div class="row g-4 justify-content-center">
-                <!-- Feature con Logo Testa -->
                 <div class="col-md-6 col-lg-3" data-aos="fade-up">
-                    <div class="feature-card-apple text-center">
-                         <div class="feature-icon-apple bg-blue-soft">
-                            <img src="images/logo-testa-simbolo.png" alt="AI Icon" class="feature-icon-image">
+                    <div class="feature-card">
+                         <div class="feature-icon-wrapper bg-accent-blue">
+                            <img src="images/logo-testa-simbolo.png" alt="Icona IA" class="feature-icon-image">
                          </div>
-                        <h3 class="apple-h3 mt-3 mb-2">Risposte intelligenti</h3>
-                        <p class="apple-p-small">Comprende le domande frequenti e risponde istantaneamente 24/7, usando la potenza di Google Gemini.</p>
+                        <h3 class="feature-title">Risposte intelligenti</h3>
+                        <p class="feature-description">Comprende le domande frequenti e risponde istantaneamente 24/7, usando la potenza dell'IA generativa.</p>
                     </div>
                 </div>
-                <!-- Altre Features con FontAwesome -->
                 <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature-card-apple text-center">
-                         <div class="feature-icon-apple bg-green-soft">
-                            <i class="fas fa-plug-circle-check text-green"></i>
+                    <div class="feature-card">
+                         <div class="feature-icon-wrapper bg-accent-green">
+                            <i class="fas fa-plug-circle-check text-accent-green"></i>
                          </div>
-                        <h3 class="apple-h3 mt-3 mb-2">Configurazione rapida</h3>
-                        <p class="apple-p-small">Collega il tuo WhatsApp Business in pochi minuti tramite partner tecnologici affidabili (Sinch).</p>
+                        <h3 class="feature-title">Configurazione rapida</h3>
+                        <p class="feature-description">Collega il tuo WhatsApp Business in pochi minuti tramite partner tecnologici affidabili.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-                     <div class="feature-card-apple text-center">
-                         <div class="feature-icon-apple bg-gray-soft">
-                             <i class="fas fa-comments text-gray"></i>
+                     <div class="feature-card">
+                         <div class="feature-icon-wrapper bg-accent-purple">
+                             <i class="fas fa-comments text-accent-purple"></i>
                          </div>
-                        <h3 class="apple-h3 mt-3 mb-2">Gestione conversazioni</h3>
-                        <p class="apple-p-small">Rispetta la finestra 24h e supporta l'invio di Messaggi Template (MTM) approvati.</p>
+                        <h3 class="feature-title">Gestione conversazioni</h3>
+                        <p class="feature-description">Rispetta la finestra 24h e supporta l'invio di Messaggi Template approvati.</p>
                     </div>
                 </div>
                  <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                     <div class="feature-card-apple text-center">
-                         <div class="feature-icon-apple bg-gray-soft">
-                            <i class="fas fa-user-astronaut text-gray"></i>
+                     <div class="feature-card">
+                         <div class="feature-icon-wrapper bg-accent-grey">
+                            <i class="fas fa-user-astronaut text-accent-grey"></i>
                         </div>
-                        <h3 class="apple-h3 mt-3 mb-2">Apprendimento</h3>
-                        <p class="apple-p-small">L'AI si adatterà al tuo stile per risposte ancora più personalizzate e autentiche.</p>
+                        <h3 class="feature-title">Apprendimento IA</h3>
+                        <p class="feature-description">L'IA si adatterà al tuo stile per risposte ancora più personalizzate e autentiche.</p>
                     </div>
                 </div>
             </div>
@@ -116,129 +126,125 @@
     </section>
 
      <!-- How it Works Section -->
-    <section id="how-it-works" class="how-it-works-apple py-5 bg-light-gray">
+    <section id="how-it-works" class="how-it-works-section py-5">
         <div class="container">
-            <h2 class="apple-h2 text-center mb-5" data-aos="fade-up">Inizia in 3 semplici passi</h2>
+            <h2 class="section-title text-center" data-aos="fade-up">Inizia in 3 semplici passi</h2>
             <div class="row text-center g-5">
                 <div class="col-md-4" data-aos="fade-up">
-                     <div class="step-number-apple">1</div>
-                    <h3 class="apple-h3 mt-3 mb-2">Collega</h3>
-                    <p class="apple-p-small">Connetti il tuo account WhatsApp Business tramite il nostro processo guidato sicuro.</p>
+                     <div class="step-number">1</div>
+                    <h3 class="step-title">Collega</h3>
+                    <p>Connetti il tuo account WhatsApp Business tramite il nostro processo guidato sicuro.</p>
                 </div>
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
-                     <div class="step-number-apple">2</div>
-                     <h3 class="apple-h3 mt-3 mb-2">Informa</h3>
-                    <p class="apple-p-small">Fornisci all'AI le informazioni chiave sulla tua attività (orari, servizi, FAQ) dalla nostra app.</p>
+                     <div class="step-number">2</div>
+                     <h3 class="step-title">Informa</h3>
+                    <p>Fornisci all'IA le informazioni chiave sulla tua attività (orari, servizi, FAQ) dalla nostra app.</p>
                 </div>
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                     <div class="step-number-apple">3</div>
-                    <h3 class="apple-h3 mt-3 mb-2">Automatizza</h3>
-                    <p class="apple-p-small">Lascia che Fid.ai gestisca le risposte ripetitive e libera il tuo tempo.</p>
+                     <div class="step-number">3</div>
+                    <h3 class="step-title">Automatizza</h3>
+                    <p>Lascia che fid.ai gestisca le risposte ripetitive e libera il tuo tempo.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Target Audience Section -->
-    <section id="target" class="target-apple py-5">
+    <section id="target" class="target-audience-section py-5">
          <div class="container">
-             <h2 class="apple-h2 text-center mb-4" data-aos="fade-up">Ideale per chi non ha tempo da perdere</h2>
-             <p class="apple-subheadline lead mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+             <h2 class="section-title text-center mb-4" data-aos="fade-up">Ideale per chi non ha tempo da perdere</h2>
+             <p class="lead mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="100">
                  Liberi professionisti, consulenti, studi e piccole attività che usano WhatsApp per comunicare con i clienti.
              </p>
              <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-                 <span class="apple-tag">Avvocati</span>
-                 <span class="apple-tag">Commercialisti</span>
-                 <span class="apple-tag">Consulenti</span>
-                 <span class="apple-tag">Artigiani</span>
-                 <span class="apple-tag">Formatori</span>
-                 <span class="apple-tag">Studi medici</span>
-                 <span class="apple-tag">Negozi</span>
-                 <span class="apple-tag">Agenti immobiliari</span>
+                 <span class="target-tag">Avvocati</span>
+                 <span class="target-tag">Commercialisti</span>
+                 <span class="target-tag">Consulenti</span>
+                 <span class="target-tag">Artigiani</span>
+                 <span class="target-tag">Formatori</span>
+                 <span class="target-tag">Studi medici</span>
+                 <span class="target-tag">Negozi</span>
+                 <span class="target-tag">Agenti immobiliari</span>
              </div>
          </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing-apple py-5 bg-light-gray">
+    <!-- Pricing Teaser Section (Opzione B) -->
+    <section id="pricing" class="pricing-teaser-section py-5">
         <div class="container text-center">
-            <h2 class="apple-h2 mb-3" data-aos="fade-up">Accesso anticipato</h2>
-            <p class="apple-subheadline lead mx-auto mb-5" data-aos="fade-up" data-aos-delay="100">
-                Stiamo finalizzando i piani. Unisciti alla lista d'attesa per essere tra i primi ad accedere e ricevere un'offerta speciale.
-            </p>
             <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="apple-pricing-card">
-                        <h3 class="apple-h3">Programma early access</h3>
-                        <p class="apple-p mt-2 mb-4">Ricevi aggiornamenti, fornisci feedback e ottieni un prezzo di lancio vantaggioso.</p>
-                        <a href="#contact" class="btn btn-primary apple-cta-main">Richiedi accesso ora</a>
-                        <p class="apple-p-small text-muted mt-3">(Costi infrastruttura WhatsApp/Sinch inclusi!)</p>
+                <div class="col-md-9 col-lg-8" data-aos="fade-up"> <!-- Leggermente più largo per il contenuto del box -->
+                    <div class="pricing-teaser-card">
+                        <h2 class="section-title mb-3">Pronto a trasformare le tue chat?</h2> <!-- Reso h2 per importanza -->
+                        <p class="lead mx-auto mt-2 mb-4">
+                            Siamo quasi pronti a lanciare! Richiedi l'accesso anticipato per non perdere l'offerta speciale di lancio e per scoprire i nostri piani pensati per ogni esigenza.
+                        </p>
+                        <a href="prezzi.html" class="btn btn-primary btn-lg me-sm-2 mb-2 mb-sm-0">Scopri i piani</a>
+                        <a href="#contact" class="btn btn-outline-secondary btn-lg">Richiedi accesso ora</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section con form funzionante -->
-    <section id="contact" class="contact-apple py-5">
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section py-5">
         <div class="container">
-            <h2 class="apple-h2 text-center mb-3" data-aos="fade-up">Mettiti in contatto</h2>
-            <p class="apple-subheadline lead mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="section-title text-center mb-3" data-aos="fade-up">Mettiti in contatto</h2>
+            <p class="lead mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="100">
                 Compila il modulo per richiedere l'accesso anticipato o per qualsiasi domanda.
             </p>
-            <div class="row justify-content-center">
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                    <!-- <<<=== IL FORM ORA PUNTA A process_form.php ===>>> -->
-                    <form id="contactFormApple" method="POST" action="process_form.php">
-                        <div class="mb-3">
-                            <label for="appleName" class="form-label apple-form-label visually-hidden">Nome</label>
-                            <!-- <<<=== Aggiunto name="nome" ===>>> -->
-                            <input type="text" class="form-control apple-input" id="appleName" name="nome" placeholder="Nome" required>
-                        </div>
-                        <div class="mb-3">
-                             <label for="appleEmail" class="form-label apple-form-label visually-hidden">Email</label>
-                             <!-- <<<=== Aggiunto name="email" ===>>> -->
-                            <input type="email" class="form-control apple-input" id="appleEmail" name="email" placeholder="Email" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="appleMessage" class="form-label apple-form-label visually-hidden">Messaggio</label>
-                            <!-- <<<=== Aggiunto name="messaggio" ===>>> -->
-                            <textarea class="form-control apple-input" id="appleMessage" name="messaggio" rows="4" placeholder="Messaggio (opzionale)"></textarea>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary apple-cta-main">Invia richiesta</button>
-                        </div>
-                    </form>
-                     <p class="text-center apple-p-small text-muted mt-4">
-                        In alternativa, scrivici a:
-                        <!-- <<<=== SOSTITUISCI CON LA TUA EMAIL PROFESSIONALE! ===>>> -->
-                        <a href="mailto:contatti@TUO-DOMINIO.com" class="apple-link">contatti@TUO-DOMINIO.com</a>
-                    </p>
-                </div>
+            <div class="contact-form-wrapper" data-aos="fade-up" data-aos-delay="200">
+                <form id="contactForm" action="process_form.php" method="POST">
+                    <div class="mb-3">
+                        <label for="contactName" class="form-label visually-hidden">Nome Completo</label>
+                        <input type="text" class="form-control contact-input" id="contactName" name="nome" placeholder="Nome Completo" required>
+                    </div>
+                    <div class="mb-3">
+                         <label for="contactEmail" class="form-label visually-hidden">La tua Email</label>
+                        <input type="email" class="form-control contact-input" id="contactEmail" name="email" placeholder="La tua Email" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="contactMessage" class="form-label visually-hidden">Messaggio</label>
+                        <textarea class="form-control contact-input" id="contactMessage" name="messaggio" rows="5" placeholder="Il tuo messaggio (opzionale)"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg cta-main-button">Invia richiesta</button>
+                    </div>
+                </form>
             </div>
+             <p class="text-center mt-4" style="font-size: 0.9rem; color: var(--text-secondary-dark);">
+                In alternativa, scrivici a:
+                <a href="mailto:info@fid.ai" class="text-link">info@fid.ai</a>
+            </p>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="apple-footer text-center py-5">
+    <!-- Footer Section -->
+    <footer class="footer-section text-center py-5">
         <div class="container">
-            <p class="apple-footer-text mb-2">
-                Copyright © 2025 Fid.ai. Tutti i diritti riservati. <!-- Aggiorna l'anno se necessario -->
+            <div class="mb-3">
+                <img src="images/logo-nome-azienda.png" alt="fid.ai Logo Footer" class="footer-logo-img mb-2">
+                 <p class="footer-tagline">La tua segreteria non è mai stata così intelligente.</p>
+            </div>
+            <div class="footer-legal-links mb-3">
+                <h5 class="footer-subtitle">Documentazione</h5>
+                <a href="legal/termini-di-servizio.html" class="footer-link">Termini di Servizio</a>
+                <span class="mx-1 footer-link-separator">|</span>
+                <a href="legal/informativa-privacy.html" class="footer-link">Informativa sulla Privacy</a>
+                <span class="mx-1 footer-link-separator">|</span>
+                <a href="legal/dpa.html" class="footer-link">Trattamento dei Dati (DPA)</a>
+            </div>
+            <div class="footer-social-icons mb-3">
+                <h5 class="footer-subtitle">Seguici</h5>
+                <a href="#" aria-label="LinkedIn" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Facebook" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="X (Twitter)" class="social-icon"><i class="fab fa-x-twitter"></i></a>
+            </div>
+            <p class="footer-copyright">
+                © <span id="currentYear"></span> fid.ai S.r.l. - P.IVA IT01234567890. Tutti i diritti riservati.
             </p>
-            <div class="apple-footer-links mb-3">
-                 <!-- <<<=== SOSTITUIRE LINK REALI! ===>>> -->
-                <a href="#" class="apple-footer-link">Privacy Policy</a>
-                <span class="mx-1">|</span>
-                <a href="#" class="apple-footer-link">Termini di Servizio</a>
-                <span class="mx-1">|</span>
-                <a href="#contact" class="apple-footer-link">Contatti</a>
-            </div>
-            <div class="apple-social-icons">
-                 <!-- <<<=== SOSTITUIRE LINK REALI AI TUOI PROFILI SOCIAL! ===>>> -->
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
-            </div>
+            <p class="footer-address">Torino, Italy</p>
         </div>
     </footer>
 
