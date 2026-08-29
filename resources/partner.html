@@ -79,12 +79,17 @@
                             <h2 class="partner-card-title">OVHcloud</h2>
                             <p class="partner-card-subtitle">Server e infrastruttura cloud in Europa (Francia)</p>
                             <p class="partner-card-description">OVHcloud ospita i server su cui gira fid.ai. È un'azienda europea: i data center che usiamo sono in Francia, quindi i tuoi dati restano nell'Unione Europea, sotto le stesse regole di protezione dati (GDPR) a cui siamo soggetti noi.</p>
-                            <h3 class="partner-card-section-title">Come</h3>
-                            <ul class="partner-card-list">
-                                <li><strong>Data center in Francia:</strong> i server fisici che eseguono fid.ai si trovano in territorio europeo, non fuori dal SEE.</li>
-                                <li><strong>Continuità del servizio:</strong> infrastruttura pensata per restare disponibile anche in caso di guasto hardware.</li>
-                                <li><strong>Sicurezza fisica e di rete:</strong> accesso ai data center controllato, protezione della rete che ospita i nostri sistemi.</li>
-                            </ul>
+                            <button class="partner-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#partnerDetailsOvh" aria-expanded="false" aria-controls="partnerDetailsOvh">
+                                <span>Come lavora</span> <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </button>
+                            <div class="collapse partner-details" id="partnerDetailsOvh">
+                                <h3 class="partner-card-section-title">Come</h3>
+                                <ul class="partner-card-list">
+                                    <li><strong>Data center in Francia:</strong> i server fisici che eseguono fid.ai si trovano in territorio europeo, non fuori dal SEE.</li>
+                                    <li><strong>Continuità del servizio:</strong> infrastruttura pensata per restare disponibile anche in caso di guasto hardware.</li>
+                                    <li><strong>Sicurezza fisica e di rete:</strong> accesso ai data center controllato, protezione della rete che ospita i nostri sistemi.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -94,15 +99,20 @@
                             <h2 class="partner-card-title">OpenAI</h2>
                             <p class="partner-card-subtitle">Modelli linguistici per l'elaborazione delle risposte</p>
                             <p class="partner-card-description">OpenAI fornisce i modelli linguistici che fid.ai usa per capire i messaggi dei tuoi clienti e preparare le risposte. È un fornitore tecnico: non usa i tuoi dati per scopi propri.</p>
-                            <h3 class="partner-card-section-title">Come</h3>
-                            <ul class="partner-card-list">
-                                <li><strong>Zero addestramento sui tuoi messaggi:</strong> le conversazioni che passano da fid.ai non vengono usate per addestrare i modelli di OpenAI, né i nostri.</li>
-                                <li><strong>Massima riservatezza:</strong> i messaggi vengono inviati solo per generare la risposta del momento.</li>
-                                <li><strong>Solo per l'elaborazione:</strong> OpenAI riceve il testo necessario a formulare la risposta, non l'intera cronologia della tua attività.</li>
-                            </ul>
-                            <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-link d-block mt-3 fw-bold">
-                                Privacy Policy di OpenAI <i class="fas fa-external-link-alt fa-xs ms-1"></i>
-                            </a>
+                            <button class="partner-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#partnerDetailsOpenai" aria-expanded="false" aria-controls="partnerDetailsOpenai">
+                                <span>Come lavora</span> <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </button>
+                            <div class="collapse partner-details" id="partnerDetailsOpenai">
+                                <h3 class="partner-card-section-title">Come</h3>
+                                <ul class="partner-card-list">
+                                    <li><strong>Zero addestramento sui tuoi messaggi:</strong> le conversazioni che passano da fid.ai non vengono usate per addestrare i modelli di OpenAI, né i nostri.</li>
+                                    <li><strong>Massima riservatezza:</strong> i messaggi vengono inviati solo per generare la risposta del momento.</li>
+                                    <li><strong>Solo per l'elaborazione:</strong> OpenAI riceve il testo necessario a formulare la risposta, non l'intera cronologia della tua attività.</li>
+                                </ul>
+                                <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-link d-block mt-3 fw-bold">
+                                    Privacy Policy di OpenAI <i class="fas fa-external-link-alt fa-xs ms-1"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -112,15 +122,20 @@
                             <h2 class="partner-card-title">Google</h2>
                             <p class="partner-card-subtitle">Integrazione sicura con Google Calendar per la gestione dell'agenda</p>
                             <p class="partner-card-description">Se lo colleghi, fid.ai legge e aggiorna il tuo Google Calendar per fissare, spostare o cancellare appuntamenti al posto tuo — sempre con il tuo permesso, e solo per l'agenda.</p>
-                            <h3 class="partner-card-section-title">Come</h3>
-                            <ul class="partner-card-list">
-                                <li><strong>Accesso autorizzato da te:</strong> il collegamento avviene con il login sicuro di Google (OAuth); puoi revocarlo quando vuoi dal tuo account Google.</li>
-                                <li><strong>Solo l'agenda:</strong> fid.ai accede al calendario che scegli tu, non ad altri servizi Google.</li>
-                                <li><strong>Uso limitato ai dati necessari:</strong> rispettiamo i requisiti "Limited Use" di Google sui dati letti dalle sue API.</li>
-                            </ul>
-                            <a href="../legal/informativa-privacy.html#priv-google-calendar" class="text-link d-block mt-3 fw-bold">
-                                Cosa vede, e cosa non fa, fid.ai con questi dati
-                            </a>
+                            <button class="partner-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#partnerDetailsGoogle" aria-expanded="false" aria-controls="partnerDetailsGoogle">
+                                <span>Come lavora</span> <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </button>
+                            <div class="collapse partner-details" id="partnerDetailsGoogle">
+                                <h3 class="partner-card-section-title">Come</h3>
+                                <ul class="partner-card-list">
+                                    <li><strong>Accesso autorizzato da te:</strong> il collegamento avviene con il login sicuro di Google (OAuth); puoi revocarlo quando vuoi dal tuo account Google.</li>
+                                    <li><strong>Solo l'agenda:</strong> fid.ai accede al calendario che scegli tu, non ad altri servizi Google.</li>
+                                    <li><strong>Uso limitato ai dati necessari:</strong> rispettiamo i requisiti "Limited Use" di Google sui dati letti dalle sue API.</li>
+                                </ul>
+                                <a href="../legal/informativa-privacy.html#priv-google-calendar" class="text-link d-block mt-3 fw-bold">
+                                    Cosa vede, e cosa non fa, fid.ai con questi dati
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
