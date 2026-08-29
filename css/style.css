@@ -36,7 +36,10 @@
 
     --text-primary-dark: #111111;                   /* palettes.light.text   */
     --text-secondary-dark: #4A5A66;
-    --text-muted: #8E8E93;                          /* palettes.light.textSecondary */
+    /* L'app usa #8E8E93 (palettes.light.textSecondary), ma sul bianco del sito
+       il contrasto e' 3,3:1 e non passa il livello AA: qui lo stesso grigio e'
+       scurito quel tanto che basta (4,9:1 su bianco, 4,5:1 sui fondi chiari). */
+    --text-muted: #686D73;
     --text-accent: var(--brand-primary);
 
     --border-color-light: rgba(255, 255, 255, 0.14);
@@ -92,6 +95,19 @@
 
 html {
     scroll-behavior: smooth;
+}
+
+/* Chi naviga con la tastiera deve vedere dov'e': un anello di messa a fuoco
+   uguale su tutto il sito, e solo per la tastiera (non al clic del mouse). */
+:focus-visible {
+    outline: 3px solid var(--brand-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+.navbar :focus-visible,
+.footer-section :focus-visible,
+.dropdown-menu :focus-visible {
+    outline-color: #FFFFFF;
 }
 
 body {
@@ -221,6 +237,13 @@ a:hover {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
     transition: background-color 0.3s ease;
 }
+/* Il logo e l'hamburger sono i due tocchi in alto: sotto i 44 px un dito li
+   manca. L'area cliccabile e' l'ancora, non l'immagine. */
+.navbar-brand.nav-logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
 .nav-logo .navbar-logo-img {
     height: 35px; 
     width: auto;    
@@ -247,6 +270,11 @@ a:hover {
 .navbar-toggler {
     color: var(--text-primary-light);
     border: none;
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 .navbar-toggler:focus { box-shadow: none; }
 .navbar-toggler i { font-size: 1.3rem; }
@@ -283,77 +311,6 @@ a:hover {
     background-color: var(--primary-accent-hover);
     border-color: var(--primary-accent-hover);
     color: var(--primary-light-bg) !important;
-}
-
-/* ========================================= */
-/* Hero Section */
-/* ========================================= */
-.hero-section {
-    padding-top: calc(70px + 5rem); 
-    padding-bottom: 5rem;
-    min-height: 90vh;
-    background: linear-gradient(180deg, var(--primary-light-bg) 70%, var(--secondary-light-bg) 100%);
-}
-.hero-img {
-    max-width: 850px;
-    margin: 2rem auto 0 auto;
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--hover-shadow); 
-}
-
-/* ========================================= */
-/* Features Section */
-/* ========================================= */
-.features-section { padding: 6rem 0; background-color: var(--secondary-light-bg); }
-.feature-card {
-    background-color: var(--card-bg);
-    padding: 2rem 1.5rem;
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--soft-shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.feature-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--hover-shadow);
-}
-.feature-icon-wrapper {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    transition: transform 0.3s ease;
-}
-.feature-card:hover .feature-icon-wrapper { transform: scale(1.1); }
-
-.feature-icon-wrapper.bg-accent-blue { background-color: var(--blue-light); }
-.feature-icon-wrapper.bg-accent-green { background-color: var(--auto-green-bg); }
-.feature-icon-wrapper.bg-accent-purple { background-color: var(--purple-light); }
-.feature-icon-wrapper.bg-accent-grey { background-color: var(--orange-light); }
-
-.feature-icon-wrapper i, .feature-icon-image {
-    font-size: 2.2rem;
-    max-width: 60%;
-    max-height: 60%;
-    object-fit: contain;
-}
-.feature-icon-wrapper .text-accent-blue { color: var(--brand-primary); }
-.feature-icon-wrapper .text-accent-green { color: var(--auto-green); }
-.feature-icon-wrapper .text-accent-purple { color: var(--purple); }
-.feature-icon-wrapper .text-accent-grey { color: var(--brand-orange); }
-
-.feature-title { margin-top: 0; margin-bottom: 0.75rem; }
-.feature-description {
-    font-size: 1rem;
-    color: var(--text-secondary-dark);
-    flex-grow: 1;
 }
 
 /* ========================================= */
@@ -496,44 +453,6 @@ a:hover {
 }
 
 /* ========================================= */
-/* Contact Section */
-/* ========================================= */
-.contact-section { padding: 6rem 0; background-color: var(--secondary-light-bg); }
-.contact-form-wrapper {
-    background-color: var(--primary-light-bg);
-    padding: 2.5rem; 
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--soft-shadow);
-    max-width: 650px;
-    margin: 0 auto; 
-}
-.contact-form-label {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-secondary-dark);
-    margin-bottom: 0.5rem;
-}
-.contact-input {
-    background-color: var(--secondary-light-bg); 
-    border: 1px solid var(--border-color-dark);
-    border-radius: var(--input-border-radius);
-    padding: 0.9rem 1.1rem;
-    font-size: 1rem;
-    color: var(--text-primary-dark);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-}
-.contact-input::placeholder {
-    color: var(--text-secondary-dark);
-    opacity: 0.7;
-}
-.contact-input:focus {
-    background-color: var(--primary-light-bg);
-    border-color: var(--primary-accent);
-    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
-    outline: none;
-}
-
-/* ========================================= */
 /* Footer Section */
 /* ========================================= */
 .footer-section {
@@ -565,6 +484,12 @@ a:hover {
     color: var(--text-secondary-light);
     text-decoration: none;
     transition: color 0.2s ease;
+    /* Sul telefono i link del piede erano righe alte 24 px, troppo vicine fra
+       loro per un dito: l'altezza minima li porta a 44 px senza spostarli. */
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.15rem;
 }
 .footer-legal-links a:hover, .footer-link:hover {
     color: var(--primary-light-bg);
@@ -654,14 +579,21 @@ a:hover {
     font-size: 90%;
     font-family: monospace;
 }
+/* Una regola sola per le tabelle dei documenti. La larghezza fissa e le parole
+   spezzate servono al telefono: a 390 px le tabelle del DPA uscivano dal bordo e
+   la pagina scorreva di lato. */
 .document-content table, .table-dpa {
     font-family: var(--font-secondary);
     font-size: 0.95rem;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     width: 100%;
+    max-width: 100%;
+    table-layout: fixed;
+    word-break: break-word;
     border-collapse: collapse;
 }
+.table-dpa tr:nth-child(even) td { background-color: rgba(20, 50, 80, 0.02); }
 .document-content table th, .document-content table td,
 .table-dpa th, .table-dpa td {
     padding: 0.75rem;
@@ -682,7 +614,8 @@ a:hover {
     margin-bottom: 2.5rem;
     border-radius: var(--card-border-radius-small);
 }
-.document-index .index-title { 
+.document-index .index-title,
+.document-index h2 { 
     font-size: 1.4rem;
     margin-top: 0;
     margin-bottom: 1rem;
@@ -691,7 +624,7 @@ a:hover {
     border-bottom: 1px solid var(--border-color-dark);
 }
 .document-index ul { list-style-type: none; padding-left: 0; }
-.document-index ul li a { text-decoration: none; color: var(--text-accent); font-family: var(--font-secondary); font-weight: 600; display: block; padding: 0.3rem 0; }
+.document-index ul li a { text-decoration: none; color: var(--text-accent); font-family: var(--font-secondary); font-weight: 600; display: block; padding: 0.55rem 0; }
 .document-index ul li a:hover { color: var(--primary-accent-hover); text-decoration: underline; }
 .document-index ul ul { padding-left: 1.5rem; margin-top: 0.2rem; margin-bottom: 0.5rem; }
 .document-index ul ul li a { font-weight: 400; font-size: 0.95rem; }
@@ -1278,9 +1211,9 @@ a:hover {
     margin: 1.5rem 0 1.25rem 0;
 }
 .site-form .consent-row input[type="checkbox"] {
-    width: 1.1rem;
-    height: 1.1rem;
-    margin-top: 0.2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: 0.05rem;
     flex: 0 0 auto;
     accent-color: var(--brand-primary);
 }
@@ -1324,31 +1257,18 @@ a:hover {
 }
 .site-form button[disabled] { opacity: 0.6; cursor: progress; }
 
-/* ------------------------- Blocco contatti in coda ------------------------ */
-.contact-section {
-    background-color: var(--primary-light-bg);
-}
-.contact-inline {
-    max-width: 620px;
-    margin: 0 auto;
-    text-align: center;
-    background-color: var(--secondary-light-bg);
-    border-radius: var(--card-border-radius);
-    padding: 2rem 1.5rem;
-}
-.contact-inline p { margin-bottom: 0.5rem; }
-
 /* ------------------------------- Telefonini ------------------------------ */
 @media (max-width: 767.98px) {
-    .features-section,
     .how-it-works-section,
     .target-audience-section,
-    .contact-section,
     .invites-section,
     .privacy-section,
     .waitlist-section {
         padding: 3.25rem 0;
     }
+    /* La spaziatura g-5 (3rem) toglie 24 px per lato alla riga, ma il
+       contenitore ne ha solo 12: a 390 px la pagina scorreva di lato. */
+    .row.g-5 { --bs-gutter-x: 1.5rem; --bs-gutter-y: 2.5rem; }
     .section-title { margin-bottom: 1.75rem; }
     .section-lead { margin-top: -0.75rem; margin-bottom: 1.75rem; font-size: 1.02rem; }
     .hero-section { padding-top: 2rem; padding-bottom: 2.5rem; }
@@ -1601,12 +1521,3 @@ a:hover {
     .device-phone { display: none; }
 }
 
-/* Le tabelle del DPA erano piu' larghe dello schermo di un telefono: a 390 px la
-   pagina scorreva di lato e il testo usciva dal bordo. Larghezza fissa e parole
-   spezzate le fanno stare dentro senza cambiare il documento. */
-.document-content table, .table-dpa {
-    width: 100%;
-    max-width: 100%;
-    table-layout: fixed;
-    word-break: break-word;
-}
