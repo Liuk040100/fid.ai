@@ -6,7 +6,7 @@
     <title>Piani e Prezzi - fid.ai</title>
     <meta name="description" content="Scopri i piani di abbonamento di fid.ai, pensati per ogni esigenza professionale. Scegli il piano perfetto per te e inizia ad automatizzare le tue chat WhatsApp.">
     <link rel="icon" href="images/favicon.png" type="image/png"> <!-- Assicurati che favicon.png esista in images/ -->
-    <meta name="robots" content="noindex, follow"> <!-- Togli noindex quando sei pronto per l'indicizzazione -->
+    <meta name="robots" content="noindex">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,76 +35,95 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavContent">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="soluzioneDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Soluzione</a>
-                        <ul class="dropdown-menu" aria-labelledby="soluzioneDropdown">
-                            <li><a class="dropdown-item" href="index.html#features">Funzionalità</a></li>
-                            <li><a class="dropdown-item" href="index.html#how-it-works">Come funziona</a></li>
-                            <li><a class="dropdown-item" href="resources/partner.html">Partner</a></li>
-                        </ul>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#come-funziona">Come funziona</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#per-chi">Per chi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#privacy">Privacy</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="risorseDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Risorse</a>
                         <ul class="dropdown-menu" aria-labelledby="risorseDropdown">
-                            <li><a class="dropdown-item" href="index.html#target">Ideale per</a></li>
-                            <li><a class="dropdown-item" href="resources/suggerimenti.html">Suggerimenti</a></li>
                             <li><a class="dropdown-item" href="resources/faq.html">FAQ</a></li>
+                            <li><a class="dropdown-item" href="resources/suggerimenti.html">Suggerimenti</a></li>
+                            <li><a class="dropdown-item" href="resources/partner.html">Partner</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"> <a class="nav-link active" href="prezzi.html">Prezzi</a> </li>
-                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0"> <a class="btn btn-primary btn-sm cta-nav-button" href="index.html#contact">Richiedi accesso</a> </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><a class="btn btn-primary btn-sm cta-nav-button" href="index.html#collabora">Partecipa</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Pricing Page Section -->
-    <section class="page-container" style="background-color: var(--primary-light-bg);"> 
+    <!-- ---------------------------------------------------------------------
+         Pagina FUORI dalla navigazione, e con noindex.
+
+         Il sito oggi chiede di raccontarci come lavori, non di comprare: una
+         pagina prezzi in bella vista direbbe il contrario di quello che dice il
+         questionario («non vogliamo venderti niente») e farebbe crollare le
+         risposte. I tre piani stanno qui perche' chi li chiede via email deve
+         poterli leggere da qualche parte — nessun link del sito porta qui.
+         Fonte: gemini-out/STRATEGIA_2026-08-26_piani_commerciali_luca_3tier.md
+         + decisione di Luca del 29/08/2026 sui messaggi inclusi.
+    --------------------------------------------------------------------- -->
+    <section class="page-container" style="background-color: var(--primary-light-bg);">
         <div class="container">
             <div class="pricing-page-header text-center pt-md-4 pb-md-3" data-aos="fade-up">
-                <h1 class="section-title">Piani pensati per te</h1>
-                <p class="lead mx-auto" style="max-width: 700px;">Scegli il piano fid.ai che meglio si adatta al volume delle tue comunicazioni e inizia subito a ottimizzare il tuo tempo.</p>
-                <p class="pricing-intro-text mt-2 mb-4" style="max-width: 700px;">(Tutti i nostri piani ti offrono la potenza di fid.ai, inclusa la gestione intelligente delle chat WhatsApp, risposte IA personalizzabili e molto altro. Scegli il volume di messaggi più adatto a te.)</p> <!-- Aggiunto mb-4 -->
+                <h1 class="section-title">I tre piani di fid.ai</h1>
+                <p class="lead mx-auto" style="max-width: 720px;">Tre modi diversi di collegare il tuo WhatsApp, non tre livelli di funzionalit&agrave;: l'assistente &egrave; lo stesso in tutti e tre. Cambia chi gestisce il numero, chi paga Meta e chi si occupa della burocrazia.</p>
+                <p class="pricing-intro-text mt-2 mb-4" style="max-width: 720px;">Il servizio &egrave; in fase di validazione: i piani qui sotto sono quelli previsti per il lancio e possono ancora cambiare. Nessuno di essi &egrave; oggi acquistabile.</p>
             </div>
 
             <div class="pricing-plans-container pb-4">
-                <!-- Piano Starter -->
+
+                <!-- 1. Self-Service -->
                 <div class="pricing-plan-card" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="pricing-plan-title">Starter</h3>
-                    <p class="pricing-plan-target">Ideale per professionisti con bassi volumi di chat.</p>
-                    <div class="pricing-plan-price">€24<span style="font-size: 1.5rem;">.99</span> <span class="term">/ mese</span></div>
+                    <h3 class="pricing-plan-title">Self-Service</h3>
+                    <p class="pricing-plan-target">Per chi vuole spendere il minimo ed &egrave; disposto a gestire da s&eacute; l'account Meta e la parte fiscale.</p>
+                    <div class="pricing-plan-price">20&nbsp;&euro; <span class="term">/ mese</span></div>
                     <p class="pricing-plan-iva">(IVA inclusa)</p>
-                    <p class="pricing-plan-messages">Fino a <strong>500</strong> messaggi inclusi</p>
-                    <a href="index.html#contact" class="btn btn-primary">Richiedi accesso Starter</a>
+                    <p class="pricing-plan-messages"><strong>400</strong> messaggi inclusi al mese</p>
+                    <ul class="content-list text-start mx-auto" style="max-width: 280px;">
+                        <li>Il tuo account WhatsApp Business API, creato e configurato da te</li>
+                        <li>Carta di credito inserita su Meta: le tariffe di traffico le paghi direttamente a loro</li>
+                        <li>fid.ai &egrave; solo il software che risponde</li>
+                        <li>Autofatture e IVA intracomunitaria a carico tuo e del tuo commercialista</li>
+                    </ul>
                 </div>
 
-                <!-- Piano Pro (Evidenziato) -->
+                <!-- 2. A Consumo -->
                 <div class="pricing-plan-card highlighted" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="pricing-plan-title">Pro</h3>
-                    <p class="pricing-plan-target">Il nostro piano più popolare, perfetto per professionisti con un volume di comunicazioni regolare.</p>
-                    <div class="pricing-plan-price">€49<span style="font-size: 1.5rem;">.99</span> <span class="term">/ mese</span></div>
-                    <p class="pricing-plan-iva">(IVA inclusa)</p>
-                    <p class="pricing-plan-messages">Fino a <strong>1500</strong> messaggi inclusi</p>
-                    <a href="index.html#contact" class="btn btn-primary">Richiedi accesso Pro</a>
+                    <h3 class="pricing-plan-title">A Consumo</h3>
+                    <p class="pricing-plan-target">Per chi non vuole usare il proprio numero personale n&eacute; l'app WhatsApp Business sul telefono.</p>
+                    <div class="pricing-plan-price">da 30&nbsp;&euro; <span class="term">/ mese</span></div>
+                    <p class="pricing-plan-iva">(IVA inclusa, pi&ugrave; il traffico a consumo)</p>
+                    <p class="pricing-plan-messages"><strong>600</strong> messaggi inclusi al mese</p>
+                    <ul class="content-list text-start mx-auto" style="max-width: 280px;">
+                        <li>Un numero dedicato per lo studio, con prefisso della tua citt&agrave;</li>
+                        <li>Chat e messaggi si leggono e si scrivono dall'app fid.ai, non da WhatsApp</li>
+                        <li>Canone fisso mensile pi&ugrave; i messaggi oltre quelli inclusi</li>
+                        <li>Il conto dei consumi &egrave; sempre visibile nell'app, giorno per giorno</li>
+                    </ul>
                 </div>
 
-                <!-- Piano Premium -->
+                <!-- 3. All-Inclusive -->
                 <div class="pricing-plan-card" data-aos="fade-up" data-aos-delay="300">
-                    <h3 class="pricing-plan-title">Premium</h3>
-                    <p class="pricing-plan-target">Adatto a professionisti o piccoli team con volumi di chat elevati.</p>
-                    <div class="pricing-plan-price">€84<span style="font-size: 1.5rem;">.99</span> <span class="term">/ mese</span></div>
-                    <p class="pricing-plan-iva">(IVA inclusa)</p>
-                    <p class="pricing-plan-messages">Fino a <strong>3000</strong> messaggi inclusi</p>
-                    <a href="index.html#contact" class="btn btn-primary">Richiedi accesso Premium</a>
+                    <h3 class="pricing-plan-title">All-Inclusive</h3>
+                    <p class="pricing-plan-target">Per chi vuole tenere il proprio numero, continuare a usare WhatsApp dal telefono e non pensare a nient'altro.</p>
+                    <div class="pricing-plan-price">70&nbsp;&euro; <span class="term">/ mese</span></div>
+                    <p class="pricing-plan-iva">(IVA inclusa, tutto compreso)</p>
+                    <p class="pricing-plan-messages"><strong>1.200</strong> messaggi inclusi al mese</p>
+                    <ul class="content-list text-start mx-auto" style="max-width: 280px;">
+                        <li>Il tuo numero resta il tuo: continui a usarlo dall'app WhatsApp Business come sempre</li>
+                        <li>Nessuna carta inserita su Meta: il traffico lo anticipiamo noi</li>
+                        <li>Una sola fattura elettronica italiana, nessun adempimento estero</li>
+                        <li>Configurazione e collegamento del numero fatti da noi</li>
+                    </ul>
                 </div>
+
             </div>
 
             <div class="pricing-disclaimer text-center" data-aos="fade-up" data-aos-delay="400">
-            <p><strong>Superamento limiti:</strong> in caso di superamento dei messaggi inclusi nel piano, verranno applicate tariffe contenute per ogni messaggio extra. Contattaci per maggiori dettagli.</p>
+                <p><strong>Oltre i messaggi inclusi:</strong> il servizio continua a funzionare e i messaggi in pi&ugrave; vengono conteggiati a parte, alla tariffa di Meta senza ricarico. Nessun blocco improvviso, nessun addebito a sorpresa: la soglia si vede nell'app prima di superarla.</p>
+                <p class="mt-3" style="font-size: 0.95rem;">Stiamo ancora decidendo insieme ai professionisti che ci stanno aiutando quale di questi tre modelli abbia senso davvero. Se vuoi dire la tua, il posto giusto &egrave; il <a href="questionario.html" class="text-link">questionario</a>.</p>
             </div>
-             <p class="text-center mt-5" data-aos="fade-up" data-aos-delay="500">
-                Hai bisogno di un piano personalizzato o hai domande? <a href="index.html#contact" class="text-link">Contattaci</a>!
-            </p>
         </div>
     </section>
 
@@ -113,7 +132,7 @@
         <div class="container">
             <div class="mb-3">
                 <img src="images/logo-nome-azienda.png" alt="fid.ai Logo Footer" class="footer-logo-img mb-2">
-                 <p class="footer-tagline">La tua segreteria non è mai stata così intelligente.</p>
+                 <p class="footer-tagline">La segreteria AI per i professionisti italiani — in costruzione, con voi.</p>
             </div>
             <div class="footer-legal-links mb-3">
                 <h5 class="footer-subtitle">Documentazione</h5>
@@ -130,9 +149,9 @@
                 <a href="#" aria-label="X (Twitter)" class="social-icon"><i class="fab fa-x-twitter"></i></a>
             </div>
             <p class="footer-copyright">
-                © <span id="currentYear"></span> fid.ai S.r.l. - P.IVA IT01234567890. Tutti i diritti riservati.
+                © <span id="currentYear"></span> fid.ai — progetto in fase di validazione. Tutti i diritti riservati.
             </p>
-            <p class="footer-address">Torino, Italy</p>
+            <p class="footer-address">Torino, Italia · <a href="mailto:info@fidai.it" class="footer-link">info@fidai.it</a></p>
         </div>
     </footer>
 

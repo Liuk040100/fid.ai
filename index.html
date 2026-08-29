@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fid.ai - La tua segreteria intelligente per WhatsApp</title>
-    <meta name="description" content="Risparmia ore ogni settimana con fid.ai. Automatizza le risposte WhatsApp con l'IA e fai crescere il tuo business.">
+    <title>fid.ai — stiamo costruendo la segreteria AI per i professionisti italiani</title>
+    <meta name="description" content="fid.ai è in fase di validazione: una segreteria AI su WhatsApp per professionisti e piccole attività italiane. Raccontaci come gestisci i messaggi di lavoro — intervista, questionario o lista d'attesa del pilota.">
     <link rel="icon" href="images/favicon.png" type="image/png">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -23,210 +23,289 @@
 </head>
 <body>
 
-    <!-- Navbar con Dropdown -->
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
         <div class="container">
             <a class="navbar-brand nav-logo" href="#hero">
                 <img src="images/logo-intero.png" alt="fid.ai Logo" class="navbar-logo-img">
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavContent" aria-controls="navbarNavContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavContent" aria-controls="navbarNavContent" aria-expanded="false" aria-label="Apri il menu">
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavContent">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="soluzioneDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Soluzione</a>
-                        <ul class="dropdown-menu" aria-labelledby="soluzioneDropdown">
-                            <li><a class="dropdown-item" href="#features">Funzionalità</a></li>
-                            <li><a class="dropdown-item" href="#how-it-works">Come funziona</a></li>
-                            <li><a class="dropdown-item" href="resources/partner.html">Partner</a></li>
-                        </ul>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#come-funziona">Come funziona</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#per-chi">Per chi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#privacy">Privacy</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="risorseDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Risorse</a>
                         <ul class="dropdown-menu" aria-labelledby="risorseDropdown">
-                            <li><a class="dropdown-item" href="#target">Ideale per</a></li>
-                            <li><a class="dropdown-item" href="resources/suggerimenti.html">Suggerimenti</a></li>
                             <li><a class="dropdown-item" href="resources/faq.html">FAQ</a></li>
+                            <li><a class="dropdown-item" href="resources/suggerimenti.html">Suggerimenti</a></li>
+                            <li><a class="dropdown-item" href="resources/partner.html">Partner</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="prezzi.html">Prezzi</a>
-                    </li>
                     <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-                        <a class="btn btn-primary btn-sm cta-nav-button" href="#contact">Richiedi accesso</a>
+                        <a class="btn btn-primary btn-sm cta-nav-button" href="#collabora">Partecipa</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero: ascolto, non vendita -->
     <section id="hero" class="hero-section text-center d-flex flex-column justify-content-center">
         <div class="container">
+            <span class="eyebrow" data-aos="fade-up"><span class="dot"></span>Progetto in fase di validazione</span>
             <h1 class="hero-title" data-aos="fade-up">
-                La tua segreteria <br class="d-none d-md-block"> non è mai stata così intelligente
+                Stiamo costruendo la segreteria AI <br class="d-none d-lg-block"> per i professionisti italiani. Aiutaci a farla giusta.
             </h1>
             <p class="hero-subheadline lead mx-auto mt-3 mb-4" data-aos="fade-up" data-aos-delay="100">
-                Risparmia ore ogni settimana. Automatizza le risposte WhatsApp ripetitive con l'IA e dedicati a ciò che conta davvero per il tuo business.
+                fid.ai risponde ai messaggi WhatsApp di lavoro al posto tuo, con il tuo tono e sotto il tuo
+                controllo. Prima di venderla a qualcuno vogliamo capire come gestisci davvero le richieste dei
+                clienti: quanto tempo ti portano via, cosa ti chiedono, cosa non delegheresti mai.
             </p>
             <div data-aos="fade-up" data-aos-delay="200">
-                <a href="#contact" class="btn btn-primary btn-lg me-2">Richiedi accesso anticipato</a>
-                <a href="#features" class="btn btn-outline-secondary">Scopri di più <i class="fas fa-arrow-right small ms-1"></i></a>
+                <a href="#collabora" class="btn btn-primary btn-lg me-2">Come vuoi collaborare?</a>
+                <a href="#come-funziona" class="btn btn-outline-secondary">Cos'è fid.ai <i class="fas fa-arrow-right small ms-1"></i></a>
             </div>
+            <p class="hero-note" data-aos="fade-up" data-aos-delay="250">
+                Non stiamo vendendo niente: nessun prezzo in questa pagina, nessuna carta di credito, nessun impegno.
+            </p>
             <div data-aos="fade-up" data-aos-delay="300">
-                 <img src="images/placeholder-hero-apple.png" alt="fid.ai su Desktop e Mobile" class="img-fluid hero-img">
+                 <img src="images/placeholder-hero-apple.png" alt="fid.ai su desktop e smartphone" class="img-fluid hero-img">
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features-section py-5">
+    <!-- I tre inviti -->
+    <section id="collabora" class="invites-section">
         <div class="container">
-            <h2 class="section-title text-center" data-aos="fade-up">Progettato per la tua efficienza</h2>
+            <h2 class="section-title text-center" data-aos="fade-up">Come vuoi collaborare?</h2>
+            <p class="section-lead" data-aos="fade-up" data-aos-delay="100">
+                Tre modi, dal più impegnativo al più veloce. Scegli quello che ti costa meno tempo: ci serve
+                soprattutto la tua esperienza di chi i messaggi li riceve tutti i giorni.
+            </p>
             <div class="row g-4 justify-content-center">
-                <div class="col-md-6 col-lg-3" data-aos="fade-up">
-                    <div class="feature-card">
-                         <div class="feature-icon-wrapper bg-accent-blue">
-                            <img src="images/logo-testa-simbolo.png" alt="Icona IA" class="feature-icon-image">
-                         </div>
-                        <h3 class="feature-title">Risposte intelligenti</h3>
-                        <p class="feature-description">Comprende le domande frequenti e risponde istantaneamente 24/7, usando la potenza dell'IA generativa.</p>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                    <div class="invito-card">
+                        <div class="invito-icon tone-blue"><i class="fas fa-comments"></i></div>
+                        <span class="invito-badge">15 minuti · in videochiamata</span>
+                        <h3 class="invito-title">Parliamone di persona</h3>
+                        <p class="invito-text">
+                            Un quarto d'ora con chi sta costruendo fid.ai. Ci racconti come lavori, noi ti mostriamo
+                            a che punto siamo. È la conversazione che ci aiuta di più — e l'unica in cui puoi dirci
+                            che stiamo sbagliando strada.
+                        </p>
+                        <a class="btn btn-primary" href="#contact" data-booking-link>Prenota l'intervista</a>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature-card">
-                         <div class="feature-icon-wrapper bg-accent-green">
-                            <i class="fas fa-plug-circle-check text-accent-green"></i>
-                         </div>
-                        <h3 class="feature-title">Configurazione rapida</h3>
-                        <p class="feature-description">Collega il tuo WhatsApp Business in pochi minuti tramite partner tecnologici affidabili.</p>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="invito-card">
+                        <div class="invito-icon tone-green"><i class="fas fa-list-check"></i></div>
+                        <span class="invito-badge">3 minuti · 16 domande</span>
+                        <h3 class="invito-title">Compila il questionario</h3>
+                        <p class="invito-text">
+                            Sedici domande a risposta chiusa sulla tua attività e su come usi WhatsApp per lavoro.
+                            Non serve sapere niente di intelligenza artificiale, e puoi restare anonimo: l'email
+                            te la chiediamo solo alla fine, ed è facoltativa.
+                        </p>
+                        <a class="btn btn-primary" href="questionario.html">Vai al questionario</a>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-                     <div class="feature-card">
-                         <div class="feature-icon-wrapper bg-accent-purple">
-                             <i class="fas fa-comments text-accent-purple"></i>
-                         </div>
-                        <h3 class="feature-title">Gestione conversazioni</h3>
-                        <p class="feature-description">Rispetta la finestra 24h e supporta l'invio di Messaggi Template approvati.</p>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="invito-card">
+                        <div class="invito-icon tone-orange"><i class="fas fa-flask"></i></div>
+                        <span class="invito-badge">1 minuto · lista d'attesa</span>
+                        <h3 class="invito-title">Prova il prodotto</h3>
+                        <p class="invito-text">
+                            Il pilota parte con pochi professionisti seguiti uno per uno. Lasciaci i tuoi contatti:
+                            ti scriviamo quando c'è un posto e quando c'è qualcosa di vero da provare, non prima.
+                        </p>
+                        <a class="btn btn-primary" href="#lista-attesa">Entra in lista d'attesa</a>
                     </div>
                 </div>
-                 <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                     <div class="feature-card">
-                         <div class="feature-icon-wrapper bg-accent-grey">
-                            <i class="fas fa-user-astronaut text-accent-grey"></i>
-                        </div>
-                        <h3 class="feature-title">Apprendimento IA</h3>
-                        <p class="feature-description">L'IA si adatterà al tuo stile per risposte ancora più personalizzate e autentiche.</p>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
 
-     <!-- How it Works Section -->
-    <section id="how-it-works" class="how-it-works-section py-5">
+    <!-- Come funziona -->
+    <section id="come-funziona" class="how-it-works-section">
         <div class="container">
-            <h2 class="section-title text-center" data-aos="fade-up">Inizia in 3 semplici passi</h2>
+            <h2 class="section-title text-center" data-aos="fade-up">Cosa fa fid.ai, in tre passaggi</h2>
+            <p class="section-lead" data-aos="fade-up" data-aos-delay="100">
+                Non è un chatbot con le risposte scritte a mano: legge il messaggio, capisce cosa serve e — se glielo
+                permetti — lo risolve. Tu continui a usare lo stesso numero dal tuo telefono.
+            </p>
             <div class="row text-center g-5">
                 <div class="col-md-4" data-aos="fade-up">
                      <div class="step-number">1</div>
-                    <h3 class="step-title">Collega</h3>
-                    <p>Connetti il tuo account WhatsApp Business tramite il nostro processo guidato sicuro.</p>
+                    <h3 class="step-title">Le racconti lo studio</h3>
+                    <p>Orari, servizi, listino, come rispondi di solito. Sono i dati che l'assistente usa per
+                       rispondere come rispondi tu, non come risponderebbe un'AI generica.</p>
                 </div>
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
                      <div class="step-number">2</div>
-                     <h3 class="step-title">Informa</h3>
-                    <p>Fornisci all'IA le informazioni chiave sulla tua attività (orari, servizi, FAQ) dalla nostra app.</p>
+                     <h3 class="step-title">Legge e propone</h3>
+                    <p>Un cliente chiede un appuntamento, un prezzo, un'informazione. L'assistente prepara la
+                       risposta, guarda l'agenda, tiene traccia di chi ha già scritto.</p>
                 </div>
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                      <div class="step-number">3</div>
-                    <h3 class="step-title">Automatizza</h3>
-                    <p>Lascia che fid.ai gestisca le risposte ripetitive e libera il tuo tempo.</p>
+                    <h3 class="step-title">Decidi tu quanto lasciarle fare</h3>
+                    <p>Puoi approvare ogni messaggio prima che parta, oppure lasciarla rispondere da sola sulle
+                       richieste che hai scelto. La modalità si cambia in qualsiasi momento, chat per chat.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Target Audience Section -->
-    <section id="target" class="target-audience-section py-5">
+    <!-- Per chi -->
+    <section id="per-chi" class="target-audience-section">
          <div class="container">
-             <h2 class="section-title text-center mb-4" data-aos="fade-up">Ideale per chi non ha tempo da perdere</h2>
-             <p class="lead mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="100">
-                 Liberi professionisti, consulenti, studi e piccole attività che usano WhatsApp per comunicare con i clienti.
+             <h2 class="section-title text-center" data-aos="fade-up">Per chi la stiamo facendo</h2>
+             <p class="section-lead" data-aos="fade-up" data-aos-delay="100">
+                 Professionisti e piccole attività italiane che ricevono richieste su WhatsApp e non hanno una
+                 segreteria. Se ti riconosci in una di queste parole, sei esattamente la persona con cui vogliamo
+                 parlare — anche (soprattutto) se pensi che una cosa così non ti servirebbe.
              </p>
              <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-                 <span class="target-tag">Avvocati</span>
-                 <span class="target-tag">Commercialisti</span>
-                 <span class="target-tag">Consulenti</span>
-                 <span class="target-tag">Artigiani</span>
-                 <span class="target-tag">Formatori</span>
                  <span class="target-tag">Studi medici</span>
+                 <span class="target-tag">Fisioterapisti</span>
+                 <span class="target-tag">Centri estetici</span>
+                 <span class="target-tag">Parrucchieri</span>
+                 <span class="target-tag">Palestre</span>
+                 <span class="target-tag">Artigiani</span>
+                 <span class="target-tag">Commercialisti</span>
+                 <span class="target-tag">Avvocati</span>
+                 <span class="target-tag">Consulenti</span>
                  <span class="target-tag">Negozi</span>
-                 <span class="target-tag">Agenti immobiliari</span>
              </div>
          </div>
     </section>
 
-    <!-- Pricing Teaser Section (Opzione B) -->
-    <section id="pricing" class="pricing-teaser-section py-5">
-        <div class="container text-center">
-            <div class="row justify-content-center">
-                <div class="col-md-9 col-lg-8" data-aos="fade-up"> <!-- Leggermente più largo per il contenuto del box -->
-                    <div class="pricing-teaser-card">
-                        <h2 class="section-title mb-3">Pronto a trasformare le tue chat?</h2> <!-- Reso h2 per importanza -->
-                        <p class="lead mx-auto mt-2 mb-4">
-                            Siamo quasi pronti a lanciare! Richiedi l'accesso anticipato per non perdere l'offerta speciale di lancio e per scoprire i nostri piani pensati per ogni esigenza.
-                        </p>
-                        <a href="prezzi.html" class="btn btn-primary btn-lg me-sm-2 mb-2 mb-sm-0">Scopri i piani</a>
-                        <a href="#contact" class="btn btn-outline-secondary btn-lg">Richiedi accesso ora</a>
+    <!-- Privacy -->
+    <section id="privacy" class="privacy-section">
+        <div class="container">
+            <h2 class="section-title text-center" data-aos="fade-up">I messaggi dei tuoi clienti restano tuoi</h2>
+            <p class="section-lead" data-aos="fade-up" data-aos-delay="100">
+                È la prima obiezione che ci fanno, ed è giusta. Ecco come abbiamo deciso di costruirla, prima
+                ancora di avere un cliente.
+            </p>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="privacy-card">
+                        <div class="privacy-icon"><i class="fas fa-shield-halved"></i></div>
+                        <h3>Zero addestramento sui tuoi messaggi</h3>
+                        <p>Le conversazioni con i tuoi clienti non vengono usate per addestrare nessun modello,
+                           né nostro né di terzi. Servono a rispondere a te, e restano nel tuo spazio.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="privacy-card">
+                        <div class="privacy-icon"><i class="fas fa-microphone-lines"></i></div>
+                        <h3>I vocali si trascrivono qui</h3>
+                        <p>La trascrizione dei messaggi vocali gira sul nostro server in Europa, in locale: l'audio
+                           dei tuoi clienti non viene spedito a un servizio di trascrizione esterno.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="privacy-card">
+                        <div class="privacy-icon"><i class="fas fa-user-check"></i></div>
+                        <h3>Supervisione umana prima dell'invio</h3>
+                        <p>La modalità predefinita è la bozza: l'assistente scrive, tu leggi e mandi. L'invio
+                           automatico esiste, ma lo accendi tu, dove decidi tu.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section py-5">
+    <!-- Lista d'attesa -->
+    <section id="lista-attesa" class="waitlist-section">
         <div class="container">
-            <h2 class="section-title text-center mb-3" data-aos="fade-up">Mettiti in contatto</h2>
-            <p class="lead mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="100">
-                Compila il modulo per richiedere l'accesso anticipato o per qualsiasi domanda.
+            <h2 class="section-title text-center" data-aos="fade-up">Lista d'attesa del pilota</h2>
+            <p class="section-lead" data-aos="fade-up" data-aos-delay="100">
+                Nessun prezzo, nessun pagamento, nessun impegno: solo il modo di ricontattarti quando apriamo il
+                test. Ti scriviamo una volta sola, e solo per questo.
             </p>
-            <div class="contact-form-wrapper" data-aos="fade-up" data-aos-delay="200">
-                <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value="10f29299-a131-40d6-a2ad-37b962b09b55">
-                    <div class="mb-3">
-                        <label for="contactName" class="form-label visually-hidden">Nome Completo</label>
-                        <input type="text" class="form-control contact-input" id="contactName" name="nome" placeholder="Nome Completo" required>
+            <div class="site-form-wrapper" data-aos="fade-up" data-aos-delay="150">
+                <form id="waitlistForm" class="site-form" novalidate>
+                    <div class="form-row">
+                        <label class="field-label" for="wlName">Nome e cognome</label>
+                        <input type="text" id="wlName" name="name" autocomplete="name" required>
                     </div>
-                    <div class="mb-3">
-                         <label for="contactEmail" class="form-label visually-hidden">La tua Email</label>
-                        <input type="email" class="form-control contact-input" id="contactEmail" name="email" placeholder="La tua Email" required>
+                    <div class="form-row">
+                        <label class="field-label" for="wlEmail">Email</label>
+                        <input type="email" id="wlEmail" name="email" autocomplete="email" required>
                     </div>
-                    <div class="mb-4">
-                        <label for="contactMessage" class="form-label visually-hidden">Messaggio</label>
-                        <textarea class="form-control contact-input" id="contactMessage" name="messaggio" rows="5" placeholder="Il tuo messaggio (opzionale)"></textarea>
+                    <div class="form-row">
+                        <label class="field-label" for="wlPhone">Telefono <span class="fw-normal text-muted">(facoltativo)</span></label>
+                        <input type="tel" id="wlPhone" name="phone" autocomplete="tel">
+                        <span class="field-hint">Lo usiamo solo se preferisci essere ricontattato su WhatsApp.</span>
                     </div>
+                    <div class="form-row">
+                        <label class="field-label" for="wlCategory">Che tipo di attività gestisci?</label>
+                        <select id="wlCategory" name="category" required>
+                            <option value="" selected disabled>Scegli una voce…</option>
+                            <option>Artigiano / professionista tecnico</option>
+                            <option>Negozio / commercio</option>
+                            <option>Centro estetico / parrucchiere / benessere</option>
+                            <option>Palestra / centro sportivo</option>
+                            <option>Studio medico / clinica</option>
+                            <option>Commercialista / consulente</option>
+                            <option>Avvocato / notaio</option>
+                            <option>Altro</option>
+                        </select>
+                    </div>
+
+                    <!-- Esca per i bot: invisibile e fuori dal percorso di tabulazione. -->
+                    <div class="hp-field" aria-hidden="true">
+                        <label for="wlWebsite">Sito web</label>
+                        <input type="text" id="wlWebsite" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <div class="consent-row">
+                        <input type="checkbox" id="wlConsent" name="consent" required>
+                        <label for="wlConsent">
+                            Ho letto l'<a href="legal/informativa-privacy.html" class="text-link">informativa sulla privacy</a>
+                            e acconsento a essere ricontattato per il test di fid.ai.
+                        </label>
+                    </div>
+
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary btn-lg cta-main-button">Invia richiesta</button>
+                        <button type="submit" class="btn btn-primary btn-lg">Entra in lista d'attesa</button>
                     </div>
+                    <div class="form-feedback" id="waitlistFeedback" role="status" aria-live="polite"></div>
                 </form>
             </div>
-             <p class="text-center mt-4" style="font-size: 0.9rem; color: var(--text-secondary-dark);">
-                In alternativa, scrivici a:
-                <a href="mailto:info@fidai.it" class="text-link">info@fidai.it</a>
-            </p>
         </div>
     </section>
 
-    <!-- Footer Section -->
+    <!-- Contatti -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title text-center" data-aos="fade-up">Preferisci scriverci?</h2>
+            <div class="contact-inline" data-aos="fade-up" data-aos-delay="100">
+                <p>Per l'intervista, per una domanda o per dirci che stiamo sbagliando qualcosa:</p>
+                <p><a href="mailto:info@fidai.it" class="text-link">info@fidai.it</a></p>
+                <p class="mb-0" style="font-size: 0.9rem; color: var(--text-muted);">
+                    Rispondiamo noi, non un assistente automatico.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer-section text-center py-5">
         <div class="container">
             <div class="mb-3">
                 <img src="images/logo-nome-azienda.png" alt="fid.ai Logo Footer" class="footer-logo-img mb-2">
-                 <p class="footer-tagline">La tua segreteria non è mai stata così intelligente.</p>
+                 <p class="footer-tagline">La segreteria AI per i professionisti italiani — in costruzione, con voi.</p>
             </div>
             <div class="footer-legal-links mb-3">
                 <h5 class="footer-subtitle">Documentazione</h5>
@@ -236,16 +315,18 @@
                 <span class="mx-1 footer-link-separator">|</span>
                 <a href="legal/dpa.html" class="footer-link">Trattamento dei Dati (DPA)</a>
             </div>
-            <div class="footer-social-icons mb-3">
-                <h5 class="footer-subtitle">Seguici</h5>
-                <a href="#" aria-label="LinkedIn" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" aria-label="Facebook" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="X (Twitter)" class="social-icon"><i class="fab fa-x-twitter"></i></a>
+            <div class="footer-legal-links mb-3">
+                <h5 class="footer-subtitle">Partecipa</h5>
+                <a href="questionario.html" class="footer-link">Questionario</a>
+                <span class="mx-1 footer-link-separator">|</span>
+                <a href="index.html#lista-attesa" class="footer-link">Lista d'attesa</a>
+                <span class="mx-1 footer-link-separator">|</span>
+                <a href="resources/faq.html" class="footer-link">FAQ</a>
             </div>
             <p class="footer-copyright">
-                © <span id="currentYear"></span> fid.ai S.r.l. - P.IVA IT01234567890. Tutti i diritti riservati.
+                © <span id="currentYear"></span> fid.ai — progetto in fase di validazione. Tutti i diritti riservati.
             </p>
-            <p class="footer-address">Torino, Italy</p>
+            <p class="footer-address">Torino, Italia · <a href="mailto:info@fidai.it" class="footer-link">info@fidai.it</a></p>
         </div>
     </footer>
 
@@ -253,6 +334,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- AOS JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Configurazione del sito (link intervista, endpoint dei moduli) -->
+    <script src="js/config.js"></script>
     <!-- Custom JS -->
     <script src="js/script.js"></script>
 

@@ -59,4 +59,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
+
+    // Il pulsante dell'intervista punta dove dice js/config.js. Se il link e' ancora
+    // il ripiego '#contact' lasciamo l'ancora del documento (scorre in fondo alla
+    // home); se e' un URL vero lo apriamo in una scheda nuova, cosi' chi torna
+    // indietro ritrova la pagina dov'era.
+    const bookingUrl = (window.FIDAI_CONFIG && window.FIDAI_CONFIG.BOOKING_URL) || '';
+    if (bookingUrl && bookingUrl.charAt(0) !== '#') {
+        document.querySelectorAll('[data-booking-link]').forEach((link) => {
+            link.setAttribute('href', bookingUrl);
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener');
+        });
+    }
 });
