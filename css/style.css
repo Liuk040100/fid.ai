@@ -1388,7 +1388,7 @@ a:hover {
     padding: 1.25rem 1.25rem 1rem 1.25rem;
     margin-bottom: 2rem;
 }
-.concept-box h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
+.concept-box h2 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
 .concept-box p { font-size: 0.97rem; margin-bottom: 0.6rem; }
 
 .q-closing {
