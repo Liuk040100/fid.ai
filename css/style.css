@@ -629,6 +629,60 @@ a:hover {
 .document-index ul ul { padding-left: 1.5rem; margin-top: 0.2rem; margin-bottom: 0.5rem; }
 .document-index ul ul li a { font-weight: 400; font-size: 0.95rem; }
 
+/* Giro 06 (richiesta 3): le sezioni numerate dei due documenti legali
+   (termini, privacy) sono <details> richiudibili — chiuse di default, cosi'
+   l'indice sopra resta il modo per orientarsi e non serve scorrere un muro
+   di testo per trovare un articolo. La nota sui moduli del sito e la
+   sezione Google Calendar dell'informativa restano fuori: sempre visibili,
+   come richiesto (frase Limited Use compresa). */
+.document-content details.legal-section {
+    border: 1px solid var(--border-color-dark);
+    border-radius: var(--card-border-radius-small);
+    margin-bottom: 0.85rem;
+    overflow: hidden;
+}
+.document-content details.legal-section[open] {
+    border-color: var(--border-color-darker);
+}
+.document-content details.legal-section summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.85rem 1.25rem;
+    background-color: var(--secondary-light-bg);
+}
+.document-content details.legal-section summary::-webkit-details-marker {
+    display: none;
+}
+.document-content details.legal-section summary h2 {
+    flex: 1 1 auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+}
+.document-content details.legal-section summary::after {
+    content: "";
+    flex: 0 0 auto;
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-left: 0.75rem;
+    background-image: var(--bs-accordion-btn-icon);
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: transform 0.2s ease;
+}
+.document-content details.legal-section[open] summary::after {
+    transform: rotate(180deg);
+}
+.document-content details.legal-section .legal-section-body {
+    padding: 0.25rem 1.25rem 1.25rem 1.25rem;
+}
+.document-content details.legal-section .legal-section-body h3:first-child {
+    margin-top: 0.5rem;
+}
 
 /* ========================================= */
 /* Stili Pagine Contenuto specifiche (Partner, Suggerimenti, FAQ) */
