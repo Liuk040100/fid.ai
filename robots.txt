@@ -1,0 +1,8 @@
+# fid.ai — sito di validazione. Nessun cookie, nessun tracker.
+# Le pagine che non vanno indicizzate portano gia' <meta name="robots" content="noindex">:
+# qui non le elenchiamo, perche' un Disallow ne annuncerebbe l'indirizzo a chiunque
+# legga questo file e impedirebbe ai motori di leggere proprio quel noindex.
+User-agent: *
+Allow: /
+
+Sitemap: https://fidai.it/sitemap.xml
