@@ -55,7 +55,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="risorseDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Risorse</a>
                         <ul class="dropdown-menu" aria-labelledby="risorseDropdown">
                             <li><a class="dropdown-item" href="resources/partner.html">Partner</a></li>
-                            <li><a class="dropdown-item" href="#lista-attesa">Waiting List</a></li>
+                            <li><a class="dropdown-item" href="lista-attesa.html">Waiting List</a></li>
                             <li><a class="dropdown-item" href="legal/termini-di-servizio.html">Termini e Privacy</a></li>
                             <li><a class="dropdown-item" href="resources/faq.html">FAQ</a></li>
                         </ul>
@@ -147,7 +147,7 @@
                             Il pilota parte con pochi professionisti seguiti uno per uno. Lasciaci i tuoi contatti:
                             ti scriviamo quando c'è un posto vero.
                         </p>
-                        <a class="btn btn-primary" href="#lista-attesa">Entra in lista d'attesa</a>
+                        <a class="btn btn-primary" href="lista-attesa.html">Entra in lista d'attesa</a>
                     </div>
                 </div>
 
@@ -295,67 +295,6 @@
         </div>
     </section>
 
-    <!-- Lista d'attesa -->
-    <section id="lista-attesa" class="waitlist-section">
-        <div class="container">
-            <h2 class="section-title text-center">Lista d'attesa del pilota</h2>
-            <p class="section-lead">
-                Nessun prezzo, nessun pagamento, nessun impegno: solo il modo di ricontattarti quando apriamo il
-                test. Ti scriviamo una volta sola, e solo per questo.
-            </p>
-            <div class="site-form-wrapper">
-                <form id="waitlistForm" class="site-form" novalidate>
-                    <div class="form-row">
-                        <label class="field-label" for="wlName">Nome e cognome</label>
-                        <input type="text" id="wlName" name="name" autocomplete="name" required>
-                    </div>
-                    <div class="form-row">
-                        <label class="field-label" for="wlEmail">Email</label>
-                        <input type="email" id="wlEmail" name="email" autocomplete="email" required>
-                    </div>
-                    <div class="form-row">
-                        <label class="field-label" for="wlPhone">Telefono <span class="fw-normal text-muted">(facoltativo)</span></label>
-                        <input type="tel" id="wlPhone" name="phone" autocomplete="tel">
-                        <span class="field-hint">Lo usiamo solo se preferisci essere ricontattato su WhatsApp.</span>
-                    </div>
-                    <div class="form-row">
-                        <label class="field-label" for="wlCategory">Che tipo di attività gestisci?</label>
-                        <select id="wlCategory" name="category" required>
-                            <option value="" selected disabled>Scegli una voce…</option>
-                            <option>Artigiano / professionista tecnico</option>
-                            <option>Negozio / commercio</option>
-                            <option>Centro estetico / parrucchiere / benessere</option>
-                            <option>Palestra / centro sportivo</option>
-                            <option>Studio medico / clinica</option>
-                            <option>Commercialista / consulente</option>
-                            <option>Avvocato / notaio</option>
-                            <option>Altro</option>
-                        </select>
-                    </div>
-
-                    <!-- Esca per i bot: invisibile e fuori dal percorso di tabulazione. -->
-                    <div class="hp-field" aria-hidden="true">
-                        <label for="wlWebsite">Sito web</label>
-                        <input type="text" id="wlWebsite" name="website" tabindex="-1" autocomplete="off">
-                    </div>
-
-                    <div class="consent-row">
-                        <input type="checkbox" id="wlConsent" name="consent" required>
-                        <label for="wlConsent">
-                            Ho letto l'<a href="legal/informativa-privacy.html" class="text-link">informativa sulla privacy</a>
-                            e acconsento a essere ricontattato per il test di fid.ai.
-                        </label>
-                    </div>
-
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary btn-lg">Entra in lista d'attesa</button>
-                    </div>
-                    <div class="form-feedback" id="waitlistFeedback" role="status" aria-live="polite"></div>
-                </form>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="footer-section text-center py-5">
         <div class="container">
@@ -375,7 +314,7 @@
                 <h2 class="footer-subtitle">Partecipa</h2>
                 <a href="questionario.html" class="footer-link">Questionario</a>
                 <span class="mx-1 footer-link-separator" aria-hidden="true">|</span>
-                <a href="#lista-attesa" class="footer-link">Lista d'attesa</a>
+                <a href="lista-attesa.html" class="footer-link">Lista d'attesa</a>
                 <span class="mx-1 footer-link-separator" aria-hidden="true">|</span>
                 <a href="resources/faq.html" class="footer-link">FAQ</a>
             </div>

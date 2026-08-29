@@ -147,7 +147,7 @@
                 email: email,
                 category: categoria,
                 consent: true,
-                source: 'index.html#lista-attesa',
+                source: 'lista-attesa.html',
                 website: valore(form, 'website'),
             };
             if (telefono) payload.phone = telefono;

@@ -76,6 +76,7 @@ l'app, per esempio Google) li trova senza cercarli.
 | Pagina | Termini | Privacy | DPA |
 |--------|:-------:|:-------:|:---:|
 | `index.html` | sì | sì | sì |
+| `lista-attesa.html` | sì | sì | sì |
 | `prezzi.html` | sì | sì | sì |
 | `questionario.html` | sì | sì | sì |
 | `thankyou.html` | **no** | **no** | **no** |
