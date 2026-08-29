@@ -13,9 +13,11 @@ window.FIDAI_CONFIG = {
      * disdette e una sincronia con l'agenda di chi riceve — tutta roba che qui non
      * possiamo tenere aggiornata.
      *
-     * Finché resta '#contact' il pulsante scende al blocco contatti in fondo alla
-     * home, che è un ripiego onesto (si scrive una mail e si fissa l'orario a mano)
-     * ma non è la versione buona: va sostituito con l'URL vero appena esiste. */
+     * Finché resta '#contact' il pulsante usa il ripiego onesto scritto nell'HTML
+     * (mailto:info@fidai.it, si scrive una mail e si fissa l'orario a mano) — dal
+     * giro 03 la home non ha più una sezione Contatti a sé, quel valore resta solo
+     * come sentinella "non ancora configurato". Va sostituito con l'URL vero appena
+     * esiste. */
     BOOKING_URL: '#contact',
 
     /* Le due porte pubbliche sulla VPS (run 160):

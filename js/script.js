@@ -54,9 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Il pulsante dell'intervista punta dove dice js/config.js. Se il link e' ancora
-    // il ripiego '#contact' lasciamo l'ancora del documento (scorre in fondo alla
-    // home); se e' un URL vero lo apriamo in una scheda nuova, cosi' chi torna
-    // indietro ritrova la pagina dov'era.
+    // il ripiego '#contact' (sentinella, non c'e' piu' una sezione Contatti) lasciamo
+    // l'href scritto nell'HTML (mailto:info@fidai.it); se e' un URL vero lo apriamo
+    // in una scheda nuova, cosi' chi torna indietro ritrova la pagina dov'era.
     const bookingUrl = (window.FIDAI_CONFIG && window.FIDAI_CONFIG.BOOKING_URL) || '';
     if (bookingUrl && bookingUrl.charAt(0) !== '#') {
         document.querySelectorAll('[data-booking-link]').forEach((link) => {
