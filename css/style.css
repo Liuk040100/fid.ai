@@ -362,6 +362,38 @@ a:hover {
     box-shadow: 0 3px 8px rgba(var(--bs-primary-rgb), 0.2);
 }
 
+/* Barra a scorrimento continuo (ticker) delle professioni: destra verso
+   sinistra, lenta, senza soluzione di continuita' (due gruppi identici
+   affiancati, il secondo nascosto agli screen reader). In pausa al hover
+   cosi' si puo' leggere; ferma del tutto se l'utente preferisce meno
+   animazioni. */
+.profession-ticker {
+    overflow: hidden;
+    margin-top: 2.5rem;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.profession-ticker-track {
+    display: flex;
+    width: max-content;
+    animation: profession-ticker-scroll 70s linear infinite;
+}
+.profession-ticker-group {
+    display: flex;
+    flex-shrink: 0;
+}
+.profession-ticker:hover .profession-ticker-track {
+    animation-play-state: paused;
+}
+@keyframes profession-ticker-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .profession-ticker-track { animation: none; }
+    .profession-ticker { overflow-x: auto; }
+}
+
 /* ========================================= */
 /* Pricing Teaser Section (on index.html) & Pricing Page */
 /* ========================================= */
