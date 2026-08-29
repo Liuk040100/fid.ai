@@ -1092,14 +1092,20 @@ a:hover {
 
 /* --------------------------------- Hero ---------------------------------- */
 .hero-section {
-    padding-top: calc(70px + 3.5rem);
+    /* `body` ha gia' padding-top: 70px per la navbar fissa: sommarne un altro
+       lasciava mezzo schermo bianco sopra il titolo. */
+    padding-top: 3.5rem;
     padding-bottom: 3.5rem;
     min-height: 0;
     background: linear-gradient(180deg, #FFFFFF 0%, var(--copilot-bg) 100%);
 }
 .hero-section .hero-title {
     font-size: clamp(2rem, 4.4vw, 3.2rem);
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
 }
+.hero-title .hero-accent { color: var(--brand-primary); }
 .hero-subheadline {
     max-width: 720px;
     font-size: clamp(1.05rem, 2vw, 1.3rem);
@@ -1332,7 +1338,7 @@ a:hover {
     }
     .section-title { margin-bottom: 1.75rem; }
     .section-lead { margin-top: -0.75rem; margin-bottom: 1.75rem; font-size: 1.02rem; }
-    .hero-section { padding-top: calc(70px + 2rem); padding-bottom: 2.5rem; }
+    .hero-section { padding-top: 2rem; padding-bottom: 2.5rem; }
     .hero-section .btn { width: 100%; margin: 0 0 0.75rem 0 !important; }
     .site-form-wrapper { padding: 1.5rem 1.1rem; }
 }
@@ -1341,7 +1347,7 @@ a:hover {
 /* Il questionario di validazione (questionario.html)                        */
 /* ========================================================================= */
 .questionario-section {
-    padding: calc(70px + 3rem) 0 4rem 0;
+    padding: 3rem 0 4rem 0;
     background-color: var(--copilot-bg);
     min-height: 100vh;
 }
@@ -1466,9 +1472,93 @@ a:hover {
 }
 
 @media (max-width: 767.98px) {
-    .questionario-section { padding-top: calc(70px + 1.5rem); }
+    .questionario-section { padding-top: 1.5rem; }
     .q-item { margin-bottom: 1.75rem; }
     .q-nav { flex-direction: column-reverse; }
     .q-nav .btn { width: 100%; }
     .q-nav > span { display: none; }
+}
+
+/* ========================================================================= */
+/* Le schermate vere dell'app (voce 3)                                       */
+/*                                                                           */
+/* Il telefono e il desktop sono due immagini separate composte con il CSS,   */
+/* non un unico PNG «telefono davanti al monitor»: cosi' sotto i 576 px il    */
+/* telefono si toglie di mezzo senza portarsi via anche la schermata grande,  */
+/* e sostituire una schermata dopo una modifica all'app e' un file solo.      */
+/* ========================================================================= */
+.device-composition {
+    position: relative;
+    max-width: 900px;
+    margin: 3rem auto 0 auto;
+    padding-bottom: 2rem;
+}
+.device-desktop {
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+    background-color: var(--primary-light-bg);
+    border: 1px solid var(--border-color-dark);
+    box-shadow: var(--hover-shadow);
+}
+.device-desktop img { display: block; width: 100%; height: auto; }
+
+.device-phone {
+    position: absolute;
+    right: -0.5rem;
+    bottom: 0;
+    width: 26%;
+    max-width: 190px;
+    border-radius: 22px;
+    overflow: hidden;
+    background-color: var(--primary-light-bg);
+    border: 5px solid #1A1A1A;                 /* la cornice del telefono */
+    box-shadow: 0 12px 32px rgba(20, 50, 80, 0.22);
+}
+.device-phone img { display: block; width: 100%; height: auto; }
+
+/* --------------------------- La fila di schermate ------------------------ */
+.screens-section {
+    padding: 5rem 0;
+    background-color: var(--secondary-light-bg);
+}
+.screen-card {
+    margin: 0;
+    text-align: center;
+}
+.screen-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    border: 4px solid #1A1A1A;
+    box-shadow: var(--soft-shadow);
+    background-color: var(--primary-light-bg);
+}
+.screen-card figcaption {
+    margin-top: 0.85rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: var(--text-secondary-dark);
+}
+
+@media (max-width: 767.98px) {
+    .screens-section { padding: 3.25rem 0; }
+    .screen-card figcaption { font-size: 0.82rem; }
+}
+
+/* Sotto i 576 px il telefono coprirebbe meta' della schermata grande:
+   si mostra solo il desktop, che a quella larghezza e' gia' leggibile. */
+@media (max-width: 575.98px) {
+    .device-composition { margin-top: 2rem; padding-bottom: 0; }
+    .device-phone { display: none; }
+}
+
+/* Le tabelle del DPA erano piu' larghe dello schermo di un telefono: a 390 px la
+   pagina scorreva di lato e il testo usciva dal bordo. Larghezza fissa e parole
+   spezzate le fanno stare dentro senza cambiare il documento. */
+.document-content table, .table-dpa {
+    width: 100%;
+    max-width: 100%;
+    table-layout: fixed;
+    word-break: break-word;
 }

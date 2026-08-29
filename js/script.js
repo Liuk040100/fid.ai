@@ -1,16 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // AOS lo carica solo chi ha qualcosa da far comparire scorrendo: il
-    // questionario no, e senza questa guardia il ReferenceError fermerebbe
-    // tutto il resto del file (anno nel footer, link dell'intervista).
-    if (window.AOS) {
-        AOS.init({
-            duration: 700,
-            once: true,
-            offset: 50,
-            easing: 'ease-out-cubic',
-        });
-    }
-
     const navbarToggler = document.querySelector('#mainNavbar .navbar-toggler');
     const navbarTogglerIcon = navbarToggler ? navbarToggler.querySelector('i') : null;
     const navbarCollapse = document.getElementById('navbarNavContent');

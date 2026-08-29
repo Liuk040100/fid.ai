@@ -16,8 +16,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- AOS CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -56,24 +54,36 @@
     <!-- Hero: ascolto, non vendita -->
     <section id="hero" class="hero-section text-center d-flex flex-column justify-content-center">
         <div class="container">
-            <span class="eyebrow" data-aos="fade-up"><span class="dot"></span>Progetto in fase di validazione</span>
-            <h1 class="hero-title" data-aos="fade-up">
-                Stiamo costruendo la segreteria AI <br class="d-none d-lg-block"> per i professionisti italiani. Aiutaci a farla giusta.
+            <span class="eyebrow"><span class="dot"></span>Progetto in fase di validazione</span>
+            <h1 class="hero-title">
+                Stiamo costruendo la segreteria AI per i professionisti italiani.
+                <span class="hero-accent">Aiutaci a farla giusta.</span>
             </h1>
-            <p class="hero-subheadline lead mx-auto mt-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <p class="hero-subheadline lead mx-auto mt-3 mb-4">
                 fid.ai risponde ai messaggi WhatsApp di lavoro al posto tuo, con il tuo tono e sotto il tuo
                 controllo. Prima di venderla a qualcuno vogliamo capire come gestisci davvero le richieste dei
                 clienti: quanto tempo ti portano via, cosa ti chiedono, cosa non delegheresti mai.
             </p>
-            <div data-aos="fade-up" data-aos-delay="200">
+            <div>
                 <a href="#collabora" class="btn btn-primary btn-lg me-2">Come vuoi collaborare?</a>
                 <a href="#come-funziona" class="btn btn-outline-secondary">Cos'è fid.ai <i class="fas fa-arrow-right small ms-1"></i></a>
             </div>
-            <p class="hero-note" data-aos="fade-up" data-aos-delay="250">
+            <p class="hero-note">
                 Non stiamo vendendo niente: nessun prezzo in questa pagina, nessuna carta di credito, nessun impegno.
             </p>
-            <div data-aos="fade-up" data-aos-delay="300">
-                 <img src="images/placeholder-hero-apple.png" alt="fid.ai su desktop e smartphone" class="img-fluid hero-img">
+            <!-- Schermate VERE dell'app, non mockup: catturate con Playwright contro
+                 l'e2e-server con dati inventati (studio e clienti che non esistono).
+                 La composizione e' in CSS, non un'immagine sola: cosi' il telefono
+                 puo' sparire sotto i 576 px senza portarsi via anche il desktop. -->
+            <div class="device-composition">
+                <div class="device-desktop">
+                    <img src="images/app/conversazioni-desktop.png" width="1600" height="1000"
+                         alt="La schermata delle conversazioni di fid.ai su computer: la lista delle chat con il riepilogo di cosa richiede attenzione">
+                </div>
+                <div class="device-phone">
+                    <img src="images/app/chat-telefono.png" width="780" height="1688"
+                         alt="Una conversazione su fid.ai dal telefono: l'assistente ha preparato una risposta e aspetta l'approvazione">
+                </div>
             </div>
         </div>
     </section>
@@ -81,14 +91,14 @@
     <!-- I tre inviti -->
     <section id="collabora" class="invites-section">
         <div class="container">
-            <h2 class="section-title text-center" data-aos="fade-up">Come vuoi collaborare?</h2>
-            <p class="section-lead" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="section-title text-center">Come vuoi collaborare?</h2>
+            <p class="section-lead">
                 Tre modi, dal più impegnativo al più veloce. Scegli quello che ti costa meno tempo: ci serve
                 soprattutto la tua esperienza di chi i messaggi li riceve tutti i giorni.
             </p>
             <div class="row g-4 justify-content-center">
 
-                <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                <div class="col-md-6 col-lg-4">
                     <div class="invito-card">
                         <div class="invito-icon tone-blue"><i class="fas fa-comments"></i></div>
                         <span class="invito-badge">15 minuti · in videochiamata</span>
@@ -102,7 +112,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-6 col-lg-4">
                     <div class="invito-card">
                         <div class="invito-icon tone-green"><i class="fas fa-list-check"></i></div>
                         <span class="invito-badge">3 minuti · 16 domande</span>
@@ -116,7 +126,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-md-6 col-lg-4">
                     <div class="invito-card">
                         <div class="invito-icon tone-orange"><i class="fas fa-flask"></i></div>
                         <span class="invito-badge">1 minuto · lista d'attesa</span>
@@ -136,25 +146,25 @@
     <!-- Come funziona -->
     <section id="come-funziona" class="how-it-works-section">
         <div class="container">
-            <h2 class="section-title text-center" data-aos="fade-up">Cosa fa fid.ai, in tre passaggi</h2>
-            <p class="section-lead" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="section-title text-center">Cosa fa fid.ai, in tre passaggi</h2>
+            <p class="section-lead">
                 Non è un chatbot con le risposte scritte a mano: legge il messaggio, capisce cosa serve e — se glielo
                 permetti — lo risolve. Tu continui a usare lo stesso numero dal tuo telefono.
             </p>
-            <div class="row text-center g-5">
-                <div class="col-md-4" data-aos="fade-up">
+            <div class="row text-center g-4">
+                <div class="col-md-4">
                      <div class="step-number">1</div>
                     <h3 class="step-title">Le racconti lo studio</h3>
                     <p>Orari, servizi, listino, come rispondi di solito. Sono i dati che l'assistente usa per
                        rispondere come rispondi tu, non come risponderebbe un'AI generica.</p>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+                <div class="col-md-4">
                      <div class="step-number">2</div>
                      <h3 class="step-title">Legge e propone</h3>
                     <p>Un cliente chiede un appuntamento, un prezzo, un'informazione. L'assistente prepara la
                        risposta, guarda l'agenda, tiene traccia di chi ha già scritto.</p>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="col-md-4">
                      <div class="step-number">3</div>
                     <h3 class="step-title">Decidi tu quanto lasciarle fare</h3>
                     <p>Puoi approvare ogni messaggio prima che parta, oppure lasciarla rispondere da sola sulle
@@ -164,16 +174,57 @@
         </div>
     </section>
 
+    <!-- Le altre schermate -->
+    <section id="schermate" class="screens-section">
+        <div class="container">
+            <h2 class="section-title text-center">Questa è l'app, non un disegno</h2>
+            <p class="section-lead">
+                Le immagini qui sotto sono schermate vere di fid.ai come funziona oggi. I nomi e gli
+                appuntamenti sono inventati — nessun cliente vero compare su questo sito.
+            </p>
+            <div class="row g-4">
+                <div class="col-6 col-lg-3">
+                    <figure class="screen-card">
+                        <img src="images/app/agenda-telefono.png" width="780" height="1688" loading="lazy"
+                             alt="L'agenda di fid.ai con gli appuntamenti della giornata">
+                        <figcaption>L'agenda, con quello che l'assistente ha fissato al posto tuo.</figcaption>
+                    </figure>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <figure class="screen-card">
+                        <img src="images/app/bozze-telefono.png" width="780" height="1688" loading="lazy"
+                             alt="Le bozze preparate dall'assistente, in attesa di approvazione">
+                        <figcaption>Le bozze in attesa: leggi, e mandi con un tocco.</figcaption>
+                    </figure>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <figure class="screen-card">
+                        <img src="images/app/assistente-telefono.png" width="780" height="1688" loading="lazy"
+                             alt="La chat con l'assistente, che riassume la settimana di lavoro">
+                        <figcaption>L'assistente a cui chiedere com'è andata la settimana.</figcaption>
+                    </figure>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <figure class="screen-card">
+                        <img src="images/app/profilo-telefono.png" width="780" height="1688" loading="lazy"
+                             alt="Il profilo dello studio, con le impostazioni dell'assistente">
+                        <figcaption>Il profilo: cosa sa l'assistente e quanto può fare da solo.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Per chi -->
     <section id="per-chi" class="target-audience-section">
          <div class="container">
-             <h2 class="section-title text-center" data-aos="fade-up">Per chi la stiamo facendo</h2>
-             <p class="section-lead" data-aos="fade-up" data-aos-delay="100">
+             <h2 class="section-title text-center">Per chi la stiamo facendo</h2>
+             <p class="section-lead">
                  Professionisti e piccole attività italiane che ricevono richieste su WhatsApp e non hanno una
                  segreteria. Se ti riconosci in una di queste parole, sei esattamente la persona con cui vogliamo
                  parlare — anche (soprattutto) se pensi che una cosa così non ti servirebbe.
              </p>
-             <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+             <div class="text-center">
                  <span class="target-tag">Studi medici</span>
                  <span class="target-tag">Fisioterapisti</span>
                  <span class="target-tag">Centri estetici</span>
@@ -191,13 +242,13 @@
     <!-- Privacy -->
     <section id="privacy" class="privacy-section">
         <div class="container">
-            <h2 class="section-title text-center" data-aos="fade-up">I messaggi dei tuoi clienti restano tuoi</h2>
-            <p class="section-lead" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="section-title text-center">I messaggi dei tuoi clienti restano tuoi</h2>
+            <p class="section-lead">
                 È la prima obiezione che ci fanno, ed è giusta. Ecco come abbiamo deciso di costruirla, prima
                 ancora di avere un cliente.
             </p>
             <div class="row g-4">
-                <div class="col-md-4" data-aos="fade-up">
+                <div class="col-md-4">
                     <div class="privacy-card">
                         <div class="privacy-icon"><i class="fas fa-shield-halved"></i></div>
                         <h3>Zero addestramento sui tuoi messaggi</h3>
@@ -205,7 +256,7 @@
                            né nostro né di terzi. Servono a rispondere a te, e restano nel tuo spazio.</p>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-4">
                     <div class="privacy-card">
                         <div class="privacy-icon"><i class="fas fa-microphone-lines"></i></div>
                         <h3>I vocali si trascrivono qui</h3>
@@ -213,7 +264,7 @@
                            dei tuoi clienti non viene spedito a un servizio di trascrizione esterno.</p>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-md-4">
                     <div class="privacy-card">
                         <div class="privacy-icon"><i class="fas fa-user-check"></i></div>
                         <h3>Supervisione umana prima dell'invio</h3>
@@ -228,12 +279,12 @@
     <!-- Lista d'attesa -->
     <section id="lista-attesa" class="waitlist-section">
         <div class="container">
-            <h2 class="section-title text-center" data-aos="fade-up">Lista d'attesa del pilota</h2>
-            <p class="section-lead" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="section-title text-center">Lista d'attesa del pilota</h2>
+            <p class="section-lead">
                 Nessun prezzo, nessun pagamento, nessun impegno: solo il modo di ricontattarti quando apriamo il
                 test. Ti scriviamo una volta sola, e solo per questo.
             </p>
-            <div class="site-form-wrapper" data-aos="fade-up" data-aos-delay="150">
+            <div class="site-form-wrapper">
                 <form id="waitlistForm" class="site-form" novalidate>
                     <div class="form-row">
                         <label class="field-label" for="wlName">Nome e cognome</label>
@@ -289,8 +340,8 @@
     <!-- Contatti -->
     <section id="contact" class="contact-section">
         <div class="container">
-            <h2 class="section-title text-center" data-aos="fade-up">Preferisci scriverci?</h2>
-            <div class="contact-inline" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="section-title text-center">Preferisci scriverci?</h2>
+            <div class="contact-inline">
                 <p>Per l'intervista, per una domanda o per dirci che stiamo sbagliando qualcosa:</p>
                 <p><a href="mailto:info@fidai.it" class="text-link">info@fidai.it</a></p>
                 <p class="mb-0" style="font-size: 0.9rem; color: var(--text-muted);">
@@ -332,8 +383,6 @@
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <!-- AOS JS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- Configurazione del sito (link intervista, endpoint dei moduli) -->
     <script src="js/config.js"></script>
     <!-- Custom JS -->
