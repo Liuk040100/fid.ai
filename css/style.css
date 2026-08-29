@@ -1336,3 +1336,139 @@ a:hover {
     .hero-section .btn { width: 100%; margin: 0 0 0.75rem 0 !important; }
     .site-form-wrapper { padding: 1.5rem 1.1rem; }
 }
+
+/* ========================================================================= */
+/* Il questionario di validazione (questionario.html)                        */
+/* ========================================================================= */
+.questionario-section {
+    padding: calc(70px + 3rem) 0 4rem 0;
+    background-color: var(--copilot-bg);
+    min-height: 100vh;
+}
+.questionario-intro { margin-bottom: 2rem; }
+.questionario-intro h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 1rem; }
+.questionario-wrapper { max-width: 720px; }
+
+/* La barra: dice a che punto sei, e che i punti sono quattro e non venti. */
+.q-progress { margin-bottom: 2rem; }
+.q-progress-track {
+    height: 6px;
+    border-radius: 999px;
+    background-color: var(--blue-light);
+    overflow: hidden;
+}
+.q-progress-bar {
+    height: 100%;
+    width: 25%;
+    border-radius: 999px;
+    background-color: var(--brand-primary);
+    transition: width 0.3s ease;
+}
+.q-progress-label {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.q-step { border: 0; padding: 0; margin: 0; }
+.q-step[hidden] { display: none; }
+.q-step-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--brand-primary);
+    float: none;
+    width: auto;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color-dark);
+}
+
+.q-item { margin-bottom: 2rem; }
+.q-label {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--text-primary-dark);
+    margin-bottom: 0.35rem;
+    line-height: 1.45;
+}
+.q-number { color: var(--brand-primary); margin-right: 0.25rem; }
+.q-note {
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+.q-options { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
+
+/* Ogni opzione è una riga cliccabile per intero, non un pallino da centrare
+   col dito: metà delle risposte arriverà da un telefono. */
+.q-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--border-color-dark);
+    border-radius: var(--input-border-radius);
+    background-color: var(--primary-light-bg);
+    cursor: pointer;
+    font-size: 0.98rem;
+    color: var(--text-secondary-dark);
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.q-option:hover { border-color: var(--pill-blue); background-color: var(--copilot-bg); }
+.q-option input {
+    margin-top: 0.15rem;
+    width: 1.05rem;
+    height: 1.05rem;
+    flex: 0 0 auto;
+    accent-color: var(--brand-primary);
+}
+.q-option:has(input:checked) {
+    border-color: var(--brand-primary);
+    background-color: var(--brand-primary-soft);
+    color: var(--text-primary-dark);
+    font-weight: 500;
+}
+.q-other-text { margin-top: 0.25rem; }
+.q-other-text:disabled { background-color: var(--secondary-light-bg); color: var(--text-muted); }
+
+.q-error {
+    display: none;
+    margin: 0.5rem 0 0 0;
+    font-size: 0.88rem;
+    color: #c62828;                            /* colors.errorText */
+}
+.q-error.is-visible { display: block; }
+
+/* Il riquadro che spiega il concept, prima delle domande della sezione 3. */
+.concept-box {
+    background-color: var(--auto-green-bg);
+    border-left: 3px solid var(--auto-green);
+    border-radius: var(--card-border-radius-small);
+    padding: 1.25rem 1.25rem 1rem 1.25rem;
+    margin-bottom: 2rem;
+}
+.concept-box h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
+.concept-box p { font-size: 0.97rem; margin-bottom: 0.6rem; }
+
+.q-closing {
+    border-top: 1px solid var(--border-color-dark);
+    padding-top: 1.5rem;
+    margin-top: 2.5rem;
+}
+.q-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 767.98px) {
+    .questionario-section { padding-top: calc(70px + 1.5rem); }
+    .q-item { margin-bottom: 1.75rem; }
+    .q-nav { flex-direction: column-reverse; }
+    .q-nav .btn { width: 100%; }
+    .q-nav > span { display: none; }
+}
