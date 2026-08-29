@@ -1,8 +1,8 @@
 /* js/forms.js — i due moduli del sito che scrivono sulla VPS.
  *
  * Il sito è statico su GitHub Pages: non ha un backend suo. Fino a oggi il modulo
- * di contatto postava a un `process_form.php` che lì non esiste — nessun contatto
- * è mai arrivato. Adesso i dati vanno alle due rotte pubbliche del backend fid.ai
+ * di contatto postava a uno script server che lì non esiste — nessun contatto è
+ * mai arrivato. Adesso i dati vanno alle due rotte pubbliche del backend fid.ai
  * (run 160), via fetch, in JSON:
  *
  *     POST <API_BASE>/survey     le risposte del questionario di validazione
