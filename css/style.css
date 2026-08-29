@@ -1053,8 +1053,6 @@ a:hover {
 .how-it-works-section,
 .target-audience-section,
 .contact-section,
-.invites-section,
-.privacy-section,
 .waitlist-section {
     padding: 5rem 0;
 }
@@ -1124,8 +1122,11 @@ a:hover {
 }
 
 /* ---------------------------- I tre inviti ------------------------------- */
+/* Giro 02: piu' spazio bianco intorno a questa sezione, su richiesta di Luca
+   (le altre sezioni restano compatte, vedi il blocco di padding piu' sopra). */
 .invites-section {
     background-color: var(--secondary-light-bg);
+    padding: 6rem 0;
 }
 .invito-card {
     background-color: var(--card-bg);
@@ -1142,15 +1143,17 @@ a:hover {
     transform: translateY(-4px);
     box-shadow: var(--hover-shadow);
 }
+/* Giro 02: icone ingrandite (48px -> 68px) per dare piu' impatto visivo al
+   blocco dei tre inviti, come chiesto da Luca. */
 .invito-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: var(--card-border-radius-small);
+    width: 68px;
+    height: 68px;
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
+    font-size: 1.85rem;
+    margin-bottom: 1.35rem;
 }
 .invito-icon.tone-blue   { background-color: var(--blue-light);     color: var(--brand-primary); }
 .invito-icon.tone-green  { background-color: var(--auto-green-bg);  color: var(--auto-green); }
@@ -1182,20 +1185,30 @@ a:hover {
 }
 
 /* --------------------------------- Privacy -------------------------------- */
+/* Giro 02: piu' spazio bianco (come per gli inviti) e icone in badge, non piu'
+   glifi nudi — coerenti con lo stile e la dimensione di .invito-icon. */
 .privacy-section {
     background-color: var(--auto-green-bg);
+    padding: 6rem 0;
 }
 .privacy-card {
     background-color: var(--card-bg);
     border-radius: var(--card-border-radius);
     box-shadow: var(--subtle-shadow);
-    padding: 1.5rem;
+    padding: 1.75rem;
     height: 100%;
 }
 .privacy-card .privacy-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--auto-green-bg);
     color: var(--auto-green);
-    font-size: 1.4rem;
-    margin-bottom: 0.75rem;
+    border-radius: 16px;
+    font-size: 1.7rem;
+    margin-bottom: 1.1rem;
 }
 .privacy-card h3 {
     font-size: 1.1rem;
@@ -1506,15 +1519,29 @@ a:hover {
     position: absolute;
     right: -0.5rem;
     bottom: 0;
-    width: 26%;
-    max-width: 190px;
+    width: 28%;
+    max-width: 205px;
     border-radius: 30px;                       /* angoli marcati, stile iPhone */
     overflow: hidden;
     background-color: var(--primary-light-bg);
     border: 6px solid #1A1A1A;                 /* la cornice del telefono */
-    box-shadow: 0 2px 4px rgba(20, 50, 80, 0.08), 0 20px 40px rgba(20, 50, 80, 0.22);
+    box-shadow: 0 2px 4px rgba(20, 50, 80, 0.10), 0 24px 48px rgba(20, 50, 80, 0.26);
 }
 .device-phone img { display: block; width: 100%; height: auto; }
+/* Il notch: un dettaglio piccolo che fa leggere subito "iPhone" invece che
+   "rettangolo con gli angoli tondi" (richiesta 3, giro 02: valorizzare la cornice). */
+.device-phone::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32%;
+    height: 7px;
+    background-color: #1A1A1A;
+    border-radius: 999px;
+    z-index: 2;
+}
 
 /* --------------------------- La fila di schermate ------------------------ */
 .screens-section {
@@ -1522,22 +1549,38 @@ a:hover {
     background-color: var(--secondary-light-bg);
 }
 .screen-card {
+    position: relative;
     margin: 0;
     text-align: center;
 }
 /* Richiesta 4 (giro 01): cornice iPhone pulita — angoli marcati, ombra morbida
    realistica, e una larghezza massima che tiene le schermate in proporzione
    telefono invece di farle stirare a tutta colonna. */
+/* Richiesta 3 (giro 02): schermate un po' piu' grandi e ombra piu' profonda,
+   per valorizzare la cornice invece di farla sparire nello sfondo. */
 .screen-card img {
     display: block;
     width: 100%;
-    max-width: 220px;
+    max-width: 240px;
     height: auto;
     margin: 0 auto;
     border-radius: 36px;
     border: 8px solid #1A1A1A;
-    box-shadow: 0 2px 4px rgba(20, 50, 80, 0.06), 0 24px 48px rgba(20, 50, 80, 0.16);
+    box-shadow: 0 2px 4px rgba(20, 50, 80, 0.08), 0 28px 56px rgba(20, 50, 80, 0.20);
     background-color: var(--primary-light-bg);
+}
+/* Stesso notch dell'iPhone dell'hero: coerenza fra tutte le cornici del sito. */
+.screen-card::before {
+    content: "";
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26%;
+    height: 12px;
+    background-color: #1A1A1A;
+    border-radius: 999px;
+    z-index: 2;
 }
 .screen-card figcaption {
     margin-top: 0.85rem;
