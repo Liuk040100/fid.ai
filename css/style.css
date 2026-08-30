@@ -1481,7 +1481,7 @@ a:hover {
     min-height: 100vh;
 }
 .questionario-intro { margin-bottom: 2rem; }
-.questionario-intro h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 1rem; }
+.questionario-intro h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 1.75rem; }
 .questionario-wrapper { max-width: 720px; }
 
 /* La barra: dice a che punto sei, e che i punti sono quattro e non venti. */
