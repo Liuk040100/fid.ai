@@ -815,6 +815,16 @@ a:hover {
 .document-content details.legal-section[open]:hover {
     transform: none;
 }
+/* I sottotitoli dentro un articolo (2.1, 2.2, ...) stanno sotto la testata
+   della scheda: devono pesare meno di lei, altrimenti sembrano piu'
+   importanti del titolo che li contiene. Si distinguono dal testo per il
+   peso, non per la taglia. */
+.document-content details.legal-section .legal-section-body h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+}
 .document-content details.legal-section .legal-section-body h3:first-child {
     margin-top: 0.5rem;
 }
