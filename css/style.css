@@ -1818,4 +1818,13 @@ a:hover {
     /* Le schermate dell'app sono catturate in tema chiaro: un bordo tenue
        evita che il bianco della schermata sembri un buco nella pagina. */
     .step-phone img { border-color: #2A3540; }
+
+    /* I loghi fid.ai in tema scuro: bianco nitido e brillante su fondo scuro */
+    .hero-logo-img,
+    .navbar-logo-img,
+    .nav-logo .navbar-logo-img,
+    .footer-logo-img {
+        filter: brightness(0) invert(1);
+        opacity: 0.95;
+    }
 }
