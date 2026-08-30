@@ -205,8 +205,8 @@ a:hover {
 .btn-outline-secondary {
     color: var(--text-accent);
     border-color: var(--text-accent);
-    font-weight: 500;
-    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    padding: 0.75rem 1.75rem;
     border-radius: var(--button-border-radius);
     transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     font-size: 1rem;
@@ -1141,13 +1141,18 @@ a:hover {
 }
 
 /* --------------------------------- Hero ---------------------------------- */
+/* Giro 10: la Hero non ha piu' immagini. Resta il testo, quindi lo spazio
+   verticale e' tarato sulla lettura: il titolo respira sotto la navbar, i due
+   pulsanti restano nella prima schermata anche su un telefono. La sfumatura
+   parte dall'azzurro dell'app e finisce sul bianco della sezione che segue,
+   cosi' le due sezioni si toccano senza uno scalino di colore. */
 .hero-section {
     /* `body` ha gia' padding-top: 70px per la navbar fissa: sommarne un altro
        lasciava mezzo schermo bianco sopra il titolo. */
-    padding-top: 3.5rem;
-    padding-bottom: 3.5rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
     min-height: 0;
-    background: linear-gradient(180deg, #FFFFFF 0%, var(--copilot-bg) 100%);
+    background: linear-gradient(180deg, var(--copilot-bg) 0%, var(--primary-light-bg) 100%);
 }
 .hero-section .hero-title {
     font-size: clamp(2rem, 4.4vw, 3.2rem);
@@ -1157,20 +1162,18 @@ a:hover {
 }
 .hero-title .hero-accent { color: var(--brand-primary); }
 .hero-subheadline {
-    max-width: 720px;
-    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    max-width: 660px;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
     color: var(--text-secondary-dark);
+    margin: 1.25rem auto 2.25rem auto;
 }
-.hero-note {
-    font-size: 0.92rem;
-    color: var(--text-muted);
-    margin-top: 1.25rem;
-}
-.hero-img {
-    max-width: 840px;
-    margin: 2.5rem auto 0 auto;
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--hover-shadow);
+/* I due pulsanti sono una coppia, non due elementi accostati: stessa altezza,
+   stesso spazio fra loro qui e sul telefono (dove diventano due righe). */
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
 }
 
 /* ---------------------------- I tre inviti ------------------------------- */
@@ -1390,8 +1393,9 @@ a:hover {
     .row.g-5 { --bs-gutter-x: 1.5rem; --bs-gutter-y: 2.5rem; }
     .section-title { margin-bottom: 1.75rem; }
     .section-lead { margin-top: -0.75rem; margin-bottom: 1.75rem; font-size: 1.02rem; }
-    .hero-section { padding-top: 2rem; padding-bottom: 2.5rem; }
-    .hero-section .btn { width: 100%; margin: 0 0 0.75rem 0 !important; }
+    .hero-section { padding-top: 2.5rem; padding-bottom: 3rem; }
+    .hero-subheadline { margin-bottom: 1.75rem; }
+    .hero-actions { flex-direction: column; }
     .site-form-wrapper { padding: 1.5rem 1.1rem; }
 }
 
@@ -1531,57 +1535,6 @@ a:hover {
     .q-nav > span { display: none; }
 }
 
-/* ========================================================================= */
-/* Le schermate vere dell'app (voce 3)                                       */
-/*                                                                           */
-/* Il telefono e il desktop sono due immagini separate composte con il CSS,   */
-/* non un unico PNG «telefono davanti al monitor»: cosi' sotto i 576 px il    */
-/* telefono si toglie di mezzo senza portarsi via anche la schermata grande,  */
-/* e sostituire una schermata dopo una modifica all'app e' un file solo.      */
-/* ========================================================================= */
-.device-composition {
-    position: relative;
-    max-width: 900px;
-    margin: 3rem auto 0 auto;
-    padding-bottom: 2rem;
-}
-.device-desktop {
-    border-radius: var(--card-border-radius);
-    overflow: hidden;
-    background-color: var(--primary-light-bg);
-    border: 1px solid var(--border-color-dark);
-    box-shadow: var(--hover-shadow);
-}
-.device-desktop img { display: block; width: 100%; height: auto; }
-
-.device-phone {
-    position: absolute;
-    right: -0.5rem;
-    bottom: 0;
-    width: 28%;
-    max-width: 205px;
-    border-radius: 30px;                       /* angoli marcati, stile iPhone */
-    overflow: hidden;
-    background-color: var(--primary-light-bg);
-    border: 6px solid #1A1A1A;                 /* la cornice del telefono */
-    box-shadow: 0 2px 4px rgba(20, 50, 80, 0.10), 0 24px 48px rgba(20, 50, 80, 0.26);
-}
-.device-phone img { display: block; width: 100%; height: auto; }
-/* Il notch: un dettaglio piccolo che fa leggere subito "iPhone" invece che
-   "rettangolo con gli angoli tondi" (richiesta 3, giro 02: valorizzare la cornice). */
-.device-phone::before {
-    content: "";
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 32%;
-    height: 7px;
-    background-color: #1A1A1A;
-    border-radius: 999px;
-    z-index: 2;
-}
-
 /* --------------------------- La fila di schermate ------------------------ */
 .screens-section {
     padding: 5rem 0;
@@ -1631,12 +1584,5 @@ a:hover {
 @media (max-width: 767.98px) {
     .screens-section { padding: 3.25rem 0; }
     .screen-card figcaption { font-size: 0.82rem; }
-}
-
-/* Sotto i 576 px il telefono coprirebbe meta' della schermata grande:
-   si mostra solo il desktop, che a quella larghezza e' gia' leggibile. */
-@media (max-width: 575.98px) {
-    .device-composition { margin-top: 2rem; padding-bottom: 0; }
-    .device-phone { display: none; }
 }
 

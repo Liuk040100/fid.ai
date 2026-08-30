@@ -65,33 +65,20 @@
         </div>
     </nav>
 
-    <!-- Hero: ascolto, non vendita -->
-    <section id="hero" class="hero-section text-center d-flex flex-column justify-content-center">
+    <!-- Hero: ascolto, non vendita. Niente immagini qui (giro 10, richiesta 1):
+         resta solo cio' che deve leggere chi arriva — titolo, sottotitolo, due
+         strade. Le schermate dell'app sono piu' sotto, dentro i cinque passi. -->
+    <section id="hero" class="hero-section text-center">
         <div class="container">
             <h1 class="hero-title">
                 La tua personale segreteria AI: lavora per te, ma solo con la tua approvazione.
             </h1>
-            <p class="hero-subheadline lead mx-auto mt-3 mb-4">
+            <p class="hero-subheadline lead">
                 Gestisce messaggi e appuntamenti su WhatsApp con il tuo stile, collegata al tuo Google Calendar.
             </p>
-            <div>
-                <a href="#collabora" class="btn btn-primary btn-lg me-2">Vuoi aiutarci?</a>
+            <div class="hero-actions">
+                <a href="#collabora" class="btn btn-primary">Vuoi aiutarci?</a>
                 <a href="#come-funziona" class="btn btn-outline-secondary">Cos'è fid.ai</a>
-            </div>
-            <!-- Schermate VERE dell'app, non mockup: catturate con Playwright
-                 sull'ambiente di prova interno, con dati inventati (uno studio e
-                 clienti che non esistono). La composizione e' in CSS, non
-                 un'immagine sola: cosi' il telefono puo' sparire sotto i 576 px
-                 senza portarsi via anche la schermata grande. -->
-            <div class="device-composition">
-                <div class="device-desktop">
-                    <img src="images/app/agenda-desktop.png" width="1600" height="1000"
-                         alt="La schermata Home/Agenda di fid.ai su computer: gli appuntamenti della giornata e cosa richiede attenzione">
-                </div>
-                <div class="device-phone">
-                    <img src="images/app/chat-telefono.png" width="780" height="1688"
-                         alt="Una conversazione su fid.ai dal telefono: l'assistente ha preparato una risposta e aspetta l'approvazione">
-                </div>
             </div>
         </div>
     </section>
