@@ -48,6 +48,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Documenti legali: gli articoli sono <details> chiusi, quindi un link a
+    // un'ancora che sta dentro un articolo chiuso (per esempio
+    // dpa.html#dpa-allegato1) non porterebbe da nessuna parte. Qui apriamo
+    // l'articolo che contiene il bersaglio e ci portiamo sopra la pagina.
+    // Se in pagina non ci sono <details>, non fa nulla.
+    function apriArticoloDelBersaglio(scorri) {
+        const id = decodeURIComponent(window.location.hash.slice(1));
+        if (!id) { return; }
+        let bersaglio = null;
+        try { bersaglio = document.getElementById(id); } catch (e) { return; }
+        if (!bersaglio) { return; }
+        let risalita = bersaglio.closest('details');
+        let apertoQualcosa = false;
+        while (risalita) {
+            if (!risalita.open) { risalita.open = true; apertoQualcosa = true; }
+            risalita = risalita.parentElement ? risalita.parentElement.closest('details') : null;
+        }
+        if (apertoQualcosa && scorri) {
+            bersaglio.scrollIntoView();
+        }
+    }
+
+    if (document.querySelector('details.legal-section')) {
+        apriArticoloDelBersaglio(true);
+        window.addEventListener('hashchange', function () { apriArticoloDelBersaglio(true); });
+    }
+
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();

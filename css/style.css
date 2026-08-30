@@ -761,37 +761,17 @@ a:hover {
     background-color: var(--secondary-light-bg);
     font-weight: 700;
 }
-.document-index { 
-    background-color: var(--secondary-light-bg); 
-    border: 1px solid var(--border-color-dark);
-    padding: 1.5rem;
-    margin-bottom: 2.5rem;
-    border-radius: var(--card-border-radius-small);
-}
-.document-index .index-title,
-.document-index h2 { 
-    font-size: 1.4rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: var(--text-primary-dark);
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-color-dark);
-}
-.document-index ul { list-style-type: none; padding-left: 0; }
-.document-index ul li a { text-decoration: none; color: var(--text-accent); font-family: var(--font-secondary); font-weight: 600; display: block; padding: 0.55rem 0; }
-.document-index ul li a:hover { color: var(--primary-accent-hover); text-decoration: underline; }
-.document-index ul ul { padding-left: 1.5rem; margin-top: 0.2rem; margin-bottom: 0.5rem; }
-.document-index ul ul li a { font-weight: 400; font-size: 0.95rem; }
 
-/* Gli articoli dei documenti legali sono <details> chiusi di default: nei
-   Termini di servizio la lista degli articoli E' l'indice (giro 16), quindi
-   la testata numerata e' insieme la voce d'indice e il comando che apre il
-   testo. Il vestito (scheda, freccetta, apertura, messa a fuoco) e' quello
-   delle domande frequenti: le regole comuni stanno nel blocco .accordion
-   piu' sotto, qui resta solo cio' che e' proprio di <details>.
-   Nell'informativa privacy la nota sui moduli del sito e la sezione Google
-   Calendar restano fuori dagli articoli richiudibili: sempre visibili,
-   frase Limited Use compresa. */
+/* Gli articoli dei documenti legali sono <details> chiusi di default: in
+   tutti e tre i documenti (termini di servizio dal giro 16, informativa
+   privacy e addendum dal giro 17) la lista degli articoli E' l'indice,
+   quindi la testata numerata e' insieme la voce d'indice e il comando che
+   apre il testo. Il vestito (scheda, freccetta, apertura, messa a fuoco) e'
+   quello delle domande frequenti: le regole comuni stanno nel blocco
+   .accordion piu' sotto, qui resta solo cio' che e' proprio di <details>.
+   Unica eccezione: nell'informativa privacy la sezione «Dati di Google
+   Calendar» nasce APERTA (attributo open nell'HTML), perche' chi verifica
+   l'app deve leggere la frase Limited Use senza dover cliccare. */
 .document-content details.legal-section > summary {
     list-style: none;
     cursor: pointer;
