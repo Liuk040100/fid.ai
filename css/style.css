@@ -1179,6 +1179,40 @@ a:hover {
     .document-content details.legal-section > summary::after { width: 30px; height: 30px; }
     .accordion-body { padding: 0.9rem 1.1rem 1.15rem 1.1rem; }
 
+    /* La tabella dei sub-responsabili ha quattro colonne: a 390 px diventava
+       una colonna di lettere, una per riga, con l'ultima intestazione tagliata.
+       Sul telefono ogni riga si legge come una scheda e il nome della colonna
+       sta scritto sopra il dato (attributo data-label nell'HTML). */
+    .document-content .table-dpa thead { display: none; }
+    .document-content .table-dpa,
+    .document-content .table-dpa tbody,
+    .document-content .table-dpa tr,
+    .document-content .table-dpa td {
+        display: block;
+        width: 100%;
+    }
+    .document-content .table-dpa tr {
+        border: 1px solid var(--border-color-dark);
+        border-radius: var(--panel-border-radius);
+        overflow: hidden;
+        margin-bottom: 1rem;
+    }
+    .document-content .table-dpa td {
+        border: 0;
+        padding: 0.7rem 0.9rem;
+    }
+    .document-content .table-dpa td + td { border-top: 1px solid var(--border-color-dark); }
+    .document-content .table-dpa td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 0.15rem;
+    }
+
     .footer-legal-links a, .footer-legal-links span { display: block; margin-bottom: 0.3rem; }
     .footer-legal-links span.footer-link-separator { display: none; }
 }
