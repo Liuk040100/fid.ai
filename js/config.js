@@ -18,7 +18,7 @@ window.FIDAI_CONFIG = {
      * giro 03 la home non ha più una sezione Contatti a sé, quel valore resta solo
      * come sentinella "non ancora configurato". Va sostituito con l'URL vero appena
      * esiste. */
-    BOOKING_URL: '#contact',
+    BOOKING_URL: 'https://calendar.app.google/BSCFrTZiFVUPNc6TA',
 
     /* Le due porte pubbliche sulla VPS (run 160):
      *   POST <API_BASE>/survey     le risposte del questionario
