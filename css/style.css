@@ -16,6 +16,10 @@
     --pill-blue: #7FAAC2;                           /* colors.pillBlue       */
     --pill-blue-dark: #6997B4;                      /* colors.pillBlueDark   */
     --brand-orange: #E8890C;                        /* colors.orange         */
+    /* Due mestieri, due valori — come per il blu: --brand-orange e' l'arancio
+       che si VEDE (pallini, riempimenti), --brand-orange-text e' quello che si
+       LEGGE. Sul fondo arancio chiaro il primo sta a 2,3:1 e non passa AA. */
+    --brand-orange-text: #8A4B04;                   /* 6,1:1 su --orange-light */
     --auto-green: #1F6B4A;                          /* colors.autoGreen      */
     --auto-green-bg: #EFF6F2;                       /* colors.autoGreenBg    */
     --copilot-bg: #F2F7FA;                          /* colors.copilotBg      */
@@ -471,7 +475,7 @@ a:hover {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    color: var(--brand-orange);
+    color: var(--brand-orange-text);
     background-color: var(--orange-light);
     border-radius: 999px;
     padding: 0.25rem 0.85rem;
@@ -1279,7 +1283,7 @@ a:hover {
 }
 .invito-icon.tone-blue   { background-color: var(--blue-light);     color: var(--brand-primary); }
 .invito-icon.tone-green  { background-color: var(--auto-green-bg);  color: var(--auto-green); }
-.invito-icon.tone-orange { background-color: var(--orange-light);   color: var(--brand-orange); }
+.invito-icon.tone-orange { background-color: var(--orange-light);   color: var(--brand-orange-text); }
 
 .invito-badge {
     align-self: flex-start;
@@ -1682,6 +1686,7 @@ a:hover {
         --on-primary: #FFFFFF;
         --auto-green: #63D0A0;
         --brand-orange: #F2A93B;
+        --brand-orange-text: #F2A93B;   /* sul fondo scuro l'arancio chiaro si legge */
         --bs-primary-rgb: 127, 187, 227;
 
         /* --- Bordi e ombre ------------------------------------------------ */
