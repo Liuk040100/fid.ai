@@ -62,6 +62,15 @@
     --button-border-radius: 999px;                  /* i bottoni dell'app sono pillole */
     --input-border-radius: 10px;
 
+    /* Le schede che si aprono — domande frequenti (faq.html) e articoli dei
+       documenti legali — sono la stessa cosa: stesso raggio, stessi margini
+       interni. Scritti qui una volta sola, cosi' le due famiglie di regole
+       non possono piu' scostarsi. Sul telefono cambiano solo queste righe
+       (vedi @media 767.98px). */
+    --panel-border-radius: 16px;
+    --panel-pad-y: 1.15rem;
+    --panel-pad-x: 1.35rem;
+
     /* Ombre leggere: colore #143250 (colors.shadow), non nero. */
     --soft-shadow: 0 1px 2px rgba(20, 50, 80, 0.05), 0 6px 18px rgba(20, 50, 80, 0.06);
     --hover-shadow: 0 2px 4px rgba(20, 50, 80, 0.06), 0 12px 28px rgba(20, 50, 80, 0.10);
@@ -654,6 +663,25 @@ a:hover {
 }
 /* Non l'intestazione delle domande frequenti: e' gia' una scheda a se', e il
    margine di 2,5rem qui dentro aprirebbe una fascia vuota sotto la domanda. */
+/* Sotto il titolo di un documento: la data e la riga che spiega come si legge
+   la pagina. Centrate come il titolo, cosi' l'intestazione resta un blocco. */
+.document-content .document-date,
+.document-content .document-hint {
+    font-family: var(--font-secondary);
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+}
+.document-content .document-date { font-style: italic; }
+.document-content .document-hint { margin-bottom: 2rem; }
+/* Il filetto prima dei contatti, in fondo ai documenti. */
+.document-content .document-rule {
+    margin: 2.5rem 0 1.5rem 0;
+    border: 0;
+    border-top: 1px solid var(--border-color-dark);
+    opacity: 1;
+}
+
 .document-content h2,
 .content-page-wrapper h2:not(.accordion-header) {
     font-size: clamp(1.4rem, 3vw, 1.8rem);
@@ -755,56 +783,37 @@ a:hover {
 .document-index ul ul { padding-left: 1.5rem; margin-top: 0.2rem; margin-bottom: 0.5rem; }
 .document-index ul ul li a { font-weight: 400; font-size: 0.95rem; }
 
-/* Giro 06 (richiesta 3): le sezioni numerate dei due documenti legali
-   (termini, privacy) sono <details> richiudibili — chiuse di default, cosi'
-   l'indice sopra resta il modo per orientarsi e non serve scorrere un muro
-   di testo per trovare un articolo. La nota sui moduli del sito e la
-   sezione Google Calendar dell'informativa restano fuori: sempre visibili,
-   come richiesto (frase Limited Use compresa). */
-.document-content details.legal-section {
-    border: 1px solid var(--border-color-dark);
-    border-radius: var(--card-border-radius-small);
-    margin-bottom: 0.85rem;
-    overflow: hidden;
-}
-.document-content details.legal-section[open] {
-    border-color: var(--border-color-darker);
-}
-.document-content details.legal-section summary {
+/* Gli articoli dei documenti legali sono <details> chiusi di default: nei
+   Termini di servizio la lista degli articoli E' l'indice (giro 16), quindi
+   la testata numerata e' insieme la voce d'indice e il comando che apre il
+   testo. Il vestito (scheda, freccetta, apertura, messa a fuoco) e' quello
+   delle domande frequenti: le regole comuni stanno nel blocco .accordion
+   piu' sotto, qui resta solo cio' che e' proprio di <details>.
+   Nell'informativa privacy la nota sui moduli del sito e la sezione Google
+   Calendar restano fuori dagli articoli richiudibili: sempre visibili,
+   frase Limited Use compresa. */
+.document-content details.legal-section > summary {
     list-style: none;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0.85rem 1.25rem;
-    background-color: var(--secondary-light-bg);
 }
-.document-content details.legal-section summary::-webkit-details-marker {
+.document-content details.legal-section > summary::-webkit-details-marker {
     display: none;
 }
-.document-content details.legal-section summary h2 {
+/* La testata e' un h2 (l'ordine dei titoli h1 -> h2 -> h3 non salta), ma
+   deve pesare come il testo di una domanda frequente, non come un titolo di
+   sezione: font: inherit prende taglia, peso e interlinea dal summary. */
+.document-content details.legal-section > summary h2 {
     flex: 1 1 auto;
     margin: 0;
     padding: 0;
     border: none;
-    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font: inherit;
+    color: inherit;
 }
-.document-content details.legal-section summary::after {
-    content: "";
-    flex: 0 0 auto;
-    width: 0.9rem;
-    height: 0.9rem;
-    margin-left: 0.75rem;
-    background-image: var(--chevron-icon);
-    background-repeat: no-repeat;
-    background-size: contain;
-    transition: transform 0.2s ease;
-}
-.document-content details.legal-section[open] summary::after {
-    transform: rotate(180deg);
-}
-.document-content details.legal-section .legal-section-body {
-    padding: 0.25rem 1.25rem 1.25rem 1.25rem;
+/* Aperto e alto, il sollevamento al passaggio del mouse farebbe ballare
+   mezza pagina: resta solo sulle schede chiuse. */
+.document-content details.legal-section[open]:hover {
+    transform: none;
 }
 .document-content details.legal-section .legal-section-body h3:first-child {
     margin-top: 0.5rem;
@@ -973,63 +982,69 @@ a:hover {
        scritte in :root verrebbero coperte. Qui vincono, perche' il nostro
        foglio di stile e' caricato dopo. Un solo posto, entrambi i temi. */
     --bs-accordion-bg: var(--card-bg);
-    --bs-accordion-border-radius: 16px;
-    --bs-accordion-inner-border-radius: 16px;
+    --bs-accordion-border-radius: var(--panel-border-radius);
+    --bs-accordion-inner-border-radius: var(--panel-border-radius);
     --bs-accordion-border-width: 1px;
     --bs-accordion-border-color: var(--border-color-dark);
     --bs-accordion-btn-color: var(--text-primary-dark);
     --bs-accordion-btn-bg: transparent;
-    --bs-accordion-btn-icon: var(--chevron-icon);
-    --bs-accordion-btn-active-icon: var(--chevron-icon);
-    --bs-accordion-btn-icon-width: 0.85rem;
-    --bs-accordion-btn-icon-transform: rotate(180deg);
-    --bs-accordion-btn-icon-transition: transform 0.3s ease;
-    --bs-accordion-btn-padding-y: 1.15rem;
-    --bs-accordion-btn-padding-x: 1.35rem;
     --bs-accordion-btn-focus-box-shadow: none;
     /* Il blu che si LEGGE (chiaro nel tema scuro), non quello dei pulsanti. */
     --bs-accordion-active-color: var(--brand-primary);
     --bs-accordion-active-bg: var(--brand-primary-soft);
+}
 
+/* La pila di schede: stessa aria fra una e l'altra nelle domande frequenti e
+   negli articoli dei documenti legali. */
+.accordion,
+.document-content .legal-sections {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.accordion-item {
-    background-color: var(--bs-accordion-bg);
-    border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color);
-    border-radius: var(--bs-accordion-border-radius) !important;
+/* La scheda. Un solo vestito per le due famiglie: la domanda frequente
+   (.accordion-item, mossa da Bootstrap) e l'articolo legale (<details>,
+   mosso dal browser). */
+.accordion-item,
+.document-content details.legal-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color-dark);
+    border-radius: var(--panel-border-radius) !important;
     box-shadow: var(--soft-shadow);
     overflow: hidden;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
-.accordion-item:hover {
+.accordion-item:hover,
+.document-content details.legal-section:hover {
     box-shadow: var(--hover-shadow);
     transform: translateY(-2px);
 }
 /* Bootstrap incolla il primo e l'ultimo elemento: qui sono schede separate. */
 .accordion-item:first-of-type,
 .accordion-item:last-of-type {
-    border-radius: var(--bs-accordion-border-radius) !important;
+    border-radius: var(--panel-border-radius) !important;
 }
 .accordion-header {
     margin: 0;
     padding: 0;
     border: none;
 }
-.accordion-item:has(.accordion-button:not(.collapsed)) {
-    border-color: var(--bs-accordion-active-color);
+.accordion-item:has(.accordion-button:not(.collapsed)),
+.document-content details.legal-section[open] {
+    border-color: var(--brand-primary);
     box-shadow: var(--hover-shadow);
 }
 
-.accordion-button {
+/* La testata cliccabile. */
+.accordion-button,
+.document-content details.legal-section > summary {
     font-family: var(--font-primary);
     font-weight: 600;
     font-size: 1.12rem;
-    padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x) !important;
+    padding: var(--panel-pad-y) var(--panel-pad-x) !important;
     background-color: transparent;
-    color: var(--bs-accordion-btn-color);
+    color: var(--text-primary-dark);
     border: none !important;
     line-height: 1.45;
     text-align: left;
@@ -1041,11 +1056,13 @@ a:hover {
     box-shadow: none !important;
     transition: color 0.2s ease, background-color 0.2s ease;
 }
-.accordion-button:hover { color: var(--bs-accordion-active-color); }
+.accordion-button:hover,
+.document-content details.legal-section > summary:hover { color: var(--brand-primary); }
 
-.accordion-button:not(.collapsed) {
-    color: var(--bs-accordion-active-color) !important;
-    background-color: var(--bs-accordion-active-bg) !important;
+.accordion-button:not(.collapsed),
+.document-content details.legal-section[open] > summary {
+    color: var(--brand-primary) !important;
+    background-color: var(--brand-primary-soft) !important;
     box-shadow: none !important;
 }
 
@@ -1055,30 +1072,33 @@ a:hover {
 }
 /* La scheda ritaglia cio' che esce (overflow: hidden), quindi l'anello di
    messa a fuoco va disegnato dentro il bordo: fuori verrebbe tagliato. */
-.accordion-button:focus-visible {
-    outline: 3px solid var(--bs-accordion-active-color);
+.accordion-button:focus-visible,
+.document-content details.legal-section > summary:focus-visible {
+    outline: 3px solid var(--brand-primary);
     outline-offset: -3px;
     border-radius: 0;
 }
 
 /* La freccetta vive dentro una pastiglia tonda: si vede che e' un comando,
    e resta un bersaglio comodo anche col dito. */
-.accordion-button::after {
+.accordion-button::after,
+.document-content details.legal-section > summary::after {
+    content: "";
     flex: 0 0 auto;
     width: 34px;
     height: 34px;
     margin-left: auto;
     border-radius: 50%;
     background-color: var(--brand-primary-soft);
-    background-image: var(--bs-accordion-btn-icon);
+    background-image: var(--chevron-icon);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: var(--bs-accordion-btn-icon-width);
+    background-size: 0.85rem;
     transition: transform 0.3s ease, background-color 0.2s ease;
 }
-.accordion-button:not(.collapsed)::after {
-    background-image: var(--bs-accordion-btn-active-icon);
-    background-color: var(--bs-accordion-bg);
+.accordion-button:not(.collapsed)::after,
+.document-content details.legal-section[open] > summary::after {
+    background-color: var(--card-bg);
     transform: rotate(180deg);
 }
 
@@ -1088,9 +1108,10 @@ a:hover {
     transition: height 0.32s ease;
 }
 
-.accordion-body {
-    padding: 1rem var(--bs-accordion-btn-padding-x) 1.35rem var(--bs-accordion-btn-padding-x);
-    background-color: var(--bs-accordion-bg);
+.accordion-body,
+.document-content details.legal-section .legal-section-body {
+    padding: 1rem var(--panel-pad-x) 1.35rem var(--panel-pad-x);
+    background-color: var(--card-bg);
     color: var(--text-secondary-dark);
 }
 
@@ -1151,13 +1172,21 @@ a:hover {
     .partner-card-section-title {
         font-size: 0.95rem;
     }
-    .accordion { gap: 0.85rem; }
-    .accordion-button {
+    /* Sul telefono le schede si stringono: cambiano le variabili, non le
+       regole — cosi' domande frequenti e articoli legali restano allineati. */
+    :root {
+        --panel-pad-y: 1rem;
+        --panel-pad-x: 1.1rem;
+    }
+    .accordion,
+    .document-content .legal-sections { gap: 0.85rem; }
+    .accordion-button,
+    .document-content details.legal-section > summary {
         font-size: 1.02rem;
         gap: 0.75rem;
-        padding: 1rem 1.1rem !important;
     }
-    .accordion-button::after { width: 30px; height: 30px; }
+    .accordion-button::after,
+    .document-content details.legal-section > summary::after { width: 30px; height: 30px; }
     .accordion-body { padding: 0.9rem 1.1rem 1.15rem 1.1rem; }
 
     .footer-legal-links a, .footer-legal-links span { display: block; margin-bottom: 0.3rem; }
