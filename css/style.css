@@ -73,6 +73,9 @@
     --bs-body-color: var(--text-primary-dark);
     --bs-body-bg: var(--primary-light-bg);
     --bs-body-font-size: 1rem;
+    /* La classe .text-muted di Bootstrap ha un grigio suo, quasi nero: sul tema
+       scuro spariva. Qui punta al grigio del sito, che e' gia' tarato AA. */
+    --bs-secondary-color: var(--text-muted);
     --bs-primary: var(--primary-accent);
     --bs-primary-rgb: 20, 86, 127;
     --bs-link-color: var(--primary-accent);
@@ -1455,6 +1458,38 @@ a:hover {
     .hero-subheadline { margin-bottom: 1.75rem; }
     .hero-actions { flex-direction: column; }
     .site-form-wrapper { padding: 1.5rem 1.1rem; }
+    /* I cinque passi diventano una colonna sola: la schermata si rimpicciolisce
+       (altrimenti la pagina diventa un rotolo) e fra un passo e l'altro serve
+       piu' respiro di quello che la griglia lascia da sola. */
+    .steps-row { --bs-gutter-y: 2.75rem; }
+    .step-phone { max-width: 200px; margin-bottom: 1.1rem; }
+}
+
+/* ------------------------- Telefoni stretti (390 px) --------------------- */
+@media (max-width: 575.98px) {
+    .step-phone { max-width: 178px; }
+    .step-number { width: 40px; height: 40px; font-size: 1.05rem; margin-bottom: 0.7rem; }
+    .step-title { font-size: 1.12rem; }
+    .invito-card,
+    .privacy-card { padding: 1.5rem 1.25rem; }
+    .invito-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 15px;
+        font-size: 1.55rem;
+        margin-bottom: 1.1rem;
+    }
+    .privacy-card .privacy-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 14px;
+        font-size: 1.5rem;
+        margin-bottom: 0.9rem;
+    }
+    /* Il nastro delle professioni: pill un filo piu' piccole, cosi' su uno
+       schermo stretto se ne leggono tre invece di due e mezza. */
+    .profession-ticker { margin-top: 2rem; }
+    .target-tag { font-size: 0.9rem; padding: 0.55rem 1rem; margin: 0.3rem; }
 }
 
 /* ========================================================================= */
