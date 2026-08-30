@@ -456,10 +456,8 @@ a:hover {
 }
 
 /* ========================================= */
-/* Pricing Teaser Section (on index.html) & Pricing Page */
+/* Pricing Page (prezzi.html)                */
 /* ========================================= */
-.pricing-teaser-section { padding: 6rem 0; } 
-
 .pricing-page-header { text-align: center; margin-bottom: 1rem; } 
 .pricing-intro-text { 
     text-align: center;
@@ -590,16 +588,6 @@ a:hover {
 }
 .footer-link-separator { margin: 0 0.5rem; }
 
-.footer-social-icons a.social-icon {
-    color: var(--text-secondary-light);
-    font-size: 1.2rem;
-    margin: 0 0.7rem;
-    transition: color 0.2s ease, transform 0.2s ease;
-}
-.footer-social-icons a.social-icon:hover {
-    color: var(--on-primary);
-    transform: scale(1.15) translateY(-2px); 
-}
 .footer-copyright, .footer-address {
     font-size: 0.85rem;
     color: var(--text-secondary-light);
@@ -1098,7 +1086,6 @@ a:hover {
     h2, .h2-custom { font-size: clamp(1.8rem, 6vw, 2.6rem); }
     p.lead { font-size: clamp(1.1rem, 4vw, 1.3rem); }
 
-    .feature-card { padding: 1.5rem 1rem; }
     .pricing-plan-card { padding: 2rem 1.5rem; }
     .pricing-plan-card.highlighted { transform: scale(1.01) translateY(-2px); } 
     .pricing-plan-card.highlighted:hover { transform: scale(1.03) translateY(-5px); }
@@ -1107,12 +1094,7 @@ a:hover {
 }
 
 @media (max-width: 767.98px) {
-    .hero-img { max-width: 95%; margin-top: 1.5rem; }
-    .features-section, .how-it-works-section, .target-audience-section,
-    .pricing-teaser-section, .contact-section, .page-container {
-        padding: 4rem 0; 
-    }
-    .section-title { margin-bottom: 2.5rem; } 
+    .page-container { padding: 4rem 0; }
     .pricing-plans-container { grid-template-columns: 1fr; gap: 1.5rem; } 
 
     .document-content, .content-page-wrapper {
@@ -1162,10 +1144,8 @@ a:hover {
 
 /* Il respiro fra le sezioni: nella PWA le schermate sono compatte, sei       */
 /* rem di padding facevano sembrare il sito un'altra applicazione.            */
-.features-section,
 .how-it-works-section,
 .target-audience-section,
-.contact-section,
 .waitlist-section {
     padding: 5rem 0;
 }
