@@ -1279,9 +1279,10 @@ a:hover {
     background: linear-gradient(180deg, var(--copilot-bg) 0%, var(--primary-light-bg) 100%);
 }
 .hero-logo-img {
-    height: 52px;
-    width: auto;
-    margin-bottom: 1rem;
+    width: 220px;
+    max-width: 80%;
+    height: auto;
+    margin-bottom: 1.5rem;
     display: inline-block;
 }
 .hero-section .hero-title {
