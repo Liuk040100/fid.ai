@@ -624,53 +624,73 @@ a:hover {
     padding: 4rem 0; 
     background-color: var(--secondary-light-bg); 
 }
-.document-content { 
-    background-color: var(--primary-light-bg); 
-    padding: 2.5rem;
+/* La scheda su cui vive un documento: le pagine legali (.document-content) e
+   le pagine di contenuto (.content-page-wrapper: partner, suggerimenti,
+   domande frequenti) sono la stessa cosa e avevano due vestiti quasi uguali
+   ma non identici — larghezza, padding, peso e taglia dei titoli. Ora e' un
+   blocco solo: stessa scheda, stessa scala tipografica, stessi margini. */
+.document-content,
+.content-page-wrapper {
+    background-color: var(--primary-light-bg);
+    padding: 3rem;
     border-radius: var(--card-border-radius);
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto 2rem auto;
     box-shadow: var(--soft-shadow);
 }
-.document-content h1 {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-color-dark);
+.document-content h1,
+.content-page-wrapper h1 {
+    font-size: clamp(1.9rem, 4.5vw, 2.6rem);
     color: var(--text-primary-dark);
-}
-.document-content h2 {
-    font-size: clamp(1.4rem, 3vw, 1.8rem);
-    margin-top: 2rem;
+    font-weight: 800;
+    text-align: center;
     margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--primary-accent);
+}
+/* Non l'intestazione delle domande frequenti: e' gia' una scheda a se', e il
+   margine di 2,5rem qui dentro aprirebbe una fascia vuota sotto la domanda. */
+.document-content h2,
+.content-page-wrapper h2:not(.accordion-header) {
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
     color: var(--text-primary-dark);
     font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color-dark);
 }
-.document-content h3 {
-    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
+.document-content h3,
+.content-page-wrapper h3 {
+    font-size: clamp(1.2rem, 2.6vw, 1.5rem);
     color: var(--text-primary-dark);
     font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
-.document-content p, .document-content ul, .document-content ol {
+.document-content p, .document-content ul, .document-content ol,
+.content-page-wrapper p, .content-page-wrapper ul, .content-page-wrapper ol {
     font-family: var(--font-secondary);
     font-size: 1.05rem;
     line-height: 1.8;
     color: var(--text-secondary-dark);
     margin-bottom: 1rem;
 }
-.document-content ul, .document-content ol {
+.document-content ul, .document-content ol,
+.content-page-wrapper ul:not(.partner-card-list), .content-page-wrapper ol {
     padding-left: 1.8rem;
 }
-.document-content li {
-    margin-bottom: 0.5rem;
+.document-content li,
+.content-page-wrapper li {
+    margin-bottom: 0.6rem;
 }
-.document-content strong {
+.document-content strong,
+.content-page-wrapper strong {
     font-weight: 700;
     color: var(--text-primary-dark);
 }
-.document-content em {
+.document-content em,
+.content-page-wrapper em {
     font-style: italic;
     color: var(--text-secondary-dark);
 }
@@ -789,25 +809,6 @@ a:hover {
 /* ========================================= */
 /* Stili Pagine Contenuto specifiche (Partner, Suggerimenti, FAQ) */
 /* ========================================= */
-.content-page-wrapper { 
-    background-color: var(--primary-light-bg);
-    padding: 3rem; 
-    border-radius: var(--card-border-radius);
-    max-width: 960px; 
-    margin: 0 auto 2rem auto;
-    box-shadow: var(--soft-shadow);
-}
-
-.content-page-wrapper h1 {
-    font-size: clamp(2rem, 5vw, 2.8rem); 
-    color: var(--text-primary-dark);
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--primary-accent); 
-}
-
 .page-intro-text { 
     font-family: var(--font-secondary);
     font-size: 1.1rem;
@@ -818,46 +819,6 @@ a:hover {
     margin: 0 auto 3rem auto; 
 }
 
-/* Non l'intestazione delle domande frequenti: e' gia' una scheda a se', e il
-   margine di 2,5rem qui dentro aprirebbe una fascia vuota sotto la domanda. */
-.content-page-wrapper h2:not(.accordion-header) { 
-    font-size: clamp(1.5rem, 3.5vw, 2rem);
-    color: var(--text-primary-dark);
-    font-weight: 700;
-    margin-top: 2.5rem;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-color-dark);
-}
-.content-page-wrapper h3 { 
-    font-size: clamp(1.2rem, 3vw, 1.6rem);
-    color: var(--text-primary-dark);
-    font-weight: 600;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-
-.content-page-wrapper p,
-.content-page-wrapper ul,
-.content-page-wrapper ol {
-    font-family: var(--font-secondary);
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: var(--text-secondary-dark);
-    margin-bottom: 1rem;
-}
-.content-page-wrapper ul:not(.partner-card-list), 
-.content-page-wrapper ol {
-    padding-left: 1.8rem; 
-}
-.content-page-wrapper li {
-    margin-bottom: 0.6rem;
-}
-.content-page-wrapper strong {
-    font-weight: 600; 
-    color: var(--text-primary-dark);
-}
-
 .content-item {
     margin-bottom: 2.5rem;
     padding-bottom: 1.5rem;
@@ -866,15 +827,6 @@ a:hover {
 .content-item:last-child {
     border-bottom: none;
     margin-bottom: 0;
-    padding-bottom: 0;
-}
-.content-item-title { 
-    font-size: clamp(1.4rem, 4vw, 1.8rem); 
-    color: var(--primary-accent);
-    font-weight: 700;
-    margin-top: 0; 
-    margin-bottom: 1rem;
-    border-bottom: none; 
     padding-bottom: 0;
 }
 .example-text { 
@@ -921,12 +873,11 @@ a:hover {
     margin-bottom: 0.5rem; 
 }
 
+/* Il titolo della scheda partner e' un <h2> dentro .content-page-wrapper: la
+   regola generale dei titoli (piu' specifica) vince su questa, quindi qui
+   resta solo cio' che ha davvero effetto — il resto era codice morto. */
 .partner-card-title {
-    font-size: 1.5rem; 
-    font-weight: 700;
-    color: var(--primary-accent);
-    margin-top: 0 !important; 
-    margin-bottom: 0.1rem;  
+    margin-top: 0 !important;
 }
 
 .partner-card-subtitle {
@@ -1183,7 +1134,8 @@ a:hover {
         padding: 1.5rem;
     }
     .document-content h1, .content-page-wrapper h1 { font-size: clamp(1.6rem, 5vw, 2rem); }
-    .document-content h2, .content-page-wrapper h2:not(.accordion-header):not(.partner-card-title):not(.content-item-title) { font-size: clamp(1.3rem, 4vw, 1.6rem); }
+    .document-content h2,
+    .content-page-wrapper h2:not(.accordion-header) { font-size: clamp(1.3rem, 4vw, 1.6rem); }
    
     .page-intro-text {
         font-size: 1rem;
@@ -1192,14 +1144,8 @@ a:hover {
     .partner-card {
         padding: 1.5rem 1.25rem;
     }
-    .partner-card-title {
-        font-size: 1.3rem;
-    }
     .partner-card-section-title {
         font-size: 0.95rem;
-    }
-    .content-item-title {
-        font-size: clamp(1.3rem, 5vw, 1.6rem);
     }
     .accordion { gap: 0.85rem; }
     .accordion-button {
@@ -1764,12 +1710,11 @@ a:hover {
     /* Testi piccoli che nel tema chiaro erano blu scuro: qui prendono il blu
        chiaro, altrimenti scendono sotto il contrasto minimo. */
     .step-number,
-    .partner-toggle,
-    .partner-card-title,
-    .content-item-title {
+    .partner-toggle {
         color: var(--brand-primary);
     }
     .step-number { border-color: var(--brand-primary); }
+    .document-content h1,
     .content-page-wrapper h1 { border-bottom-color: var(--brand-primary); }
 
     /* I moduli: le caselle sono piu' scure del riquadro che le contiene, cosi'
