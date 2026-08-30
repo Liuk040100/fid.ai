@@ -463,9 +463,41 @@ a:hover {
     text-align: center;
     font-size: 0.95rem;
     color: var(--text-secondary-dark);
-    margin: 0 auto 3rem auto;
+    margin: 0 auto 2.5rem auto;
     max-width: 700px;
     font-family: var(--font-secondary);
+}
+.pricing-promo-banner {
+    background-color: var(--copilot-bg);
+    border: 2px solid var(--primary-accent);
+    border-radius: var(--card-border-radius);
+    padding: 1.5rem 2rem;
+    max-width: 760px;
+    text-align: center;
+    box-shadow: var(--soft-shadow);
+}
+.pricing-promo-badge {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--brand-orange);
+    background-color: var(--orange-light);
+    border-radius: 999px;
+    padding: 0.25rem 0.85rem;
+    margin-bottom: 0.75rem;
+}
+.pricing-promo-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary-dark);
+    margin-bottom: 0.6rem;
+}
+.pricing-promo-text {
+    font-size: 1rem;
+    color: var(--text-secondary-dark);
+    line-height: 1.55;
 }
 .pricing-plans-container { 
     display: grid;
