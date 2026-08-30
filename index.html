@@ -90,31 +90,65 @@
             <p class="section-lead">
                 L'assistente gestisce i messaggi e l'agenda WhatsApp al posto tuo, senza farti cambiare numero.
             </p>
-            <div class="row text-center g-4 justify-content-center">
+            <!-- Ogni passo mostra la schermata vera dell'app che gli corrisponde
+                 (catturate sull'ambiente di prova interno, con dati inventati).
+                 Su schermo largo: tre passi in fila, gli ultimi due centrati sotto.
+                 Sul telefono: una colonna sola. -->
+            <div class="row g-4 justify-content-center steps-row">
                 <div class="col-md-4">
-                     <div class="step-number">1</div>
-                    <h3 class="step-title">Imposta le tue regole</h3>
-                    <p>Inserisci orari, servizi e abitudini: l'assistente impara il tuo stile.</p>
+                    <div class="step-card">
+                        <div class="step-phone">
+                            <img src="images/app/assistente-telefono.png" width="780" height="1688" loading="lazy"
+                                 alt="Impostazioni delle regole dell'assistente">
+                        </div>
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Imposta le tue regole</h3>
+                        <p>Inserisci orari, servizi e abitudini: l'assistente impara il tuo stile.</p>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                     <div class="step-number">2</div>
-                    <h3 class="step-title">Collega Google Calendar</h3>
-                    <p>Sincronizzazione automatica per verificare disponibilità e appuntamenti in tempo reale.</p>
+                    <div class="step-card">
+                        <div class="step-phone">
+                            <img src="images/app/agenda-telefono.png" width="780" height="1688" loading="lazy"
+                                 alt="Sincronizzazione Google Calendar">
+                        </div>
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Collega Google Calendar</h3>
+                        <p>Sincronizzazione automatica per verificare disponibilità e appuntamenti in tempo reale.</p>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                     <div class="step-number">3</div>
-                    <h3 class="step-title">Riceve messaggi e vocali</h3>
-                    <p>Gestisce le richieste su WhatsApp e trascrive i vocali in locale su server in Europa.</p>
+                    <div class="step-card">
+                        <div class="step-phone">
+                            <img src="images/app/conversazioni-telefono.png" width="780" height="1688" loading="lazy"
+                                 alt="Ricezione messaggi e vocali">
+                        </div>
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Riceve messaggi e vocali</h3>
+                        <p>Gestisce le richieste su WhatsApp e trascrive i vocali in locale su server in Europa.</p>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                     <div class="step-number">4</div>
-                    <h3 class="step-title">Prepara la bozza intelligente</h3>
-                    <p>Formula la risposta precisa e propone lo slot libero più adatto.</p>
+                    <div class="step-card">
+                        <div class="step-phone">
+                            <img src="images/app/bozze-telefono.png" width="780" height="1688" loading="lazy"
+                                 alt="Preparazione bozza intelligente">
+                        </div>
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Prepara la bozza intelligente</h3>
+                        <p>Formula la risposta precisa e propone lo slot libero più adatto.</p>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                     <div class="step-number">5</div>
-                    <h3 class="step-title">Confermi con un tocco</h3>
-                    <p>Decidi tu se approvare ogni messaggio prima dell'invio o attivare le risposte automatiche.</p>
+                    <div class="step-card">
+                        <div class="step-phone">
+                            <img src="images/app/chat-telefono.png" width="780" height="1688" loading="lazy"
+                                 alt="Conferma e invio con un tocco">
+                        </div>
+                        <div class="step-number">5</div>
+                        <h3 class="step-title">Confermi con un tocco</h3>
+                        <p>Decidi tu se approvare ogni messaggio prima dell'invio o attivare le risposte automatiche.</p>
+                    </div>
                 </div>
             </div>
             <!-- Aggiunta 29/08/2026 (PRD-141): Google chiede di vedere dichiarato sulla home
