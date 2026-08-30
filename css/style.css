@@ -1593,5 +1593,125 @@ a:hover {
     .q-nav > span { display: none; }
 }
 
-}
 
+/* ========================================================================= */
+/* Tema scuro automatico (giro 10, richiesta 3)                              */
+/*                                                                           */
+/* Segue la preferenza del sistema operativo di chi visita: niente pulsante,  */
+/* niente interruttore, niente cookie e niente JavaScript che ricordi una     */
+/* scelta. Chi ha il telefono in tema scuro trova il sito in tema scuro.      */
+/*                                                                           */
+/* Non e' un secondo foglio di stile: si riscrivono solo le variabili di      */
+/* colore dichiarate in testa al file, piu' la manciata di regole che un      */
+/* colore l'avevano scritto a mano. I nomi restano quelli di prima            */
+/* (--text-primary-dark = "il testo principale", non "testo scuro"): cambiare */
+/* i nomi avrebbe voluto dire toccare tutte le pagine.                        */
+/* ========================================================================= */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dice al browser che la pagina e' scura: barre di scorrimento,       */
+        /* caselle e menu di sistema si adeguano da soli.                      */
+        color-scheme: dark;
+
+        /* --- I fondi, dal piu' chiaro al piu' scuro ----------------------- */
+        --primary-light-bg: #131A21;    /* fondo della pagina e delle schede  */
+        --secondary-light-bg: #0E141A;  /* sezioni alternate, piu' profonde   */
+        --card-bg: #1B242E;             /* le schede staccano dal fondo       */
+        --copilot-bg: #16202A;
+        --auto-green-bg: #12211B;
+        --blue-light: #17384F;
+        --orange-light: #33240E;
+        --purple-light: #241B33;
+        --primary-dark-bg: #0A1015;     /* barra in alto e piede di pagina    */
+
+        /* --- I testi (tutti oltre 7:1 sui fondi qui sopra) ----------------- */
+        --text-primary-dark: #E9EFF4;
+        --text-secondary-dark: #B2C1CD;
+        --text-muted: #94A5B2;
+
+        /* --- L'accento -----------------------------------------------------
+           Due mestieri diversi, due valori diversi: --brand-primary e' il blu
+           che si LEGGE (link, icone, numeri dei passi) e va chiaro;
+           --primary-accent e' il blu su cui si legge, cioe' il fondo dei
+           pulsanti, e resta scuro perche' sopra ci va il bianco. */
+        --brand-primary: #7FBBE3;
+        --brand-primary-soft: rgba(127, 187, 227, 0.14);
+        --primary-accent: #2178AF;           /* bianco sopra: 4,8:1          */
+        --primary-accent-hover: #A9D4F0;     /* colore dei link al passaggio */
+        --on-primary: #FFFFFF;
+        --auto-green: #63D0A0;
+        --brand-orange: #F2A93B;
+        --bs-primary-rgb: 127, 187, 227;
+
+        /* --- Bordi e ombre ------------------------------------------------ */
+        --border-color-dark: rgba(255, 255, 255, 0.12);
+        --border-color-darker: rgba(255, 255, 255, 0.20);
+        --soft-shadow: 0 1px 2px rgba(0, 0, 0, 0.40), 0 6px 18px rgba(0, 0, 0, 0.38);
+        --hover-shadow: 0 2px 4px rgba(0, 0, 0, 0.45), 0 12px 28px rgba(0, 0, 0, 0.50);
+        --subtle-shadow: 0 1px 2px rgba(0, 0, 0, 0.40);
+        --subtle-glow-shadow: 0 0 0 3px rgba(127, 187, 227, 0.28);
+
+        /* La freccetta degli accordion e delle sezioni legali e' un'immagine  */
+        /* SVG col colore scritto dentro: va ridisegnata chiara.               */
+        --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%237FBBE3'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        --bs-accordion-btn-active-icon: var(--bs-accordion-btn-icon);
+    }
+
+    /* I pulsanti pieni: al passaggio il fondo si scurisce, come nel tema
+       chiaro, cosi' il bianco sopra resta sempre leggibile. */
+    .btn-primary:hover,
+    .cta-nav-button:hover,
+    .btn-outline-secondary:hover {
+        background-color: #17618F;
+        border-color: #17618F;
+        color: var(--on-primary);
+    }
+
+    /* Testi piccoli che nel tema chiaro erano blu scuro: qui prendono il blu
+       chiaro, altrimenti scendono sotto il contrasto minimo. */
+    .step-number,
+    .partner-toggle,
+    .partner-card-title,
+    .content-item-title {
+        color: var(--brand-primary);
+    }
+    .step-number { border-color: var(--brand-primary); }
+    .content-page-wrapper h1 { border-bottom-color: var(--brand-primary); }
+
+    /* I moduli: le caselle sono piu' scure del riquadro che le contiene, cosi'
+       si vede dove si scrive anche senza bordi marcati. */
+    .site-form input[type="text"],
+    .site-form input[type="email"],
+    .site-form input[type="tel"],
+    .site-form select,
+    .site-form textarea,
+    .q-other-text {
+        background-color: #0F161C;
+        color: var(--text-primary-dark);
+    }
+    .site-form input:focus,
+    .site-form select:focus,
+    .site-form textarea:focus {
+        background-color: #0A1015;
+    }
+    .site-form input::placeholder,
+    .site-form textarea::placeholder { color: var(--text-muted); }
+    .q-option { background-color: var(--card-bg); }
+
+    /* Il rosso degli errori: quello del tema chiaro sul nero non si legge. */
+    .form-feedback.is-error {
+        background-color: #2B1416;
+        color: #FF9E9E;
+        border-color: rgba(255, 158, 158, 0.35);
+    }
+    .q-error { color: #FF9E9E; }
+
+    /* Pagine legali e di contenuto: righe alternate, codice e schede partner. */
+    .document-content code { background-color: rgba(255, 255, 255, 0.08); }
+    .table-dpa tr:nth-child(even) td { background-color: rgba(255, 255, 255, 0.03); }
+    .partner-card { box-shadow: var(--subtle-shadow); }
+
+    /* Le schermate dell'app sono catturate in tema chiaro: un bordo tenue
+       evita che il bianco della schermata sembri un buco nella pagina. */
+    .step-phone img { border-color: #2A3540; }
+}
