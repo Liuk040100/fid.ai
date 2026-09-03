@@ -192,7 +192,7 @@ hr, .document-rule {
     flex-wrap: wrap;
     margin-inline: -.75rem;
 }
-.row > [class*="col-"] { padding-inline: .75rem; margin-bottom: 1.5rem; width: 100%; }
+.row > [class*="col-"] { padding-inline: .75rem; margin-bottom: 1.5rem; flex: 0 0 100%; max-width: 100%; }
 .g-4 > [class*="col-"] { margin-bottom: 1.5rem; }
 .g-5 > [class*="col-"], .gy-4 > [class*="col-"] { margin-bottom: 2rem; }
 .justify-content-center { justify-content: center; }
@@ -200,11 +200,11 @@ hr, .document-rule {
 .align-items-start { align-items: flex-start; }
 
 @media (min-width: 768px) {
-    .col-md-4 { width: 33.3333%; }
-    .col-md-6 { width: 50%; }
+    .row > .col-md-4 { flex-basis: 33.3333%; max-width: 33.3333%; }
+    .row > .col-md-6 { flex-basis: 50%; max-width: 50%; }
 }
 @media (min-width: 992px) {
-    .col-lg-4 { width: 33.3333%; }
+    .row > .col-lg-4 { flex-basis: 33.3333%; max-width: 33.3333%; }
 }
 
 .text-center { text-align: center; }
@@ -369,7 +369,10 @@ hr, .document-rule {
     .navbar-nav { margin-left: 0; }
     .navbar-actions { display: inline-flex; align-items: center; gap: .75rem; margin-left: 1rem; }
     .dropdown-item { display: block; }
+    /* Chiuso davvero (display:none), non solo trasparente: cosi' non compare
+       mai per sbaglio nelle schermate ne' sotto il dito di chi naviga. */
     .nav-item.dropdown > .dropdown-menu {
+        display: none;
         position: absolute;
         top: 100%; right: 0;
         min-width: 190px;
@@ -379,12 +382,14 @@ hr, .document-rule {
         border: 1px solid var(--line);
         border-radius: var(--radius);
         box-shadow: var(--shadow-lift);
-        opacity: 0; visibility: hidden; transform: translateY(-4px);
-        transition: opacity .16s ease, transform .16s ease, visibility .16s;
     }
     .nav-item.dropdown:hover > .dropdown-menu,
     .nav-item.dropdown:focus-within > .dropdown-menu,
-    .nav-item.dropdown.open > .dropdown-menu { opacity: 1; visibility: visible; transform: none; }
+    .nav-item.dropdown.open > .dropdown-menu {
+        display: block;
+        animation: dropdown-in .16s cubic-bezier(.22, 1, .36, 1);
+    }
+    @keyframes dropdown-in { from { opacity: 0; transform: translateY(-4px); } }
     .dropdown-menu .dropdown-item { padding-inline: 1rem; min-height: 40px; width: 100%; }
 }
 .dropdown-menu { list-style: none; margin: 0; padding: 0; }
@@ -442,12 +447,12 @@ section { padding-block: var(--space-section); }
 
 /* --------------------------------- Hero ---------------------------------- */
 .hero-section {
-    padding-top: clamp(3rem, 8vw, 5.5rem);
+    padding-top: clamp(2.25rem, 5vw, 3.5rem);
     padding-bottom: clamp(2rem, 5vw, 3.5rem);
     border-bottom: 1px solid var(--line);
 }
 .hero-section > .container { max-width: 1000px; }
-.hero-logo-img { height: 64px; width: auto; margin: 0 auto 1.75rem; }
+.hero-logo-img { height: 52px; width: auto; margin: 0 auto 1.5rem; }
 
 .hero-title {
     font-size: clamp(2.5rem, 6.6vw, 4.4rem);
@@ -462,7 +467,7 @@ section { padding-block: var(--space-section); }
 
 .hero-subheadline {
     max-width: 46ch;
-    margin: 0 auto 2rem;
+    margin: 0 auto 1.75rem;
     color: var(--text-muted);
     font-size: 1.1rem;
 }
@@ -473,7 +478,7 @@ section { padding-block: var(--space-section); }
  * terminale di pi.dev, ma nella lingua giusta per un professionista. */
 .hero-demo {
     max-width: 420px;
-    margin: 3.25rem auto 0;
+    margin: 2.5rem auto 0;
     border: 1px solid var(--line);
     border-radius: var(--radius);
     background: var(--surface);
