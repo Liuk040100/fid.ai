@@ -831,7 +831,9 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="url"], t
     font-family: var(--font-body);
     font-size: 1rem;
     color: var(--text-base);
-    background: var(--surface);
+    /* background-COLOR, non la scorciatoia: la scorciatoia cancellava la
+       freccetta disegnata sopra per <select> e il campo restava senza. */
+    background-color: var(--surface);
     border: 1px solid var(--line-strong);
     border-radius: var(--radius);
     transition: border-color .14s ease, box-shadow .14s ease;
