@@ -131,7 +131,7 @@ ul, ol { max-width: var(--measure); }
 /* Etichette monospaziate: piccole, maiuscole, spaziate — il contrario esatto
  * del tracking stretto dei titoli. E' il contrasto che regge tutto. */
 .eyebrow, .invito-badge, .q-progress-label, .step-number, .footer-subtitle,
-.nav-link, .dropdown-item, .cta-nav-button, .btn, .field-label, .q-number,
+.nav-link, .cta-nav-button, .btn, .field-label, .q-number,
 .pricing-plan-target, .partner-card-subtitle, .document-date, .scroll-hint,
 .q-step-title, .target-tag, .pricing-plan-iva, .theme-toggle {
     font-family: var(--font-mono);
@@ -279,7 +279,7 @@ hr, .document-rule {
 }
 .nav-item { position: relative; }
 
-.nav-link, .dropdown-item {
+.nav-link {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
@@ -293,8 +293,8 @@ hr, .document-rule {
     background-size: 0% 1px;
     transition: color .14s ease, background-size .24s cubic-bezier(.22, 1, .36, 1);
 }
-.nav-link:hover, .dropdown-item:hover { color: var(--text-base); background-size: 100% 1px; }
-.nav-link.active, .dropdown-item.active { color: var(--text-base); background-size: 100% 1px; }
+.nav-link:hover { color: var(--text-base); background-size: 100% 1px; }
+.nav-link.active { color: var(--text-base); background-size: 100% 1px; }
 
 .cta-nav-button {
     min-height: 44px;
@@ -355,55 +355,18 @@ hr, .document-rule {
     }
     .navbar-collapse.show { opacity: 1; transform: none; visibility: visible; }
     .navbar-nav { flex-direction: column; align-items: stretch; gap: 0; margin: 0; }
-    .nav-link, .dropdown-item {
+    .nav-link {
         min-height: 48px;
         width: 100%;
         border-bottom: 1px solid var(--line);
         background-image: none;
     }
-    .dropdown-item { padding-left: 1rem; font-size: .7rem; }
     .cta-nav-button { margin-top: 1rem; width: 100%; justify-content: center; border-bottom: 1px solid var(--accent); }
 }
 @media (min-width: 900px) {
     .navbar-collapse { margin-left: auto; }
     .navbar-nav { margin-left: 0; }
     .navbar-actions { display: inline-flex; align-items: center; gap: .75rem; margin-left: 1rem; }
-    .dropdown-item { display: block; }
-    /* Chiuso davvero (display:none), non solo trasparente: cosi' non compare
-       mai per sbaglio nelle schermate ne' sotto il dito di chi naviga. */
-    .nav-item.dropdown > .dropdown-menu {
-        display: none;
-        position: absolute;
-        top: 100%; right: 0;
-        min-width: 190px;
-        list-style: none;
-        margin: 0; padding: .35rem 0;
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow-lift);
-    }
-    .nav-item.dropdown:hover > .dropdown-menu,
-    .nav-item.dropdown:focus-within > .dropdown-menu,
-    .nav-item.dropdown.open > .dropdown-menu {
-        display: block;
-        animation: dropdown-in .16s cubic-bezier(.22, 1, .36, 1);
-    }
-    @keyframes dropdown-in { from { opacity: 0; transform: translateY(-4px); } }
-    .dropdown-menu .dropdown-item { padding-inline: 1rem; min-height: 40px; width: 100%; }
-}
-.dropdown-menu { list-style: none; margin: 0; padding: 0; }
-/* La freccetta esiste solo dove il menu si apre davvero (schermo largo):
- * sul telefono «Risorse» e' gia' un elenco aperto. */
-@media (min-width: 900px) {
-    .dropdown-toggle::after {
-        content: "";
-        display: inline-block;
-        margin-left: .4em;
-        border: 3px solid transparent;
-        border-top-color: currentColor;
-        transform: translateY(2px);
-    }
 }
 
 /* ========================================================================= */

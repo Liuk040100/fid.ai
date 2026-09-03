@@ -44,9 +44,7 @@
             bottone.setAttribute('aria-expanded', aperto ? 'true' : 'false');
         });
         pannello.querySelectorAll('a').forEach(function (link) {
-            link.addEventListener('click', function () {
-                if (!link.classList.contains('dropdown-toggle')) { chiudi(); }
-            });
+            link.addEventListener('click', chiudi);
         });
         window.addEventListener('scroll', function () {
             if (pannello.classList.contains('show')) { chiudi(); }
@@ -54,21 +52,6 @@
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') { chiudi(); }
         });
-
-        /* «Risorse» sul telefono e' un elenco sempre aperto; su schermo largo
-         * si apre al passaggio del mouse (CSS) o con un tocco (qui). */
-        var apri = document.querySelector('.nav-item.dropdown > .dropdown-toggle');
-        if (apri) {
-            apri.addEventListener('click', function (e) {
-                e.preventDefault();
-                apri.parentElement.classList.toggle('open');
-            });
-            document.addEventListener('click', function (e) {
-                if (!e.target.closest('.nav-item.dropdown')) {
-                    document.querySelectorAll('.nav-item.dropdown.open').forEach(function (n) { n.classList.remove('open'); });
-                }
-            });
-        }
     }
 
     /* --------------------- Sezioni sincronizzate allo scorrimento --------- */
