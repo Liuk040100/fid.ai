@@ -119,8 +119,8 @@ h1, h2, h3, h4 {
     color: var(--text-base);
 }
 h1 { font-size: clamp(2.15rem, 5.4vw, 3.5rem); font-weight: 700; letter-spacing: -0.032em; line-height: 1.08; }
-h2 { font-size: clamp(1.75rem, 3.6vw, 2.5rem); letter-spacing: -0.026em; }
-h3 { font-size: clamp(1.25rem, 2.2vw, 1.55rem); line-height: 1.2; }
+h2 { font-size: clamp(1.75rem, 3.6vw, 2.5rem); letter-spacing: -0.022em; }
+h3 { font-size: clamp(1.25rem, 2.2vw, 1.55rem); letter-spacing: -0.012em; line-height: 1.24; }
 h4 { font-size: 1.15rem; letter-spacing: -0.014em; }
 
 p { margin: 0 0 1.1em; max-width: var(--measure); }
@@ -555,38 +555,46 @@ section { padding-block: var(--space-section); }
 }
 
 /* ------------------------------- I 5 passi ------------------------------- */
+/* Giro 23: le schermate vere dell'app raccontano il prodotto, quindi sono
+ * grandi. Sul telefono stanno una sotto l'altra a tutta larghezza; da 900 px
+ * in su ogni passo e' una riga di due colonne (schermata ~48 %, testo a
+ * fianco) e i lati si alternano. */
 .how-it-works-section { background: var(--bg-deep); border-bottom: 1px solid var(--line); }
-.step-card {
-    height: 100%;
-    padding: 1.5rem 1.25rem 1.75rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
+.steps-flow {
+    list-style: none;
+    max-width: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: border-color .18s ease, transform .18s ease;
+    gap: clamp(2.75rem, 6vw, 4.5rem);
 }
-.step-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
-.step-phone {
-    width: 132px;
-    margin-bottom: 1.1rem;
+.step-row { display: grid; gap: clamp(1.1rem, 3vw, 2rem); align-items: center; }
+.step-shot {
+    margin: 0 auto;
+    max-width: 420px;          /* oltre il telefono la verticale non cresce ancora */
+    width: 100%;
     border: 1px solid var(--line);
     border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow-lift);
     overflow: hidden;
-    background: var(--surface-2);
 }
-.step-phone img { width: 100%; height: auto; }
-.step-number {
-    font-size: .72rem;
-    letter-spacing: .16em;
-    color: var(--accent);
-    margin-bottom: .4rem;
+.step-shot img { width: 100%; height: auto; }
+.step-number { display: block; font-size: .72rem; letter-spacing: .16em; color: var(--accent); margin-bottom: .5rem; }
+.step-title { font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin-bottom: .5rem; }
+.step-body p { color: var(--text-muted); font-size: 1rem; margin-bottom: 0; }
+
+@media (min-width: 620px) {
+    /* Da qui in su la schermata e' quella del computer: orizzontale, puo'
+       riempire tutta la colonna senza diventare una torre. */
+    .step-shot { max-width: none; }
 }
-.step-number::before { content: "0"; }
-.step-title { font-size: 1.28rem; margin-bottom: .5rem; }
-.step-card p { color: var(--text-muted); font-size: .96rem; margin-bottom: 0; }
+@media (min-width: 900px) {
+    .step-row { grid-template-columns: minmax(0, 48%) minmax(0, 1fr); gap: clamp(2rem, 5vw, 3.5rem); }
+    .step-row:nth-child(even) .step-shot { order: 2; }
+    .step-row:nth-child(even) .step-body { order: 1; }
+}
 
 /* ------------------------------- I tre inviti ---------------------------- */
 .invites-section { border-bottom: 1px solid var(--line); }
@@ -672,7 +680,7 @@ section { padding-block: var(--space-section); }
 }
 .document-date { display: block; margin-bottom: .35rem; }
 .document-hint { color: var(--text-muted); font-size: .95rem; }
-.h2-custom { font-size: clamp(1.75rem, 3.6vw, 2.5rem); letter-spacing: -0.026em; }
+.h2-custom { font-size: clamp(1.75rem, 3.6vw, 2.5rem); letter-spacing: -0.022em; }
 
 /* Documenti legali: ogni articolo e' un <details>, chiuso. */
 .legal-sections { display: flex; flex-direction: column; gap: .5rem; margin-top: 2rem; }
