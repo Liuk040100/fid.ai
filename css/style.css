@@ -1,1830 +1,1029 @@
-/* css/style.css */
+/* css/style.css — fid.ai
+ *
+ * Giro 21 (03/09/2026): restyle completo, ispirato a pi.dev ma in versione
+ * «chiara di default». Niente Bootstrap, niente Font Awesome, nessuna libreria
+ * via CDN: qui dentro c'e' TUTTO il vestito del sito, in un file solo.
+ *
+ * Indice:
+ *   1. Variabili (tema chiaro = base, tema scuro = override)
+ *   2. Reset e tipografia
+ *   3. Griglia e utilita' minime (le poche classi ereditate da Bootstrap)
+ *   4. Testata e menu
+ *   5. Bottoni, etichette, link
+ *   6. Home: hero, demo WhatsApp, passi, inviti, professioni, privacy
+ *   7. Pagine interne: documenti, schede, prezzi, moduli, questionario
+ *   8. Pie' di pagina
+ *   9. Movimento (ingresso, scroll-sync) e prefers-reduced-motion
+ */
 
-/* ========================================= */
-/* Variables & Global Styles */
-/* ========================================= */
+/* ========================================================================= */
+/* 1. Variabili                                                              */
+/* ========================================================================= */
+/* Palette «materiale» e desaturata: carta e pietra, mai bianco o nero puri.
+ * Il blu dell'app (#14567F, copiato da frontend/src/config/colors.js) resta
+ * solo come accento: link, un bottone primario, la sezione a fuoco. */
 :root {
-    /* ===================================================================== */
-    /* Palette dell'app fid.ai — copiata da frontend/src/config/colors.js.    */
-    /* Il sito e l'app devono sembrare la stessa cosa: chi compila il         */
-    /* questionario qui e poi apre la PWA non deve avere l'impressione di     */
-    /* essere finito su un altro prodotto.                                   */
-    /* ===================================================================== */
-    --brand-primary: #14567F;                       /* colors.primary        */
-    --brand-primary-dark: #104566;                  /* primary scurito       */
-    --brand-primary-soft: rgba(20, 86, 127, 0.10);  /* colors.primaryLight   */
-    --pill-blue: #7FAAC2;                           /* colors.pillBlue       */
-    --pill-blue-dark: #6997B4;                      /* colors.pillBlueDark   */
-    --brand-orange: #E8890C;                        /* colors.orange         */
-    /* Due mestieri, due valori — come per il blu: --brand-orange e' l'arancio
-       che si VEDE (pallini, riempimenti), --brand-orange-text e' quello che si
-       LEGGE. Sul fondo arancio chiaro il primo sta a 2,3:1 e non passa AA. */
-    --brand-orange-text: #8A4B04;                   /* 6,1:1 su --orange-light */
-    --auto-green: #1F6B4A;                          /* colors.autoGreen      */
-    --auto-green-bg: #EFF6F2;                       /* colors.autoGreenBg    */
-    --copilot-bg: #F2F7FA;                          /* colors.copilotBg      */
-    --blue-light: #E3EEF7;                          /* colors.blueLight      */
-    --orange-light: #FBF1E1;                        /* colors.orangeLight    */
-    --purple: #8C64C8;                              /* colors.purple         */
-    --purple-light: #F1EAF7;                        /* colors.purpleLight    */
+    color-scheme: light;
 
-    /* Alias storici: le regole scritte nel 2025 continuano a funzionare. */
-    --primary-dark-bg: var(--brand-primary-dark);
-    --primary-accent: var(--brand-primary);
-    --primary-accent-hover: var(--brand-primary-dark);
-    --primary-light-bg: #FFFFFF;                    /* palettes.light.surface    */
-    --secondary-light-bg: #FAF8F3;                  /* palettes.light.background */
-    /* Il colore del testo SOPRA un fondo colorato (pulsanti, pill, navbar).
-       Era scritto come --primary-light-bg, cioe' "il bianco delle schede": due
-       significati diversi nella stessa variabile. Separarli serve al tema
-       scuro, dove il fondo delle schede diventa scuro ma il testo sui pulsanti
-       resta bianco. */
-    --on-primary: #FFFFFF;
+    /* Superfici */
+    --bg-canvas:  #F3F0EA;   /* carta */
+    --bg-deep:    #E7E2D8;   /* pergamena, per le fasce alternate */
+    --surface:    #FCFAF6;   /* schede */
+    --surface-2:  #EDE8DF;
 
-    --text-primary-light: #FFFFFF;
-    --text-secondary-light: rgba(255, 255, 255, 0.78);
+    /* Testo — contrasti misurati in fondo al file */
+    --text-base:  #23272C;   /* 13.2:1 su --bg-canvas */
+    --text-muted: #55504A;   /*  7.0:1 su --bg-canvas */
+    --text-invert:#FCFAF6;
 
-    --text-primary-dark: #111111;                   /* palettes.light.text   */
-    --text-secondary-dark: #4A5A66;
-    /* L'app usa #8E8E93 (palettes.light.textSecondary), ma sul bianco del sito
-       il contrasto e' 3,3:1 e non passa il livello AA: qui lo stesso grigio e'
-       scurito quel tanto che basta (4,9:1 su bianco, 4,5:1 sui fondi chiari). */
-    --text-muted: #686D73;
-    --text-accent: var(--brand-primary);
+    /* Accento */
+    --accent:        #14567F;   /* 6.9:1 su --bg-canvas */
+    --accent-strong: #104566;
+    --accent-soft:   rgba(20, 86, 127, 0.10);
+    --on-accent:     #FCFAF6;   /* 7.6:1 su --accent */
 
-    --border-color-light: rgba(255, 255, 255, 0.14);
-    --border-color-dark: rgba(20, 50, 80, 0.10);    /* palettes.light.border, piu' visibile */
-    --border-color-darker: rgba(20, 50, 80, 0.16);
+    /* Linee e ombre */
+    --line:        #D6CFC4;
+    --line-strong: #B9AFA0;
+    --shadow-lift: 0 1px 0 rgba(35, 39, 44, .05), 0 12px 32px rgba(35, 39, 44, .07);
 
-    --card-bg: var(--primary-light-bg);
-    --card-border-radius: 12px;
-    --card-border-radius-small: 10px;
-    --button-border-radius: 999px;                  /* i bottoni dell'app sono pillole */
-    --input-border-radius: 10px;
+    /* Tipografia */
+    --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-    /* Le schede che si aprono — domande frequenti (faq.html) e articoli dei
-       documenti legali — sono la stessa cosa: stesso raggio, stessi margini
-       interni. Scritti qui una volta sola, cosi' le due famiglie di regole
-       non possono piu' scostarsi. Sul telefono cambiano solo queste righe
-       (vedi @media 767.98px). */
-    --panel-border-radius: 16px;
-    --panel-pad-y: 1.15rem;
-    --panel-pad-x: 1.35rem;
+    --fs-body: 1.0625rem;     /* 17px */
+    --lh-body: 1.62;
+    --measure: 68ch;          /* larghezza massima di lettura */
+    --container: 1100px;
 
-    /* Ombre leggere: colore #143250 (colors.shadow), non nero. */
-    --soft-shadow: 0 1px 2px rgba(20, 50, 80, 0.05), 0 6px 18px rgba(20, 50, 80, 0.06);
-    --hover-shadow: 0 2px 4px rgba(20, 50, 80, 0.06), 0 12px 28px rgba(20, 50, 80, 0.10);
-    --card-shadow: var(--soft-shadow);
-    --card-hover-shadow: var(--hover-shadow);
-    --subtle-shadow: 0 1px 2px rgba(20, 50, 80, 0.05);
-    --subtle-glow-shadow: 0 0 0 3px rgba(20, 86, 127, 0.12);
-
-    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --font-secondary: var(--font-primary);
-
-    --bs-body-font-family: var(--font-primary);
-    --bs-body-color: var(--text-primary-dark);
-    --bs-body-bg: var(--primary-light-bg);
-    --bs-body-font-size: 1rem;
-    /* La classe .text-muted di Bootstrap ha un grigio suo, quasi nero: sul tema
-       scuro spariva. Qui punta al grigio del sito, che e' gia' tarato AA. */
-    --bs-secondary-color: var(--text-muted);
-    --bs-primary: var(--primary-accent);
-    --bs-primary-rgb: 20, 86, 127;
-    --bs-link-color: var(--primary-accent);
-    --bs-link-hover-color: var(--primary-accent-hover);
-    --bs-border-radius: var(--card-border-radius-small);
-    --bs-border-radius-lg: var(--card-border-radius);
-
-    /* La freccetta di apertura: la usano le domande frequenti e le sezioni
-       richiudibili dei documenti legali. Disegnata qui una volta sola; nel
-       tema scuro cambia solo questa riga.
-       Le altre variabili delle schede FAQ stanno sul blocco .accordion:
-       Bootstrap le ridichiara li' sopra, e da :root verrebbero coperte. */
-    --chevron-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2314567F'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    /* Ritmo */
+    --space-section: clamp(4rem, 9vw, 7rem);
+    --gutter: clamp(1.25rem, 4vw, 2rem);
+    --radius: 2px;            /* squadrato: 2 px al massimo */
+    --header-h: 62px;
 }
 
-html {
-    scroll-behavior: smooth;
+/* Tema scuro: stessa palette rovesciata (notte fredda + azzurro polveroso). */
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --bg-canvas:  #141920;
+    --bg-deep:    #0E1218;
+    --surface:    #1B212A;
+    --surface-2:  #222A34;
+
+    --text-base:  #DEE4EA;   /* 13.8:1 su --bg-canvas */
+    --text-muted: #A2ACB6;   /*  7.7:1 su --bg-canvas */
+    --text-invert:#0E1218;
+
+    --accent:        #7FB2DC;   /* 7.8:1 su --bg-canvas */
+    --accent-strong: #A6CCEB;
+    --accent-soft:   rgba(127, 178, 220, 0.14);
+    --on-accent:     #0E1218;   /* 8.3:1 su --accent */
+
+    --line:        #2E3742;
+    --line-strong: #46525F;
+    --shadow-lift: 0 1px 0 rgba(0, 0, 0, .3), 0 12px 32px rgba(0, 0, 0, .35);
 }
 
-/* Chi naviga con la tastiera deve vedere dov'e': un anello di messa a fuoco
-   uguale su tutto il sito, e solo per la tastiera (non al clic del mouse). */
-:focus-visible {
-    outline: 3px solid var(--brand-primary);
-    outline-offset: 2px;
-    border-radius: 4px;
-}
-.navbar :focus-visible,
-.footer-section :focus-visible,
-.dropdown-menu :focus-visible {
-    outline-color: #FFFFFF;
-}
+/* ========================================================================= */
+/* 2. Reset e tipografia                                                     */
+/* ========================================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
 body {
-    font-family: var(--font-primary);
-    background-color: var(--primary-light-bg);
-    color: var(--text-primary-dark);
-    line-height: 1.65;
+    margin: 0;
+    padding-top: var(--header-h);
+    background-color: var(--bg-canvas);
+    color: var(--text-base);
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    padding-top: 70px; 
+    transition: background-color .25s ease, color .25s ease;
 }
 
-h1, .h1-custom {
-    font-weight: 800;
-    color: var(--text-primary-dark);
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    font-size: clamp(2.5rem, 5vw, 3.8rem);
-}
+img, svg { max-width: 100%; height: auto; display: block; }
 
-h2, .h2-custom {
-    font-weight: 700;
-    color: var(--text-primary-dark);
-    line-height: 1.25;
-    letter-spacing: -0.015em;
-    font-size: clamp(2rem, 4vw, 3rem);
-    margin-bottom: 1.5rem;
-}
-.section-title { margin-bottom: 2.5rem; }
-
-h3, .h3-custom {
-    font-weight: 600;
-    color: var(--text-primary-dark);
-    line-height: 1.3;
-    font-size: clamp(1.3rem, 3vw, 1.75rem);
-    margin-top: 0;
-}
-
-p {
-    font-size: 1.05rem;
-    color: var(--text-secondary-dark);
-    line-height: 1.7;
-    margin-bottom: 1rem;
-}
-p.lead {
-    font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
     font-weight: 400;
-    color: var(--text-secondary-dark);
-    max-width: 750px;
-    margin-left: auto;
-    margin-right: auto;
+    letter-spacing: -0.018em;
+    line-height: 1.08;
+    margin: 0 0 .6em;
+    color: var(--text-base);
 }
+h1 { font-size: clamp(2.4rem, 6.2vw, 4.1rem); }
+h2 { font-size: clamp(1.9rem, 4.2vw, 2.9rem); }
+h3 { font-size: clamp(1.35rem, 2.6vw, 1.75rem); line-height: 1.16; }
+h4 { font-size: 1.2rem; }
 
-a {
-    color: var(--text-accent);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-a:hover {
-    color: var(--primary-accent-hover);
-    text-decoration: underline;
-}
+p { margin: 0 0 1.1em; max-width: var(--measure); }
+ul, ol { max-width: var(--measure); }
 
-.text-link {
-    color: var(--text-accent);
-    font-weight: 600;
-}
-.text-link:hover {
-    color: var(--primary-accent-hover);
-    text-decoration: underline;
-}
-.text-link .fa-external-link-alt {
-    font-size: 0.8em; 
-}
+/* Il corsivo del serif e' la firma editoriale: titolo della home e occhielli. */
+.is-italic, .hero-title em, .section-title em { font-style: italic; }
 
-.btn-primary {
-    background-color: var(--primary-accent);
-    border-color: var(--primary-accent);
-    color: var(--on-primary);
-    font-weight: 600;
-    padding: 0.75rem 1.75rem;
-    border-radius: var(--button-border-radius);
-    font-size: 1rem;
-    box-shadow: 0 2px 8px rgba(var(--bs-primary-rgb), 0.18);
-    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.3s ease;
+/* Etichette monospaziate: piccole, maiuscole, spaziate — il contrario esatto
+ * del tracking stretto dei titoli. E' il contrasto che regge tutto. */
+.eyebrow, .invito-badge, .q-progress-label, .step-number, .footer-subtitle,
+.nav-link, .dropdown-item, .cta-nav-button, .btn, .field-label, .q-number,
+.pricing-plan-target, .partner-card-subtitle, .document-date, .scroll-hint,
+.q-step-title, .target-tag, .pricing-plan-iva, .theme-toggle {
+    font-family: var(--font-mono);
 }
-.btn-primary:hover {
-    background-color: var(--primary-accent-hover);
-    border-color: var(--primary-accent-hover);
-    color: var(--on-primary);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(var(--bs-primary-rgb), 0.26);
-}
-
-.btn-outline-secondary {
-    color: var(--text-accent);
-    border-color: var(--text-accent);
-    font-weight: 600;
-    padding: 0.75rem 1.75rem;
-    border-radius: var(--button-border-radius);
-    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    font-size: 1rem;
-}
-.btn-outline-secondary:hover {
-    color: var(--on-primary);
-    background-color: var(--text-accent);
-    border-color: var(--text-accent);
-    text-decoration: none;
-    transform: translateY(-2px);
-}
-.btn-outline-secondary .fas {
-    font-size: 0.8em;
-    margin-left: 0.3rem;
-    transition: transform 0.2s ease;
-}
-.btn-outline-secondary:hover .fas {
-    transform: translateX(3px);
-}
-
-/* ========================================= */
-/* Navbar Styles */
-/* ========================================= */
-.navbar {
-    background-color: var(--primary-dark-bg) !important;
-    padding-top: 0.8rem;
-    padding-bottom: 0.8rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-    transition: background-color 0.3s ease;
-}
-/* Il logo e l'hamburger sono i due tocchi in alto: sotto i 44 px un dito li
-   manca. L'area cliccabile e' l'ancora, non l'immagine. */
-.navbar-brand.nav-logo {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-}
-.nav-logo .navbar-logo-img {
-    height: 35px; 
-    width: auto;    
-    filter: brightness(0) invert(1);
-    object-fit: contain; 
-}
-.navbar .nav-link {
-    color: #E0E0E0 !important;
-    font-weight: 500;
-    font-size: 0.95rem;
-    margin: 0 0.6rem;
-    padding: 0.5rem 0.25rem;
-    transition: color 0.2s ease;
-}
-.navbar .nav-link:hover,
-.navbar .nav-link.active {
-    color: #FFFFFF !important;
-}
-
-.navbar .dropdown-item:hover, 
-.navbar .dropdown-item.active {
-    color: #FFFFFF !important;
-}
-.navbar-toggler {
-    color: var(--text-primary-light);
-    border: none;
-    min-width: 44px;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.navbar-toggler:focus { box-shadow: none; }
-.navbar-toggler i { font-size: 1.3rem; }
-
-.dropdown-menu {
-    background-color: var(--primary-dark-bg);
-    border: 1px solid var(--border-color-light);
-    border-radius: var(--card-border-radius-small);
-    margin-top: 0.5rem !important;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-}
-.dropdown-item {
-    color: var(--text-secondary-light);
-    padding: 0.6rem 1.2rem;
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-.dropdown-item:hover, .dropdown-item:focus {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: var(--on-primary);
-}
-.dropdown-divider {
-    border-top-color: var(--border-color-light);
-}
-
-.cta-nav-button {
-    font-size: 0.85rem;
-    padding: 0.5rem 1.2rem;
-    background-color: var(--primary-accent);
-    border-color: var(--primary-accent);
-    color: var(--on-primary) !important;
-}
-.cta-nav-button:hover {
-    background-color: var(--primary-accent-hover);
-    border-color: var(--primary-accent-hover);
-    color: var(--on-primary) !important;
-}
-
-/* ========================================= */
-/* How it Works Section */
-/* ========================================= */
-/* Il padding della sezione sta in un blocco solo, piu' in basso, insieme a
-   quello delle altre sezioni: qui restava una seconda dichiarazione a 6rem che
-   la cascata annullava comunque. */
-/* Giro 10: ogni passo e' una scheda — schermata del telefono, numero, titolo,
-   una riga di spiegazione. La cornice del telefono e' la stessa che il sito
-   usava nella galleria «Questa e' l'app» (rimossa al giro 08): riusata qui,
-   invece di scriverne una seconda uguale. */
-.step-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    height: 100%;
-}
-.step-phone {
-    position: relative;
-    width: 100%;
-    max-width: 210px;
-    margin: 0 auto 1.4rem auto;
-}
-.step-phone img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 32px;
-    border: 7px solid #1A1A1A;                 /* la cornice del telefono */
-    background-color: var(--primary-light-bg);
-    box-shadow: 0 2px 4px rgba(20, 50, 80, 0.08), 0 22px 44px rgba(20, 50, 80, 0.18);
-}
-/* Il notch: un dettaglio piccolo che fa leggere subito "iPhone" invece che
-   "rettangolo con gli angoli tondi". */
-.step-phone::before {
-    content: "";
-    position: absolute;
-    top: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 26%;
-    height: 10px;
-    background-color: #1A1A1A;
-    border-radius: 999px;
-    z-index: 2;
-}
-.step-number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border: 2px solid var(--primary-accent);
-    color: var(--primary-accent);
-    border-radius: 50%;
-    font-weight: 700;
-    font-size: 1.15rem;
-    margin-bottom: 0.9rem;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-}
-.step-card:hover .step-number {
-    background-color: var(--primary-accent);
-    color: var(--on-primary);
-    transform: scale(1.1);
-}
-/* Stessa scala tipografica delle schede degli inviti: i due blocchi di card
-   della home devono sembrare la stessa famiglia. */
-.step-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-.step-card p {
-    font-size: 0.98rem;
-    margin-bottom: 0;
-}
-
-/* ========================================= */
-/* Target Audience Section */
-/* ========================================= */
-.target-audience-section { background-color: var(--secondary-light-bg); }
-.target-tag {
-    display: inline-block;
-    background-color: var(--primary-light-bg);
-    color: var(--text-secondary-dark);
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--button-border-radius);
-    margin: 0.4rem;
-    font-size: 0.95rem;
-    font-weight: 500;
-    border: 1px solid var(--border-color-dark);
-    transition: all 0.2s ease-out;
-}
-.target-tag:hover {
-    background-color: var(--primary-accent);
-    color: var(--on-primary);
-    border-color: var(--primary-accent);
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 3px 8px rgba(var(--bs-primary-rgb), 0.2);
-}
-
-/* Barra a scorrimento continuo (ticker) delle professioni: destra verso
-   sinistra, lenta, senza soluzione di continuita' (due gruppi identici
-   affiancati, il secondo nascosto agli screen reader). In pausa al hover
-   cosi' si puo' leggere; ferma del tutto se l'utente preferisce meno
-   animazioni. */
-.profession-ticker {
-    overflow: hidden;
-    margin-top: 2.5rem;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-}
-.profession-ticker-track {
-    display: flex;
-    width: max-content;
-    animation: profession-ticker-scroll 70s linear infinite;
-}
-.profession-ticker-group {
-    display: flex;
-    flex-shrink: 0;
-}
-.profession-ticker:hover .profession-ticker-track {
-    animation-play-state: paused;
-}
-@keyframes profession-ticker-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-}
-@media (prefers-reduced-motion: reduce) {
-    .profession-ticker-track { animation: none; }
-    .profession-ticker { overflow-x: auto; }
-}
-
-/* ========================================= */
-/* Pricing Page (prezzi.html)                */
-/* ========================================= */
-.pricing-page-header { text-align: center; margin-bottom: 1rem; } 
-.pricing-intro-text { 
-    text-align: center;
-    font-size: 0.95rem;
-    color: var(--text-secondary-dark);
-    margin: 0 auto 2.5rem auto;
-    max-width: 700px;
-    font-family: var(--font-secondary);
-}
-.pricing-promo-banner {
-    background-color: var(--copilot-bg);
-    border: 2px solid var(--primary-accent);
-    border-radius: var(--card-border-radius);
-    padding: 1.5rem 2rem;
-    max-width: 760px;
-    text-align: center;
-    box-shadow: var(--soft-shadow);
-}
-.pricing-promo-badge {
-    display: inline-block;
-    font-size: 0.8rem;
-    font-weight: 700;
+.eyebrow, .invito-badge, .footer-subtitle, .q-progress-label, .scroll-hint,
+.pricing-plan-target, .document-date {
     text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: var(--brand-orange-text);
-    background-color: var(--orange-light);
-    border-radius: 999px;
-    padding: 0.25rem 0.85rem;
-    margin-bottom: 0.75rem;
-}
-.pricing-promo-title {
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--text-primary-dark);
-    margin-bottom: 0.6rem;
-}
-.pricing-promo-text {
-    font-size: 1rem;
-    color: var(--text-secondary-dark);
-    line-height: 1.55;
-}
-.pricing-plans-container { 
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    align-items: stretch; 
-}
-.pricing-plan-card { 
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color-dark);
-    border-radius: var(--card-border-radius);
-    padding: 2.5rem 2rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--soft-shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.pricing-plan-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--hover-shadow);
-}
-.pricing-plan-card.highlighted {
-    border: 2px solid var(--primary-accent); 
-    box-shadow: 0 0 0 3px rgba(var(--bs-primary-rgb),0.1), var(--hover-shadow); 
-    transform: scale(1.03) translateY(-4px); 
-}
-.pricing-plan-card.highlighted:hover {
-    transform: scale(1.05) translateY(-10px); 
-}
-.pricing-plan-title {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--text-primary-dark);
-    margin-bottom: 0.5rem;
-}
-.pricing-plan-target {
-    font-size: 0.9rem;
-    color: var(--text-secondary-dark);
-    margin-bottom: 1.5rem;
-    min-height: 40px; 
-}
-.pricing-plan-price {
-    font-size: 2.8rem;
-    font-weight: 800;
-    color: var(--text-primary-dark);
-    margin-bottom: 0.2rem;
-}
-.pricing-plan-price .term {
-    font-size: 1rem;
+    letter-spacing: 0.12em;
+    font-size: .7rem;
     font-weight: 500;
-    color: var(--text-secondary-dark);
-}
-.pricing-plan-iva {
-    font-size: 0.85rem;
-    color: var(--text-secondary-dark);
-    margin-bottom: 1.5rem;
-}
-.pricing-plan-messages {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text-primary-dark);
-    margin-bottom: 2rem;
-}
-.pricing-plan-card .btn-primary {
-    width: 100%;
-    margin-top: auto; 
-    padding: 0.8rem 1rem;
-}
-.pricing-disclaimer { 
-    text-align: center;
-    font-size: 0.9rem;
-    color: var(--text-secondary-dark);
-    margin-top: 3rem;
-    font-family: var(--font-secondary);
-}
-
-/* ========================================= */
-/* Footer Section */
-/* ========================================= */
-.footer-section {
-    background-color: var(--primary-dark-bg);
-    color: var(--text-secondary-light);
-    padding: 4rem 0 2rem 0;
-}
-.footer-logo-img {
-    max-height: 35px; 
-    width: auto;
-    filter: brightness(0) invert(1);
-}
-.footer-tagline {
-    font-size: 1rem;
-    color: var(--text-secondary-light);
-    margin-top: 0.5rem;
-}
-.footer-subtitle {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-primary-light);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 0.8rem;
-}
-.footer-legal-links a, .footer-legal-links span,
-.footer-link {
-    font-size: 0.9rem;
-    color: var(--text-secondary-light);
-    text-decoration: none;
-    transition: color 0.2s ease;
-    /* Sul telefono i link del piede erano righe alte 24 px, troppo vicine fra
-       loro per un dito: l'altezza minima li porta a 44 px senza spostarli. */
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0 0.15rem;
-}
-.footer-legal-links a:hover, .footer-link:hover {
-    color: var(--on-primary);
-    text-decoration: underline;
-}
-.footer-link-separator { margin: 0 0.5rem; }
-
-.footer-copyright, .footer-address {
-    font-size: 0.85rem;
-    color: var(--text-secondary-light);
-    opacity: 0.8;
-    margin-top: 0.5rem;
-    margin-bottom: 0.2rem;
-}
-
-/* ========================================= */
-/* Stili per Pagine di Contenuto Generiche (Legali) */
-/* ========================================= */
-.page-container {
-    padding: 4rem 0; 
-    background-color: var(--secondary-light-bg); 
-}
-/* La scheda su cui vive un documento: le pagine legali (.document-content) e
-   le pagine di contenuto (.content-page-wrapper: partner, suggerimenti,
-   domande frequenti) sono la stessa cosa e avevano due vestiti quasi uguali
-   ma non identici — larghezza, padding, peso e taglia dei titoli. Ora e' un
-   blocco solo: stessa scheda, stessa scala tipografica, stessi margini. */
-.document-content,
-.content-page-wrapper {
-    background-color: var(--primary-light-bg);
-    padding: 3rem;
-    border-radius: var(--card-border-radius);
-    max-width: 960px;
-    margin: 0 auto 2rem auto;
-    box-shadow: var(--soft-shadow);
-}
-.document-content h1,
-.content-page-wrapper h1 {
-    font-size: clamp(1.9rem, 4.5vw, 2.6rem);
-    color: var(--text-primary-dark);
-    font-weight: 800;
-    text-align: center;
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--primary-accent);
-}
-/* Non l'intestazione delle domande frequenti: e' gia' una scheda a se', e il
-   margine di 2,5rem qui dentro aprirebbe una fascia vuota sotto la domanda. */
-/* Sotto il titolo di un documento: la data e la riga che spiega come si legge
-   la pagina. Centrate come il titolo, cosi' l'intestazione resta un blocco. */
-.document-content .document-date,
-.document-content .document-hint {
-    font-family: var(--font-secondary);
-    text-align: center;
     color: var(--text-muted);
-    margin-bottom: 0.4rem;
-}
-.document-content .document-date { font-style: italic; }
-.document-content .document-hint { margin-bottom: 2rem; }
-/* Il filetto prima dei contatti, in fondo ai documenti. */
-.document-content .document-rule {
-    margin: 2.5rem 0 1.5rem 0;
-    border: 0;
-    border-top: 1px solid var(--border-color-dark);
-    opacity: 1;
 }
 
-.document-content h2,
-.content-page-wrapper h2:not(.accordion-header) {
-    font-size: clamp(1.4rem, 3vw, 1.8rem);
-    color: var(--text-primary-dark);
-    font-weight: 700;
-    margin-top: 2.5rem;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-color-dark);
+a { color: var(--accent); text-decoration: none; }
+
+/* Sottolineatura animata: cresce da sinistra al passaggio del mouse. */
+.text-link, .footer-link, .content-page-wrapper a, .document-content a,
+.legal-section-body a, p a {
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    transition: background-size .24s cubic-bezier(.22, 1, .36, 1);
+    padding-bottom: 1px;
 }
-.document-content h3,
-.content-page-wrapper h3 {
-    font-size: clamp(1.2rem, 2.6vw, 1.5rem);
-    color: var(--text-primary-dark);
-    font-weight: 600;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-.document-content p, .document-content ul, .document-content ol,
-.content-page-wrapper p, .content-page-wrapper ul, .content-page-wrapper ol {
-    font-family: var(--font-secondary);
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: var(--text-secondary-dark);
-    margin-bottom: 1rem;
-}
-.document-content ul, .document-content ol,
-.content-page-wrapper ul:not(.partner-card-list), .content-page-wrapper ol {
-    padding-left: 1.8rem;
-}
-.document-content li,
-.content-page-wrapper li {
-    margin-bottom: 0.6rem;
-}
-.document-content strong,
-.content-page-wrapper strong {
-    font-weight: 700;
-    color: var(--text-primary-dark);
-}
-.document-content em,
-.content-page-wrapper em {
-    font-style: italic;
-    color: var(--text-secondary-dark);
-}
-.document-content code {
-    background-color: #e9ecef;
-    padding: 0.2em 0.4em;
-    border-radius: 4px;
-    font-size: 90%;
-    font-family: monospace;
-}
-/* Una regola sola per le tabelle dei documenti. La larghezza fissa e le parole
-   spezzate servono al telefono: a 390 px le tabelle del DPA uscivano dal bordo e
-   la pagina scorreva di lato. */
-.document-content table, .table-dpa {
-    font-family: var(--font-secondary);
-    font-size: 0.95rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    width: 100%;
-    max-width: 100%;
-    table-layout: fixed;
-    word-break: break-word;
-    border-collapse: collapse;
-}
-.table-dpa tr:nth-child(even) td { background-color: rgba(20, 50, 80, 0.02); }
-.document-content table th, .document-content table td,
-.table-dpa th, .table-dpa td {
-    padding: 0.75rem;
-    vertical-align: top;
-    border: 1px solid var(--border-color-dark); 
-    text-align: left;
-}
-.document-content table thead th, .table-dpa thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid var(--border-color-darker);
-    background-color: var(--secondary-light-bg);
-    font-weight: 700;
+.text-link:hover, .footer-link:hover, .content-page-wrapper a:hover,
+.document-content a:hover, .legal-section-body a:hover, p a:hover {
+    background-size: 100% 1px;
 }
 
-/* Gli articoli dei documenti legali sono <details> chiusi di default: in
-   tutti e tre i documenti (termini di servizio dal giro 16, informativa
-   privacy e addendum dal giro 17) la lista degli articoli E' l'indice,
-   quindi la testata numerata e' insieme la voce d'indice e il comando che
-   apre il testo. Il vestito (scheda, freccetta, apertura, messa a fuoco) e'
-   quello delle domande frequenti: le regole comuni stanno nel blocco
-   .accordion piu' sotto, qui resta solo cio' che e' proprio di <details>.
-   Unica eccezione: nell'informativa privacy la sezione «Dati di Google
-   Calendar» nasce APERTA (attributo open nell'HTML), perche' chi verifica
-   l'app deve leggere la frase Limited Use senza dover cliccare. */
-.document-content details.legal-section > summary {
-    list-style: none;
-    cursor: pointer;
-}
-.document-content details.legal-section > summary::-webkit-details-marker {
-    display: none;
-}
-/* La testata e' un h2 (l'ordine dei titoli h1 -> h2 -> h3 non salta), ma
-   deve pesare come il testo di una domanda frequente, non come un titolo di
-   sezione: font: inherit prende taglia, peso e interlinea dal summary. */
-.document-content details.legal-section > summary h2 {
-    flex: 1 1 auto;
-    margin: 0;
-    padding: 0;
-    border: none;
-    font: inherit;
-    color: inherit;
-}
-/* Aperto e alto, il sollevamento al passaggio del mouse farebbe ballare
-   mezza pagina: resta solo sulle schede chiuse. */
-.document-content details.legal-section[open]:hover {
-    transform: none;
-}
-/* I sottotitoli dentro un articolo (2.1, 2.2, ...) stanno sotto la testata
-   della scheda: devono pesare meno di lei, altrimenti sembrano piu'
-   importanti del titolo che li contiene. Si distinguono dal testo per il
-   peso, non per la taglia. */
-.document-content details.legal-section .legal-section-body h3 {
-    font-size: 1.05rem;
-    font-weight: 700;
-    margin-top: 1.75rem;
-    margin-bottom: 0.5rem;
-}
-.document-content details.legal-section .legal-section-body h3:first-child {
-    margin-top: 0.5rem;
-}
-
-/* ========================================= */
-/* Stili Pagine Contenuto specifiche (Partner, Suggerimenti, FAQ) */
-/* ========================================= */
-.page-intro-text { 
-    font-family: var(--font-secondary);
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--text-secondary-dark);
-    text-align: center;
-    max-width: 750px; 
-    margin: 0 auto 3rem auto; 
-}
-
-.content-item {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px dashed var(--border-color-dark); 
-}
-.content-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-.example-text { 
-    background-color: var(--secondary-light-bg);
-    border-left: 3px solid var(--primary-accent);
-    padding: 0.8rem 1.2rem;
-    margin-top: 0.5rem;
-    border-radius: var(--card-border-radius-small);
-    font-size: 0.95rem;
-}
-.example-text em {
-    color: var(--text-secondary-dark);
-}
-
-.content-list {
-    list-style-type: disc;
-}
-.content-list li::marker {
-    color: var(--primary-accent);
-}
-
-.partner-card {
-    background-color: var(--secondary-light-bg); 
-    border: 1px solid var(--border-color-dark);
-    border-radius: var(--card-border-radius-small); 
-    padding: 1.5rem 1.75rem; 
-    height: auto; 
-    align-self: flex-start;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.04); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex; 
-    flex-direction: column;
-}
-
-.partner-card:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: var(--hover-shadow); 
-}
-
-.partner-logo {
-    max-height: 40px;
-    width: auto;
-    object-fit: contain;
-    margin-bottom: 0.5rem; 
-}
-
-/* Il titolo della scheda partner e' un <h2> dentro .content-page-wrapper: la
-   regola generale dei titoli (piu' specifica) vince su questa, quindi qui
-   resta solo cio' che ha davvero effetto — il resto era codice morto. */
-.partner-card-title {
-    margin-top: 0 !important;
-}
-
-.partner-card-subtitle {
-    font-size: 0.9rem;
-    color: var(--text-secondary-dark);
-    margin-bottom: 1rem;
-    font-weight: 500;
-    font-style: italic;
-    margin-top: 0.25rem; 
-}
-
-.partner-card-description {
-    font-size: 0.95rem;
-    color: var(--text-secondary-dark);
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
-    flex-grow: 1; 
-}
-
-.partner-card-section-title { 
-    font-size: 1rem; 
-    font-weight: 600;
-    color: var(--text-primary-dark);
-    margin-top: 1.25rem;
-    margin-bottom: 0.6rem;
-    border-bottom: 1px solid var(--border-color-dark);
-    padding-bottom: 0.3rem;
-}
-
-.partner-card-list {
-    font-family: var(--font-secondary);
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: var(--text-secondary-dark);
-    padding-left: 1.2rem;
-    margin-bottom: 0.5rem;
-}
-
-.partner-card-list li {
-    margin-bottom: 0.4rem;
-    list-style-type: disc; 
-}
-
-.partner-card-list li::marker { 
-    color: var(--primary-accent);
-}
-
-/* Giro 06 (richiesta 2): «Come lavora / Dettagli» sotto ogni card partner è
-   dietro un toggle pulito, per tenere la pagina snella invece di tre liste
-   sempre aperte una sopra l'altra. */
-.partner-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    margin-top: 1rem;
-    padding: 0.5rem 0;
-    min-height: 44px;
-    background: none;
-    border: none;
-    font-family: var(--font-primary);
-    font-weight: 600;
-    font-size: 0.92rem;
-    color: var(--primary-accent);
-    cursor: pointer;
-}
-.partner-toggle:hover {
-    color: var(--primary-accent-hover);
-    text-decoration: underline;
-}
-.partner-toggle .fa-chevron-down {
-    font-size: 0.75em;
-    transition: transform 0.2s ease;
-}
-.partner-toggle[aria-expanded="true"] .fa-chevron-down {
-    transform: rotate(180deg);
-}
-.partner-details {
-    margin-top: 0.25rem;
-}
-
-/* --------------------- Domande frequenti (faq.html) ----------------------
-   Ogni domanda e' una scheda a se': pannello stondato, bordo tenue, molta
-   aria fra una e l'altra. Aperta, la scheda prende il bordo e il titolo del
-   blu di marca, cosi' si vede a colpo d'occhio dove si sta leggendo. I colori
-   arrivano tutti dalle variabili elencate qui sotto: nel tema scuro cambiano
-   quelle, non queste regole. */
-.accordion {
-    /* Bootstrap dichiara le proprie --bs-accordion-* proprio su questo blocco:
-       scritte in :root verrebbero coperte. Qui vincono, perche' il nostro
-       foglio di stile e' caricato dopo. Un solo posto, entrambi i temi. */
-    --bs-accordion-bg: var(--card-bg);
-    --bs-accordion-border-radius: var(--panel-border-radius);
-    --bs-accordion-inner-border-radius: var(--panel-border-radius);
-    --bs-accordion-border-width: 1px;
-    --bs-accordion-border-color: var(--border-color-dark);
-    --bs-accordion-btn-color: var(--text-primary-dark);
-    --bs-accordion-btn-bg: transparent;
-    --bs-accordion-btn-focus-box-shadow: none;
-    /* Il blu che si LEGGE (chiaro nel tema scuro), non quello dei pulsanti. */
-    --bs-accordion-active-color: var(--brand-primary);
-    --bs-accordion-active-bg: var(--brand-primary-soft);
-}
-
-/* La pila di schede: stessa aria fra una e l'altra nelle domande frequenti e
-   negli articoli dei documenti legali. */
-.accordion,
-.document-content .legal-sections {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-/* La scheda. Un solo vestito per le due famiglie: la domanda frequente
-   (.accordion-item, mossa da Bootstrap) e l'articolo legale (<details>,
-   mosso dal browser). */
-.accordion-item,
-.document-content details.legal-section {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color-dark);
-    border-radius: var(--panel-border-radius) !important;
-    box-shadow: var(--soft-shadow);
-    overflow: hidden;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-}
-.accordion-item:hover,
-.document-content details.legal-section:hover {
-    box-shadow: var(--hover-shadow);
-    transform: translateY(-2px);
-}
-/* Bootstrap incolla il primo e l'ultimo elemento: qui sono schede separate. */
-.accordion-item:first-of-type,
-.accordion-item:last-of-type {
-    border-radius: var(--panel-border-radius) !important;
-}
-.accordion-header {
-    margin: 0;
-    padding: 0;
-    border: none;
-}
-.accordion-item:has(.accordion-button:not(.collapsed)),
-.document-content details.legal-section[open] {
-    border-color: var(--brand-primary);
-    box-shadow: var(--hover-shadow);
-}
-
-/* La testata cliccabile. */
-.accordion-button,
-.document-content details.legal-section > summary {
-    font-family: var(--font-primary);
-    font-weight: 600;
-    font-size: 1.12rem;
-    padding: var(--panel-pad-y) var(--panel-pad-x) !important;
-    background-color: transparent;
-    color: var(--text-primary-dark);
-    border: none !important;
-    line-height: 1.45;
-    text-align: left;
-    width: 100%;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    box-shadow: none !important;
-    transition: color 0.2s ease, background-color 0.2s ease;
-}
-.accordion-button:hover,
-.document-content details.legal-section > summary:hover { color: var(--brand-primary); }
-
-.accordion-button:not(.collapsed),
-.document-content details.legal-section[open] > summary {
-    color: var(--brand-primary) !important;
-    background-color: var(--brand-primary-soft) !important;
-    box-shadow: none !important;
-}
-
-.accordion-button:focus {
-    z-index: 3;
-    box-shadow: none !important;
-}
-/* La scheda ritaglia cio' che esce (overflow: hidden), quindi l'anello di
-   messa a fuoco va disegnato dentro il bordo: fuori verrebbe tagliato. */
-.accordion-button:focus-visible,
-.document-content details.legal-section > summary:focus-visible {
-    outline: 3px solid var(--brand-primary);
-    outline-offset: -3px;
+/* Messa a fuoco sempre visibile, su qualunque fondo. */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
     border-radius: 0;
 }
 
-/* La freccetta vive dentro una pastiglia tonda: si vede che e' un comando,
-   e resta un bersaglio comodo anche col dito. */
-.accordion-button::after,
-.document-content details.legal-section > summary::after {
-    content: "";
-    flex: 0 0 auto;
-    width: 34px;
-    height: 34px;
-    margin-left: auto;
-    border-radius: 50%;
-    background-color: var(--brand-primary-soft);
-    background-image: var(--chevron-icon);
+hr, .document-rule {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin: 2.5rem 0;
+}
+
+::selection { background: var(--accent); color: var(--on-accent); }
+
+/* ========================================================================= */
+/* 3. Griglia e utilita' minime                                              */
+/* ========================================================================= */
+.container {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-inline: -.75rem;
+}
+.row > [class*="col-"] { padding-inline: .75rem; margin-bottom: 1.5rem; width: 100%; }
+.g-4 > [class*="col-"] { margin-bottom: 1.5rem; }
+.g-5 > [class*="col-"], .gy-4 > [class*="col-"] { margin-bottom: 2rem; }
+.justify-content-center { justify-content: center; }
+.align-items-center { align-items: center; }
+.align-items-start { align-items: flex-start; }
+
+@media (min-width: 768px) {
+    .col-md-4 { width: 33.3333%; }
+    .col-md-6 { width: 50%; }
+}
+@media (min-width: 992px) {
+    .col-lg-4 { width: 33.3333%; }
+}
+
+.text-center { text-align: center; }
+.text-start  { text-align: left; }
+.mx-auto { margin-inline: auto; }
+.mx-1 { margin-inline: .25rem; }
+.ms-1 { margin-left: .25rem; }
+.me-1 { margin-right: .25rem; }
+.ms-auto { margin-left: auto; }
+.mb-0 { margin-bottom: 0 !important; }
+.mb-2 { margin-bottom: .5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mt-2 { margin-top: .5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 2.5rem; }
+.py-5 { padding-block: 3rem; }
+.pb-4 { padding-bottom: 1.5rem; }
+.pt-md-4 { padding-top: 1.5rem; }
+.pb-md-3 { padding-bottom: 1rem; }
+.d-block { display: block; }
+.fw-bold { font-weight: 700; }
+.fw-normal { font-weight: 400; }
+.gap-2 { gap: .75rem; }
+.lead { font-size: 1.15rem; }
+.text-muted { color: var(--text-muted); }
+.border-0 { border: 0; }
+@media (min-width: 768px) { .mt-md-5 { margin-top: 2.5rem; } }
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* Icone SVG in linea: sostituiscono Font Awesome, una per una. */
+.icon { width: 1em; height: 1em; display: inline-block; vertical-align: -.125em; fill: none;
+        stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.icon-lg { width: 28px; height: 28px; stroke-width: 1.4; }
+
+/* ========================================================================= */
+/* 4. Testata e menu                                                         */
+/* ========================================================================= */
+.navbar {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 1000;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    background: color-mix(in srgb, var(--bg-canvas) 88%, transparent);
+    backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--line);
+}
+.navbar > .container { display: flex; align-items: center; gap: 1rem; }
+
+.navbar-brand { display: inline-flex; align-items: center; min-height: 44px; }
+.navbar-logo-img { height: 30px; width: auto; }
+:root[data-theme="dark"] .navbar-logo-img,
+:root[data-theme="dark"] .footer-logo-img,
+:root[data-theme="dark"] .hero-logo-img { filter: brightness(0) invert(1); opacity: .92; }
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    margin: 0 0 0 auto;
+    padding: 0;
+}
+.nav-item { position: relative; }
+
+.nav-link, .dropdown-item {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: .74rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background-image: linear-gradient(var(--text-base), var(--text-base));
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: 0.85rem;
-    transition: transform 0.3s ease, background-color 0.2s ease;
+    background-position: 0 calc(50% + .95em);
+    background-size: 0% 1px;
+    transition: color .14s ease, background-size .24s cubic-bezier(.22, 1, .36, 1);
 }
-.accordion-button:not(.collapsed)::after,
-.document-content details.legal-section[open] > summary::after {
-    background-color: var(--card-bg);
-    transform: rotate(180deg);
+.nav-link:hover, .dropdown-item:hover { color: var(--text-base); background-size: 100% 1px; }
+.nav-link.active, .dropdown-item.active { color: var(--text-base); background-size: 100% 1px; }
+
+.cta-nav-button {
+    min-height: 44px;
+    padding-inline: 1rem;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: var(--on-accent) !important;
 }
+.cta-nav-button:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
 
-/* L'apertura: Bootstrap anima l'altezza, qui la si rallenta quel poco che
-   basta perche' sembri un pannello che si distende e non uno scatto. */
-.accordion-collapse.collapsing {
-    transition: height 0.32s ease;
+/* Interruttore del tema: sole/luna, 44 px di area toccabile. */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; height: 44px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: color .14s ease, border-color .14s ease;
 }
+.theme-toggle:hover { color: var(--text-base); border-color: var(--line-strong); }
+.theme-toggle .icon { width: 18px; height: 18px; }
+:root:not([data-theme="dark"]) .theme-toggle .icon-moon { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: none; }
 
-.accordion-body,
-.document-content details.legal-section .legal-section-body {
-    padding: 1rem var(--panel-pad-x) 1.35rem var(--panel-pad-x);
-    background-color: var(--card-bg);
-    color: var(--text-secondary-dark);
+/* Hamburger e pannello a scomparsa (sotto i 900 px). */
+.navbar-toggler {
+    display: none;
+    width: 44px; height: 44px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--text-base);
+    cursor: pointer;
 }
+.navbar-toggler .icon { width: 20px; height: 20px; }
 
-.accordion-body p, .accordion-body ul {
-    font-size: 1rem;
-    margin-bottom: 0.75rem;
-}
-.accordion-body p:last-child, .accordion-body ul:last-child {
-    margin-bottom: 0;
-}
+@media (max-width: 899.98px) {
+    .navbar-toggler { display: inline-flex; }
+    .navbar > .container { justify-content: space-between; }
+    .navbar-actions { margin-left: auto; display: flex; align-items: center; gap: .5rem; }
 
-/* ========================================= */
-/* Responsive Adjustments */
-/* ========================================= */
-@media (max-width: 991.98px) {
-    body { padding-top: 62px; } 
-    .navbar { padding-top: 0.6rem; padding-bottom: 0.6rem; }
-    .nav-logo .navbar-logo-img { height: 28px; } 
-    .navbar .nav-link { font-size: 0.9rem; margin: 0.3rem 0.5rem; }
-    .cta-nav-button { font-size: 0.8rem; padding: 0.4rem 1rem; }
-
-    .dropdown-menu {
-        text-align: center;
-        box-shadow: none;
-        border-top: 1px solid var(--border-color-light);
+    .navbar-collapse {
+        position: fixed;
+        inset: var(--header-h) 0 auto 0;
+        background: var(--bg-canvas);
+        border-bottom: 1px solid var(--line);
+        padding: 1rem var(--gutter) 1.5rem;
+        transform: translateY(-8px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .18s ease, transform .18s ease, visibility .18s;
     }
-
-    .hero-section { padding-top: calc(62px + 3rem); min-height: auto; }
-    h1, .h1-custom { font-size: clamp(2.2rem, 7vw, 3.2rem); }
-    h2, .h2-custom { font-size: clamp(1.8rem, 6vw, 2.6rem); }
-    p.lead { font-size: clamp(1.1rem, 4vw, 1.3rem); }
-
-    .pricing-plan-card { padding: 2rem 1.5rem; }
-    .pricing-plan-card.highlighted { transform: scale(1.01) translateY(-2px); } 
-    .pricing-plan-card.highlighted:hover { transform: scale(1.03) translateY(-5px); }
-
-    .footer-section { padding: 3rem 0 1.5rem 0; }
-}
-
-@media (max-width: 767.98px) {
-    .page-container { padding: 4rem 0; }
-    .pricing-plans-container { grid-template-columns: 1fr; gap: 1.5rem; } 
-
-    .document-content, .content-page-wrapper {
-        padding: 1.5rem;
-    }
-    .document-content h1, .content-page-wrapper h1 { font-size: clamp(1.6rem, 5vw, 2rem); }
-    .document-content h2,
-    .content-page-wrapper h2:not(.accordion-header) { font-size: clamp(1.3rem, 4vw, 1.6rem); }
-   
-    .page-intro-text {
-        font-size: 1rem;
-        margin-bottom: 2rem;
-    }
-    .partner-card {
-        padding: 1.5rem 1.25rem;
-    }
-    .partner-card-section-title {
-        font-size: 0.95rem;
-    }
-    /* Sul telefono le schede si stringono: cambiano le variabili, non le
-       regole — cosi' domande frequenti e articoli legali restano allineati. */
-    :root {
-        --panel-pad-y: 1rem;
-        --panel-pad-x: 1.1rem;
-    }
-    .accordion,
-    .document-content .legal-sections { gap: 0.85rem; }
-    .accordion-button,
-    .document-content details.legal-section > summary {
-        font-size: 1.02rem;
-        gap: 0.75rem;
-    }
-    .accordion-button::after,
-    .document-content details.legal-section > summary::after { width: 30px; height: 30px; }
-    .accordion-body { padding: 0.9rem 1.1rem 1.15rem 1.1rem; }
-
-    /* La tabella dei sub-responsabili ha quattro colonne: a 390 px diventava
-       una colonna di lettere, una per riga, con l'ultima intestazione tagliata.
-       Sul telefono ogni riga si legge come una scheda e il nome della colonna
-       sta scritto sopra il dato (attributo data-label nell'HTML). */
-    .document-content .table-dpa thead { display: none; }
-    .document-content .table-dpa,
-    .document-content .table-dpa tbody,
-    .document-content .table-dpa tr,
-    .document-content .table-dpa td {
-        display: block;
+    .navbar-collapse.show { opacity: 1; transform: none; visibility: visible; }
+    .navbar-nav { flex-direction: column; align-items: stretch; gap: 0; margin: 0; }
+    .nav-link, .dropdown-item {
+        min-height: 48px;
         width: 100%;
+        border-bottom: 1px solid var(--line);
+        background-image: none;
     }
-    .document-content .table-dpa tr {
-        border: 1px solid var(--border-color-dark);
-        border-radius: var(--panel-border-radius);
-        overflow: hidden;
-        margin-bottom: 1rem;
-    }
-    .document-content .table-dpa td {
-        border: 0;
-        padding: 0.7rem 0.9rem;
-    }
-    .document-content .table-dpa td + td { border-top: 1px solid var(--border-color-dark); }
-    .document-content .table-dpa td::before {
-        content: attr(data-label);
-        display: block;
-        font-weight: 700;
-        font-size: 0.8rem;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-        color: var(--text-muted);
-        margin-bottom: 0.15rem;
-    }
-
-    .footer-legal-links a, .footer-legal-links span { display: block; margin-bottom: 0.3rem; }
-    .footer-legal-links span.footer-link-separator { display: none; }
+    .dropdown-item { padding-left: 1rem; font-size: .7rem; }
+    .cta-nav-button { margin-top: 1rem; justify-content: center; border-bottom: 1px solid var(--accent); }
 }
-/* ========================================================================= */
-/* Restyle 2026-08 — il sito come pagina di ascolto (PRD-139)                */
-/*                                                                           */
-/* Da qui in giu' c'e' cio' che serve alla nuova home: i tre inviti, i        */
-/* riquadri sulla privacy e i due moduli che scrivono sulla VPS. Le regole    */
-/* piu' vecchie restano dove sono, e servono ancora le pagine legali, le FAQ  */
-/* e i partner: quelle non sono state riscritte, hanno solo cambiato colore.  */
-/* ========================================================================= */
-
-/* Il respiro fra le sezioni: nella PWA le schermate sono compatte, sei       */
-/* rem di padding facevano sembrare il sito un'altra applicazione.            */
-.how-it-works-section,
-.target-audience-section,
-.waitlist-section {
-    padding: 5rem 0;
+@media (min-width: 900px) {
+    .navbar-collapse { margin-left: auto; }
+    .navbar-nav { margin-left: 0; }
+    .navbar-actions { display: inline-flex; align-items: center; gap: .75rem; margin-left: 1rem; }
+    .dropdown-item { display: block; }
+    .nav-item.dropdown > .dropdown-menu {
+        position: absolute;
+        top: 100%; right: 0;
+        min-width: 190px;
+        list-style: none;
+        margin: 0; padding: .35rem 0;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-lift);
+        opacity: 0; visibility: hidden; transform: translateY(-4px);
+        transition: opacity .16s ease, transform .16s ease, visibility .16s;
+    }
+    .nav-item.dropdown:hover > .dropdown-menu,
+    .nav-item.dropdown:focus-within > .dropdown-menu,
+    .nav-item.dropdown.open > .dropdown-menu { opacity: 1; visibility: visible; transform: none; }
+    .dropdown-menu .dropdown-item { padding-inline: 1rem; min-height: 40px; width: 100%; }
+}
+.dropdown-menu { list-style: none; margin: 0; padding: 0; }
+.dropdown-toggle::after {
+    content: "";
+    display: inline-block;
+    margin-left: .4em;
+    border: 3px solid transparent;
+    border-top-color: currentColor;
+    transform: translateY(2px);
 }
 
-.section-lead {
-    max-width: 700px;
-    margin: -1.5rem auto 2.5rem auto;
+/* ========================================================================= */
+/* 5. Bottoni                                                                */
+/* ========================================================================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 46px;
+    padding: .6rem 1.5rem;
+    font-size: .78rem;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    cursor: pointer;
     text-align: center;
-    color: var(--text-secondary-dark);
-    font-size: 1.1rem;
+    transition: background-color .14s ease, color .14s ease, border-color .14s ease, transform .14s ease;
 }
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn-primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); color: var(--on-accent); }
+.btn-outline-secondary { background: transparent; border-color: var(--line-strong); color: var(--text-base); }
+.btn-outline-secondary:hover { border-color: var(--text-base); background: var(--surface-2); }
+.btn-sm { min-height: 44px; padding: .45rem 1rem; font-size: .72rem; }
+.btn-lg { min-height: 52px; padding: .8rem 2rem; }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
 
-/* Il cartellino sopra il titolo: dice cos'e' questa pagina prima ancora che  */
-/* si legga il titolo — un progetto in validazione, non un prodotto in saldo. */
-.eyebrow {
-    display: inline-block;
-    background-color: var(--brand-primary-soft);
-    color: var(--brand-primary);
-    border-radius: 999px;
-    padding: 0.35rem 0.9rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    margin-bottom: 1.25rem;
-}
-.eyebrow .dot {
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background-color: var(--brand-orange);
-    margin-right: 0.5rem;
-    vertical-align: middle;
+/* ========================================================================= */
+/* 6. Home                                                                   */
+/* ========================================================================= */
+section { padding-block: var(--space-section); }
+
+.section-title { text-align: center; margin-bottom: .5rem; }
+.section-lead {
+    max-width: 60ch;
+    margin: 0 auto 3rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.08rem;
 }
 
 /* --------------------------------- Hero ---------------------------------- */
-/* Giro 10: la Hero non ha piu' immagini. Resta il testo, quindi lo spazio
-   verticale e' tarato sulla lettura: il titolo respira sotto la navbar, i due
-   pulsanti restano nella prima schermata anche su un telefono. La sfumatura
-   parte dall'azzurro dell'app e finisce sul bianco della sezione che segue,
-   cosi' le due sezioni si toccano senza uno scalino di colore. */
 .hero-section {
-    /* `body` ha gia' padding-top: 70px per la navbar fissa: sommarne un altro
-       lasciava mezzo schermo bianco sopra il titolo. */
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-    min-height: 0;
-    background: linear-gradient(180deg, var(--copilot-bg) 0%, var(--primary-light-bg) 100%);
+    padding-top: clamp(3rem, 8vw, 5.5rem);
+    padding-bottom: clamp(2rem, 5vw, 3.5rem);
+    border-bottom: 1px solid var(--line);
 }
-.hero-logo-img {
-    width: 220px;
-    max-width: 80%;
-    height: auto;
-    margin-bottom: 1.5rem;
-    display: inline-block;
-}
-.hero-section .hero-title {
-    font-size: clamp(2rem, 4.4vw, 3.2rem);
-    max-width: 880px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.hero-title .hero-accent { color: var(--brand-primary); }
-.hero-subheadline {
-    max-width: 660px;
-    font-size: clamp(1.05rem, 2vw, 1.25rem);
-    color: var(--text-secondary-dark);
-    margin: 1.25rem auto 2.25rem auto;
-}
-/* I due pulsanti sono una coppia, non due elementi accostati: stessa altezza,
-   stesso spazio fra loro qui e sul telefono (dove diventano due righe). */
-.hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
-}
+.hero-section > .container { max-width: 1000px; }
+.hero-logo-img { height: 64px; width: auto; margin: 0 auto 1.75rem; }
 
-/* ---------------------------- I tre inviti ------------------------------- */
-/* Giro 02: piu' spazio bianco intorno a questa sezione, su richiesta di Luca
-   (le altre sezioni restano compatte, vedi il blocco di padding piu' sopra). */
-.invites-section {
-    background-color: var(--secondary-light-bg);
-    padding: 6rem 0;
-}
-.invito-card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color-dark);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--soft-shadow);
-    padding: 1.75rem 1.5rem;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.invito-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--hover-shadow);
-}
-/* Giro 02: icone ingrandite (48px -> 68px) per dare piu' impatto visivo al
-   blocco dei tre inviti, come chiesto da Luca. */
-.invito-icon {
-    width: 68px;
-    height: 68px;
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.85rem;
-    margin-bottom: 1.35rem;
-}
-.invito-icon.tone-blue   { background-color: var(--blue-light);     color: var(--brand-primary); }
-.invito-icon.tone-green  { background-color: var(--auto-green-bg);  color: var(--auto-green); }
-.invito-icon.tone-orange { background-color: var(--orange-light);   color: var(--brand-orange-text); }
-
-.invito-badge {
-    align-self: flex-start;
-    font-size: 0.78rem;
-    font-weight: 600;
-    border-radius: 999px;
-    padding: 0.2rem 0.7rem;
-    margin-bottom: 0.75rem;
-    background-color: var(--copilot-bg);
-    color: var(--text-secondary-dark);
-}
-.invito-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: var(--text-primary-dark);
-}
-.invito-text {
-    font-size: 0.98rem;
+.hero-title {
+    font-size: clamp(2.5rem, 6.6vw, 4.4rem);
+    letter-spacing: -0.026em;
+    line-height: 1.02;
+    max-width: 18ch;
+    margin-inline: auto;
     margin-bottom: 1.25rem;
 }
-.invito-card .btn {
-    margin-top: auto;
-    width: 100%;
-}
+.hero-title .hero-line { display: block; }
+.hero-title em { font-style: italic; color: var(--accent); }
 
-/* --------------------------------- Privacy -------------------------------- */
-/* Giro 02: piu' spazio bianco (come per gli inviti) e icone in badge, non piu'
-   glifi nudi — coerenti con lo stile e la dimensione di .invito-icon. */
-.privacy-section {
-    background-color: var(--auto-green-bg);
-    padding: 6rem 0;
+.hero-subheadline {
+    max-width: 46ch;
+    margin: 0 auto 2rem;
+    color: var(--text-muted);
+    font-size: 1.1rem;
 }
-.privacy-card {
-    background-color: var(--card-bg);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--subtle-shadow);
-    padding: 1.75rem;
-    height: 100%;
+.hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; }
+
+/* ------------------- La demo: una conversazione WhatsApp ------------------ */
+/* Prende il posto dello screenshot statico: si scrive da sola, come il
+ * terminale di pi.dev, ma nella lingua giusta per un professionista. */
+.hero-demo {
+    max-width: 420px;
+    margin: 3.25rem auto 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow-lift);
+    overflow: hidden;
 }
-.privacy-card .privacy-icon {
-    width: 60px;
-    height: 60px;
+.demo-bar {
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: var(--auto-green-bg);
-    color: var(--auto-green);
-    border-radius: 16px;
-    font-size: 1.7rem;
-    margin-bottom: 1.1rem;
+    gap: .6rem;
+    padding: .7rem .9rem;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface-2);
 }
-.privacy-card h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+.demo-avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--on-accent);
+    display: grid; place-items: center;
+    font-family: var(--font-mono);
+    font-size: .68rem;
 }
-.privacy-card p {
-    font-size: 0.97rem;
-    margin-bottom: 0;
-}
-
-/* --------------------------- I moduli del sito ---------------------------- */
-/* Un solo vestito per il modulo della lista d'attesa e per il questionario.  */
-.waitlist-section {
-    background-color: var(--copilot-bg);
-}
-.site-form-wrapper {
-    max-width: 640px;
-    margin: 0 auto;
-    background-color: var(--card-bg);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--soft-shadow);
-    padding: 2rem 1.75rem;
-}
-.site-form .form-row { margin-bottom: 1.15rem; }
-.site-form label.field-label {
-    display: block;
-    font-size: 0.92rem;
-    font-weight: 600;
-    color: var(--text-primary-dark);
-    margin-bottom: 0.4rem;
-}
-.site-form .field-hint {
-    display: block;
-    font-size: 0.85rem;
+.demo-who { font-family: var(--font-mono); font-size: .74rem; color: var(--text-base); }
+.demo-state {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: .62rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
     color: var(--text-muted);
-    margin-top: 0.3rem;
 }
-.site-form input[type="text"],
-.site-form input[type="email"],
-.site-form input[type="tel"],
-.site-form select,
-.site-form textarea {
-    width: 100%;
-    font-family: var(--font-primary);
-    font-size: 1rem;
-    color: var(--text-primary-dark);
-    background-color: #F6F3EE;                 /* colors.inputBg */
-    border: 1px solid var(--border-color-dark);
-    border-radius: var(--input-border-radius);
-    padding: 0.7rem 0.9rem;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
-}
-.site-form textarea { min-height: 110px; resize: vertical; }
-.site-form input:focus,
-.site-form select:focus,
-.site-form textarea:focus {
-    outline: none;
-    background-color: #FFFFFF;
-    border-color: var(--brand-primary);
-    box-shadow: var(--subtle-glow-shadow);
-}
-.site-form .consent-row {
+.demo-thread {
+    padding: 1rem .9rem;
+    min-height: 300px;
     display: flex;
-    align-items: flex-start;
-    gap: 0.65rem;
-    margin: 1.5rem 0 1.25rem 0;
+    flex-direction: column;
+    gap: .5rem;
+    text-align: left;
 }
-.site-form .consent-row input[type="checkbox"] {
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-top: 0.05rem;
-    flex: 0 0 auto;
-    accent-color: var(--brand-primary);
-}
-.site-form .consent-row label {
-    font-size: 0.92rem;
-    color: var(--text-secondary-dark);
-    line-height: 1.5;
-}
-
-/* L'esca per i bot: fuori dallo schermo, mai raggiungibile col tab, mai      */
-/* letta da uno screen reader. Chi la compila non e' una persona.            */
-.hp-field {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
+.demo-msg {
+    max-width: 84%;
+    padding: .55rem .8rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-size: .95rem;
+    line-height: 1.45;
+    background: var(--surface-2);
+    color: var(--text-base);
     opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .3s ease, transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+.demo-msg.is-in { opacity: 1; transform: none; }
+.demo-msg.from-them { align-self: flex-start; }
+.demo-msg.from-us {
+    align-self: flex-end;
+    background: var(--accent-soft);
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.demo-msg .demo-time {
+    display: block;
+    margin-top: .25rem;
+    font-family: var(--font-mono);
+    font-size: .6rem;
+    color: var(--text-muted);
+}
+.demo-typing-row {
+    align-self: flex-end;
+    opacity: 1;
+    transform: none;
+    padding: .7rem .9rem;
+}
+.demo-typing { display: inline-flex; gap: 4px; align-items: center; }
+.demo-typing span {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--text-muted);
+    animation: demo-dot 1.1s infinite ease-in-out;
+}
+.demo-typing span:nth-child(2) { animation-delay: .16s; }
+.demo-typing span:nth-child(3) { animation-delay: .32s; }
+@keyframes demo-dot { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
+
+.demo-confirm {
+    margin-top: .35rem;
+    align-self: stretch;
+    padding: .6rem .8rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    font-family: var(--font-mono);
+    font-size: .74rem;
+    color: var(--text-base);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .3s ease, transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+.demo-confirm.is-in { opacity: 1; transform: none; }
+
+.scroll-hint {
+    display: block;
+    margin-top: 2.25rem;
+    text-align: center;
+    color: var(--text-muted);
 }
 
-/* Il messaggio di esito resta accanto al pulsante: la pagina non ricarica    */
-/* mai, quindi le risposte gia' date restano dove sono.                      */
+/* ------------------------------- I 5 passi ------------------------------- */
+.how-it-works-section { background: var(--bg-deep); border-bottom: 1px solid var(--line); }
+.step-card {
+    height: 100%;
+    padding: 1.5rem 1.25rem 1.75rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: border-color .18s ease, transform .18s ease;
+}
+.step-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.step-phone {
+    width: 132px;
+    margin-bottom: 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface-2);
+}
+.step-phone img { width: 100%; height: auto; }
+.step-number {
+    font-size: .72rem;
+    letter-spacing: .16em;
+    color: var(--accent);
+    margin-bottom: .4rem;
+}
+.step-number::before { content: "0"; }
+.step-title { font-size: 1.3rem; margin-bottom: .5rem; }
+.step-card p { color: var(--text-muted); font-size: .96rem; margin-bottom: 0; }
+
+/* ------------------------------- I tre inviti ---------------------------- */
+.invites-section { border-bottom: 1px solid var(--line); }
+.invito-card {
+    height: 100%;
+    padding: 1.75rem 1.5rem 2rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: border-color .18s ease, transform .18s ease;
+}
+.invito-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.invito-icon {
+    width: 48px; height: 48px;
+    display: grid; place-items: center;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 1.1rem;
+    color: var(--accent);
+    background: var(--accent-soft);
+}
+.invito-icon.tone-green { color: #1F6B4A; background: rgba(31, 107, 74, .10); }
+.invito-icon.tone-orange { color: #8A4B04; background: rgba(232, 137, 12, .12); }
+:root[data-theme="dark"] .invito-icon.tone-green { color: #7FC9A6; background: rgba(127, 201, 166, .12); }
+:root[data-theme="dark"] .invito-icon.tone-orange { color: #E5B073; background: rgba(229, 176, 115, .12); }
+.invito-badge { display: block; margin-bottom: .6rem; }
+.invito-title { font-size: 1.5rem; margin-bottom: .55rem; }
+.invito-text { color: var(--text-muted); font-size: .98rem; flex-grow: 1; }
+.invito-card .btn { align-self: stretch; margin-top: .5rem; }
+
+/* ------------------------------ Professioni ------------------------------ */
+.target-audience-section { background: var(--bg-deep); border-bottom: 1px solid var(--line); }
+.profession-ticker {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.profession-ticker-track { display: flex; width: max-content; animation: profession-ticker-scroll 42s linear infinite; }
+.profession-ticker-group { display: flex; gap: .6rem; padding-right: .6rem; }
+.target-tag {
+    white-space: nowrap;
+    padding: .5rem .95rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text-base);
+    font-size: .76rem;
+    letter-spacing: .04em;
+}
+@keyframes profession-ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* -------------------------------- Privacy -------------------------------- */
+.privacy-card {
+    height: 100%;
+    padding: 1.5rem 1.25rem;
+    border-top: 2px solid var(--accent);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    background: var(--surface);
+    border-radius: var(--radius);
+}
+.privacy-icon { color: var(--accent); margin-bottom: .9rem; }
+.privacy-card h3 { font-size: 1.28rem; margin-bottom: .5rem; }
+.privacy-card p { color: var(--text-muted); font-size: .96rem; margin-bottom: 0; }
+
+/* ========================================================================= */
+/* 7. Pagine interne                                                         */
+/* ========================================================================= */
+.page-container { padding-block: clamp(3rem, 7vw, 5rem); }
+.content-page-wrapper, .document-content {
+    max-width: 860px;
+    margin-inline: auto;
+}
+.content-page-wrapper > h1, .document-content > h1 { margin-bottom: .35em; }
+.page-intro-text, .pricing-intro-text, .questionario-intro {
+    color: var(--text-muted);
+    font-size: 1.08rem;
+    max-width: var(--measure);
+}
+.document-date { display: block; margin-bottom: .35rem; }
+.document-hint { color: var(--text-muted); font-size: .95rem; }
+.h2-custom { font-size: clamp(1.9rem, 4.2vw, 2.9rem); }
+
+/* Documenti legali: ogni articolo e' un <details>, chiuso. */
+.legal-sections { display: flex; flex-direction: column; gap: .5rem; margin-top: 2rem; }
+.legal-section {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+.legal-section > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    min-height: 56px;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    line-height: 1.25;
+    color: var(--text-base);
+    margin: 0;
+}
+.legal-section > summary::-webkit-details-marker { display: none; }
+.legal-section > summary::after {
+    content: "+";
+    margin-left: auto;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+.legal-section[open] > summary::after { content: "–"; }
+.legal-section > summary:hover { background: var(--surface-2); }
+.legal-section-body { padding: 0 1.2rem 1.25rem; }
+.legal-section-body h3 { font-size: 1.15rem; margin-top: 1.5rem; }
+.legal-section-body p, .legal-section-body li { color: var(--text-muted); font-size: .99rem; }
+.legal-section h2, .legal-section summary h2 { font-size: inherit; margin: 0; font-family: inherit; }
+
+table, .table-dpa {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+    font-size: .92rem;
+}
+th, td {
+    border: 1px solid var(--line);
+    padding: .6rem .7rem;
+    text-align: left;
+    vertical-align: top;
+    word-break: break-word;
+}
+th { background: var(--surface-2); font-family: var(--font-mono); font-size: .74rem;
+     text-transform: uppercase; letter-spacing: .07em; font-weight: 500; }
+@media (max-width: 767.98px) {
+    .table-dpa, .table-dpa thead, .table-dpa tbody, .table-dpa tr, .table-dpa th, .table-dpa td { display: block; width: 100%; }
+    .table-dpa thead { display: none; }
+    .table-dpa tr { border: 1px solid var(--line); margin-bottom: .75rem; }
+    .table-dpa td { border: 0; border-bottom: 1px solid var(--line); }
+    .table-dpa td:last-child { border-bottom: 0; }
+}
+
+/* Schede generiche: FAQ (details), partner, suggerimenti. */
+.accordion { display: flex; flex-direction: column; gap: .5rem; margin-top: 2rem; }
+.accordion-item {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+.accordion-item > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1.2rem;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    line-height: 1.25;
+    color: var(--text-base);
+}
+.accordion-item > summary::-webkit-details-marker { display: none; }
+.accordion-item > summary::after {
+    content: "+";
+    margin-left: auto;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+.accordion-item[open] > summary::after { content: "–"; }
+.accordion-item > summary:hover { background: var(--surface-2); }
+.accordion-body { padding: 0 1.2rem 1.25rem; }
+.accordion-body p { color: var(--text-muted); margin-bottom: 0; }
+.accordion-header { margin: 0; font-size: inherit; font-family: inherit; }
+
+.partner-card, .content-item, .concept-box, .thankyou-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1.5rem 1.35rem;
+    height: 100%;
+}
+.partner-card-title { font-size: 1.4rem; margin-bottom: .25rem; }
+.partner-card-subtitle { display: block; font-size: .7rem; text-transform: uppercase;
+    letter-spacing: .12em; color: var(--text-muted); margin-bottom: .9rem; }
+.partner-card-description { color: var(--text-muted); font-size: .96rem; }
+.partner-card-section-title { font-family: var(--font-mono); font-size: .7rem; text-transform: uppercase;
+    letter-spacing: .12em; color: var(--text-muted); margin: 1rem 0 .4rem; }
+.partner-card-list { padding-left: 1.1rem; color: var(--text-muted); font-size: .94rem; }
+.partner-details { border-top: 1px solid var(--line); margin-top: 1rem; padding-top: .5rem; }
+.partner-toggle {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: center; gap: .5rem;
+    min-height: 44px;
+    font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase;
+    letter-spacing: .1em; color: var(--accent);
+}
+.partner-toggle::-webkit-details-marker { display: none; }
+.partner-details[open] .partner-toggle .icon { transform: rotate(180deg); }
+.content-list { display: flex; flex-direction: column; gap: 1rem; list-style: none; padding: 0; margin: 2rem 0 0; }
+.content-item-title { font-size: 1.25rem; margin-bottom: .4rem; }
+.example-text { color: var(--text-muted); font-style: italic; }
+.term { font-family: var(--font-mono); font-size: .9em; background: var(--surface-2);
+    border: 1px solid var(--line); padding: .05em .35em; border-radius: var(--radius); }
+
+/* --------------------------------- Prezzi -------------------------------- */
+.pricing-page-header { text-align: center; }
+.pricing-plans-container { display: grid; gap: 1.25rem; margin-top: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.pricing-plan-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 1.6rem 1.35rem;
+    display: flex; flex-direction: column;
+}
+.pricing-plan-card.highlighted { border-color: var(--accent); border-top: 2px solid var(--accent); }
+.pricing-plan-title { font-size: 1.5rem; margin-bottom: .3rem; }
+.pricing-plan-target { display: block; margin-bottom: 1rem; }
+.pricing-plan-price { font-family: var(--font-display); font-size: 2.4rem; line-height: 1; letter-spacing: -.02em; }
+.pricing-plan-iva { display: block; font-size: .68rem; text-transform: uppercase;
+    letter-spacing: .12em; color: var(--text-muted); margin-bottom: 1rem; }
+.pricing-plan-messages { color: var(--text-muted); font-size: .94rem; }
+.pricing-promo-banner { border: 1px solid var(--accent); border-left: 3px solid var(--accent);
+    background: var(--accent-soft); padding: 1.1rem 1.25rem; border-radius: var(--radius); margin-top: 2rem; }
+.pricing-promo-title { font-size: 1.3rem; margin-bottom: .35rem; }
+.pricing-promo-text, .pricing-disclaimer { color: var(--text-muted); font-size: .95rem; margin-bottom: 0; }
+.pricing-disclaimer { margin-top: 2rem; }
+
+/* --------------------------- I moduli del sito --------------------------- */
+.site-form-wrapper, .questionario-wrapper {
+    max-width: 720px;
+    margin-inline: auto;
+}
+.site-form { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; }
+.form-row { display: flex; flex-direction: column; gap: .4rem; }
+.field-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--text-muted); }
+.field-hint { color: var(--text-muted); font-size: .85rem; }
+input[type="text"], input[type="email"], input[type="tel"], input[type="url"], textarea, select {
+    width: 100%;
+    min-height: 46px;
+    padding: .65rem .8rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--text-base);
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    transition: border-color .14s ease, box-shadow .14s ease;
+}
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-soft);
+}
+textarea { min-height: 120px; resize: vertical; }
+.consent-row { display: flex; align-items: flex-start; gap: .65rem; }
+.consent-row input[type="checkbox"] { width: 20px; height: 20px; min-height: 20px; margin-top: .2rem; accent-color: var(--accent); }
+.consent-row label { font-size: .93rem; color: var(--text-muted); }
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-feedback {
     display: none;
     margin-top: 1rem;
-    border-radius: var(--card-border-radius-small);
-    padding: 0.85rem 1rem;
-    font-size: 0.95rem;
+    padding: .8rem 1rem;
+    border-radius: var(--radius);
+    font-size: .95rem;
     line-height: 1.5;
 }
 .form-feedback.is-visible { display: block; }
-.form-feedback.is-error {
-    background-color: #FFF0F0;                 /* colors.dangerLight */
-    color: #c62828;                            /* colors.errorText   */
-    border: 1px solid #ef9a9a;                 /* colors.errorBorder */
-}
-.form-feedback.is-ok {
-    background-color: var(--auto-green-bg);
-    color: var(--auto-green);
-    border: 1px solid rgba(31, 107, 74, 0.25);
-}
-.site-form button[disabled] { opacity: 0.6; cursor: progress; }
+.form-feedback.is-error { background: rgba(163, 42, 28, .08); color: #A32A1C; border: 1px solid rgba(163, 42, 28, .35); }
+.form-feedback.is-ok    { background: rgba(31, 107, 74, .08); color: #1F6B4A; border: 1px solid rgba(31, 107, 74, .35); }
+:root[data-theme="dark"] .form-feedback.is-error { color: #E9927F; border-color: rgba(233, 146, 127, .4); background: rgba(233, 146, 127, .10); }
+:root[data-theme="dark"] .form-feedback.is-ok    { color: #7FC9A6; border-color: rgba(127, 201, 166, .4); background: rgba(127, 201, 166, .10); }
+.site-form button[disabled] { opacity: .6; cursor: progress; }
 
-/* ------------------------------- Telefonini ------------------------------ */
-@media (max-width: 767.98px) {
-    .how-it-works-section,
-    .target-audience-section,
-    .invites-section,
-    .privacy-section,
-    .waitlist-section {
-        padding: 3.25rem 0;
-    }
-    /* La spaziatura g-5 (3rem) toglie 24 px per lato alla riga, ma il
-       contenitore ne ha solo 12: a 390 px la pagina scorreva di lato. */
-    .row.g-5 { --bs-gutter-x: 1.5rem; --bs-gutter-y: 2.5rem; }
-    .section-title { margin-bottom: 1.75rem; }
-    .section-lead { margin-top: -0.75rem; margin-bottom: 1.75rem; font-size: 1.02rem; }
-    .hero-section { padding-top: 2.5rem; padding-bottom: 3rem; }
-    .hero-subheadline { margin-bottom: 1.75rem; }
-    .hero-actions { flex-direction: column; }
-    .site-form-wrapper { padding: 1.5rem 1.1rem; }
-    /* I cinque passi diventano una colonna sola: la schermata si rimpicciolisce
-       (altrimenti la pagina diventa un rotolo) e fra un passo e l'altro serve
-       piu' respiro di quello che la griglia lascia da sola. */
-    .steps-row { --bs-gutter-y: 2.75rem; }
-    .step-phone { max-width: 200px; margin-bottom: 1.1rem; }
-}
-
-/* ------------------------- Telefoni stretti (390 px) --------------------- */
-@media (max-width: 575.98px) {
-    .step-phone { max-width: 178px; }
-    .step-number { width: 40px; height: 40px; font-size: 1.05rem; margin-bottom: 0.7rem; }
-    .step-title { font-size: 1.12rem; }
-    .invito-card,
-    .privacy-card { padding: 1.5rem 1.25rem; }
-    .invito-icon {
-        width: 58px;
-        height: 58px;
-        border-radius: 15px;
-        font-size: 1.55rem;
-        margin-bottom: 1.1rem;
-    }
-    .privacy-card .privacy-icon {
-        width: 54px;
-        height: 54px;
-        border-radius: 14px;
-        font-size: 1.5rem;
-        margin-bottom: 0.9rem;
-    }
-    /* Il nastro delle professioni: pill un filo piu' piccole, cosi' su uno
-       schermo stretto se ne leggono tre invece di due e mezza. */
-    .profession-ticker { margin-top: 2rem; }
-    .target-tag { font-size: 0.9rem; padding: 0.55rem 1rem; margin: 0.3rem; }
-}
-
-/* ========================================================================= */
-/* Il questionario di validazione (questionario.html)                        */
-/* ========================================================================= */
-.questionario-section {
-    padding: 3rem 0 4rem 0;
-    background-color: var(--copilot-bg);
-    min-height: 100vh;
-}
-.questionario-intro { margin-bottom: 2rem; }
-.questionario-intro h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 1.75rem; }
-.questionario-wrapper { max-width: 720px; }
-
-/* La barra: dice a che punto sei, e che i punti sono quattro e non venti. */
-.q-progress { margin-bottom: 2rem; }
-.q-progress-track {
-    height: 6px;
-    border-radius: 999px;
-    background-color: var(--blue-light);
-    overflow: hidden;
-}
-.q-progress-bar {
-    height: 100%;
-    width: 25%;
-    border-radius: 999px;
-    background-color: var(--brand-primary);
-    transition: width 0.3s ease;
-}
-.q-progress-label {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-muted);
-}
-
-.q-step { border: 0; padding: 0; margin: 0; }
-.q-step[hidden] { display: none; }
-.q-step-title {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--brand-primary);
-    float: none;
-    width: auto;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border-color-dark);
-}
-
-.q-item { margin-bottom: 2rem; }
-.q-label {
-    font-size: 1.02rem;
-    font-weight: 600;
-    color: var(--text-primary-dark);
-    margin-bottom: 0.35rem;
-    line-height: 1.45;
-}
-.q-number { color: var(--brand-primary); margin-right: 0.25rem; }
-.q-note {
-    font-size: 0.87rem;
-    color: var(--text-muted);
-    margin-bottom: 0.75rem;
-}
-.q-options { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
-
-/* Ogni opzione è una riga cliccabile per intero, non un pallino da centrare
-   col dito: metà delle risposte arriverà da un telefono. */
+/* ------------------------------ Questionario ----------------------------- */
+.questionario-section { padding-block: clamp(3rem, 7vw, 5rem); }
+.q-progress { position: sticky; top: var(--header-h); z-index: 900; background: var(--bg-canvas);
+    padding: .75rem 0 1rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
+.q-progress-label { display: block; margin-bottom: .4rem; }
+.q-progress-track { height: 2px; background: var(--line); }
+.q-progress-bar { height: 100%; background: var(--accent); transition: width .3s ease; }
+.q-step { display: flex; flex-direction: column; gap: 2rem; }
+.q-step-title { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--text-muted); }
+.q-item { border-top: 1px solid var(--line); padding-top: 1.5rem; }
+.q-number { display: block; font-size: .7rem; letter-spacing: .14em; color: var(--accent); margin-bottom: .35rem; }
+.q-label { display: block; font-family: var(--font-display); font-size: 1.35rem; line-height: 1.2;
+    letter-spacing: -.015em; color: var(--text-base); margin-bottom: 1rem; }
+.q-options { display: flex; flex-direction: column; gap: .5rem; }
 .q-option {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.65rem;
-    padding: 0.7rem 0.9rem;
-    border: 1px solid var(--border-color-dark);
-    border-radius: var(--input-border-radius);
-    background-color: var(--primary-light-bg);
+    display: flex; align-items: center; gap: .7rem;
+    min-height: 48px; padding: .5rem .85rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    font-size: .95rem;
+    font-family: var(--font-body);
     cursor: pointer;
-    font-size: 0.98rem;
-    color: var(--text-secondary-dark);
-    transition: border-color 0.15s ease, background-color 0.15s ease;
+    transition: border-color .14s ease, background-color .14s ease;
 }
-.q-option:hover { border-color: var(--pill-blue); background-color: var(--copilot-bg); }
-.q-option input {
-    margin-top: 0.15rem;
-    width: 1.05rem;
-    height: 1.05rem;
-    flex: 0 0 auto;
-    accent-color: var(--brand-primary);
-}
-.q-option:has(input:checked) {
-    border-color: var(--brand-primary);
-    background-color: var(--brand-primary-soft);
-    color: var(--text-primary-dark);
-    font-weight: 500;
-}
-.q-other-text { margin-top: 0.25rem; }
-.q-other-text:disabled { background-color: var(--secondary-light-bg); color: var(--text-muted); }
-
-.q-error {
-    display: none;
-    margin: 0.5rem 0 0 0;
-    font-size: 0.88rem;
-    color: #c62828;                            /* colors.errorText */
-}
+.q-option:hover { border-color: var(--line-strong); background: var(--surface-2); }
+.q-option input { accent-color: var(--accent); width: 18px; height: 18px; min-height: 18px; }
+.q-option:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.q-other-text { margin-top: .5rem; }
+.q-note, .q-closing { color: var(--text-muted); font-size: .92rem; }
+.q-error { display: none; margin: .5rem 0 0; color: #A32A1C; font-family: var(--font-mono); font-size: .8rem; }
 .q-error.is-visible { display: block; }
+:root[data-theme="dark"] .q-error { color: #E9927F; }
+.q-other-text:disabled { background: var(--surface-2); color: var(--text-muted); }
+.concept-box { margin-block: 1.5rem; }
+.q-nav { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: space-between;
+    border-top: 1px solid var(--line); padding-top: 1.5rem; }
+.dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--text-muted); }
 
-/* Il riquadro che spiega il concept, prima delle domande della sezione 3. */
-.concept-box {
-    background-color: var(--auto-green-bg);
-    border-left: 3px solid var(--auto-green);
-    border-radius: var(--card-border-radius-small);
-    padding: 1.25rem 1.25rem 1rem 1.25rem;
-    margin-bottom: 2rem;
-}
-.concept-box h2 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
-.concept-box p { font-size: 0.97rem; margin-bottom: 0.6rem; }
-
-.q-closing {
-    border-top: 1px solid var(--border-color-dark);
-    padding-top: 1.5rem;
-    margin-top: 2.5rem;
-}
-.q-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-@media (max-width: 767.98px) {
-    .questionario-section { padding-top: 1.5rem; }
-    .q-item { margin-bottom: 1.75rem; }
-    .q-nav { flex-direction: column-reverse; }
-    .q-nav .btn { width: 100%; }
-    .q-nav > span { display: none; }
-}
-
+/* Grazie */
+.thankyou-card { max-width: 560px; margin: 0 auto; text-align: center; }
+.thankyou-mark { font-family: var(--font-mono); font-size: 2rem; color: var(--accent); display: block; margin-bottom: 1rem; }
 
 /* ========================================================================= */
-/* Tema scuro automatico (giro 10, richiesta 3)                              */
-/*                                                                           */
-/* Segue la preferenza del sistema operativo di chi visita: niente pulsante,  */
-/* niente interruttore, niente cookie e niente JavaScript che ricordi una     */
-/* scelta. Chi ha il telefono in tema scuro trova il sito in tema scuro.      */
-/*                                                                           */
-/* Non e' un secondo foglio di stile: si riscrivono solo le variabili di      */
-/* colore dichiarate in testa al file, piu' la manciata di regole che un      */
-/* colore l'avevano scritto a mano. I nomi restano quelli di prima            */
-/* (--text-primary-dark = "il testo principale", non "testo scuro"): cambiare */
-/* i nomi avrebbe voluto dire toccare tutte le pagine.                        */
+/* 8. Pie' di pagina                                                         */
 /* ========================================================================= */
-@media (prefers-color-scheme: dark) {
-    :root {
-        /* Dice al browser che la pagina e' scura: barre di scorrimento,       */
-        /* caselle e menu di sistema si adeguano da soli.                      */
-        color-scheme: dark;
-
-        /* --- I fondi, dal piu' chiaro al piu' scuro ----------------------- */
-        --primary-light-bg: #131A21;    /* fondo della pagina e delle schede  */
-        --secondary-light-bg: #0E141A;  /* sezioni alternate, piu' profonde   */
-        --card-bg: #1B242E;             /* le schede staccano dal fondo       */
-        --copilot-bg: #16202A;
-        --auto-green-bg: #12211B;
-        --blue-light: #17384F;
-        --orange-light: #33240E;
-        --purple-light: #241B33;
-        --primary-dark-bg: #0A1015;     /* barra in alto e piede di pagina    */
-
-        /* --- I testi (tutti oltre 7:1 sui fondi qui sopra) ----------------- */
-        --text-primary-dark: #E9EFF4;
-        --text-secondary-dark: #B2C1CD;
-        --text-muted: #94A5B2;
-
-        /* --- L'accento -----------------------------------------------------
-           Due mestieri diversi, due valori diversi: --brand-primary e' il blu
-           che si LEGGE (link, icone, numeri dei passi) e va chiaro;
-           --primary-accent e' il blu su cui si legge, cioe' il fondo dei
-           pulsanti, e resta scuro perche' sopra ci va il bianco. */
-        --brand-primary: #7FBBE3;
-        --brand-primary-soft: rgba(127, 187, 227, 0.14);
-        --primary-accent: #2178AF;           /* bianco sopra: 4,8:1          */
-        --primary-accent-hover: #A9D4F0;     /* colore dei link al passaggio */
-        --on-primary: #FFFFFF;
-        --auto-green: #63D0A0;
-        --brand-orange: #F2A93B;
-        --brand-orange-text: #F2A93B;   /* sul fondo scuro l'arancio chiaro si legge */
-        --bs-primary-rgb: 127, 187, 227;
-
-        /* --- Bordi e ombre ------------------------------------------------ */
-        --border-color-dark: rgba(255, 255, 255, 0.12);
-        --border-color-darker: rgba(255, 255, 255, 0.20);
-        --soft-shadow: 0 1px 2px rgba(0, 0, 0, 0.40), 0 6px 18px rgba(0, 0, 0, 0.38);
-        --hover-shadow: 0 2px 4px rgba(0, 0, 0, 0.45), 0 12px 28px rgba(0, 0, 0, 0.50);
-        --subtle-shadow: 0 1px 2px rgba(0, 0, 0, 0.40);
-        --subtle-glow-shadow: 0 0 0 3px rgba(127, 187, 227, 0.28);
-
-        /* La freccetta e' un SVG col colore scritto dentro: va ridisegnata     */
-        /* chiara, altrimenti sul fondo scuro sparisce.                        */
-        --chevron-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%237FBBE3'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-    }
-
-    /* I pulsanti pieni: al passaggio il fondo si scurisce, come nel tema
-       chiaro, cosi' il bianco sopra resta sempre leggibile. */
-    .btn-primary:hover,
-    .cta-nav-button:hover,
-    .btn-outline-secondary:hover {
-        background-color: #17618F;
-        border-color: #17618F;
-        color: var(--on-primary);
-    }
-
-    /* Testi piccoli che nel tema chiaro erano blu scuro: qui prendono il blu
-       chiaro, altrimenti scendono sotto il contrasto minimo. */
-    .step-number,
-    .partner-toggle {
-        color: var(--brand-primary);
-    }
-    .step-number { border-color: var(--brand-primary); }
-    .document-content h1,
-    .content-page-wrapper h1 { border-bottom-color: var(--brand-primary); }
-
-    /* I moduli: le caselle sono piu' scure del riquadro che le contiene, cosi'
-       si vede dove si scrive anche senza bordi marcati. */
-    .site-form input[type="text"],
-    .site-form input[type="email"],
-    .site-form input[type="tel"],
-    .site-form select,
-    .site-form textarea,
-    .q-other-text {
-        background-color: #0F161C;
-        color: var(--text-primary-dark);
-    }
-    .site-form input:focus,
-    .site-form select:focus,
-    .site-form textarea:focus {
-        background-color: #0A1015;
-    }
-    .site-form input::placeholder,
-    .site-form textarea::placeholder { color: var(--text-muted); }
-    .q-option { background-color: var(--card-bg); }
-
-    /* Il rosso degli errori: quello del tema chiaro sul nero non si legge. */
-    .form-feedback.is-error {
-        background-color: #2B1416;
-        color: #FF9E9E;
-        border-color: rgba(255, 158, 158, 0.35);
-    }
-    .q-error { color: #FF9E9E; }
-
-    /* Pagine legali e di contenuto: righe alternate, codice e schede partner. */
-    .document-content code { background-color: rgba(255, 255, 255, 0.08); }
-    .table-dpa tr:nth-child(even) td { background-color: rgba(255, 255, 255, 0.03); }
-    .partner-card { box-shadow: var(--subtle-shadow); }
-
-    /* Le schermate dell'app sono catturate in tema chiaro: un bordo tenue
-       evita che il bianco della schermata sembri un buco nella pagina. */
-    .step-phone img { border-color: #2A3540; }
-
-    /* I loghi fid.ai in tema scuro: bianco nitido e brillante su fondo scuro */
-    .hero-logo-img,
-    .navbar-logo-img,
-    .nav-logo .navbar-logo-img,
-    .footer-logo-img {
-        filter: brightness(0) invert(1);
-        opacity: 0.95;
-    }
+.footer-section {
+    border-top: 1px solid var(--line);
+    background: var(--bg-deep);
+    padding-block: 3rem;
 }
+.footer-logo-img { height: 34px; width: auto; margin: 0 auto .75rem; }
+.footer-tagline, .footer-copyright, .footer-address {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .04em;
+    color: var(--text-muted);
+    max-width: none;
+}
+.footer-subtitle {
+    font-size: .68rem;
+    margin-bottom: .5rem;
+    font-family: var(--font-mono);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+.footer-legal-links { margin-block: 1.5rem; }
+.footer-link { font-family: var(--font-mono); font-size: .72rem; color: var(--text-base); }
+.footer-link:hover { color: var(--accent); }
+.footer-link-separator { color: var(--line-strong); }
+.footer-section .container > * + * { margin-top: .35rem; }
+
+/* ========================================================================= */
+/* 9. Movimento                                                              */
+/* ========================================================================= */
+/* Ingresso scaglionato dei titoli della home: 70 ms fra una riga e l'altra. */
+[data-intro] .hero-logo-img,
+[data-intro] .hero-title .hero-line,
+[data-intro] .hero-subheadline,
+[data-intro] .hero-actions,
+[data-intro] .hero-demo,
+[data-intro] .scroll-hint {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: hero-rise .62s cubic-bezier(.22, 1, .36, 1) forwards;
+}
+[data-intro] .hero-logo-img            { animation-delay: .05s; }
+[data-intro] .hero-title .hero-line:nth-child(1) { animation-delay: .13s; }
+[data-intro] .hero-title .hero-line:nth-child(2) { animation-delay: .20s; }
+[data-intro] .hero-title .hero-line:nth-child(3) { animation-delay: .27s; }
+[data-intro] .hero-subheadline         { animation-delay: .35s; }
+[data-intro] .hero-actions             { animation-delay: .43s; }
+[data-intro] .hero-demo                { animation-delay: .51s; }
+[data-intro] .scroll-hint              { animation-delay: .62s; }
+@keyframes hero-rise { to { opacity: 1; transform: none; } }
+
+/* Sezioni sincronizzate allo scorrimento: quella in vista e' piena, le altre
+ * si attenuano appena. Nessun salto di layout, solo opacita' e colore. */
+.has-scroll-sync section { transition: opacity .35s ease; }
+.has-scroll-sync section:not(.is-active) { opacity: .58; }
+.has-scroll-sync section.is-active { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+    }
+    [data-intro] .hero-logo-img,
+    [data-intro] .hero-title .hero-line,
+    [data-intro] .hero-subheadline,
+    [data-intro] .hero-actions,
+    [data-intro] .hero-demo,
+    [data-intro] .scroll-hint { opacity: 1; transform: none; }
+    .has-scroll-sync section:not(.is-active) { opacity: 1; }
+    .profession-ticker-track { animation: none; }
+    .demo-msg, .demo-confirm { opacity: 1; transform: none; }
+}
+
+/* ------------------------------------------------------------------------- */
+/* Contrasti misurati (WCAG 2.1, rapporto testo/sfondo)                       */
+/*   CHIARO  testo #23272C / carta #F3F0EA .................... 13.21:1  AAA  */
+/*           secondario #55504A / carta #F3F0EA ...............  7.01:1  AAA  */
+/*           secondario #55504A / pergamena #E7E2D8 ...........  6.18:1  AA   */
+/*           accento #14567F / carta #F3F0EA .................   6.92:1  AA   */
+/*           testo bottone #FCFAF6 / accento #14567F .........   7.55:1  AAA  */
+/*   SCURO   testo #DEE4EA / notte #141920 ..................   13.78:1  AAA  */
+/*           secondario #A2ACB6 / notte #141920 ..............   7.66:1  AAA  */
+/*           secondario #A2ACB6 / scheda #1B212A .............   7.02:1  AAA  */
+/*           accento #7FB2DC / notte #141920 .................   7.82:1  AAA  */
+/*           testo bottone #0E1218 / accento #7FB2DC .........   8.32:1  AAA  */
+/* ------------------------------------------------------------------------- */

@@ -26,38 +26,63 @@
     <meta name="twitter:image" content="https://fidai.it/images/app/conversazioni-desktop.png">
     <link rel="icon" href="../images/favicon.png" type="image/png">
 
+
+    <!-- Caratteri: un serif editoriale per i titoli (Instrument Serif, anche in
+         corsivo) e un monospace per etichette, numeri e comandi (JetBrains Mono).
+         Il corpo del testo usa il carattere di sistema: nessun altro download. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Foglio di stile unico: nessuna libreria esterna, nessun tracker. -->
     <link rel="stylesheet" href="../css/style.css">
+
+    <!-- Il tema si decide PRIMA del disegno, altrimenti si vede il lampo chiaro:
+         vince la scelta salvata, altrimenti la preferenza del sistema. -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('fidai:theme');
+          if (t !== 'dark' && t !== 'light') {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+    <!-- Testata: essenziale, in monospace piccolo. Il logo resta quello di sempre. -->
+    <nav class="navbar" id="mainNavbar">
         <div class="container">
             <a class="navbar-brand nav-logo" href="../index.html#hero">
                 <img src="../images/logo-intero.png" alt="fid.ai — torna alla home" class="navbar-logo-img" width="169" height="140">
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavContent" aria-controls="navbarNavContent" aria-expanded="false" aria-label="Apri il menu">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavContent">
-                <ul class="navbar-nav ms-auto align-items-center">
+            <div class="navbar-collapse" id="navbarNavContent">
+                <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="../index.html#come-funziona">Come funziona</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="risorseDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Risorse</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="risorseDropdown" aria-haspopup="true" aria-expanded="false">Risorse</a>
                         <ul class="dropdown-menu" aria-labelledby="risorseDropdown">
                             <li><a class="dropdown-item" href="../resources/partner.html">Partner</a></li>
-                            <li><a class="dropdown-item" href="../lista-attesa.html">Waiting List</a></li>
-                            <li><a class="dropdown-item active" href="../resources/faq.html" aria-current="page">FAQ</a></li>
+                            <li><a class="dropdown-item" href="../lista-attesa.html">Lista d'attesa</a></li>
+                            <li><a class="dropdown-item active" aria-current="page" href="../resources/faq.html">Domande frequenti</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><a class="btn btn-primary btn-sm cta-nav-button" href="../index.html#collabora">Partecipa</a></li>
+                    <li class="nav-item"><a class="btn btn-sm cta-nav-button" href="../index.html#collabora">Partecipa</a></li>
                 </ul>
+            </div>
+            <div class="navbar-actions">
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambia tema chiaro o scuro">
+                    <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+                    <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+                </button>
+                <button class="navbar-toggler" type="button" aria-controls="navbarNavContent" aria-expanded="false" aria-label="Apri il menu">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                </button>
             </div>
         </div>
     </nav>
@@ -70,83 +95,47 @@
                 <p class="page-intro-text">Le risposte alle domande più importanti su fid.ai, su come gestisce i messaggi e l'agenda, e sul controllo che mantieni su ogni risposta.</p>
                 
                 <div class="accordion mt-4 mt-md-5" id="faqAccordion">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                fid.ai risponde da sola o decido io cosa inviare?
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
+                    <details class="accordion-item" id="collapseOne">
+                        <summary><h2 class="accordion-header">fid.ai risponde da sola o decido io cosa inviare?</h2></summary>
+                        <div class="accordion-body">
                                 <p>Di default l'assistente prepara una bozza precisa e aspetta la tua approvazione: leggi e invii con un tocco. Se preferisci, puoi abilitare l'invio automatico solo per determinati orari o tipi di richiesta (es. orari di apertura o conferme appuntamento). Sei sempre tu a decidere il livello di autonomia.</p>
                             </div>
-                        </div>
-                    </div>
+                    </details>
 
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Devo cambiare il mio numero di WhatsApp o usare un'app diversa?
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
+                    <details class="accordion-item" id="collapseTwo">
+                        <summary><h2 class="accordion-header">Devo cambiare il mio numero di WhatsApp o usare un'app diversa?</h2></summary>
+                        <div class="accordion-body">
                                 <p>No: con i piani Self-Service e All-Inclusive continui a usare il tuo numero abituale e la tua consueta app WhatsApp Business sul telefono. Se invece preferisci un numero separato dedicato allo studio, il piano A Consumo ti fornisce una linea dedicata.</p>
                             </div>
-                        </div>
-                    </div>
+                    </details>
 
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Come funziona il collegamento con Google Calendar?
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
+                    <details class="accordion-item" id="collapseThree">
+                        <summary><h2 class="accordion-header">Come funziona il collegamento con Google Calendar?</h2></summary>
+                        <div class="accordion-body">
                                 <p>Il collegamento avviene tramite il login sicuro e autorizzato di Google (OAuth). fid.ai legge solo le disponibilità per proporre gli slot liberi ai clienti e aggiunge o sposta gli appuntamenti concordati. Non accede a email, contatti o altri dati del tuo account Google.</p>
                             </div>
-                        </div>
-                    </div>
+                    </details>
 
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingFour">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                I dati e i vocali dei miei clienti sono protetti e riservati?
-                            </button>
-                        </h2>
-                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
+                    <details class="accordion-item" id="collapseFour">
+                        <summary><h2 class="accordion-header">I dati e i vocali dei miei clienti sono protetti e riservati?</h2></summary>
+                        <div class="accordion-body">
                                 <p>Sì, al 100%. L'infrastruttura risiede in Europa su server OVHcloud (Francia) nel pieno rispetto del GDPR. I messaggi non vengono mai usati per addestrare modelli di intelligenza artificiale, e i messaggi vocali vengono trascritti in locale sui nostri server europei senza viaggiare verso servizi terzi.</p>
                             </div>
-                        </div>
-                    </div>
+                    </details>
 
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingFive">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                Cosa succede se un cliente invia una richiesta complessa o urgente?
-                            </button>
-                        </h2>
-                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
+                    <details class="accordion-item" id="collapseFive">
+                        <summary><h2 class="accordion-header">Cosa succede se un cliente invia una richiesta complessa o urgente?</h2></summary>
+                        <div class="accordion-body">
                                 <p>L'assistente riconosce i propri limiti. Se una richiesta richiede una valutazione professionale specifica o una gestione manuale, fid.ai prepara una bozza di alert e ti avvisa immediatamente, permettendoti di intervenire di persona nella conversazione.</p>
                             </div>
-                        </div>
-                    </div>
+                    </details>
 
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingSix">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                Supportate anche altri canali social oltre a WhatsApp?
-                            </button>
-                        </h2>
-                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
+                    <details class="accordion-item" id="collapseSix">
+                        <summary><h2 class="accordion-header">Supportate anche altri canali social oltre a WhatsApp?</h2></summary>
+                        <div class="accordion-body">
                                 <p>Partiamo da WhatsApp, che è il canale più utilizzato dai clienti. La piattaforma è progettata per estendersi progressivamente alla gestione centralizzata di Instagram, Facebook Messenger e altri canali di messaggistica.</p>
                             </div>
-                        </div>
-                    </div>
+                    </details>
                 </div>
 
                 <p class="mt-5 text-center">
@@ -178,7 +167,6 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/script.js"></script>
 </body>
 </html>

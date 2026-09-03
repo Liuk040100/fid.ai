@@ -1,95 +1,187 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const navbarToggler = document.querySelector('#mainNavbar .navbar-toggler');
-    const navbarTogglerIcon = navbarToggler ? navbarToggler.querySelector('i') : null;
-    const navbarCollapse = document.getElementById('navbarNavContent');
-    let bsCollapseInstance = null;
+/* js/script.js — tutto il comportamento del sito, in JavaScript puro.
+ *
+ * Giro 21: via Bootstrap. Qui dentro: interruttore del tema, menu del telefono,
+ * ingresso animato della home, sezioni che si accendono allo scorrimento, la
+ * conversazione WhatsApp che si scrive da sola, piu' le due cose di sempre
+ * (articoli legali aperti dall'ancora, anno corrente, link dell'intervista).
+ *
+ * Regola di base: se qualcosa non c'e' in pagina, la funzione non fa nulla.
+ * E se chi guarda ha chiesto meno movimento (prefers-reduced-motion), tutto
+ * appare gia' al suo posto, senza animazione.
+ */
+(function () {
+    'use strict';
 
-    if (navbarCollapse && navbarToggler) {
-        bsCollapseInstance = new bootstrap.Collapse(navbarCollapse, {
-            toggle: false
-        });
+    var MENO_MOVIMENTO = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        if (navbarTogglerIcon) {
-            navbarCollapse.addEventListener('show.bs.collapse', function () {
-                navbarTogglerIcon.classList.remove('fa-bars');
-                navbarTogglerIcon.classList.add('fa-times');
-            });
-            navbarCollapse.addEventListener('hide.bs.collapse', function () {
-                navbarTogglerIcon.classList.remove('fa-times');
-                navbarTogglerIcon.classList.add('fa-bars');
-            });
-        }
-
-        const navLinksAndItems = document.querySelectorAll('#navbarNavContent .nav-link, #navbarNavContent .dropdown-item');
-
-        navLinksAndItems.forEach(link => {
-            link.addEventListener('click', (event) => {
-                if (
-                    getComputedStyle(navbarToggler).display !== 'none' &&
-                    navbarCollapse.classList.contains('show') &&
-                    !link.classList.contains('dropdown-toggle')
-                ) {
-                    if (bsCollapseInstance) {
-                        bsCollapseInstance.hide();
-                    }
-                }
-            });
-        });
-
-        window.addEventListener('scroll', () => {
-            if (
-                getComputedStyle(navbarToggler).display !== 'none' &&
-                navbarCollapse.classList.contains('show')
-            ) {
-                if (bsCollapseInstance) {
-                    bsCollapseInstance.hide();
-                }
-            }
+    /* --------------------------- Tema chiaro/scuro ------------------------ */
+    /* La decisione iniziale la prende lo script in testa a ogni pagina (prima
+     * del disegno, per non vedere il lampo bianco). Qui c'e' solo il bottone. */
+    function tema() {
+        var bottone = document.getElementById('themeToggle');
+        if (!bottone) { return; }
+        bottone.addEventListener('click', function () {
+            var attuale = document.documentElement.getAttribute('data-theme');
+            var nuovo = attuale === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', nuovo);
+            try { localStorage.setItem('fidai:theme', nuovo); } catch (e) { /* niente */ }
+            bottone.setAttribute('aria-label', nuovo === 'dark' ? 'Passa al tema chiaro' : 'Passa al tema scuro');
         });
     }
 
-    // Documenti legali: gli articoli sono <details> chiusi, quindi un link a
-    // un'ancora che sta dentro un articolo chiuso (per esempio
-    // dpa.html#dpa-allegato1) non porterebbe da nessuna parte. Qui apriamo
-    // l'articolo che contiene il bersaglio e ci portiamo sopra la pagina.
-    // Se in pagina non ci sono <details>, non fa nulla.
+    /* ------------------------------ Menu ---------------------------------- */
+    function menu() {
+        var bottone = document.querySelector('#mainNavbar .navbar-toggler');
+        var pannello = document.getElementById('navbarNavContent');
+        if (!bottone || !pannello) { return; }
+
+        function chiudi() {
+            pannello.classList.remove('show');
+            bottone.setAttribute('aria-expanded', 'false');
+        }
+        bottone.addEventListener('click', function () {
+            var aperto = pannello.classList.toggle('show');
+            bottone.setAttribute('aria-expanded', aperto ? 'true' : 'false');
+        });
+        pannello.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                if (!link.classList.contains('dropdown-toggle')) { chiudi(); }
+            });
+        });
+        window.addEventListener('scroll', function () {
+            if (pannello.classList.contains('show')) { chiudi(); }
+        }, { passive: true });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') { chiudi(); }
+        });
+
+        /* «Risorse» sul telefono e' un elenco sempre aperto; su schermo largo
+         * si apre al passaggio del mouse (CSS) o con un tocco (qui). */
+        var apri = document.querySelector('.nav-item.dropdown > .dropdown-toggle');
+        if (apri) {
+            apri.addEventListener('click', function (e) {
+                e.preventDefault();
+                apri.parentElement.classList.toggle('open');
+            });
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.nav-item.dropdown')) {
+                    document.querySelectorAll('.nav-item.dropdown.open').forEach(function (n) { n.classList.remove('open'); });
+                }
+            });
+        }
+    }
+
+    /* --------------------- Sezioni sincronizzate allo scorrimento --------- */
+    /* La sezione al centro dello schermo resta piena, le altre si attenuano.
+     * E' l'effetto di pi.dev, in versione leggera: solo opacita'. */
+    function scrollSync() {
+        var contenitore = document.querySelector('.has-scroll-sync');
+        if (!contenitore || MENO_MOVIMENTO || !('IntersectionObserver' in window)) { return; }
+        var sezioni = contenitore.querySelectorAll('section');
+        if (!sezioni.length) { return; }
+        var osservatore = new IntersectionObserver(function (voci) {
+            voci.forEach(function (voce) {
+                voce.target.classList.toggle('is-active', voce.isIntersecting);
+            });
+        }, { rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+        sezioni.forEach(function (s) { osservatore.observe(s); });
+        sezioni[0].classList.add('is-active');
+    }
+
+    /* --------------- La conversazione WhatsApp che si scrive da sola ------- */
+    /* I testi stanno nell'HTML (data-attributi sui messaggi gia' scritti): qui
+     * si limita a scoprirli uno alla volta. Con meno movimento, sono gia' tutti
+     * visibili e questa funzione esce subito. */
+    function demoConversazione() {
+        var demo = document.getElementById('heroDemo');
+        if (!demo) { return; }
+        var messaggi = Array.prototype.slice.call(demo.querySelectorAll('[data-demo-step]'));
+        var stato = demo.querySelector('.demo-state');
+        var scrivendo = demo.querySelector('.demo-typing-row');
+
+        if (MENO_MOVIMENTO) {
+            messaggi.forEach(function (m) { m.classList.add('is-in'); });
+            if (scrivendo) { scrivendo.remove(); }
+            if (stato) { stato.textContent = 'appuntamento fissato'; }
+            return;
+        }
+
+        messaggi.forEach(function (m) { m.classList.remove('is-in'); });
+        if (scrivendo) { scrivendo.style.display = 'none'; }
+
+        var i = 0;
+        function passo() {
+            if (i >= messaggi.length) {
+                if (stato) { stato.textContent = 'appuntamento fissato'; }
+                return;
+            }
+            var msg = messaggi[i];
+            var nostro = msg.classList.contains('from-us');
+            var attesa = parseInt(msg.getAttribute('data-demo-wait') || '900', 10);
+
+            function mostra() {
+                if (scrivendo) { scrivendo.style.display = 'none'; }
+                msg.classList.add('is-in');
+                if (stato) { stato.textContent = nostro ? 'online' : 'nuovo messaggio'; }
+                i += 1;
+                setTimeout(passo, attesa);
+            }
+
+            if (nostro && scrivendo) {
+                scrivendo.style.display = '';
+                if (stato) { stato.textContent = 'sta scrivendo…'; }
+                setTimeout(mostra, 1100);
+            } else {
+                mostra();
+            }
+        }
+        setTimeout(passo, 1200);
+    }
+
+    /* ------------- Articoli legali: apri quello puntato dall'ancora -------- */
     function apriArticoloDelBersaglio(scorri) {
-        const id = decodeURIComponent(window.location.hash.slice(1));
+        var id = decodeURIComponent(window.location.hash.slice(1));
         if (!id) { return; }
-        let bersaglio = null;
+        var bersaglio = null;
         try { bersaglio = document.getElementById(id); } catch (e) { return; }
         if (!bersaglio) { return; }
-        let risalita = bersaglio.closest('details');
-        let apertoQualcosa = false;
+        var risalita = bersaglio.closest('details');
+        var apertoQualcosa = false;
         while (risalita) {
             if (!risalita.open) { risalita.open = true; apertoQualcosa = true; }
             risalita = risalita.parentElement ? risalita.parentElement.closest('details') : null;
         }
-        if (apertoQualcosa && scorri) {
-            bersaglio.scrollIntoView();
-        }
+        if (apertoQualcosa && scorri) { bersaglio.scrollIntoView(); }
     }
 
-    if (document.querySelector('details.legal-section')) {
-        apriArticoloDelBersaglio(true);
-        window.addEventListener('hashchange', function () { apriArticoloDelBersaglio(true); });
+    /* ---------------------------- Cose minute ----------------------------- */
+    function annoCorrente() {
+        var span = document.getElementById('currentYear');
+        if (span) { span.textContent = new Date().getFullYear(); }
     }
 
-    const currentYearSpan = document.getElementById('currentYear');
-    if (currentYearSpan) {
-        currentYearSpan.textContent = new Date().getFullYear();
-    }
-
-    // Il pulsante dell'intervista punta dove dice js/config.js. Se il link e' ancora
-    // il ripiego '#contact' (sentinella, non c'e' piu' una sezione Contatti) lasciamo
-    // l'href scritto nell'HTML (mailto:info@fidai.it); se e' un URL vero lo apriamo
-    // in una scheda nuova, cosi' chi torna indietro ritrova la pagina dov'era.
-    const bookingUrl = (window.FIDAI_CONFIG && window.FIDAI_CONFIG.BOOKING_URL) || '';
-    if (bookingUrl && bookingUrl.charAt(0) !== '#') {
-        document.querySelectorAll('[data-booking-link]').forEach((link) => {
-            link.setAttribute('href', bookingUrl);
+    /* Il pulsante dell'intervista punta dove dice js/config.js. Se il link e'
+     * ancora il ripiego '#contact' (sentinella) resta l'href scritto nell'HTML. */
+    function linkIntervista() {
+        var url = (window.FIDAI_CONFIG && window.FIDAI_CONFIG.BOOKING_URL) || '';
+        if (!url || url.charAt(0) === '#') { return; }
+        document.querySelectorAll('[data-booking-link]').forEach(function (link) {
+            link.setAttribute('href', url);
             link.setAttribute('target', '_blank');
             link.setAttribute('rel', 'noopener');
         });
     }
-});
+
+    document.addEventListener('DOMContentLoaded', function () {
+        tema();
+        menu();
+        scrollSync();
+        demoConversazione();
+        if (document.querySelector('details.legal-section')) {
+            apriArticoloDelBersaglio(true);
+            window.addEventListener('hashchange', function () { apriArticoloDelBersaglio(true); });
+        }
+        annoCorrente();
+        linkIntervista();
+    });
+})();
