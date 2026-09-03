@@ -137,7 +137,7 @@ ul, ol { max-width: var(--measure); }
     font-family: var(--font-mono);
 }
 .eyebrow, .invito-badge, .footer-subtitle, .q-progress-label, .scroll-hint,
-.pricing-plan-target, .document-date {
+.document-date {
     text-transform: uppercase;
     letter-spacing: 0.12em;
     font-size: .7rem;
@@ -806,8 +806,8 @@ th { background: var(--surface-2); font-family: var(--font-mono); font-size: .74
     height: 100%;
 }
 .partner-card-title { font-size: 1.4rem; margin-bottom: .25rem; }
-.partner-card-subtitle { display: block; font-size: .7rem; text-transform: uppercase;
-    letter-spacing: .12em; color: var(--text-muted); margin-bottom: .9rem; }
+.partner-card-subtitle { display: block; font-size: .8rem; letter-spacing: .02em;
+    color: var(--text-muted); margin-bottom: .9rem; }
 .partner-card-description { color: var(--text-muted); font-size: .96rem; }
 .partner-card-section-title { font-family: var(--font-mono); font-size: .7rem; text-transform: uppercase;
     letter-spacing: .12em; color: var(--text-muted); margin: 1rem 0 .4rem; }
@@ -841,11 +841,21 @@ th { background: var(--surface-2); font-family: var(--font-mono); font-size: .74
 }
 .pricing-plan-card.highlighted { border-color: var(--accent); border-top: 2px solid var(--accent); }
 .pricing-plan-title { font-size: 1.5rem; margin-bottom: .3rem; }
-.pricing-plan-target { display: block; margin-bottom: 1rem; }
+.pricing-plan-target { display: block; margin-bottom: 1rem; text-transform: none; letter-spacing: .02em; font-size: .8rem; }
 .pricing-plan-price { font-family: var(--font-display); font-size: 2.4rem; line-height: 1; letter-spacing: -.02em; }
-.pricing-plan-iva { display: block; font-size: .68rem; text-transform: uppercase;
-    letter-spacing: .12em; color: var(--text-muted); margin-bottom: 1rem; }
+.pricing-plan-price .term {
+    font-family: var(--font-mono); font-size: .8rem; letter-spacing: .06em;
+    background: none; border: 0; padding: 0; color: var(--text-muted);
+}
+.pricing-plan-iva { display: block; font-size: .74rem; letter-spacing: .02em;
+    color: var(--text-muted); margin-bottom: 1rem; }
 .pricing-plan-messages { color: var(--text-muted); font-size: .94rem; }
+.pricing-promo-badge {
+    display: inline-flex; align-items: center; gap: .4rem;
+    font-family: var(--font-mono); font-size: .68rem;
+    text-transform: uppercase; letter-spacing: .14em;
+    color: var(--accent); margin-bottom: .4rem;
+}
 .pricing-promo-banner { border: 1px solid var(--accent); border-left: 3px solid var(--accent);
     background: var(--accent-soft); padding: 1.1rem 1.25rem; border-radius: var(--radius); margin-top: 2rem; }
 .pricing-promo-title { font-size: 1.3rem; margin-bottom: .35rem; }
