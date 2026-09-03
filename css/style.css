@@ -362,7 +362,7 @@ hr, .document-rule {
         background-image: none;
     }
     .dropdown-item { padding-left: 1rem; font-size: .7rem; }
-    .cta-nav-button { margin-top: 1rem; justify-content: center; border-bottom: 1px solid var(--accent); }
+    .cta-nav-button { margin-top: 1rem; width: 100%; justify-content: center; border-bottom: 1px solid var(--accent); }
 }
 @media (min-width: 900px) {
     .navbar-collapse { margin-left: auto; }
@@ -393,13 +393,17 @@ hr, .document-rule {
     .dropdown-menu .dropdown-item { padding-inline: 1rem; min-height: 40px; width: 100%; }
 }
 .dropdown-menu { list-style: none; margin: 0; padding: 0; }
-.dropdown-toggle::after {
-    content: "";
-    display: inline-block;
-    margin-left: .4em;
-    border: 3px solid transparent;
-    border-top-color: currentColor;
-    transform: translateY(2px);
+/* La freccetta esiste solo dove il menu si apre davvero (schermo largo):
+ * sul telefono «Risorse» e' gia' un elenco aperto. */
+@media (min-width: 900px) {
+    .dropdown-toggle::after {
+        content: "";
+        display: inline-block;
+        margin-left: .4em;
+        border: 3px solid transparent;
+        border-top-color: currentColor;
+        transform: translateY(2px);
+    }
 }
 
 /* ========================================================================= */
