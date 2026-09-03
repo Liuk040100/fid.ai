@@ -861,6 +861,16 @@ th { background: var(--surface-2); font-family: var(--font-mono); font-size: .74
 .form-row { display: flex; flex-direction: column; gap: .4rem; }
 .field-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--text-muted); }
 .field-hint { color: var(--text-muted); font-size: .85rem; }
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+                      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(50% + 1px), calc(100% - 14px) calc(50% + 1px);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 2.5rem;
+}
 input[type="text"], input[type="email"], input[type="tel"], input[type="url"], textarea, select {
     width: 100%;
     min-height: 46px;
@@ -880,7 +890,10 @@ input:focus, textarea:focus, select:focus {
 }
 textarea { min-height: 120px; resize: vertical; }
 .consent-row { display: flex; align-items: flex-start; gap: .65rem; }
-.consent-row input[type="checkbox"] { width: 20px; height: 20px; min-height: 20px; margin-top: .2rem; accent-color: var(--accent); }
+.consent-row { min-height: 44px; }
+.consent-row input[type="checkbox"] { width: 24px; height: 24px; min-height: 24px; margin-top: .1rem; accent-color: var(--accent); }
+/* Un link «a blocco» e' un comando, non una parola nel testo: area piena. */
+.text-link.d-block { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; }
 .consent-row label { font-size: .93rem; color: var(--text-muted); }
 .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-feedback {
@@ -965,8 +978,23 @@ textarea { min-height: 120px; resize: vertical; }
     text-transform: uppercase;
     color: var(--text-muted);
 }
-.footer-legal-links { margin-block: 1.5rem; }
-.footer-link { font-family: var(--font-mono); font-size: .72rem; color: var(--text-base); }
+.footer-legal-links {
+    margin-block: 1.25rem;
+    display: flex; flex-wrap: wrap;
+    align-items: center; justify-content: center;
+    gap: 0 .2rem;
+}
+.footer-legal-links .footer-subtitle { flex-basis: 100%; margin-bottom: .25rem; }
+/* I link del pie' di pagina sono navigazione: area toccabile piena, 44 px. */
+.footer-link {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    color: var(--text-base);
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: .35rem;
+}
 .footer-link:hover { color: var(--accent); }
 .footer-link-separator { color: var(--line-strong); }
 .footer-section .container > * + * { margin-top: .35rem; }
