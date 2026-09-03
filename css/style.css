@@ -918,7 +918,10 @@ textarea { min-height: 120px; resize: vertical; }
 .q-progress-label { display: block; margin-bottom: .4rem; }
 .q-progress-track { height: 2px; background: var(--line); }
 .q-progress-bar { height: 100%; background: var(--accent); transition: width .3s ease; }
-.q-step { display: flex; flex-direction: column; gap: 2rem; }
+.q-step { display: flex; flex-direction: column; gap: 2rem; border: 0; padding: 0; margin: 0; }
+/* forms.js mostra un passo alla volta con l'attributo hidden: qui va rispettato,
+ * altrimenti il questionario esce tutto in una pagina sola. */
+[hidden] { display: none !important; }
 .q-step-title { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--text-muted); }
 .q-item { border-top: 1px solid var(--line); padding-top: 1.5rem; }
 .q-number { display: block; font-size: .7rem; letter-spacing: .14em; color: var(--accent); margin-bottom: .35rem; }
@@ -997,6 +1000,12 @@ textarea { min-height: 120px; resize: vertical; }
 }
 .footer-link:hover { color: var(--accent); }
 .footer-link-separator { color: var(--line-strong); }
+/* Sul telefono i tre link legali vanno a capo: i separatori resterebbero
+ * appesi a fine riga, quindi spariscono e i link si impilano. */
+@media (max-width: 575.98px) {
+    .footer-link-separator { display: none; }
+    .footer-legal-links { flex-direction: column; gap: 0; }
+}
 .footer-section .container > * + * { margin-top: .35rem; }
 
 /* ========================================================================= */
