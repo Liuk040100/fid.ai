@@ -49,6 +49,16 @@
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
+        /* Comparsa allo scorrimento: la classe la mette JavaScript, e solo se
+           il browser sa osservare lo scorrimento e non e' stato chiesto meno
+           movimento. Senza di essa nulla e' nascosto: la pagina si legge
+           intera anche con JavaScript spento. */
+        try {
+          if ('IntersectionObserver' in window
+              && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('rv');
+          }
+        } catch (e) { /* niente */ }
       })();
     </script>
 </head>
@@ -83,11 +93,11 @@
     <section class="page-container">
         <div class="container">
             <article class="document-content">
-                <h1>Informativa sulla privacy di fid.ai</h1>
-                <p class="document-date">Data ultimo aggiornamento: 30 Agosto 2026</p>
-                <p class="document-hint">Qui sotto trovi tutte le sezioni, in ordine. Tocca il titolo di una sezione per aprirla e leggerne il testo integrale: quella sui dati di Google Calendar è già aperta.</p>
+                <h1 data-reveal="lines">Informativa sulla privacy di fid.ai</h1>
+                <p class="document-date" data-reveal="type">Data ultimo aggiornamento: 30 Agosto 2026</p>
+                <p class="document-hint" data-reveal="up">Qui sotto trovi tutte le sezioni, in ordine. Tocca il titolo di una sezione per aprirla e leggerne il testo integrale: quella sui dati di Google Calendar è già aperta.</p>
 
-                <div class="legal-sections">
+                <div class="legal-sections" data-reveal="cascade">
 
                 <!-- Aggiunta 29/08/2026 (PRD-139): il sito ha due moduli che scrivono
                      davvero su un server nostro. Prima non ne aveva nessuno funzionante,

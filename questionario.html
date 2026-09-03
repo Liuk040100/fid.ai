@@ -49,6 +49,16 @@
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
+        /* Comparsa allo scorrimento: la classe la mette JavaScript, e solo se
+           il browser sa osservare lo scorrimento e non e' stato chiesto meno
+           movimento. Senza di essa nulla e' nascosto: la pagina si legge
+           intera anche con JavaScript spento. */
+        try {
+          if ('IntersectionObserver' in window
+              && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('rv');
+          }
+        } catch (e) { /* niente */ }
       })();
     </script>
 </head>
@@ -83,8 +93,8 @@
         <div class="container">
             <div class="questionario-intro text-center" id="questionarioTop">
                 <span class="eyebrow"><span class="dot"></span>16 domande &middot; circa 3 minuti</span>
-                <h1>Come gestisci i messaggi di lavoro?</h1>
-                <p class="section-lead">
+                <h1 data-reveal="lines">Come gestisci i messaggi di lavoro?</h1>
+                <p class="section-lead" data-reveal="up">
                     Stiamo raccogliendo il parere di professionisti e piccole attività sull'uso di WhatsApp e dei canali di messaggistica per gestire clienti e richieste di lavoro. Non è necessario conoscere strumenti di intelligenza artificiale, e non stiamo vendendo niente: le risposte servono a decidere cosa costruire.
                 </p>
             </div>

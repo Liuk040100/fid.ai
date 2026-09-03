@@ -48,6 +48,16 @@
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
+        /* Comparsa allo scorrimento: la classe la mette JavaScript, e solo se
+           il browser sa osservare lo scorrimento e non e' stato chiesto meno
+           movimento. Senza di essa nulla e' nascosto: la pagina si legge
+           intera anche con JavaScript spento. */
+        try {
+          if ('IntersectionObserver' in window
+              && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('rv');
+          }
+        } catch (e) { /* niente */ }
       })();
     </script>
     <style>
@@ -78,7 +88,7 @@
 <body>
     <div class="thankyou-card">
         <div class="thankyou-mark" aria-hidden="true">&check;</div>
-        <h1>Grazie, ci sei stato utile davvero.</h1>
+        <h1 data-reveal="lines">Grazie, ci sei stato utile davvero.</h1>
         <p>
             Abbiamo ricevuto quello che ci hai mandato. Se ci hai lasciato un indirizzo email ti
             scriviamo noi: una volta sola, quando ci sarà qualcosa di concreto da raccontarti o da

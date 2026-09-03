@@ -50,6 +50,16 @@
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
+        /* Comparsa allo scorrimento: la classe la mette JavaScript, e solo se
+           il browser sa osservare lo scorrimento e non e' stato chiesto meno
+           movimento. Senza di essa nulla e' nascosto: la pagina si legge
+           intera anche con JavaScript spento. */
+        try {
+          if ('IntersectionObserver' in window
+              && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('rv');
+          }
+        } catch (e) { /* niente */ }
       })();
     </script>
 </head>
@@ -84,10 +94,10 @@
     <section class="page-container">
         <div class="container">
             <div class="content-page-wrapper">
-                <h1>Suggerimenti per massimizzare fid.ai</h1>
-                <p class="page-intro-text">fid.ai è uno strumento potente per ottimizzare la tua comunicazione WhatsApp. Ecco alcuni consigli per sfruttarlo al meglio:</p>
+                <h1 data-reveal="lines">Suggerimenti per massimizzare fid.ai</h1>
+                <p class="page-intro-text" data-reveal="up">fid.ai è uno strumento potente per ottimizzare la tua comunicazione WhatsApp. Ecco alcuni consigli per sfruttarlo al meglio:</p>
                 
-                <div class="content-item">
+                <div class="content-item" data-reveal="up">
                     <h2 class="content-item-title">1. Definisci chiaramente la tua knowledge base</h2>
                     <p>La qualità delle risposte dell'IA dipende direttamente dalle informazioni che le fornisci. Prenditi il tempo per inserire dettagli precisi su:</p>
                     <ul class="content-list">
@@ -99,7 +109,7 @@
                     </ul>
                 </div>
 
-                <div class="content-item">
+                <div class="content-item" data-reveal="up">
                     <h2 class="content-item-title">2. Monitora e affina</h2>
                     <p>Controlla periodicamente le conversazioni gestite dall'IA attraverso la piattaforma fid.ai. Questo ti permetterà di:</p>
                     <ul class="content-list">
@@ -109,18 +119,18 @@
                     </ul>
                 </div>
 
-                <div class="content-item">
+                <div class="content-item" data-reveal="up">
                     <h2 class="content-item-title">3. Personalizza il tono (quando disponibile)</h2>
                     <p>Sebbene l'IA sia progettata per apprendere uno stile di comunicazione professionale e cortese, in futuro potresti avere opzioni per personalizzare ulteriormente il tono delle risposte affinché si allinei perfettamente con il tuo brand.</p>
                 </div>
                 
-                <div class="content-item">
+                <div class="content-item" data-reveal="up">
                     <h2 class="content-item-title">4. Messaggio di benvenuto</h2>
                     <p>Considera di impostare un messaggio automatico (o definirlo nella knowledge base) per informare l'utente che sta interagendo con una segreteria intelligente gestita da IA. Questo aiuta a gestire le aspettative e migliora la trasparenza.</p>
                     <p class="example-text"><em>Esempio: "Ciao! Sei in contatto con la segreteria intelligente di [Nome Attività], powered by fid.ai. Come posso aiutarti oggi?"</em></p>
                 </div>
 
-                <div class="content-item">
+                <div class="content-item" data-reveal="up">
                     <h2 class="content-item-title">5. Sfrutta i messaggi template</h2>
                     <p>Per le comunicazioni proattive (come promemoria di appuntamenti, notifiche importanti, o per riaprire una conversazione dopo le 24 ore dall'ultimo messaggio del cliente), utilizza i messaggi template. Questi devono essere pre-approvati da WhatsApp e puoi gestirli tramite la piattaforma fid.ai. Assicurati sempre di avere il consenso del cliente per questo tipo di comunicazioni.</p>
                 </div>

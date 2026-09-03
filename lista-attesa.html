@@ -49,6 +49,16 @@
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
+        /* Comparsa allo scorrimento: la classe la mette JavaScript, e solo se
+           il browser sa osservare lo scorrimento e non e' stato chiesto meno
+           movimento. Senza di essa nulla e' nascosto: la pagina si legge
+           intera anche con JavaScript spento. */
+        try {
+          if ('IntersectionObserver' in window
+              && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('rv');
+          }
+        } catch (e) { /* niente */ }
       })();
     </script>
 </head>
@@ -84,13 +94,13 @@
          solo con l'intestazione della home tolta e sostituita da un h1 vero. -->
     <section class="waitlist-section">
         <div class="container">
-            <h1 class="h2-custom section-title text-center">Lista d'attesa del pilota</h1>
-            <p class="section-lead">
+            <h1 class="h2-custom section-title text-center" data-reveal="lines">Lista d'attesa del pilota</h1>
+            <p class="section-lead" data-reveal="up">
                 Nessun prezzo, nessun pagamento, nessun impegno: solo il modo di ricontattarti quando apriamo il
                 test. Ti scriviamo una volta sola, e solo per questo.
             </p>
             <div class="site-form-wrapper">
-                <form id="waitlistForm" class="site-form" novalidate>
+                <form id="waitlistForm" class="site-form" novalidate data-reveal="cascade">
                     <div class="form-row">
                         <label class="field-label" for="wlName">Nome e cognome</label>
                         <input type="text" id="wlName" name="name" autocomplete="name" required>

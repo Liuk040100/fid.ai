@@ -14,7 +14,7 @@
  *   6. Home: hero, demo WhatsApp, passi, inviti, professioni, privacy
  *   7. Pagine interne: documenti, schede, prezzi, moduli, questionario
  *   8. Pie' di pagina
- *   9. Movimento (ingresso, scroll-sync) e prefers-reduced-motion
+ *   9. Movimento: ingresso, comparsa allo scorrimento, prefers-reduced-motion
  */
 
 /* ========================================================================= */
@@ -418,7 +418,6 @@ section { padding-block: var(--space-section); }
 .hero-section {
     padding-top: clamp(2.25rem, 5vw, 3.5rem);
     padding-bottom: clamp(2rem, 5vw, 3.5rem);
-    border-bottom: 1px solid var(--line);
 }
 .hero-section > .container { max-width: 1000px; }
 .hero-logo-img { height: 52px; width: auto; margin: 0 auto 1.5rem; }
@@ -559,7 +558,7 @@ section { padding-block: var(--space-section); }
  * grandi. Sul telefono stanno una sotto l'altra a tutta larghezza; da 900 px
  * in su ogni passo e' una riga di due colonne (schermata ~48 %, testo a
  * fianco) e i lati si alternano. */
-.how-it-works-section { background: var(--bg-deep); border-bottom: 1px solid var(--line); }
+.how-it-works-section { background: var(--bg-deep); }
 .steps-flow {
     list-style: none;
     max-width: none;
@@ -597,7 +596,6 @@ section { padding-block: var(--space-section); }
 }
 
 /* ------------------------------- I tre inviti ---------------------------- */
-.invites-section { border-bottom: 1px solid var(--line); }
 .invito-card {
     height: 100%;
     padding: 1.75rem 1.5rem 2rem;
@@ -629,7 +627,7 @@ section { padding-block: var(--space-section); }
 .invito-card .btn { align-self: stretch; margin-top: .5rem; }
 
 /* ------------------------------ Professioni ------------------------------ */
-.target-audience-section { background: var(--bg-deep); border-bottom: 1px solid var(--line); }
+.target-audience-section { background: var(--bg-deep); }
 .profession-ticker {
     overflow: hidden;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
@@ -1023,11 +1021,63 @@ textarea { min-height: 120px; resize: vertical; }
 [data-intro] .scroll-hint              { animation-delay: .62s; }
 @keyframes hero-rise { to { opacity: 1; transform: none; } }
 
-/* Sezioni sincronizzate allo scorrimento: quella in vista e' piena, le altre
- * si attenuano appena. Nessun salto di layout, solo opacita' e colore. */
-.has-scroll-sync section { transition: opacity .35s ease; }
-.has-scroll-sync section:not(.is-active) { opacity: .58; }
-.has-scroll-sync section.is-active { opacity: 1; }
+/* ---------------------- Comparsa allo scorrimento ------------------------ */
+/* La classe «rv» la mette JavaScript in testa alla pagina, e solo se il
+ * browser sa osservare lo scorrimento e chi legge non ha chiesto meno
+ * movimento: senza JavaScript nulla e' nascosto e la pagina si legge intera.
+ * Si muovono solo opacita' e transform, quindi niente salti di impaginazione. */
+.rv [data-reveal="up"],
+.rv [data-reveal="type"],
+.rv [data-reveal="cascade"] > *,
+.rv [data-reveal="lines"] .rv-line {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .58s cubic-bezier(.22, 1, .36, 1),
+                transform .58s cubic-bezier(.22, 1, .36, 1);
+}
+/* (a) i titoli entrano una riga alla volta, sfasate di 70 ms */
+.rv-line { display: block; }
+.rv [data-reveal="lines"] .rv-line { transition-delay: calc(var(--rv-i, 0) * 70ms); }
+/* (b) le schermate «si posano»: scala e traslazione, in ritardo sul testo */
+.rv [data-reveal="shot"] {
+    opacity: 0;
+    transform: translateY(26px) scale(.96);
+    transition: opacity .68s cubic-bezier(.22, 1, .36, 1),
+                transform .68s cubic-bezier(.22, 1, .36, 1);
+    transition-delay: .18s;
+}
+/* (c) le schede di una griglia a cascata, una ogni 70 ms */
+.rv [data-reveal="cascade"] > * { transition-delay: calc(var(--rv-i, 0) * 70ms); }
+/* (d) le etichette monospace si «digitano»: il cursore lampeggia solo mentre scrive */
+.rv [data-reveal="type"].is-typing::after {
+    content: "\258F";
+    margin-left: .12em;
+    color: var(--accent);
+    animation: rv-caret .62s steps(1, end) infinite;
+}
+@keyframes rv-caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+.rv [data-reveal="up"].is-in,
+.rv [data-reveal="type"].is-in,
+.rv [data-reveal="shot"].is-in,
+.rv [data-reveal="cascade"].is-in > *,
+.rv [data-reveal="lines"].is-in .rv-line { opacity: 1; transform: none; }
+
+/* (e) il filo che chiude ogni fascia della home si disegna da sinistra a destra */
+.home-section { position: relative; }
+.home-section::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: var(--line);
+}
+.rv .home-section[data-reveal="rule"]::after {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .85s cubic-bezier(.22, 1, .36, 1) .08s;
+}
+.rv .home-section[data-reveal="rule"].is-in::after { transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -1042,9 +1092,16 @@ textarea { min-height: 120px; resize: vertical; }
     [data-intro] .hero-actions,
     [data-intro] .hero-demo,
     [data-intro] .scroll-hint { opacity: 1; transform: none; }
-    .has-scroll-sync section:not(.is-active) { opacity: 1; }
     .profession-ticker-track { animation: none; }
     .demo-msg, .demo-confirm { opacity: 1; transform: none; }
+    /* Se la preferenza cambia a pagina aperta, la comparsa si spegne qui. */
+    .rv [data-reveal="up"],
+    .rv [data-reveal="type"],
+    .rv [data-reveal="shot"],
+    .rv [data-reveal="cascade"] > *,
+    .rv [data-reveal="lines"] .rv-line { opacity: 1; transform: none; }
+    .rv .home-section[data-reveal="rule"]::after { transform: none; }
+    .rv [data-reveal="type"].is-typing::after { content: none; }
 }
 
 /* ------------------------------------------------------------------------- */

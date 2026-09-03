@@ -50,6 +50,16 @@
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
+        /* Comparsa allo scorrimento: la classe la mette JavaScript, e solo se
+           il browser sa osservare lo scorrimento e non e' stato chiesto meno
+           movimento. Senza di essa nulla e' nascosto: la pagina si legge
+           intera anche con JavaScript spento. */
+        try {
+          if ('IntersectionObserver' in window
+              && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('rv');
+          }
+        } catch (e) { /* niente */ }
       })();
     </script>
 </head>
@@ -94,7 +104,7 @@
     <section class="page-container">
         <div class="container">
             <div class="pricing-page-header text-center pt-md-4 pb-md-3">
-                <h1 class="section-title">I tre piani di fid.ai</h1>
+                <h1 class="section-title" data-reveal="lines">I tre piani di fid.ai</h1>
                 <p class="lead mx-auto" style="max-width: 720px;">Tre modi diversi di collegare il tuo WhatsApp, non tre livelli di funzionalit&agrave;: l'assistente &egrave; lo stesso in tutti e tre. Cambia chi gestisce il numero e come desideri configurare il servizio.</p>
                 <p class="pricing-intro-text mt-2 mb-4" style="max-width: 720px;">Il servizio &egrave; in fase di validazione: i piani qui sotto sono quelli previsti per il lancio e possono ancora cambiare. Nessuno di essi &egrave; oggi acquistabile.</p>
             </div>
@@ -110,7 +120,7 @@
                 </p>
             </div>
 
-            <div class="pricing-plans-container pb-4">
+            <div class="pricing-plans-container pb-4" data-reveal="cascade">
 
                 <!-- 1. Self-Service -->
                 <div class="pricing-plan-card">

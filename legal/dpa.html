@@ -50,6 +50,16 @@
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
+        /* Comparsa allo scorrimento: la classe la mette JavaScript, e solo se
+           il browser sa osservare lo scorrimento e non e' stato chiesto meno
+           movimento. Senza di essa nulla e' nascosto: la pagina si legge
+           intera anche con JavaScript spento. */
+        try {
+          if ('IntersectionObserver' in window
+              && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('rv');
+          }
+        } catch (e) { /* niente */ }
       })();
     </script>
 </head>
@@ -84,11 +94,11 @@
     <section class="page-container">
         <div class="container">
             <article class="document-content">
-                <h1>Addendum sul trattamento dei dati</h1>
-                <p class="document-date">Data ultimo aggiornamento: 30 Agosto 2026</p>
-                <p class="document-hint">Accordo fra il cliente e fid.ai ai sensi dell'art. 28 del GDPR. Qui sotto trovi tutti gli articoli, in ordine: tocca il titolo di un articolo per aprirlo e leggerne il testo integrale.</p>
+                <h1 data-reveal="lines">Addendum sul trattamento dei dati</h1>
+                <p class="document-date" data-reveal="type">Data ultimo aggiornamento: 30 Agosto 2026</p>
+                <p class="document-hint" data-reveal="up">Accordo fra il cliente e fid.ai ai sensi dell'art. 28 del GDPR. Qui sotto trovi tutti gli articoli, in ordine: tocca il titolo di un articolo per aprirlo e leggerne il testo integrale.</p>
 
-                <div class="legal-sections">
+                <div class="legal-sections" data-reveal="cascade">
 
                 <details class="legal-section">
                     <summary><h2 id="dpa-parti-data">Parti e data di efficacia</h2></summary>

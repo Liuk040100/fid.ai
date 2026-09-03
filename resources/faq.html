@@ -50,6 +50,16 @@
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
+        /* Comparsa allo scorrimento: la classe la mette JavaScript, e solo se
+           il browser sa osservare lo scorrimento e non e' stato chiesto meno
+           movimento. Senza di essa nulla e' nascosto: la pagina si legge
+           intera anche con JavaScript spento. */
+        try {
+          if ('IntersectionObserver' in window
+              && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('rv');
+          }
+        } catch (e) { /* niente */ }
       })();
     </script>
 </head>
@@ -84,10 +94,10 @@
     <section class="page-container">
         <div class="container">
             <div class="content-page-wrapper">
-                <h1>Domande frequenti</h1>
-                <p class="page-intro-text">Le risposte alle domande più importanti su fid.ai, su come gestisce i messaggi e l'agenda, e sul controllo che mantieni su ogni risposta.</p>
+                <h1 data-reveal="lines">Domande frequenti</h1>
+                <p class="page-intro-text" data-reveal="up">Le risposte alle domande più importanti su fid.ai, su come gestisce i messaggi e l'agenda, e sul controllo che mantieni su ogni risposta.</p>
                 
-                <div class="accordion mt-4 mt-md-5" id="faqAccordion">
+                <div class="accordion mt-4 mt-md-5" id="faqAccordion" data-reveal="cascade">
                     <details class="accordion-item" id="collapseOne">
                         <summary><h2 class="accordion-header">fid.ai risponde da sola o decido io cosa inviare?</h2></summary>
                         <div class="accordion-body">

@@ -52,6 +52,16 @@
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
+        /* Comparsa allo scorrimento: la classe la mette JavaScript, e solo se
+           il browser sa osservare lo scorrimento e non e' stato chiesto meno
+           movimento. Senza di essa nulla e' nascosto: la pagina si legge
+           intera anche con JavaScript spento. */
+        try {
+          if ('IntersectionObserver' in window
+              && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('rv');
+          }
+        } catch (e) { /* niente */ }
       })();
     </script>
 </head>
@@ -86,10 +96,10 @@
     <section class="page-container">
         <div class="container">
             <div class="content-page-wrapper">
-                <h1>I nostri partner tecnologici</h1>
-                <p class="page-intro-text">fid.ai si appoggia a un numero volutamente piccolo di fornitori, scelti per fare bene una cosa sola. Ecco chi sono davvero, e cosa fanno per te.</p>
+                <h1 data-reveal="lines">I nostri partner tecnologici</h1>
+                <p class="page-intro-text" data-reveal="up">fid.ai si appoggia a un numero volutamente piccolo di fornitori, scelti per fare bene una cosa sola. Ecco chi sono davvero, e cosa fanno per te.</p>
 
-                <div class="row gy-4 mt-md-5 mt-4 align-items-start">
+                <div class="row gy-4 mt-md-5 mt-4 align-items-start" data-reveal="cascade">
                     <!-- Card OVHcloud -->
                     <div class="col-lg-4 col-md-6">
                         <div class="partner-card">
