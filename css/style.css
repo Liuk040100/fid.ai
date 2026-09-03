@@ -423,7 +423,7 @@ section { padding-block: var(--space-section); }
 .hero-logo-img { height: 52px; width: auto; margin: 0 auto 1.5rem; }
 
 .hero-title {
-    font-size: clamp(2.2rem, 5.6vw, 3.7rem);
+    font-size: clamp(1.35rem, 7vw, 3.7rem);
     letter-spacing: -0.036em;
     line-height: 1.06;
     max-width: 20ch;
