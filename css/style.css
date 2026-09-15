@@ -635,13 +635,11 @@ section { padding-block: var(--space-section); }
 
 /* ------------------------------ Professioni ------------------------------ */
 .target-audience-section { background: var(--bg-deep); }
-.profession-ticker {
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+.profession-list {
+    list-style: none; margin: 0 auto; padding: 0;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem;
+    max-width: 780px;
 }
-.profession-ticker-track { display: flex; width: max-content; animation: profession-ticker-scroll 42s linear infinite; }
-.profession-ticker-group { display: flex; gap: .6rem; padding-right: .6rem; }
 .target-tag {
     white-space: nowrap;
     padding: .5rem .95rem;
@@ -652,7 +650,6 @@ section { padding-block: var(--space-section); }
     font-size: .76rem;
     letter-spacing: .04em;
 }
-@keyframes profession-ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* -------------------------------- Privacy -------------------------------- */
 .privacy-card {
@@ -1095,7 +1092,6 @@ body.thankyou-page {
     [data-intro] .hero-actions,
     [data-intro] .hero-demo,
     [data-intro] .scroll-hint { opacity: 1; transform: none; }
-    .profession-ticker-track { animation: none; }
     .demo-msg, .demo-confirm { opacity: 1; transform: none; }
     /* Se la preferenza cambia a pagina aperta, la comparsa si spegne qui. */
     .rv [data-reveal="up"],
