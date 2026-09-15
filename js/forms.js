@@ -73,7 +73,9 @@
             body: JSON.stringify(payload),
         }).then(function (res) {
             if (res.status === 201 || res.status === 204) {
-                window.location.assign('thankyou.html');
+                /* Chi viene dal questionario, nella pagina «Grazie», vede anche
+                 * l'invito alla lista d'attesa (giro 24). */
+                window.location.assign(percorso === '/survey' ? 'thankyou.html?da=questionario' : 'thankyou.html');
                 return null;
             }
             if (res.status === 429) {

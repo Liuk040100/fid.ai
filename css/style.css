@@ -945,6 +945,9 @@ body.thankyou-page {
 }
 .thankyou-card h1 { margin-bottom: 1rem; }
 .thankyou-card p { margin-inline: auto; }
+.thankyou-next { margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+.thankyou-next-lead { margin-bottom: 1rem; }
+.thankyou-home { display: inline-block; margin-top: 1.5rem; }
 
 /* ========================================================================= */
 /* 8. Pie' di pagina                                                         */

@@ -65,7 +65,7 @@
 <body class="thankyou-page">
     <div class="thankyou-card">
         <div class="thankyou-mark" aria-hidden="true">&check;</div>
-        <h1 data-reveal="lines">Grazie, ci sei stato utile davvero.</h1>
+        <h1 data-reveal="lines">Grazie: ci hai dato una mano vera.</h1>
         <p>
             Abbiamo ricevuto quello che ci hai mandato. Se ci hai lasciato un indirizzo email ti
             scriviamo noi: una volta sola, quando ci sarà qualcosa di concreto da raccontarti o da
@@ -75,7 +75,27 @@
             Vuoi aggiungere qualcosa o cancellare quello che ci hai scritto?
             Basta una riga a <a href="mailto:info@fidai.it" class="text-link">info@fidai.it</a>.
         </p>
-        <a href="index.html" class="btn btn-primary">Torna alla home</a>
+        <div class="thankyou-next">
+            <p class="thankyou-next-lead">Hai un quarto d'ora? Raccontaci come lavori: è la conversazione che ci aiuta di più.</p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="https://calendar.app.google/BSCFrTZiFVUPNc6TA" target="_blank" rel="noopener" data-booking-link>Prenota l'intervista</a>
+                <a class="btn btn-outline-secondary" href="lista-attesa.html" data-solo-questionario>Entra in lista d'attesa</a>
+            </div>
+        </div>
+        <a href="index.html" class="text-link thankyou-home">Torna alla home</a>
     </div>
+
+    <!-- Chi arriva dal questionario (thankyou.html?da=questionario, lo mette js/forms.js)
+         vede anche l'invito alla lista d'attesa; chi si e' appena iscritto no.
+         Senza JavaScript restano visibili tutti e due. Il link dell'intervista e' lo
+         stesso di js/config.js (BOOKING_URL): se cambia li', va cambiato anche qui. -->
+    <script>
+      (function () {
+        if (!/[?&]da=questionario(&|$)/.test(window.location.search)) {
+          var el = document.querySelector('[data-solo-questionario]');
+          if (el) el.parentNode.removeChild(el);
+        }
+      })();
+    </script>
 </body>
 </html>
