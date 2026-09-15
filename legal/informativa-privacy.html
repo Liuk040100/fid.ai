@@ -26,12 +26,10 @@
     <link rel="icon" href="../images/favicon.png" type="image/png">
 
 
-    <!-- Caratteri: Sora per i titoli (sans geometrico: 700 per l'h1, 600 per
-         gli altri) e JetBrains Mono per etichette, numeri e comandi.
-         Il corpo del testo usa il carattere di sistema: nessun altro download. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    <!-- Caratteri: Sora per i titoli e JetBrains Mono per etichette, numeri e
+         comandi, ospitati qui in fonts/ e dichiarati in css/style.css: nessuna
+         richiesta a Google o ad altri. Il corpo del testo usa il carattere di sistema. -->
+    <link rel="preload" href="../fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Foglio di stile unico: nessuna libreria esterna, nessun tracker. -->
     <link rel="stylesheet" href="../css/style.css">
@@ -72,7 +70,7 @@
             </a>
             <div class="navbar-collapse" id="navbarNavContent">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="../resources/partner.html">Partner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../resources/partner.html">Fornitori</a></li>
                     <li class="nav-item"><a class="nav-link" href="../lista-attesa.html">Lista d'attesa</a></li>
                     <li class="nav-item"><a class="nav-link" href="../resources/faq.html">Domande frequenti</a></li>
                 </ul>
@@ -94,7 +92,7 @@
         <div class="container">
             <article class="document-content">
                 <h1 data-reveal="lines">Informativa sulla privacy di fid.ai</h1>
-                <p class="document-date" data-reveal="type">Data ultimo aggiornamento: 30 Agosto 2026</p>
+                <p class="document-date" data-reveal="type">Data ultimo aggiornamento: 15 Settembre 2026</p>
                 <p class="document-hint" data-reveal="up">Qui sotto trovi tutte le sezioni, in ordine. Tocca il titolo di una sezione per aprirla e leggerne il testo integrale: quella sui dati di Google Calendar è già aperta.</p>
 
                 <div class="legal-sections" data-reveal="cascade">
@@ -246,8 +244,8 @@
                             <li><strong>Fornitori tecnici (sub-responsabili):</strong> tre soltanto, elencati anche nell'Allegato 2 dell'<a href="dpa.html">addendum sul trattamento dei dati</a>:
                                 <ul>
                                     <li><strong>OVH SAS (OVHcloud):</strong> fornitore dell'infrastruttura di hosting. I server che eseguono fid.ai si trovano nei suoi data center in <strong>Francia</strong>, nell'Unione Europea.</li>
-                                    <li><strong>OpenAI Ireland Limited (o OpenAI, L.L.C.):</strong> fornitore dei modelli linguistici che elaborano i messaggi per preparare le bozze di risposta. <strong>I messaggi non vengono usati per addestrare i modelli di OpenAI.</strong> Puoi consultare la loro <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-link">Privacy Policy</a>.</li>
-                                    <li><strong>Google Ireland Limited / Google LLC:</strong> soltanto se il cliente collega la propria agenda, per l'accesso a Google Calendar tramite l'autorizzazione OAuth (vedi la sezione <a href="#priv-google-calendar">Dati di Google Calendar</a>). Il sito non usa Google Analytics né altri strumenti di analisi del traffico.</li>
+                                    <li><strong>OpenRouter, Inc.</strong> (Stati Uniti): riceve il testo necessario a preparare le bozze di risposta e lo instrada ai modelli linguistici di Google (Gemini). <strong>I messaggi non vengono usati per addestrare i modelli.</strong> Puoi consultare la sua <a href="https://openrouter.ai/privacy" target="_blank" rel="noopener noreferrer" class="text-link">Privacy Policy</a>.</li>
+                                    <li><strong>Google Ireland Limited / Google LLC:</strong> fornisce i modelli linguistici Gemini, a cui il testo arriva tramite OpenRouter o, se OpenRouter non è disponibile, direttamente; custodisce su Google Drive una copia cifrata dei backup, illeggibile senza la chiave, che non si trova sul server; e, soltanto se il cliente collega la propria agenda, dà accesso a Google Calendar tramite l'autorizzazione OAuth (vedi la sezione <a href="#priv-google-calendar">Dati di Google Calendar</a>). Il sito non usa Google Analytics né altri strumenti di analisi del traffico.</li>
                                 </ul>
                                 Con ciascuno di questi fornitori è in essere un accordo sul trattamento dei dati (DPA) che impone obblighi conformi al GDPR. L'elenco aggiornato può essere richiesto a <a href="mailto:info@fidai.it">info@fidai.it</a> oppure consultato nell'<a href="dpa.html#dpa-allegato2">Allegato 2 dell'addendum</a>. La trascrizione dei messaggi vocali avviene sul nostro server e non passa da nessun fornitore esterno.</li>
                             <li><strong>Autorità competenti:</strong> possiamo comunicare dati personali se lo impone la legge, un ordine dell'autorità giudiziaria o un'autorità di controllo, o se serve a difendere un diritto in giudizio o a indagare su un abuso.</li>
@@ -259,10 +257,11 @@
                 <details class="legal-section">
                     <summary><h2 id="priv-trasferimento-estero">7. Trasferimento dei dati all'estero</h2></summary>
                     <div class="legal-section-body">
-                        <p>I dati personali sono trattati e conservati <strong>nello Spazio Economico Europeo</strong>: i server di fid.ai sono in Francia. Due trattamenti possono però comportare un trasferimento verso gli Stati Uniti d'America:</p>
+                        <p>I dati personali sono trattati e conservati <strong>nello Spazio Economico Europeo</strong>: i server di fid.ai sono in Francia. Alcuni trattamenti possono però comportare un trasferimento verso gli Stati Uniti d'America:</p>
                         <ul>
-                            <li>l'elaborazione dei messaggi da parte dei modelli linguistici di <strong>OpenAI</strong>;</li>
-                            <li>l'accesso all'agenda tramite <strong>Google</strong>, se il cliente la collega.</li>
+                            <li>l'elaborazione dei messaggi, il cui testo passa da <strong>OpenRouter</strong> ai modelli linguistici di <strong>Google (Gemini)</strong>, o direttamente a Google se OpenRouter non è disponibile;</li>
+                            <li>l'accesso all'agenda tramite <strong>Google</strong>, se il cliente la collega;</li>
+                            <li>la copia cifrata dei backup conservata su <strong>Google Drive</strong>.</li>
                         </ul>
                         <p>Questi trasferimenti avvengono in conformità al Capo V del GDPR, sulla base di garanzie adeguate:</p>
                         <ul>
@@ -278,7 +277,7 @@
                     <summary><h2 id="priv-misure-sicurezza">8. Misure di sicurezza</h2></summary>
                     <div class="legal-section-body">
                         <p>Adottiamo misure tecniche e organizzative adeguate per proteggere i dati personali da accessi non autorizzati, divulgazione, alterazione o distruzione. Sono descritte in dettaglio nell'<a href="dpa.html#dpa-allegato1">Allegato 1 dell'addendum sul trattamento dei dati</a> e comprendono, in sintesi: cifratura dei dati in transito (HTTPS con TLS), cifratura dei dati sensibili e delle credenziali conservate, accesso ai sistemi limitato a chi ne ha bisogno e protetto da autenticazione a più fattori, registri degli accessi, backup automatici cifrati con copia in un luogo separato e prove periodiche di ripristino, aggiornamenti di sicurezza applicati con regolarità e sorveglianza automatica dello stato del servizio.</p>
-                        <p>I nostri fornitori — OVHcloud per l'hosting, OpenAI per l'elaborazione dei messaggi, Google per il collegamento con il Calendar — adottano a loro volta misure di sicurezza in linea con gli standard di settore, descritte negli accordi che abbiamo sottoscritto con loro.</p>
+                        <p>I nostri fornitori — OVHcloud per l'hosting, OpenRouter e Google per l'elaborazione dei messaggi, Google anche per il Calendar e per la copia cifrata dei backup — adottano a loro volta misure di sicurezza in linea con gli standard di settore, descritte negli accordi che abbiamo sottoscritto con loro.</p>
                         <p>Il cliente resta responsabile della sicurezza del proprio account: scegliere una password robusta, non condividerla e proteggere i dispositivi da cui accede alla piattaforma.</p>
                     </div>
                 </details>
@@ -322,7 +321,7 @@
                     <summary><h2 id="priv-cookie-policy">11. Cookie e strumenti di analisi</h2></summary>
                     <div class="legal-section-body">
                         <p>Il sito <strong>fidai.it</strong> è fatto di pagine statiche ospitate su GitHub Pages e <strong>non installa cookie di profilazione né usa strumenti di analisi del traffico</strong>: niente Google Analytics, nessun pixel pubblicitario, nessun tracciamento fra un sito e l'altro.</p>
-                        <p>Il sito carica soltanto i caratteri tipografici e i fogli di stile da reti di distribuzione pubbliche (Google Fonts, jsDelivr, cdnjs), che per consegnarli vedono l'indirizzo IP del tuo browser. La piattaforma — l'area riservata ai clienti, che sta su un altro server — usa la memoria locale del browser per tenere aperta la sessione di chi ha effettuato l'accesso: è un uso tecnico, necessario al funzionamento, e non serve a profilare nessuno.</p>
+                        <p>Caratteri tipografici e fogli di stile sono ospitati sul sito stesso: le pagine non scaricano nulla da Google né da altri servizi. Come per ogni sito, GitHub, che lo ospita, vede l'indirizzo IP del tuo browser per consegnarti le pagine. La piattaforma — l'area riservata ai clienti, che sta su un altro server — usa la memoria locale del browser per tenere aperta la sessione di chi ha effettuato l'accesso: è un uso tecnico, necessario al funzionamento, e non serve a profilare nessuno.</p>
                         <p>Se in futuro il sito adotterà strumenti che richiedono un consenso, pubblicheremo qui una cookie policy dedicata e chiederemo il consenso prima di attivarli.</p>
                     </div>
                 </details>

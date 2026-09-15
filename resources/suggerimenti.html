@@ -27,12 +27,10 @@
     <link rel="icon" href="../images/favicon.png" type="image/png">
 
 
-    <!-- Caratteri: Sora per i titoli (sans geometrico: 700 per l'h1, 600 per
-         gli altri) e JetBrains Mono per etichette, numeri e comandi.
-         Il corpo del testo usa il carattere di sistema: nessun altro download. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    <!-- Caratteri: Sora per i titoli e JetBrains Mono per etichette, numeri e
+         comandi, ospitati qui in fonts/ e dichiarati in css/style.css: nessuna
+         richiesta a Google o ad altri. Il corpo del testo usa il carattere di sistema. -->
+    <link rel="preload" href="../fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Foglio di stile unico: nessuna libreria esterna, nessun tracker. -->
     <link rel="stylesheet" href="../css/style.css">
@@ -73,7 +71,7 @@
             </a>
             <div class="navbar-collapse" id="navbarNavContent">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="../resources/partner.html">Partner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../resources/partner.html">Fornitori</a></li>
                     <li class="nav-item"><a class="nav-link" href="../lista-attesa.html">Lista d'attesa</a></li>
                     <li class="nav-item"><a class="nav-link" href="../resources/faq.html">Domande frequenti</a></li>
                 </ul>

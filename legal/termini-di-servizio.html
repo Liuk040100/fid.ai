@@ -27,12 +27,10 @@
 
 
     <!-- Link CSS corretto per file in sottocartella -->
-    <!-- Caratteri: Sora per i titoli (sans geometrico: 700 per l'h1, 600 per
-         gli altri) e JetBrains Mono per etichette, numeri e comandi.
-         Il corpo del testo usa il carattere di sistema: nessun altro download. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    <!-- Caratteri: Sora per i titoli e JetBrains Mono per etichette, numeri e
+         comandi, ospitati qui in fonts/ e dichiarati in css/style.css: nessuna
+         richiesta a Google o ad altri. Il corpo del testo usa il carattere di sistema. -->
+    <link rel="preload" href="../fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Foglio di stile unico: nessuna libreria esterna, nessun tracker. -->
     <link rel="stylesheet" href="../css/style.css">
@@ -73,7 +71,7 @@
             </a>
             <div class="navbar-collapse" id="navbarNavContent">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="../resources/partner.html">Partner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../resources/partner.html">Fornitori</a></li>
                     <li class="nav-item"><a class="nav-link" href="../lista-attesa.html">Lista d'attesa</a></li>
                     <li class="nav-item"><a class="nav-link" href="../resources/faq.html">Domande frequenti</a></li>
                 </ul>
@@ -95,7 +93,7 @@
         <div class="container">
             <article class="document-content">
                 <h1 data-reveal="lines">Termini di servizio di fid.ai</h1>
-                <p class="document-date" data-reveal="type">Data ultimo aggiornamento: 30 Agosto 2026</p>
+                <p class="document-date" data-reveal="type">Data ultimo aggiornamento: 15 Settembre 2026</p>
                 <p class="document-hint" data-reveal="up">Qui sotto trovi tutti gli articoli, in ordine. Tocca il titolo di un articolo per aprirlo e leggerne il testo integrale.</p>
 
                 <div class="legal-sections" data-reveal="cascade">
@@ -123,7 +121,7 @@
                             <li><strong>Dati del cliente:</strong> i dati forniti dal cliente a fid.ai in relazione alla registrazione e all'utilizzo dei servizi, inclusi i dati personali del cliente o dei suoi rappresentanti.</li>
                             <li><strong>Dati degli utenti finali:</strong> i dati personali degli utenti finali del cliente &mdash; inclusi i numeri di telefono e il contenuto delle comunicazioni &mdash; trattati dal cliente tramite la piattaforma.</li>
                             <li><strong>DPA (Data Processing Addendum):</strong> l'addendum sul trattamento dei dati disponibile alla pagina <a href="dpa.html">Trattamento dei Dati (DPA)</a>, che disciplina il trattamento dei dati personali da parte di fid.ai in qualit&agrave; di responsabile del trattamento per conto del cliente.</li>
-                            <li><strong>Fornitori tecnici:</strong> i fornitori di cui fid.ai si avvale per erogare i servizi, elencati alla sezione "2.5. Fornitori tecnici": OVHcloud per l'hosting, OpenAI per i modelli linguistici e Google per l'accesso all'agenda Google Calendar, quest'ultimo soltanto se il cliente la collega.</li>
+                            <li><strong>Fornitori tecnici:</strong> i fornitori di cui fid.ai si avvale per erogare i servizi, elencati alla sezione "2.5. Fornitori tecnici": OVHcloud per l'hosting, OpenRouter e Google per i modelli linguistici, Google anche per la copia cifrata dei backup e, soltanto se il cliente la collega, per l'accesso all'agenda Google Calendar.</li>
                             <li><strong>Informativa sulla privacy:</strong> l'informativa disponibile alla pagina <a href="informativa-privacy.html">Informativa sulla Privacy</a>, che descrive come fid.ai raccoglie, utilizza e protegge i dati personali.</li>
                             <li><strong>Piattaforma:</strong> la piattaforma software-as-a-service (SaaS) di <strong>segreteria AI</strong> fornita da fid.ai, accessibile via web, che si collega al numero WhatsApp del cliente e, se il cliente lo desidera, alla sua agenda Google Calendar.</li>
                             <li><strong>Servizi:</strong> l'accesso alla piattaforma e il suo utilizzo, il supporto tecnico e ogni altra prestazione fornita da fid.ai al cliente ai sensi dei presenti ToS e del piano di abbonamento scelto.</li>
@@ -154,8 +152,8 @@
                         <p>Per erogare i servizi fid.ai si avvale dei fornitori elencati qui sotto. I contratti con questi fornitori sono stipulati da fid.ai: <strong>il cliente non deve sottoscrivere alcun contratto con loro n&eacute; sostenere costi diretti nei loro confronti</strong>.</p>
                         <ul>
                             <li><strong>OVHcloud (OVH SAS):</strong> fornitore dell'infrastruttura di hosting. I server che eseguono fid.ai si trovano nei suoi data center in <strong>Francia, Unione Europea</strong>.</li>
-                            <li><strong>OpenAI (OpenAI Ireland Limited, o OpenAI, L.L.C.):</strong> fornitore dei modelli linguistici che elaborano i messaggi per preparare le risposte. <strong>I messaggi dei clienti e dei loro utenti finali non vengono utilizzati per addestrare i modelli di OpenAI.</strong></li>
-                            <li><strong>Google (Google Ireland Limited / Google LLC):</strong> soltanto se il cliente collega la propria agenda, per l'accesso a Google Calendar tramite autorizzazione OAuth.</li>
+                            <li><strong>OpenRouter (OpenRouter, Inc.):</strong> instrada il testo dei messaggi verso i modelli linguistici di Google (Gemini) che preparano le risposte. <strong>I messaggi dei clienti e dei loro utenti finali non vengono utilizzati per addestrare i modelli.</strong></li>
+                            <li><strong>Google (Google Ireland Limited / Google LLC):</strong> fornitore dei modelli linguistici Gemini, raggiunti tramite OpenRouter o, se questo non &egrave; disponibile, direttamente; custodisce su Google Drive una copia cifrata dei backup; e, soltanto se il cliente collega la propria agenda, consente l'accesso a Google Calendar tramite autorizzazione OAuth.</li>
                         </ul>
                         <p>Il processore dei pagamenti &egrave; indicato alla sezione "6.3. Modalit&agrave; di pagamento". L'elenco aggiornato dei fornitori che trattano dati personali per conto di fid.ai, con i rispettivi ruoli e Paesi, &egrave; nell'<a href="informativa-privacy.html">informativa sulla privacy</a> e nel <a href="dpa.html">DPA</a>. fid.ai pu&ograve; sostituire un fornitore o aggiungerne uno nuovo, dandone comunicazione ai sensi della sezione "12. Modifiche ai termini di servizio" e aggiornando i documenti citati.</p>
 
@@ -312,7 +310,7 @@
                         <h3 id="sottosez-8-3">8.3. Il cliente &egrave; titolare del trattamento</h3>
                         <p>Il cliente &egrave; e resta l'unico titolare del trattamento dei dati dei propri utenti finali. Spetta a lui garantire la liceit&agrave; del trattamento, fornire ai propri utenti finali l'informativa privacy, gestire l'esercizio dei loro diritti e rispondere della conformit&agrave; al GDPR.</p>
                         <h3 id="sottosez-8-4">8.4. Dove stanno i dati</h3>
-                        <p>I dati sono conservati sui server di OVHcloud in <strong>Francia, Unione Europea</strong>, e la trascrizione dei messaggi vocali avviene sullo stesso server, senza inviare l'audio all'esterno. Per preparare le risposte i testi dei messaggi sono elaborati dai modelli linguistici di OpenAI e, se il cliente collega l'agenda, alcune informazioni sono scambiate con Google: entrambi possono comportare un trasferimento di dati al di fuori dell'Unione europea, con le garanzie descritte nell'<a href="informativa-privacy.html">informativa sulla privacy</a>.</p>
+                        <p>I dati sono conservati sui server di OVHcloud in <strong>Francia, Unione Europea</strong>, e la trascrizione dei messaggi vocali avviene sullo stesso server, senza inviare l'audio all'esterno. Per preparare le risposte i testi dei messaggi passano da OpenRouter ai modelli linguistici di Google (Gemini), una copia cifrata dei backup &egrave; conservata su Google Drive e, se il cliente collega l'agenda, alcune informazioni sono scambiate con Google: questi trattamenti possono comportare un trasferimento di dati al di fuori dell'Unione europea, con le garanzie descritte nell'<a href="informativa-privacy.html">informativa sulla privacy</a>.</p>
                     </div>
                 </details>
 

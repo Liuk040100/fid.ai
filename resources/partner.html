@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Partner tecnologici — fid.ai</title>
-    <meta name="description" content="I fornitori tecnologici reali di fid.ai: OVHcloud per l'infrastruttura in Europa, OpenAI per l'elaborazione dei messaggi, Google per l'integrazione con Google Calendar.">
+    <title>Fornitori — fid.ai</title>
+    <meta name="description" content="I fornitori di fid.ai: OVHcloud per i server in Francia, OpenRouter e Google Gemini per le risposte, Google per il Calendar e i backup cifrati.">
     <link rel="canonical" href="https://fidai.it/resources/partner.html">
     <meta name="robots" content="noindex, follow">
 
@@ -14,27 +14,25 @@
     <meta property="og:site_name" content="fid.ai">
     <meta property="og:locale" content="it_IT">
     <meta property="og:url" content="https://fidai.it/resources/partner.html">
-    <meta property="og:title" content="Partner tecnologici — fid.ai">
-    <meta property="og:description" content="I fornitori tecnologici reali di fid.ai: OVHcloud per l'infrastruttura in Europa, OpenAI per l'elaborazione dei messaggi, Google per l'integrazione con Google Calendar.">
+    <meta property="og:title" content="Fornitori — fid.ai">
+    <meta property="og:description" content="I fornitori di fid.ai: OVHcloud per i server in Francia, OpenRouter e Google Gemini per le risposte, Google per il Calendar e i backup cifrati.">
     <meta property="og:image" content="https://fidai.it/images/app/conversazioni-desktop.png">
     <meta property="og:image:width" content="1600">
     <meta property="og:image:height" content="1000">
     <meta property="og:image:alt" content="La schermata delle conversazioni di fid.ai su computer">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Partner tecnologici — fid.ai">
-    <meta name="twitter:description" content="I fornitori tecnologici reali di fid.ai: OVHcloud per l'infrastruttura in Europa, OpenAI per l'elaborazione dei messaggi, Google per l'integrazione con Google Calendar.">
+    <meta name="twitter:title" content="Fornitori — fid.ai">
+    <meta name="twitter:description" content="I fornitori di fid.ai: OVHcloud per i server in Francia, OpenRouter e Google Gemini per le risposte, Google per il Calendar e i backup cifrati.">
     <meta name="twitter:image" content="https://fidai.it/images/app/conversazioni-desktop.png">
     <link rel="icon" href="../images/favicon.png" type="image/png"> <!-- Assicurati che favicon.png esista in images/ -->
 
 
 
     <!-- Link CSS corretto per file in sottocartella -->
-    <!-- Caratteri: Sora per i titoli (sans geometrico: 700 per l'h1, 600 per
-         gli altri) e JetBrains Mono per etichette, numeri e comandi.
-         Il corpo del testo usa il carattere di sistema: nessun altro download. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    <!-- Caratteri: Sora per i titoli e JetBrains Mono per etichette, numeri e
+         comandi, ospitati qui in fonts/ e dichiarati in css/style.css: nessuna
+         richiesta a Google o ad altri. Il corpo del testo usa il carattere di sistema. -->
+    <link rel="preload" href="../fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Foglio di stile unico: nessuna libreria esterna, nessun tracker. -->
     <link rel="stylesheet" href="../css/style.css">
@@ -75,7 +73,7 @@
             </a>
             <div class="navbar-collapse" id="navbarNavContent">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="../resources/partner.html">Partner</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="../resources/partner.html">Fornitori</a></li>
                     <li class="nav-item"><a class="nav-link" href="../lista-attesa.html">Lista d'attesa</a></li>
                     <li class="nav-item"><a class="nav-link" href="../resources/faq.html">Domande frequenti</a></li>
                 </ul>
@@ -96,8 +94,8 @@
     <section class="page-container">
         <div class="container">
             <div class="content-page-wrapper">
-                <h1 data-reveal="lines">I nostri partner tecnologici</h1>
-                <p class="page-intro-text" data-reveal="up">fid.ai si appoggia a un numero volutamente piccolo di fornitori, scelti per fare bene una cosa sola. Ecco chi sono davvero, e cosa fanno per te.</p>
+                <h1 data-reveal="lines">I nostri fornitori</h1>
+                <p class="page-intro-text" data-reveal="up">fid.ai si appoggia a pochi fornitori, scelti apposta. Ecco chi sono davvero, e cosa fanno con i dati.</p>
 
                 <div class="row gy-4 mt-md-5 mt-4 align-items-start" data-reveal="cascade">
                     <!-- Card OVHcloud -->
@@ -105,7 +103,7 @@
                         <div class="partner-card">
                             <h2 class="partner-card-title">OVHcloud</h2>
                             <p class="partner-card-subtitle">Server e infrastruttura cloud in Europa (Francia)</p>
-                            <p class="partner-card-description">I server di fid.ai sono ospitati in Francia da un'azienda europea: i tuoi dati restano nell'Unione Europea sotto la tutela del GDPR.</p>
+                            <p class="partner-card-description">I server di fid.ai sono in Francia, presso un'azienda europea: è lì che i dati vengono conservati, sotto la tutela del GDPR.</p>
                             <details class="partner-details" id="partnerDetailsOvh">
                                 <summary class="partner-toggle"><span>Come lavora</span> <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
 
@@ -119,23 +117,25 @@
                         </div>
                     </div>
 
-                    <!-- Card OpenAI -->
+                    <!-- Card OpenRouter: dal 09/09/2026 il testo dei messaggi passa da qui
+                         verso i modelli Google Gemini (stessa frase dell'informativa dell'app,
+                         backend/assets/notices/). -->
                     <div class="col-lg-4 col-md-6">
                         <div class="partner-card">
-                            <h2 class="partner-card-title">OpenAI</h2>
-                            <p class="partner-card-subtitle">Modelli linguistici per l'elaborazione delle risposte</p>
-                            <p class="partner-card-description">Elabora i messaggi dei tuoi clienti senza mai usare i tuoi dati o le conversazioni per addestrare i propri modelli.</p>
-                            <details class="partner-details" id="partnerDetailsOpenai">
+                            <h2 class="partner-card-title">OpenRouter</h2>
+                            <p class="partner-card-subtitle">Porta il testo dei messaggi ai modelli Google Gemini</p>
+                            <p class="partner-card-description">Per preparare una bozza, il testo che serve passa da OpenRouter (Stati Uniti), che lo consegna ai modelli di intelligenza artificiale Gemini di Google. Nessuno lo usa per addestrare i modelli.</p>
+                            <details class="partner-details" id="partnerDetailsOpenrouter">
                                 <summary class="partner-toggle"><span>Come lavora</span> <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
 
                                 <h3 class="partner-card-section-title">Come</h3>
                                 <ul class="partner-card-list">
-                                    <li><strong>Zero addestramento sui tuoi messaggi:</strong> le conversazioni che passano da fid.ai non vengono usate per addestrare i modelli di OpenAI, né i nostri.</li>
-                                    <li><strong>Massima riservatezza:</strong> i messaggi vengono inviati solo per generare la risposta del momento.</li>
-                                    <li><strong>Solo per l'elaborazione:</strong> OpenAI riceve il testo necessario a formulare la risposta, non l'intera cronologia della tua attività.</li>
+                                    <li><strong>Solo il testo che serve:</strong> riceve ciò che serve a preparare la risposta del momento, non l'intera cronologia della tua attività.</li>
+                                    <li><strong>Zero addestramento sui tuoi messaggi:</strong> le conversazioni non vengono usate per addestrare modelli, né da OpenRouter né da Google né da noi.</li>
+                                    <li><strong>Trasferimento con garanzie:</strong> OpenRouter ha sede negli Stati Uniti; il trasferimento è coperto dal Data Privacy Framework UE-USA e, in subordine, dalle Clausole Contrattuali Standard della Commissione europea.</li>
                                 </ul>
-                                <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-link d-block mt-3 fw-bold">
-                                    Privacy Policy di OpenAI <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-8 8"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+                                <a href="https://openrouter.ai/privacy" target="_blank" rel="noopener noreferrer" class="text-link d-block mt-3 fw-bold">
+                                    Privacy Policy di OpenRouter <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-8 8"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
                                 </a>
                             </details>
                         </div>
@@ -145,19 +145,21 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="partner-card">
                             <h2 class="partner-card-title">Google</h2>
-                            <p class="partner-card-subtitle">Integrazione con Google Calendar per l'agenda</p>
-                            <p class="partner-card-description">Sincronizza e aggiorna appuntamenti in sicurezza tramite OAuth, con accesso limitato al solo calendario autorizzato.</p>
+                            <p class="partner-card-subtitle">Modelli Gemini, Google Calendar e copie di sicurezza</p>
+                            <p class="partner-card-description">Fornisce i modelli Gemini che scrivono le bozze, collega la tua agenda Google Calendar se lo autorizzi e custodisce una copia cifrata dei nostri backup.</p>
                             <details class="partner-details" id="partnerDetailsGoogle">
                                 <summary class="partner-toggle"><span>Come lavora</span> <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
 
                                 <h3 class="partner-card-section-title">Come</h3>
                                 <ul class="partner-card-list">
+                                    <li><strong>Gemini, anche come riserva:</strong> se OpenRouter non risponde, il testo va direttamente ai modelli Gemini di Google, con le stesse garanzie e senza addestramento.</li>
                                     <li><strong>Accesso autorizzato da te:</strong> il collegamento avviene con il login sicuro di Google (OAuth); puoi revocarlo quando vuoi dal tuo account Google.</li>
                                     <li><strong>Solo l'agenda:</strong> fid.ai accede al calendario che scegli tu, non ad altri servizi Google.</li>
                                     <li><strong>Uso limitato ai dati necessari:</strong> rispettiamo i requisiti "Limited Use" di Google sui dati letti dalle sue API.</li>
+                                    <li><strong>Copie di sicurezza cifrate:</strong> una copia dei backup è conservata su Google Drive; senza la chiave, che non si trova sul server, è illeggibile a chiunque.</li>
                                 </ul>
                                 <a href="../legal/informativa-privacy.html#priv-google-calendar" class="text-link d-block mt-3 fw-bold">
-                                    Cosa vede, e cosa non fa, fid.ai con questi dati
+                                    Cosa vede, e cosa non fa, fid.ai con i dati del calendario
                                 </a>
                             </details>
                         </div>
@@ -165,7 +167,7 @@
                 </div>
 
                 <p class="mt-5 text-center">
-                    Sono gli unici fornitori terzi che usiamo oggi. Se cambia, questa pagina cambia con loro.
+                    Sono gli unici fornitori terzi che usiamo oggi; i messaggi, poi, viaggiano su WhatsApp (Meta), come tutti quelli che ricevi già. Se cambia, questa pagina cambia con loro.
                 </p>
             </div>
         </div>

@@ -27,12 +27,10 @@
     <link rel="icon" href="../images/favicon.png" type="image/png">
 
 
-    <!-- Caratteri: Sora per i titoli (sans geometrico: 700 per l'h1, 600 per
-         gli altri) e JetBrains Mono per etichette, numeri e comandi.
-         Il corpo del testo usa il carattere di sistema: nessun altro download. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    <!-- Caratteri: Sora per i titoli e JetBrains Mono per etichette, numeri e
+         comandi, ospitati qui in fonts/ e dichiarati in css/style.css: nessuna
+         richiesta a Google o ad altri. Il corpo del testo usa il carattere di sistema. -->
+    <link rel="preload" href="../fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Foglio di stile unico: nessuna libreria esterna, nessun tracker. -->
     <link rel="stylesheet" href="../css/style.css">
@@ -73,7 +71,7 @@
             </a>
             <div class="navbar-collapse" id="navbarNavContent">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="../resources/partner.html">Partner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../resources/partner.html">Fornitori</a></li>
                     <li class="nav-item"><a class="nav-link" href="../lista-attesa.html">Lista d'attesa</a></li>
                     <li class="nav-item"><a class="nav-link" href="../resources/faq.html">Domande frequenti</a></li>
                 </ul>
@@ -95,7 +93,7 @@
         <div class="container">
             <article class="document-content">
                 <h1 data-reveal="lines">Addendum sul trattamento dei dati</h1>
-                <p class="document-date" data-reveal="type">Data ultimo aggiornamento: 30 Agosto 2026</p>
+                <p class="document-date" data-reveal="type">Data ultimo aggiornamento: 15 Settembre 2026</p>
                 <p class="document-hint" data-reveal="up">Accordo fra il cliente e fid.ai ai sensi dell'art. 28 del GDPR. Qui sotto trovi tutti gli articoli, in ordine: tocca il titolo di un articolo per aprirlo e leggerne il testo integrale.</p>
 
                 <div class="legal-sections" data-reveal="cascade">
@@ -191,7 +189,7 @@
                         <h3 id="dpa-3-4">3.4. Ricorso a sub-responsabili (artt. 28.2 e 28.4 GDPR)</h3>
                         <ol type="a">
                             <li><strong>Autorizzazione generale:</strong> accettando il presente addendum, il titolare del trattamento autorizza fid.ai a ricorrere a sub-responsabili per l'erogazione del servizio principale.</li>
-                            <li><strong>Elenco:</strong> fid.ai mantiene aggiornato l'elenco dei sub-responsabili nell'<a href="#dpa-allegato2">Allegato 2 ("Elenco dei sub-responsabili autorizzati")</a>. Oggi sono tre: OVHcloud per l'hosting, OpenAI per i modelli linguistici e Google per l'accesso a Google Calendar, quest'ultimo soltanto se il cliente collega la propria agenda.</li>
+                            <li><strong>Elenco:</strong> fid.ai mantiene aggiornato l'elenco dei sub-responsabili nell'<a href="#dpa-allegato2">Allegato 2 ("Elenco dei sub-responsabili autorizzati")</a>. Oggi sono tre: OVHcloud per l'hosting, OpenRouter per l'instradamento del testo verso i modelli linguistici e Google per i modelli linguistici Gemini, per la copia cifrata dei backup e, soltanto se il cliente collega la propria agenda, per l'accesso a Google Calendar.</li>
                             <li><strong>Obblighi contrattuali:</strong> fid.ai stipula con ciascun sub-responsabile un accordo scritto che impone obblighi di protezione dei dati non meno rigorosi di quelli previsti dal presente addendum.</li>
                             <li><strong>Notifica e diritto di obiezione:</strong> fid.ai informa il titolare del trattamento di ogni aggiunta o sostituzione di sub-responsabili con almeno 14 giorni di preavviso; entro lo stesso termine il titolare può opporsi. In caso di obiezione motivata e persistente, e se non è possibile una soluzione alternativa, il titolare può recedere dal contratto principale limitatamente ai servizi interessati.</li>
                             <li><strong>Responsabilità:</strong> fid.ai resta pienamente responsabile nei confronti del titolare del trattamento per l'operato dei propri sub-responsabili.</li>
@@ -205,7 +203,7 @@
                         <h3 id="dpa-3-8">3.8. Informazioni e verifiche (art. 28.3.h GDPR)</h3>
                         <p>Mettere a disposizione del titolare del trattamento tutte le informazioni necessarie a dimostrare il rispetto degli obblighi del presente addendum e consentire e contribuire alle verifiche, su richiesta scritta, non più di una volta all'anno salvo il caso di una violazione dei dati, e a spese del titolare.</p>
                         <h3 id="dpa-3-9">3.9. Trasferimenti fuori dallo Spazio Economico Europeo</h3>
-                        <p>I dati personali sono conservati su server situati in <strong>Francia</strong>, nell'Unione Europea. fid.ai non trasferisce dati personali fuori dallo Spazio Economico Europeo senza le garanzie previste dal Capo V del GDPR. Il ricorso a sub-responsabili con sede anche negli Stati Uniti — OpenAI per i modelli linguistici e Google per il Calendar — può comportare trasferimenti verso quel Paese: per essi fid.ai si avvale dell'EU-U.S. Data Privacy Framework e delle clausole contrattuali standard della Commissione Europea, come indicato nell'<a href="#dpa-allegato2">Allegato 2</a>.</p>
+                        <p>I dati personali sono conservati su server situati in <strong>Francia</strong>, nell'Unione Europea. fid.ai non trasferisce dati personali fuori dallo Spazio Economico Europeo senza le garanzie previste dal Capo V del GDPR. Il ricorso a sub-responsabili con sede anche negli Stati Uniti — OpenRouter e Google per i modelli linguistici, Google anche per il Calendar e per la copia cifrata dei backup — può comportare trasferimenti verso quel Paese: per essi fid.ai si avvale dell'EU-U.S. Data Privacy Framework e delle clausole contrattuali standard della Commissione Europea, come indicato nell'<a href="#dpa-allegato2">Allegato 2</a>.</p>
                         <h3 id="dpa-3-10">3.10. Notifica delle violazioni dei dati personali</h3>
                         <p>In caso di violazione dei dati personali, fid.ai informa il titolare del trattamento <strong>senza ingiustificato ritardo e comunque entro 48 ore</strong> dal momento in cui ne è venuto a conoscenza, fornendo le informazioni ragionevolmente disponibili — natura della violazione, categorie e numero approssimativo di interessati e di dati coinvolti, probabili conseguenze, misure adottate — e collaborando agli adempimenti di notifica che spettano al titolare ai sensi degli artt. 33 e 34 del GDPR.</p>
                         <h3 id="dpa-3-11">3.11. Accesso umano ai dati</h3>
@@ -322,7 +320,7 @@
                 <details class="legal-section">
                     <summary><h2 id="dpa-allegato2">Allegato 2: elenco dei sub-responsabili autorizzati</h2></summary>
                     <div class="legal-section-body">
-                        <p>Il titolare del trattamento autorizza fid.ai a ricorrere ai seguenti sub-responsabili (sezione 3.4.b). L'elenco è aggiornato al 30 Agosto 2026.</p>
+                        <p>Il titolare del trattamento autorizza fid.ai a ricorrere ai seguenti sub-responsabili (sezione 3.4.b). L'elenco è aggiornato al 15 Settembre 2026.</p>
                         <table class="table-dpa">
                             <caption class="visually-hidden">Sub-responsabili del trattamento autorizzati da fid.ai: nome, servizio, Paese e meccanismo di trasferimento</caption>
                             <thead>
@@ -341,14 +339,14 @@
                                     <td data-label="Meccanismo di trasferimento">Non applicabile: i dati restano nel SEE</td>
                                 </tr>
                                 <tr>
-                                    <td data-label="Nome del sub-responsabile">OpenAI Ireland Limited (o OpenAI, L.L.C.)</td>
-                                    <td data-label="Servizio fornito">Modelli linguistici per l'elaborazione dei messaggi e la preparazione delle bozze di risposta. I messaggi non sono usati per addestrare i modelli.</td>
-                                    <td data-label="Paese di trattamento principale">Irlanda, Stati Uniti</td>
+                                    <td data-label="Nome del sub-responsabile">OpenRouter, Inc.</td>
+                                    <td data-label="Servizio fornito">Instradamento del testo dei messaggi verso i modelli linguistici di Google (Gemini), per la preparazione delle bozze di risposta. I messaggi non sono usati per addestrare i modelli.</td>
+                                    <td data-label="Paese di trattamento principale">Stati Uniti</td>
                                     <td data-label="Meccanismo di trasferimento">EU-U.S. Data Privacy Framework, clausole contrattuali standard</td>
                                 </tr>
                                 <tr>
                                     <td data-label="Nome del sub-responsabile">Google Ireland Limited / Google LLC</td>
-                                    <td data-label="Servizio fornito">Google Calendar API: lettura e scrittura degli appuntamenti sull'agenda del professionista, soltanto se il cliente la collega</td>
+                                    <td data-label="Servizio fornito">Modelli linguistici Gemini, raggiunti tramite OpenRouter o, se questo non è disponibile, direttamente; conservazione di una copia cifrata dei backup su Google Drive; Google Calendar API: lettura e scrittura degli appuntamenti sull'agenda del professionista, soltanto se il cliente la collega</td>
                                     <td data-label="Paese di trattamento principale">Irlanda, Stati Uniti</td>
                                     <td data-label="Meccanismo di trasferimento">EU-U.S. Data Privacy Framework, clausole contrattuali standard</td>
                                 </tr>

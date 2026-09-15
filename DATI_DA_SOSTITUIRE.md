@@ -60,10 +60,13 @@ funziona. Restano da confermare:
   portavano `noindex, nofollow` e nessun motore poteva raggiungerli. Chi verifica l'app (Google, per
   l'accesso al Calendar) deve poter arrivare all'informativa da una ricerca, non solo dal link nel piè
   di pagina. Il DPA resta `noindex` perché è un allegato contrattuale, non una pagina da cercare.
-- **I fornitori elencati** nell'informativa (§ 6) e nel DPA (Allegato 2) sono già allineati a quelli
-  realmente in uso (OVH per l'hosting, OpenAI per i modelli linguistici, Google per il Calendar) dal
-  giro 02 del 29/08/2026. I vecchi riferimenti a Twilio nei Termini di Servizio sono stati rimossi nel
-  giro 04, stessa data (voce 2): non restano più menzioni di AWS/Twilio/SendGrid/Zendesk in nessuno dei
+- **I fornitori elencati** nell'informativa (§ 6) e nel DPA (Allegato 2) sono allineati a quelli
+  realmente in uso dal giro 24 del 15/09/2026: OVH per l'hosting, OpenRouter verso i modelli Google
+  Gemini (riserva: Google diretto), Google anche per il Calendar e per la copia cifrata dei backup su
+  Drive. È la stessa frase dell'informativa mostrata dentro l'app (`backend/assets/notices/`): se l'app
+  cambia fornitore, cambiano anche la pagina Fornitori, le Domande frequenti, l'informativa (§ 6, 7, 8),
+  il DPA (§ 3.4, 3.9, Allegato 2) e i Termini (§ 1, 2.5, 8.4). Fino al giro 23 c'era scritto OpenAI.
+  I vecchi riferimenti a Twilio nei Termini di Servizio sono stati rimossi nel giro 04 del 29/08/2026 (voce 2): non restano più menzioni di AWS/Twilio/SendGrid/Zendesk in nessuno dei
   tre documenti. Resta un punto da decidere: **Stripe**, il processore dei pagamenti, oggi compare solo
   nei Termini di Servizio (§ 6.2) e non nell'elenco dei sub-responsabili di informativa e DPA — verificare
   se vada aggiunto anche lì.
