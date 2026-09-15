@@ -10,7 +10,7 @@ Accanto a ogni segnaposto, **nel codice della pagina**, c'è un commento `<!-- D
 ripete cosa metterci. Il commento non si vede nella pagina pubblicata: si vede solo aprendo il file.
 Quando sostituisci il valore, **cancella anche il commento**.
 
-Elenco verificato e riallineato il 30/08/2026 (giro 17, `grep -n '\[\['`). Le righe si sono spostate
+Elenco verificato il 30/08/2026 (giro 17) e riallineato il 15/09/2026 (giro 24, `grep -n '\[\['`). Le righe si sono spostate
 perché nei giri 16 e 17 i tre documenti sono stati riscritti con l'indice unico auto-espandibile: ogni
 articolo è ora una scheda che si apre da sola, e il testo è rientrato di un livello. Il totale resta
 **12**: nessun segnaposto è stato aggiunto o tolto. I numeri di riga valgono a oggi: se non tornano
@@ -33,18 +33,18 @@ ricerca di `[[` su GitHub non deve trovare più niente.
 
 | # | File | Riga | Dove sta, nella pagina | Segnaposto (da sostituire per intero, parentesi comprese) | Cosa metterci |
 |---|------|-----:|------------------------|-----------------------------------------------------------|---------------|
-| 1 | `legal/dpa.html` | 109 | Addendum, scheda «Parti e data di efficacia»: chi è il «responsabile del trattamento» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
-| 2 | `legal/dpa.html` | 109 | Addendum, scheda «Parti e data di efficacia»: chi è il «responsabile del trattamento» | `[[INDIRIZZO COMPLETO — via e numero civico, CAP]]` | Via, numero civico e CAP dell'indirizzo a cui si possono mandare comunicazioni formali. La città (Torino, Italia) è già scritta accanto e non va ripetuta. Esempio: `Via Roma 1, 10121`. |
-| 3 | `legal/dpa.html` | 109 | Addendum, scheda «Parti e data di efficacia»: chi è il «responsabile del trattamento» | `[[P.IVA O CODICE FISCALE — oggi IT01234567890, valore di prova]]` | La partita IVA vera, se c'è; altrimenti il codice fiscale della persona fisica. `IT01234567890` è un numero di prova: non esiste e non va lasciato. |
-| 4 | `legal/informativa-privacy.html` | 142 | Informativa, scheda «1. Introduzione» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
-| 5 | `legal/informativa-privacy.html` | 159 | Informativa, scheda «2. Titolare del trattamento» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
-| 6 | `legal/informativa-privacy.html` | 160 | Informativa, scheda «2. Titolare del trattamento» | `[[INDIRIZZO COMPLETO — via e numero civico, CAP]]` | Via, numero civico e CAP dell'indirizzo a cui si possono mandare comunicazioni formali. La città (Torino, Italia) è già scritta accanto e non va ripetuta. Esempio: `Via Roma 1, 10121`. |
-| 7 | `legal/informativa-privacy.html` | 161 | Informativa, scheda «2. Titolare del trattamento» | `[[P.IVA O CODICE FISCALE — oggi IT01234567890, valore di prova]]` | La partita IVA vera, se c'è; altrimenti il codice fiscale della persona fisica. `IT01234567890` è un numero di prova: non esiste e non va lasciato. |
-| 8 | `legal/informativa-privacy.html` | 345 | Informativa, scheda «13. Contatti» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
-| 9 | `legal/informativa-privacy.html` | 346 | Informativa, scheda «13. Contatti» | `[[INDIRIZZO COMPLETO — via e numero civico, CAP]]` | Via, numero civico e CAP dell'indirizzo a cui si possono mandare comunicazioni formali. La città (Torino, Italia) è già scritta accanto e non va ripetuta. Esempio: `Via Roma 1, 10121`. |
-| 10 | `legal/termini-di-servizio.html` | 107 | Termini, scheda «Preambolo e introduzione», sotto «Chi offre il servizio» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
-| 11 | `legal/termini-di-servizio.html` | 107 | Termini, scheda «Preambolo e introduzione», sotto «Chi offre il servizio» | `[[INDIRIZZO COMPLETO — via e numero civico, CAP]]` | Via, numero civico e CAP dell'indirizzo a cui si possono mandare comunicazioni formali. La città (Torino, Italia) è già scritta accanto e non va ripetuta. Esempio: `Via Roma 1, 10121`. |
-| 12 | `legal/termini-di-servizio.html` | 107 | Termini, scheda «Preambolo e introduzione», sotto «Chi offre il servizio» | `[[P.IVA O CODICE FISCALE — oggi IT01234567890, valore di prova]]` | La partita IVA vera, se c'è; altrimenti il codice fiscale della persona fisica. `IT01234567890` è un numero di prova: non esiste e non va lasciato. |
+| 1 | `legal/dpa.html` | 110 | Addendum, scheda «Parti e data di efficacia»: chi è il «responsabile del trattamento» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
+| 2 | `legal/dpa.html` | 110 | Addendum, scheda «Parti e data di efficacia»: chi è il «responsabile del trattamento» | `[[INDIRIZZO COMPLETO — via e numero civico, CAP]]` | Via, numero civico e CAP dell'indirizzo a cui si possono mandare comunicazioni formali. La città (Torino, Italia) è già scritta accanto e non va ripetuta. Esempio: `Via Roma 1, 10121`. |
+| 3 | `legal/dpa.html` | 110 | Addendum, scheda «Parti e data di efficacia»: chi è il «responsabile del trattamento» | `[[P.IVA O CODICE FISCALE — oggi IT01234567890, valore di prova]]` | La partita IVA vera, se c'è; altrimenti il codice fiscale della persona fisica. `IT01234567890` è un numero di prova: non esiste e non va lasciato. |
+| 4 | `legal/informativa-privacy.html` | 143 | Informativa, scheda «1. Introduzione» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
+| 5 | `legal/informativa-privacy.html` | 160 | Informativa, scheda «2. Titolare del trattamento» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
+| 6 | `legal/informativa-privacy.html` | 161 | Informativa, scheda «2. Titolare del trattamento» | `[[INDIRIZZO COMPLETO — via e numero civico, CAP]]` | Via, numero civico e CAP dell'indirizzo a cui si possono mandare comunicazioni formali. La città (Torino, Italia) è già scritta accanto e non va ripetuta. Esempio: `Via Roma 1, 10121`. |
+| 7 | `legal/informativa-privacy.html` | 162 | Informativa, scheda «2. Titolare del trattamento» | `[[P.IVA O CODICE FISCALE — oggi IT01234567890, valore di prova]]` | La partita IVA vera, se c'è; altrimenti il codice fiscale della persona fisica. `IT01234567890` è un numero di prova: non esiste e non va lasciato. |
+| 8 | `legal/informativa-privacy.html` | 347 | Informativa, scheda «13. Contatti» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
+| 9 | `legal/informativa-privacy.html` | 348 | Informativa, scheda «13. Contatti» | `[[INDIRIZZO COMPLETO — via e numero civico, CAP]]` | Via, numero civico e CAP dell'indirizzo a cui si possono mandare comunicazioni formali. La città (Torino, Italia) è già scritta accanto e non va ripetuta. Esempio: `Via Roma 1, 10121`. |
+| 10 | `legal/termini-di-servizio.html` | 108 | Termini, scheda «Preambolo e introduzione», sotto «Chi offre il servizio» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
+| 11 | `legal/termini-di-servizio.html` | 108 | Termini, scheda «Preambolo e introduzione», sotto «Chi offre il servizio» | `[[INDIRIZZO COMPLETO — via e numero civico, CAP]]` | Via, numero civico e CAP dell'indirizzo a cui si possono mandare comunicazioni formali. La città (Torino, Italia) è già scritta accanto e non va ripetuta. Esempio: `Via Roma 1, 10121`. |
+| 12 | `legal/termini-di-servizio.html` | 108 | Termini, scheda «Preambolo e introduzione», sotto «Chi offre il servizio» | `[[P.IVA O CODICE FISCALE — oggi IT01234567890, valore di prova]]` | La partita IVA vera, se c'è; altrimenti il codice fiscale della persona fisica. `IT01234567890` è un numero di prova: non esiste e non va lasciato. |
 
 ## Non sono segnaposto, ma vanno decisi lo stesso
 
@@ -83,12 +83,12 @@ l'app, per esempio Google) li trova senza cercarli.
 | `prezzi.html` | sì | sì | sì |
 | `questionario.html` | sì | sì | sì |
 | `thankyou.html` | **no** | **no** | **no** |
+| `404.html` (pagina «non trovata») | sì | sì | sì |
 | `legal/informativa-privacy.html` | sì | sì | sì |
 | `legal/termini-di-servizio.html` | sì | sì | sì |
 | `legal/dpa.html` | sì | sì | sì |
 | `resources/faq.html` | sì | sì | sì |
 | `resources/partner.html` | sì | sì | sì |
-| `resources/suggerimenti.html` | sì | sì | sì |
 
 `thankyou.html` è la pagina di ringraziamento dopo l'invio di un modulo: non ha piè di pagina, quindi
 non ha i tre link. Ci si arriva solo dopo aver spuntato il consenso, che rimanda all'informativa.

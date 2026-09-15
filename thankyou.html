@@ -25,6 +25,9 @@
     <meta name="twitter:description" content="La tua risposta è arrivata. Ti scriviamo una volta sola, quando ci sarà qualcosa di concreto da raccontarti o da farti provare.">
     <meta name="twitter:image" content="https://fidai.it/images/app/conversazioni-desktop.png">
     <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <meta name="theme-color" content="#F3F0EA" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#141920" media="(prefers-color-scheme: dark)">
     <!-- Caratteri: Sora per i titoli e JetBrains Mono per etichette, numeri e
          comandi, ospitati qui in fonts/ e dichiarati in css/style.css: nessuna
          richiesta a Google o ad altri. Il corpo del testo usa il carattere di sistema. -->
@@ -58,32 +61,8 @@
         } catch (e) { /* niente */ }
       })();
     </script>
-    <style>
-        /* Una pagina sola, centrata: qui non c'è navigazione perché non c'è
-           nient'altro da fare che tornare alla home. */
-        body {
-            padding-top: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-            background-color: var(--bg-deep);
-        }
-        .thankyou-card { max-width: 620px; margin: 2rem 1rem; padding: 3rem 2rem; }
-        .thankyou-mark {
-            width: 56px; height: 56px;
-            margin: 0 auto 1.5rem;
-            border: 1px solid var(--accent);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; color: var(--accent);
-        }
-        .thankyou-card h1 { margin-bottom: 1rem; }
-        .thankyou-card p { margin-inline: auto; }
-    </style>
 </head>
-<body>
+<body class="thankyou-page">
     <div class="thankyou-card">
         <div class="thankyou-mark" aria-hidden="true">&check;</div>
         <h1 data-reveal="lines">Grazie, ci sei stato utile davvero.</h1>

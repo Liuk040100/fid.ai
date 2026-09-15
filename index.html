@@ -24,6 +24,9 @@
     <meta name="twitter:description" content="fid.ai è in fase di validazione: la segreteria AI per professionisti e piccole attività, collegata al tuo Google Calendar. Raccontaci come gestisci i messaggi di lavoro — intervista, questionario o lista d'attesa del pilota.">
     <meta name="twitter:image" content="https://fidai.it/images/app/conversazioni-desktop.png">
     <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <meta name="theme-color" content="#F3F0EA" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#141920" media="(prefers-color-scheme: dark)">
 
 
     <!-- Caratteri: Sora per i titoli e JetBrains Mono per etichette, numeri e
@@ -161,9 +164,14 @@
                     <figure class="step-shot" data-reveal="shot">
                         <picture>
                             <!-- Sul telefono la schermata del telefono, a tutta larghezza;
-                                 da tablet in su quella del computer, che riempie la riga. -->
+                                 da tablet in su quella del computer, che riempie la riga.
+                                 WebP senza perdita dove il browser lo legge, PNG altrimenti. -->
+                            <source media="(min-width: 620px)" srcset="images/app/assistente-desktop.webp" type="image/webp"
+                                    width="1600" height="1000">
                             <source media="(min-width: 620px)" srcset="images/app/assistente-desktop.png"
                                     width="1600" height="1000">
+                            <source srcset="images/app/assistente-telefono.webp" type="image/webp"
+                                    width="780" height="1688">
                             <img src="images/app/assistente-telefono.png" width="780" height="1688"
                                  loading="lazy" decoding="async" alt="Impostazioni delle regole dell'assistente">
                         </picture>
@@ -178,9 +186,14 @@
                     <figure class="step-shot" data-reveal="shot">
                         <picture>
                             <!-- Sul telefono la schermata del telefono, a tutta larghezza;
-                                 da tablet in su quella del computer, che riempie la riga. -->
+                                 da tablet in su quella del computer, che riempie la riga.
+                                 WebP senza perdita dove il browser lo legge, PNG altrimenti. -->
+                            <source media="(min-width: 620px)" srcset="images/app/agenda-desktop.webp" type="image/webp"
+                                    width="1600" height="1000">
                             <source media="(min-width: 620px)" srcset="images/app/agenda-desktop.png"
                                     width="1600" height="1000">
+                            <source srcset="images/app/agenda-telefono.webp" type="image/webp"
+                                    width="780" height="1688">
                             <img src="images/app/agenda-telefono.png" width="780" height="1688"
                                  loading="lazy" decoding="async" alt="Sincronizzazione Google Calendar">
                         </picture>
@@ -195,9 +208,14 @@
                     <figure class="step-shot" data-reveal="shot">
                         <picture>
                             <!-- Sul telefono la schermata del telefono, a tutta larghezza;
-                                 da tablet in su quella del computer, che riempie la riga. -->
+                                 da tablet in su quella del computer, che riempie la riga.
+                                 WebP senza perdita dove il browser lo legge, PNG altrimenti. -->
+                            <source media="(min-width: 620px)" srcset="images/app/conversazioni-desktop.webp" type="image/webp"
+                                    width="1600" height="1000">
                             <source media="(min-width: 620px)" srcset="images/app/conversazioni-desktop.png"
                                     width="1600" height="1000">
+                            <source srcset="images/app/conversazioni-telefono.webp" type="image/webp"
+                                    width="780" height="1688">
                             <img src="images/app/conversazioni-telefono.png" width="780" height="1688"
                                  loading="lazy" decoding="async" alt="Ricezione messaggi e vocali">
                         </picture>
@@ -212,9 +230,14 @@
                     <figure class="step-shot" data-reveal="shot">
                         <picture>
                             <!-- Sul telefono la schermata del telefono, a tutta larghezza;
-                                 da tablet in su quella del computer, che riempie la riga. -->
+                                 da tablet in su quella del computer, che riempie la riga.
+                                 WebP senza perdita dove il browser lo legge, PNG altrimenti. -->
+                            <source media="(min-width: 620px)" srcset="images/app/bozze-desktop.webp" type="image/webp"
+                                    width="1600" height="1000">
                             <source media="(min-width: 620px)" srcset="images/app/bozze-desktop.png"
                                     width="1600" height="1000">
+                            <source srcset="images/app/bozze-telefono.webp" type="image/webp"
+                                    width="780" height="1688">
                             <img src="images/app/bozze-telefono.png" width="780" height="1688"
                                  loading="lazy" decoding="async" alt="Preparazione bozza intelligente">
                         </picture>
@@ -229,9 +252,14 @@
                     <figure class="step-shot" data-reveal="shot">
                         <picture>
                             <!-- Sul telefono la schermata del telefono, a tutta larghezza;
-                                 da tablet in su quella del computer, che riempie la riga. -->
+                                 da tablet in su quella del computer, che riempie la riga.
+                                 WebP senza perdita dove il browser lo legge, PNG altrimenti. -->
+                            <source media="(min-width: 620px)" srcset="images/app/chat-desktop.webp" type="image/webp"
+                                    width="1600" height="1000">
                             <source media="(min-width: 620px)" srcset="images/app/chat-desktop.png"
                                     width="1600" height="1000">
+                            <source srcset="images/app/chat-telefono.webp" type="image/webp"
+                                    width="780" height="1688">
                             <img src="images/app/chat-telefono.png" width="780" height="1688"
                                  loading="lazy" decoding="async" alt="Conferma e invio con un tocco">
                         </picture>
