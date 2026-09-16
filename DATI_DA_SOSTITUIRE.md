@@ -1,50 +1,30 @@
 # Dati da sostituire prima di pubblicare
 
-I tre documenti legali di questo sito contengono **12 segnaposto** nella forma `[[COSÌ]]`: sono i dati
-che oggi non ci sono, e che deve mettere chi si assume la responsabilità dei documenti. Finché restano
-`[[…]]`, chi legge il sito vede che manca un dato — invece di leggere un dato inventato e crederlo vero
-(fino al 29/08/2026 i documenti dicevano «fid.ai S.r.l.» e una partita IVA, `IT01234567890`, che non
-esiste).
+**Chiuso il 16/09/2026 (giro 25).** I tre documenti legali non contengono più nessun segnaposto
+`[[…]]`: la ricerca di `[[` non trova più niente e i commenti `<!-- DA-SOSTITUIRE: … -->` sono stati
+cancellati insieme ai valori. Fino al 29/08/2026 i documenti dicevano «fid.ai S.r.l.» e una partita IVA
+che non esiste (`IT01234567890`): quella strada resta chiusa, nessun dato si inventa.
 
-Accanto a ogni segnaposto, **nel codice della pagina**, c'è un commento `<!-- DA-SOSTITUIRE: ... -->` che
-ripete cosa metterci. Il commento non si vede nella pagina pubblicata: si vede solo aprendo il file.
-Quando sostituisci il valore, **cancella anche il commento**.
+Cosa c'è scritto oggi, e cosa no — decisioni di Luca del 16/09/2026:
 
-Elenco verificato il 30/08/2026 (giro 17) e riallineato il 15/09/2026 (giro 24, `grep -n '\[\['`). Le righe si sono spostate
-perché nei giri 16 e 17 i tre documenti sono stati riscritti con l'indice unico auto-espandibile: ogni
-articolo è ora una scheda che si apre da sola, e il testo è rientrato di un livello. Il totale resta
-**12**: nessun segnaposto è stato aggiunto o tolto. I numeri di riga valgono a oggi: se non tornano
-più, cerca il testo fra le doppie parentesi quadre, non la riga.
+| Dato | Come compare nei documenti |
+|---|---|
+| Nome del titolare | **Luca Bertaggia**, in tutti e cinque i punti: informativa § 1, § 2 e § 13, DPA «Parti e data di efficacia», Termini «Chi offre il servizio». |
+| Indirizzo postale | **Non pubblicato.** Non c'è una sede: l'attività non è aperta, e l'indirizzo personale non si pubblica. I documenti indicano «Torino (Italia)» e `info@fidai.it` come recapito. |
+| Partita IVA / codice fiscale | **Non pubblicati**, non esistono ancora. Al loro posto i documenti dicono che il pilota è gratuito e che la partita IVA sarà indicata quando l'attività sarà avviata. |
+| «ditta individuale» | Diventa «persona fisica» dove descrive fid.ai oggi: senza partita IVA la ditta non esiste. Resta dove parla del futuro (Termini, ciclo di fatturazione; pagina prezzi) e dove descrive il **cliente** (Termini, definizioni). |
 
-## Come si sostituisce, dall'editor di GitHub
+**Da rivedere con l'avvocato (ottobre 2026):**
 
-1. Apri il file su GitHub (per esempio `legal/informativa-privacy.html`) e clicca l'icona della matita in
-   alto a destra, «Edit this file».
-2. Cerca `[[` nel testo (Ctrl+F, o Cmd+F sul Mac). Sostituisci **tutto quello che sta fra `[[` e `]]`,
-   parentesi comprese**, con il valore vero; poi cancella il commento `<!-- DA-SOSTITUIRE: ... -->` che
-   segue subito dopo, spazio compreso.
-3. Scorri in fondo alla pagina e premi il bottone verde «Commit changes». Il sito si aggiorna da solo in
-   un paio di minuti; ricarica la pagina tenendo premuto Maiuscolo se vedi ancora la versione vecchia.
+- Chi offre un servizio online deve rendere accessibile un indirizzo geografico (art. 7 del
+  D.Lgs 70/2003, da confermare). Oggi c'è solo la città: va sistemato quando l'attività sarà aperta
+  e ci sarà una sede.
+- Il DPA (§ 3.4.d) promette ai clienti 14 giorni di preavviso a ogni cambio di fornitore. Il passaggio
+  da OpenAI a OpenRouter è del 09/09/2026: va comunicato ai clienti del pilota.
 
-Lo stesso dato va sostituito **in tutti i punti in cui compare**: sono tre file. Finito il giro, la
-ricerca di `[[` su GitHub non deve trovare più niente.
-
-## I segnaposto, uno per uno
-
-| # | File | Riga | Dove sta, nella pagina | Segnaposto (da sostituire per intero, parentesi comprese) | Cosa metterci |
-|---|------|-----:|------------------------|-----------------------------------------------------------|---------------|
-| 1 | `legal/dpa.html` | 110 | Addendum, scheda «Parti e data di efficacia»: chi è il «responsabile del trattamento» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
-| 2 | `legal/dpa.html` | 110 | Addendum, scheda «Parti e data di efficacia»: chi è il «responsabile del trattamento» | `[[INDIRIZZO COMPLETO — via e numero civico, CAP]]` | Via, numero civico e CAP dell'indirizzo a cui si possono mandare comunicazioni formali. La città (Torino, Italia) è già scritta accanto e non va ripetuta. Esempio: `Via Roma 1, 10121`. |
-| 3 | `legal/dpa.html` | 110 | Addendum, scheda «Parti e data di efficacia»: chi è il «responsabile del trattamento» | `[[P.IVA O CODICE FISCALE — oggi IT01234567890, valore di prova]]` | La partita IVA vera, se c'è; altrimenti il codice fiscale della persona fisica. `IT01234567890` è un numero di prova: non esiste e non va lasciato. |
-| 4 | `legal/informativa-privacy.html` | 143 | Informativa, scheda «1. Introduzione» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
-| 5 | `legal/informativa-privacy.html` | 160 | Informativa, scheda «2. Titolare del trattamento» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
-| 6 | `legal/informativa-privacy.html` | 161 | Informativa, scheda «2. Titolare del trattamento» | `[[INDIRIZZO COMPLETO — via e numero civico, CAP]]` | Via, numero civico e CAP dell'indirizzo a cui si possono mandare comunicazioni formali. La città (Torino, Italia) è già scritta accanto e non va ripetuta. Esempio: `Via Roma 1, 10121`. |
-| 7 | `legal/informativa-privacy.html` | 162 | Informativa, scheda «2. Titolare del trattamento» | `[[P.IVA O CODICE FISCALE — oggi IT01234567890, valore di prova]]` | La partita IVA vera, se c'è; altrimenti il codice fiscale della persona fisica. `IT01234567890` è un numero di prova: non esiste e non va lasciato. |
-| 8 | `legal/informativa-privacy.html` | 347 | Informativa, scheda «13. Contatti» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
-| 9 | `legal/informativa-privacy.html` | 348 | Informativa, scheda «13. Contatti» | `[[INDIRIZZO COMPLETO — via e numero civico, CAP]]` | Via, numero civico e CAP dell'indirizzo a cui si possono mandare comunicazioni formali. La città (Torino, Italia) è già scritta accanto e non va ripetuta. Esempio: `Via Roma 1, 10121`. |
-| 10 | `legal/termini-di-servizio.html` | 108 | Termini, scheda «Preambolo e introduzione», sotto «Chi offre il servizio» | `[[NOME E COGNOME DEL TITOLARE]]` | Il nome e il cognome della persona fisica che risponde del progetto. Esempio: `Mario Rossi`. |
-| 11 | `legal/termini-di-servizio.html` | 108 | Termini, scheda «Preambolo e introduzione», sotto «Chi offre il servizio» | `[[INDIRIZZO COMPLETO — via e numero civico, CAP]]` | Via, numero civico e CAP dell'indirizzo a cui si possono mandare comunicazioni formali. La città (Torino, Italia) è già scritta accanto e non va ripetuta. Esempio: `Via Roma 1, 10121`. |
-| 12 | `legal/termini-di-servizio.html` | 108 | Termini, scheda «Preambolo e introduzione», sotto «Chi offre il servizio» | `[[P.IVA O CODICE FISCALE — oggi IT01234567890, valore di prova]]` | La partita IVA vera, se c'è; altrimenti il codice fiscale della persona fisica. `IT01234567890` è un numero di prova: non esiste e non va lasciato. |
+Se in futuro tornano dei segnaposto, la regola resta: doppie parentesi quadre `[[COSÌ]]` più un commento
+`<!-- DA-SOSTITUIRE: … -->` accanto, così chi legge il sito vede che manca un dato invece di leggerne uno
+inventato e crederlo vero.
 
 ## Non sono segnaposto, ma vanno decisi lo stesso
 
