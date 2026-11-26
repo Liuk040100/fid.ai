@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>fid.ai: segreteria AI su WhatsApp per professionisti</title>
-<meta name="description" content="Risponde ai clienti su WhatsApp e fissa gli appuntamenti sul tuo Google Calendar, solo dopo il tuo sì. Pilota in validazione a Torino.">
+<title>fid.ai: assistente amministrativo AI per professionisti sanitari</title>
+<meta name="description" content="Gestisce appuntamenti su Google Calendar, disdette, vocali e consensi privacy dei pazienti su WhatsApp e Telegram mentre sei in seduta, sempre con la tua approvazione.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="fid.ai: segreteria AI su WhatsApp per professionisti">
-<meta property="og:description" content="Risponde ai clienti su WhatsApp e fissa gli appuntamenti sul Calendar, solo dopo il tuo sì.">
+<meta property="og:title" content="fid.ai: assistente amministrativo AI per professionisti sanitari">
+<meta property="og:description" content="Gestisce appuntamenti su Google Calendar, disdette, vocali e consensi privacy dei pazienti su WhatsApp e Telegram mentre sei in seduta, sempre con la tua approvazione.">
 <meta property="og:image" content="share.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/favicon.png" type="image/png">
@@ -40,13 +40,11 @@
   --display-weight: 400;
   --display-tracking: -0.03em;
   --display-tracking-xl: -0.04em;
-  --ly-scale: 0.98;
+  --ly-scale: 0.85;
 }
 </style>
 <link rel="stylesheet" href="assets/ui/base.css">
-<link rel="stylesheet" href="assets/ui/window/fragment.css">
 <link rel="stylesheet" href="assets/ui/chat/fragment.css">
-<link rel="stylesheet" href="assets/ui/calendar/fragment.css">
 <link rel="stylesheet" href="assets/ui/notify/fragment.css">
 <link rel="stylesheet" href="assets/ui/toggles/fragment.css">
 <link rel="stylesheet" href="assets/ui/checklist/fragment.css">
@@ -58,75 +56,206 @@
 <link rel="modulepreload" href="assets/moments/lib.js">
 <link rel="modulepreload" href="assets/moments/liquid-type/moment.js">
 <style>
-  /* il logo del cliente nella barra e nel piè di pagina */
+  /* logo fid.ai */
   .nav__logo img { display: block; height: 24px; width: auto; }
-  /* dentro la figura dell'apertura: la schermata Bozze AI dell'app */
+  /* contrasto testo attenuato nei mock */
+  .ui { --u-soft: #595b5d; }
+  /* schermata Bozze AI nella hero */
   .bz { width: 100%; }
-  .bz__sub { margin: 0; padding: 0 16px 12px; font-size: 12px; color: var(--u-muted, #6b6c6e); }
+  .bz__sub { margin: 0; padding: 0 16px 12px; font-size: 12px; color: var(--u-muted, #595b5d); }
   .bz__list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--u-line); }
-  .bz__row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 14px 16px; border-bottom: 1px solid var(--u-line); }
-  .bz__row.is-on { box-shadow: inset 3px 0 0 var(--accent); }
-  .bz__text { display: flex; flex-direction: column; gap: 2px; font-size: 13px; line-height: 1.45; min-width: 0; }
+  .bz__row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 13px 16px; border-bottom: 1px solid var(--u-line); }
+  .bz__row.is-on { box-shadow: inset 3px 0 0 var(--accent); background: #eef4f8; }
+  .bz__text { display: flex; flex-direction: column; gap: 2px; font-size: 13px; line-height: 1.42; min-width: 0; }
   .bz__text b { font-weight: 500; }
-  .bz__text time { font-size: 12px; color: var(--u-muted, #6b6c6e); }
+  .bz__text time { font-size: 12px; color: var(--u-muted, #595b5d); }
   .bz__acts { display: flex; align-items: center; gap: 6px; }
-  .bz__ico { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; color: var(--u-muted, #6b6c6e); }
+  .bz__ico { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; color: var(--u-muted, #595b5d); }
   .bz__ico svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  /* la finestra dell'app: ricetta app-frame */
-  .app.ui { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); margin-top: var(--s-7); background: var(--u-bg); border: 1px solid var(--u-border); border-radius: var(--u-r); box-shadow: var(--u-shadow); }
-  .app > .app__pane { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
-  .app > .app__pane + .app__pane { border-left: 1px solid var(--u-line); }
-  .app > .app__pane > .ui-panel { width: 100%; border: 0; border-radius: 0; box-shadow: none; }
-  .app > .app__pane::after { content: ""; position: absolute; inset: auto 0 0 0; height: 64px; background: linear-gradient(transparent, var(--u-bg)); pointer-events: none; }
-  @media (min-width: 1024px) and (max-width: 1279px) { .app.ui { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); } }
-  @media (max-width: 1023px) {
-    .app.ui { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
-    .app > .app__pane--list { max-height: 252px; }
-    .app > .app__pane--list::after { display: none; }
-    .app .ui-win__side { display: none; }
-    .app .ui-win__body { grid-template-columns: minmax(0, 1fr); }
-    .app > .app__pane + .app__pane { border-left: 0; border-top: 1px solid var(--u-line); }
+
+  /* sezione #app: ricetta A2 tabs-tour */
+  .app-tour { align-items: start; }
+  .app-tour__left { display: grid; gap: var(--s-5); align-content: start; }
+  .app-tour__left .section-head { margin-bottom: 0; }
+  .app-tour__left .tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-2); }
+  .app-tour__left .tab {
+    width: 100%; height: auto; min-height: 40px; padding: 6px 10px;
+    text-align: center; line-height: 1.2; white-space: normal;
+  }
+  .app-tour__left .tabs.m-has-ind .m-tab-ind { background: var(--action); }
+  .app-tour__left .tab[aria-selected="true"] { background: var(--action); color: var(--action-ink); border-color: var(--action); }
+  .app-tour__left .tabs.m-has-ind .tab[aria-selected="true"] { background: transparent; border-color: transparent; color: var(--action-ink); }
+  .app-tour__panels { height: 184px; }
+  .app-tour__panel { display: grid; gap: var(--s-4); align-content: start; }
+  .app-tour__panel p { font-size: 16px; line-height: 1.55; color: var(--ink); max-width: 52ch; }
+  .app-tour__panel[hidden] { display: none; }
+
+  .app-frame {
+    background: linear-gradient(180deg, #faf8f3 0%, #efebe2 100%);
+    border: 1px solid #e5e1d8;
+    height: 556px;
+    --ratio: 0px;
+  }
+  .privacy-frame { --ratio: 80%; }
+  .stage > [hidden] { display: none; }
+  .fid-screen { width: auto; max-width: 100%; }
+  .fid-screen .ui-panel { width: 100%; background: #fcfaf6; border-color: #e5e1d8; }
+  .fid-chan-ico { width: 14px; height: 14px; flex: none; display: block; }
+
+  /* hover affidabile sulle card linkate di #aiuta anche su headless desktop */
+  @media (min-width: 1024px) {
+    html:not([data-motion="off"]) a.card.card--open:not(.m-nolift):hover > .panel {
+      transform: translateY(var(--m-lift, -2px));
+      box-shadow: 0 14px 32px -18px rgb(35 39 44 / 0.22);
+      transition-duration: 180ms;
+    }
+    html:not([data-motion="off"]) a.card.card--open:hover .link {
+      background-size: calc(100% - 1em - var(--s-2)) 1px, calc(100% - 1em - var(--s-2)) 1px;
+      background-position: 0 100%, 0 100%;
+      color: var(--action);
+    }
+  }
+
+  .fid-pill {
+    display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px;
+    border-radius: 999px; font-size: 12px; font-weight: 500; line-height: 1; white-space: nowrap;
+  }
+  .fid-pill--copilot { background: #eef4f8; color: #14567f; border: 1px solid #d4e3ee; }
+  .fid-pill--green { background: #e7f1ea; color: #1f6b4a; border: 1px solid #cfe3d5; }
+  .fid-pill--amber { background: #fbf1e1; color: #8a4b00; border: 1px solid #edd9b4; }
+  .fid-pill--muted { background: #f3f0ea; color: #595b5d; border: 1px solid #e5e1d8; }
+  .fid-dot-live { width: 6px; height: 6px; border-radius: 50%; background: #14567f; flex: none; animation: fid-pulse 3.5s ease-in-out infinite; }
+  .fid-dot-amber { width: 6px; height: 6px; border-radius: 50%; background: #e8890c; flex: none; }
+  @keyframes fid-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.85); } }
+  #screen-1 { --m-cycle: 3.5s; }
+
+  .fid-copilot-box {
+    display: block; padding: 10px 12px; border-radius: 10px;
+    background: #eef4f8; border: 1px solid #d4e3ee; color: #23272c;
+  }
+  .fid-block { padding: 14px 16px; border-top: 1px solid #e5e1d8; display: grid; gap: 10px; }
+  .fid-modes { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .fid-voice {
+    display: grid; gap: 8px; padding: 10px 12px; border-radius: 10px;
+    background: #faf8f3; border: 1px solid #e5e1d8;
+  }
+  .fid-voice__top { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 12px; color: #595b5d; }
+  .fid-wave { display: flex; align-items: center; gap: 3px; height: 18px; }
+  .fid-wave i { display: block; width: 3px; border-radius: 2px; background: #14567f; height: calc(var(--h, 8) * 1px); }
+  .fid-acts { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .fid-btn-primary {
+    display: inline-flex; align-items: center; height: 28px; padding: 0 11px; border-radius: 7px;
+    background: #14567f; color: #fcfaf6; font-size: 12px; font-weight: 500;
+  }
+  .fid-btn-ghost {
+    display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 7px;
+    background: #fcfaf6; color: #23272c; border: 1px solid #e5e1d8; font-size: 12px; font-weight: 500;
+  }
+
+  .fid-consent-list { list-style: none; margin: 0; padding: 8px 16px 12px; display: grid; gap: 10px; }
+  .fid-consent-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.4; }
+  .fid-consent-tick {
+    display: grid; place-items: center; flex: none; width: 18px; height: 18px; margin-top: 1px;
+    border-radius: 50%; background: #e7f1ea; color: #1f6b4a;
+  }
+  .fid-consent-tick svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .fid-consent-meta { display: block; font-size: 12px; color: #595b5d; }
+  .fid-push {
+    margin: 0 16px 16px; padding: 12px; border-radius: 10px;
+    background: #faf8f3; border: 1px solid #e5e1d8; display: grid; gap: 6px;
+  }
+  .fid-push__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 12px; color: #595b5d; }
+  .fid-push__msg { font-size: 13px; font-weight: 500; color: #23272c; }
+
+  .fid-task-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 13px; }
+  .fid-meta-grid { display: grid; gap: 6px; font-size: 13px; color: #23272c; }
+  .fid-files { display: flex; flex-wrap: wrap; gap: 6px; }
+  .fid-file-chip {
+    display: inline-flex; align-items: center; gap: 5px; height: 24px; padding: 0 8px;
+    border-radius: 6px; background: #faf8f3; border: 1px solid #e5e1d8; font-size: 12px; color: #23272c;
+  }
+
+  /* responsive per #app, #per-chi, #come, #privacy, #aiuta */
+  @media (min-width: 1280px) { .hero h1 { font-size: 53px; } }
+  #per-chi .panel { --p-h: 288px; }
+  #privacy .frame { background: #efebe2; border-color: #e5e1d8; }
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .app-tour__panels { height: 214px; }
+    .app-frame { height: 472px; }
+    #privacy .frame { --ratio: 112%; }
+  }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    #app .wrap.grid, #privacy .wrap.grid { row-gap: var(--s-6); }
+    .app-tour__left { gap: var(--s-3); }
+    .app-tour__left .section-head { gap: var(--s-3); }
+    .app-tour__panels { height: 162px; }
+    .app-frame { height: 328px; }
+    #screen-1 .ui-chat__body { gap: 8px; padding: 10px 14px 12px; min-height: 0; }
+    #screen-1 .ui-chat__day { display: none; }
+    #come .frame { --ratio: 42%; }
+    #come ol.rows { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s-5); margin-top: var(--s-4) !important; }
+    #come ol.rows > li { padding-block: var(--s-2); }
+    #privacy .frame { --ratio: 74%; }
+    #privacy .at-corner { --ay: calc(100% - 410px); }
+    #per-chi .panel { --p-h: 350px; }
+    #approvazione .mo-lt__type { font-size: 11vw; }
+    footer#contact .closing__cta { gap: var(--s-4); }
+    .close__word { font-size: calc(17svh - 86px); }
+    #come .wrap > *, #privacy .wrap > *, #app .wrap > * { grid-column: 1 / -1; }
+    #aiuta .card:not(:first-child) .panel { display: none; }
   }
   @media (max-width: 639px) {
-    .app.ui { grid-template-rows: minmax(0, 1fr); }
-    .app > .app__pane--list { display: none; }
-    .app > .app__pane + .app__pane { border-top: 0; }
+    .hero { --hgap: 20px; --hpadb: 16px; }
+    .hero__text > * + * { margin-top: var(--s-3); }
+    .hero__text > .btn-row { margin-top: var(--s-4); }
+    .hero .ly-float { display: none; }
+    .bz__row { padding: 9px 12px; }
+    .app-tour__left { gap: var(--s-4); }
+    .app-tour__left .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .app-tour__left .tab { min-height: 44px; font-size: 13px; padding: 6px 8px; }
+    .app-tour__panels { height: 224px; }
+    .app-frame { height: 616px; }
+    .fid-screen .ui-chat { width: 100%; }
+    #come ol.rows { margin-top: var(--s-4) !important; }
+    #come ol.rows > li { padding-block: var(--s-2); gap: 2px; }
+    #come .frame { --ratio: 96%; }
+    #privacy .stack-4 { gap: 10px; }
+    #privacy .t-lead { font-size: 16.5px; line-height: 1.42; }
+    #privacy .frame { --ratio: 130%; }
+    #per-chi .panel { --p-h: 250px; }
+    footer#contact .closing__cta { gap: var(--s-2); }
+    footer#contact .close__word { font-size: 44px; }
+    footer#contact .closing__links .grid { row-gap: var(--s-3); }
+    footer#contact .footer__legal { margin-top: var(--s-3); padding-top: var(--s-3); gap: var(--s-2); }
   }
-  /* le due schede di «per chi» */
-  #per-chi .panel { --p-h: 260px; }
-  @media (max-width: 639px) { #per-chi .panel { --p-h: 250px; } #come .frame, #privacy .frame { --ratio: 130%; } }
-  /* tablet: il diagramma più basso, solo la prima scheda «aiuta» con il riquadro, così ogni sezione resta di una schermata */
-  @media (min-width: 1024px) and (max-width: 1279px) { #privacy .frame { --ratio: 110%; } }
-  @media (min-width: 800px) and (max-width: 1023px) { #privacy .frame { --ratio: 85% !important; } }
-  @media (min-width: 640px) and (max-width: 1023px) { #come .frame { --ratio: 50%; } #come ol.rows { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s-5); } #privacy .frame { --ratio: 70%; } #privacy .at-corner { --ay: calc(100% - 400px); } #per-chi .panel { --p-h: 310px; } #approvazione .mo-lt__type { font-size: 13vw; } .close__word { font-size: calc(22svh - 110px); } #come .wrap > *, #privacy .wrap > * { grid-column: 1 / -1; } #aiuta .card:not(:first-child) .panel { display: none; } }
-  /* dentro le schede: l'agenda del giorno e i tre modi per aiutare */
+
+  /* agenda e card di #aiuta */
   .ag, .mini { width: 100%; }
   .ag__list, .mini__list { list-style: none; margin: 0; padding: 0; }
-  .ag__row { display: grid; grid-template-columns: 44px auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 16px; border-top: 1px solid var(--u-line); font-size: 13px; }
-  .ag__row time { font-size: 12px; color: var(--u-muted, #6b6c6e); }
-  .ag__row.is-on { box-shadow: inset 3px 0 0 var(--accent); }
+  .ag__row { display: grid; grid-template-columns: 44px auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 8px 16px; border-top: 1px solid var(--u-line); font-size: 13px; }
+  .ag__row time { font-size: 12px; color: var(--u-muted, #595b5d); }
+  .ag__row.is-on { box-shadow: inset 3px 0 0 var(--accent); background: #eef4f8; }
   .ag__text { display: flex; flex-direction: column; min-width: 0; line-height: 1.35; }
   .ag__text b, .mini b { font-weight: 500; }
-  .ag__text span, .ag__dur, .mini__sub { font-size: 12px; color: var(--u-muted, #6b6c6e); }
-  .mini__row { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-top: 1px solid var(--u-line); font-size: 13px; }
+  .ag__text span, .ag__dur, .mini__sub { font-size: 12px; color: var(--u-muted, #595b5d); }
+  .mini__row { display: flex; align-items: center; gap: 12px; padding: 8px 16px; border-top: 1px solid var(--u-line); font-size: 13px; }
   .mini__row .ui-check__box { flex: none; }
-  .mini__field { display: grid; gap: 4px; padding: 8px 16px; font-size: 12px; color: var(--u-muted, #6b6c6e); }
-  .mini__field span { display: block; height: 32px; border: 1px solid var(--u-line); border-radius: 8px; background: var(--u-bg); }
+  .mini__field { display: grid; gap: 4px; padding: 6px 16px; font-size: 12px; color: var(--u-muted, #595b5d); }
+  .mini__field span { display: block; height: 28px; border: 1px solid var(--u-line); border-radius: 8px; background: var(--u-bg); }
   .mini__face { position: relative; display: block; flex: none; width: 48px; height: 48px; border-radius: 50%; overflow: clip; }
   .mini__face img { width: 100%; height: 100%; object-fit: cover; }
   .footer__legal .legal-item { margin-right: var(--s-4); }
-  #aiuta .panel { --p-h: 240px; }
-  @media (max-width: 639px) { .hero .ly-float { display: none; } }
+  #aiuta .panel { --p-h: 256px; }
   /* il nome in chiusura: Funnel Display sale oltre l'interlinea .86 del kit */
   .close__word { line-height: 1.02; }
 </style>
 </head>
 <body>
-<!-- type: software (segreteria AI su WhatsApp per professionisti)
+<!-- type: software (assistente amministrativo AI per professionisti sanitari)
      deal: hero split, nav nav-centre, close close-word, footer footer-columns, rhythm space, buttons arrow,
-     mark arc (sostituito dal logo del cliente), palette: colori del marchio (start.mjs brand), type funnel,
-     radius soft, ground sky, effect grain-gradient nella figura dell'apertura
-     moments: liquid-type nella sezione #approvazione (marquee-row sorteggiato per primo e ri-sorteggiato: il suo scorrimento falliva cut-text e row-lines del checker) -->
+     mark arc (sostituito dal logo del cliente), palette: colori reali fid.ai, type funnel,
+     radius soft, ground sky, effect grain-gradient nella figura dell'apertura, app tabs-tour (A2)
+     moments: liquid-type nella sezione #approvazione -->
 
 <header class="nav nav--centre">
   <div class="wrap nav__bar">
@@ -139,14 +268,14 @@
           <div class="wrap grid">
             <div class="menu-col span-3">
               <p class="t-label">L'app</p>
-              <a href="#app">Le chat<span>Le bozze accanto a ogni cliente</span></a>
-              <a href="#come">Come funziona<span>Cinque passi, stesso numero</span></a>
-              <a href="#per-chi">Per chi è<span>Professionisti senza segreteria</span></a>
+              <a href="#app">I moduli dello studio<span>Chat, vocali, consenso, agenda</span></a>
+              <a href="#come">Come funziona<span>Cinque passi per lo studio</span></a>
+              <a href="#per-chi">Studi sanitari<span>Meno burocrazia tra sedute</span></a>
             </div>
             <div class="menu-col span-3">
               <p class="t-label">Il pilota</p>
-              <a href="#aiuta">Tre modi per aiutare<span>Intervista, questionario, lista</span></a>
-              <a href="#privacy">Privacy<span>Bozza di default, dati in Europa</span></a>
+              <a href="#aiuta">Partecipa al pilota<span>Intervista, sondaggio o lista</span></a>
+              <a href="#privacy">Dati sanitari e GDPR<span>Bozza di default, server UE</span></a>
             </div>
           </div>
         </div>
@@ -168,100 +297,215 @@
   <section class="hero hero--split" data-enter aria-labelledby="hero-h">
     <div class="wrap"><div class="hero-text grid hero__grid">
       <div class="hero__text span-5">
-        <p class="hero__kicker"><span class="dot" aria-hidden="true"></span>Pilota in validazione a Torino · lista d'attesa in 1 minuto</p>
-        <h1 id="hero-h">Segreteria AI su WhatsApp per professionisti</h1>
-        <p class="hero__lead">Per professionisti e piccole attività: risponde ai clienti su WhatsApp e fissa gli appuntamenti sul tuo Google Calendar.</p>
+        <p class="hero__kicker"><span class="dot" aria-hidden="true"></span>Pilota per studi sanitari italiani · lista d'attesa in 1 minuto</p>
+        <h1 id="hero-h">Assistente amministrativo AI per professionisti sanitari</h1>
+        <p class="hero__lead">Mentre sei in seduta gestisce richieste, spostamenti e disdette dei pazienti su WhatsApp e Telegram, trascrive i vocali in Europa e aggiorna il tuo Google Calendar, solo con la tua approvazione.</p>
         <div class="btn-row"><a class="btn btn--primary" href="../lista-attesa.html">Entra in lista d'attesa<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a></div>
       </div>
       <div class="hero__media span-6 start-7" data-visual data-fx="grain-gradient" data-fx-seed="7">
-        <div class="stage stage--fade-b"><div class="at-rise fit" style="--fit-max:460px;--ax:max(24px, 50% - 230px);--ay:56px;--ay-sm:24px">
-          <div class="ui ui-panel bz" role="img" aria-label="La schermata Bozze AI di fid.ai: quattro risposte in attesa di approvazione, la prima per Maria R. con giovedì alle 17:30 o venerdì alle 9:00">
+        <div class="stage stage--fade-b"><div class="at-rise fit" style="--fit-max:460px;--ax:max(24px, 50% - 230px);--ay:48px;--ay-sm:16px">
+          <div class="ui ui-panel bz" role="img" aria-label="La schermata Bozze AI di fid.ai: quattro richieste amministrative di pazienti in attesa di approvazione">
             <div class="ui-head"><div class="ui-title">Bozze AI</div><span class="ui-spacer"></span><div class="ui-meta">4 in attesa</div></div>
-            <p class="bz__sub">Risposte preparate dall'AI in attesa della tua approvazione</p>
+            <p class="bz__sub">Risposte amministrative preparate dall'AI in attesa della tua approvazione</p>
             <ul class="bz__list">
-              <li class="bz__row is-on"><span class="ui-avatar" data-tone="1">MR</span><span class="bz__text"><b>Maria R.</b><span>Buongiorno Maria, ho posto giovedì alle 17:30 oppure venerdì alle 9:00: quale preferisce?</span><time>Oggi, 9:14</time></span><span class="bz__acts"><span class="ui-btn ui-btn--sm">Approva</span><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span></span></li>
-              <li class="bz__row"><span class="ui-avatar" data-tone="3">SB</span><span class="bz__text"><b>Sara Belotti</b><span>Buongiorno Sara, la prima visita dura circa 45 minuti. Ho posto giovedì alle 15:30: le va bene?</span><time>Oggi, 8:51</time></span><span class="bz__acts"><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg></span><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span></span></li>
-              <li class="bz__row"><span class="ui-avatar" data-tone="4">PF</span><span class="bz__text"><b>Paolo Ferretti</b><span>Buongiorno Paolo, il sabato siamo aperti dalle 9:00 alle 12:30. Vuole che le fissi un appuntamento?</span><time>Oggi, 8:14</time></span><span class="bz__acts"><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg></span><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span></span></li>
-              <li class="bz__row"><span class="ui-avatar" data-tone="5">CV</span><span class="bz__text"><b>Chiara Vitale</b><span>Grazie Chiara, resto in attesa della ricevuta. Buona giornata!</span><time>Ieri, 17:14</time></span><span class="bz__acts"><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg></span><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span></span></li>
+              <li class="bz__row is-on"><span class="ui-avatar" data-tone="1">MR</span><span class="bz__text"><b>Maria R.</b><span>Buongiorno Maria, posso spostare la seduta a giovedì alle 17:30 oppure venerdì alle 9:00: quale preferisce?</span><time>WhatsApp · Oggi, 9:14</time></span><span class="bz__acts"><span class="ui-btn ui-btn--sm">Approva</span><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span></span></li>
+              <li class="bz__row"><span class="ui-avatar" data-tone="3">SB</span><span class="bz__text"><b>Sara Belotti</b><span>Buongiorno Sara, la prima seduta dura 45 minuti. Ho disponibilità giovedì alle 15:30: le confermo?</span><time>Telegram · Oggi, 8:51</time></span><span class="bz__acts"><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg></span><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span></span></li>
+              <li class="bz__row"><span class="ui-avatar" data-tone="4">PF</span><span class="bz__text"><b>Paolo Ferretti</b><span>Buongiorno Paolo, si è liberato un posto oggi alle 17:00 per una disdetta: desidera anticipare?</span><time>WhatsApp · Oggi, 8:14</time></span><span class="bz__acts"><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg></span><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span></span></li>
+              <li class="bz__row"><span class="ui-avatar" data-tone="5">CV</span><span class="bz__text"><b>Chiara Vitale</b><span>Grazie Chiara, consenso privacy confermato. L'appuntamento di domani alle 11:00 è confermato.</span><time>WhatsApp · Ieri, 17:14</time></span><span class="bz__acts"><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg></span><span class="bz__ico"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span></span></li>
             </ul>
           </div>
         </div></div>
         <div class="ly-float">
           <div class="ly-float__row"><span class="ly-live">Google Calendar</span><span>giovedì 17:30</span></div>
-          <div class="ly-float__title">Maria R., appuntamento fissato</div>
+          <div class="ly-float__title">Maria R., seduta confermata</div>
         </div>
       </div>
     </div></div>
   </section>
 
-  <section class="section" id="app" aria-labelledby="app-h">
-    <div class="wrap">
-      <div class="grid">
-        <h2 class="span-5" id="app-h">Le chat di WhatsApp, con la bozza pronta</h2>
-        <p class="span-6 start-7">A sinistra i tuoi clienti. A destra Maria R. chiede un appuntamento, approvi la bozza con giovedì 17:30 o venerdì 9:00 e lei sceglie giovedì. <a class="link" href="#come">Vedi come funziona</a></p>
+  <section class="section g2m" id="app" aria-labelledby="app-h">
+    <div class="wrap grid app-tour">
+      <div class="span-5 app-tour__left">
+        <div class="section-head">
+          <h2 id="app-h">I moduli dell'assistente AI per lo studio</h2>
+          <p class="t-lead">Ogni funzione reale dell'app spiegata passo passo, dalla bozza in chat all'archivio. <span class="muted">Clicca un modulo.</span></p>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Moduli di fid.ai">
+          <button class="tab" type="button" role="tab" aria-selected="true" aria-controls="tab-1 screen-1" id="t-1">Fissa visite e disdette</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="tab-2 screen-2" id="t-2">Prepara bozze e vocali</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="tab-3 screen-3" id="t-3">Raccoglie il consenso</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="tab-4 screen-4" id="t-4">Organizza studio e archivio</button>
+        </div>
+        <div class="app-tour__panels">
+          <div class="app-tour__panel" role="tabpanel" id="tab-1" aria-labelledby="t-1">
+            <p>Sincronizza il tuo Google Calendar, controlla i conflitti di orario e gestisce spostamenti e ricorrenze su WhatsApp e Telegram. Quando un paziente disdice all'ultimo minuto, usa la lista d'attesa dello studio per proporre subito il posto libero e invia i promemoria.</p>
+            <a class="link" href="#come">Vedi i cinque passi</a>
+          </div>
+          <div class="app-tour__panel" role="tabpanel" id="tab-2" aria-labelledby="t-2" hidden>
+            <p>Scegli per ogni singolo paziente tra modalità Copilota con bozza da approvare, Autopilota o In pausa. I messaggi vocali ricevuti su WhatsApp e Telegram vengono trascritti sul nostro server in Europa e ogni orario scritto viene verificato sul calendario reale.</p>
+            <a class="link" href="#approvazione">Scopri il controllo umano</a>
+          </div>
+          <div class="app-tour__panel" role="tabpanel" id="tab-3" aria-labelledby="t-3" hidden>
+            <p>Invia l'informativa privacy al primo contatto, gestisce l'ammissione dei pazienti e mostra la cronologia completa del consenso direttamente nella chat. Le notifiche push sul tuo telefono non espongono mai testi o dettagli sanitari.</p>
+            <a class="link" href="#privacy">Leggi le garanzie GDPR</a>
+          </div>
+          <div class="app-tour__panel" role="tabpanel" id="tab-4" aria-labelledby="t-4" hidden>
+            <p>Dialoghi in chat diretta con il tuo assistente personale per fissare impegni e task con avviso di scadenza. Gestisci rubrica e schede pazienti con tono formale o informale, orari, listino prestazioni con durate e archivio documenti dello studio.</p>
+            <a class="link" href="../lista-attesa.html">Richiedi l'accesso al pilota</a>
+          </div>
+        </div>
       </div>
-      <div class="ui app fill" role="img" aria-label="La finestra di fid.ai: l'elenco delle chat WhatsApp accanto alla conversazione con Maria R., con la bozza approvata e l'appuntamento di giovedì alle 17:30 sul Google Calendar" data-ui-pause-host>
-        <div class="app__pane app__pane--list">
-          <div class="ui ui-panel ui-win" data-ui="window" data-open="Bozza" data-work="In corso" data-done="Risposto">
-            <div class="ui-win__bar">
-              <span class="ui-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="ui-win__crumb">fid.ai <i>/</i> <b>Chat</b></span>
-              <span class="ui-spacer"></span>
-              <span class="ui-win__search" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg><span class="ui-win__ph">Cerca chat</span></span>
+
+      <div class="frame frame--split span-6 start-7 app-frame" data-ui-pause-host>
+        <div class="stage stage--fade-br">
+          <div id="screen-1" class="at-rise fit to-edge fid-screen" style="--fit-max:440px;--ax:max(24px, 50% - 220px);--ay:28px;--ay-sm:16px" data-ui-loop>
+            <div class="ui ui-panel ui-chat" data-ui="chat" role="img" aria-label="Conversazione WhatsApp con Maria R., bozza Copilota approvata e appuntamento scritto su Google Calendar">
+              <div class="ui-head">
+                <span class="ui-avatar" data-tone="1" aria-hidden="true">MR</span>
+                <div class="ui-title">Maria R.</div>
+                <img class="fid-chan-ico" data-icon="whatsapp" src="assets/icons/whatsapp.svg" alt="">
+                <span class="ui-chat__online">WhatsApp</span>
+                <span class="ui-spacer"></span>
+                <span class="fid-pill fid-pill--copilot"><span class="fid-dot-live" aria-hidden="true"></span>Copilota</span>
+              </div>
+              <div class="ui-chat__body">
+                <div class="ui-chat__day">Oggi, 9:12</div>
+                <div class="ui-msg ui-msg--me" data-chat-q><span class="ui-msg__text">Buongiorno, posso spostare la seduta in settimana?</span></div>
+                <div class="ui-msg ui-msg--bot">
+                  <span class="ui-agent ui-msg__av" aria-hidden="true"></span>
+                  <span class="ui-msg__col">
+                    <span class="ui-chat__answer fid-copilot-box">Buongiorno Maria, ho controllato gli orari liberi dello studio e propongo <b>giovedì alle 17:30</b> oppure venerdì alle 9:00: quale preferisce?</span>
+                    <span class="ui-chat__srcs">
+                      <span class="ui-chat__src"><svg class="ui-icon" viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg>Bozza Copilota approvata</span>
+                      <span class="ui-chat__src"><img class="ui-brand" data-icon="google-calendar" src="assets/icons/google-calendar.svg" alt="">Slot verificato</span>
+                    </span>
+                  </span>
+                </div>
+                <div class="ui-msg ui-msg--me"><span class="ui-msg__text">Giovedì alle 17:30 per me va benissimo, la ringrazio molto.</span></div>
+                <div class="ui-msg ui-msg--bot" data-chat-a>
+                  <span class="ui-agent ui-msg__av" aria-hidden="true"></span>
+                  <span class="ui-msg__col">
+                    <span class="ui-chat__typing" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="ui-chat__answer">Perfetto, seduta confermata <b>giovedì alle 17:30</b>. Il giorno prima le invio il promemoria.</span>
+                    <span class="ui-chat__srcs">
+                      <span class="ui-chat__src"><img class="ui-brand" data-icon="google-calendar" src="assets/icons/google-calendar.svg" alt="">Scritto su Google Calendar</span>
+                      <span class="ui-chat__src"><svg class="ui-icon" viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg>Promemoria attivo</span>
+                    </span>
+                  </span>
+                </div>
+              </div>
+              <div class="ui-chat__input"><span class="ui-chat__ph">Scrivi un messaggio o un vocale</span><span class="ui-chat__send" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M8 13V3.5M3.8 7.5 8 3.3l4.2 4.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
             </div>
-            <div class="ui-win__body">
-              <nav class="ui-win__side" aria-hidden="true">
-                <span class="ui-win__nav is-on"><svg class="ui-icon" viewBox="0 0 16 16"><path d="M2.5 9h3l1 1.5h3l1-1.5h3"/><path d="M2.5 9 4 3.5h8L13.5 9v3.5h-11z"/></svg>Tutti<em>6</em></span>
-                <span class="ui-win__nav"><svg class="ui-icon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 1.5"/></svg>Non letti<em>2</em></span>
-                <span class="ui-win__nav"><svg class="ui-icon" viewBox="0 0 16 16"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg>Bozze<em>2</em></span>
-                <span class="ui-win__nav"><svg class="ui-icon" viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg>Archivio</span>
-                <span class="ui-win__label">Oggi</span>
-                <span class="ui-win__nav"><span class="ui-win__hash">#</span>Agenda</span>
-                <span class="ui-win__nav"><span class="ui-win__hash">#</span>Assistente</span>
-              </nav>
-              <div class="ui-win__main">
-                <div class="ui-win__cols" aria-hidden="true"><span>Cliente</span><span>Messaggio</span><span>Stato</span><span>Ora</span></div>
-                <ul class="ui-win__rows">
-                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="1">MR</span><span class="ui-win__who">Maria R.</span><span class="ui-win__sub">Un appuntamento in settimana</span><span class="ui-win__st is-you" data-st>Bozza</span><span class="ui-win__age">9:12</span></li>
-                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="2">EM</span><span class="ui-win__who">Elena Marchetti</span><span class="ui-win__sub">Spostare l'appuntamento di giovedì</span><span class="ui-win__st" data-st>Da leggere</span><span class="ui-win__age">9:06</span></li>
-                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="3">SB</span><span class="ui-win__who">Sara Belotti</span><span class="ui-win__sub">Quanto dura la prima visita?</span><span class="ui-win__st" data-st>Bozza</span><span class="ui-win__age">8:49</span></li>
-                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="4">PF</span><span class="ui-win__who">Paolo Ferretti</span><span class="ui-win__sub">Siete aperti il sabato?</span><span class="ui-win__st is-done" data-st>Risposto</span><span class="ui-win__age">8:14</span></li>
-                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="5">DC</span><span class="ui-win__who">Davide Conti</span><span class="ui-win__sub">Ci vediamo martedì alle 15</span><span class="ui-win__st is-done" data-st>Risposto</span><span class="ui-win__age">Ieri</span></li>
-                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="3">CV</span><span class="ui-win__who">Chiara Vitale</span><span class="ui-win__sub">Vi mando la ricevuta</span><span class="ui-win__st is-done" data-st>Risposto</span><span class="ui-win__age">Ieri</span></li>
-                </ul>
+          </div>
+
+          <div id="screen-2" class="at-rise fit to-edge fid-screen" style="--fit-max:440px;--ax:max(24px, 50% - 220px);--ay:28px;--ay-sm:16px" hidden>
+            <div class="ui ui-panel" role="img" aria-label="Schermata bozze e vocali di fid.ai con vocale trascritto in Europa, selettore modalità contatto e verifica orario">
+              <div class="ui-head">
+                <span class="ui-avatar" data-tone="2" aria-hidden="true">EM</span>
+                <div class="ui-title">Elena Marchetti</div>
+                <img class="fid-chan-ico" data-icon="telegram" src="assets/icons/telegram.svg" alt="">
+                <span class="ui-chat__online">Telegram</span>
+                <span class="ui-spacer"></span>
+                <span class="fid-pill fid-pill--amber"><span class="fid-dot-amber" aria-hidden="true"></span>Bozza attesa</span>
+              </div>
+              <div class="fid-block">
+                <div class="fid-modes">
+                  <span class="fid-pill fid-pill--copilot">Copilota · Attivo</span>
+                  <span class="fid-pill fid-pill--muted">Autopilota</span>
+                  <span class="fid-pill fid-pill--muted">In pausa</span>
+                </div>
+                <div class="fid-voice">
+                  <div class="fid-voice__top">
+                    <span>Vocale ricevuto · 0:38</span>
+                    <span class="fid-pill fid-pill--green">Trascritto in Europa</span>
+                  </div>
+                  <div class="fid-wave" aria-hidden="true">
+                    <i style="--h:5"></i><i style="--h:10"></i><i style="--h:14"></i><i style="--h:8"></i><i style="--h:16"></i><i style="--h:11"></i><i style="--h:7"></i><i style="--h:13"></i><i style="--h:17"></i><i style="--h:9"></i><i style="--h:12"></i><i style="--h:6"></i><i style="--h:15"></i><i style="--h:10"></i><i style="--h:7"></i>
+                  </div>
+                  <span>«Buongiorno dottoressa, venerdì prossimo avrei bisogno di spostare l'orario dopo le 18:00.»</span>
+                </div>
+                <div class="fid-copilot-box">
+                  <div class="fid-voice__top" style="margin-bottom:6px">
+                    <b style="color:#14567f;font-weight:500">Bozza Copilota pronta</b>
+                    <span class="fid-pill fid-pill--green">Orario verificato</span>
+                  </div>
+                  <span>«Buongiorno Elena, venerdì alle 18:15 ho uno slot libero da 45 minuti: glielo blocco su Google Calendar?»</span>
+                </div>
+                <div class="fid-acts">
+                  <span class="fid-btn-primary">Approva e invia</span>
+                  <span class="fid-btn-ghost">Modifica</span>
+                  <span class="fid-btn-ghost">Scarta</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="app__pane app__pane--open" data-ui-loop>
-          <div class="ui ui-panel ui-chat" data-ui="chat">
-            <div class="ui-head">
-              <span class="ui-avatar" data-tone="1" aria-hidden="true">MR</span>
-              <div class="ui-title">Maria R.</div>
-              <span class="ui-chat__online">WhatsApp</span>
-              <span class="ui-spacer"></span>
-            </div>
-            <div class="ui-chat__body">
-              <div class="ui-chat__day">Oggi, 9:12</div>
-              <div class="ui-msg ui-msg--me" data-chat-q><span class="ui-msg__text">Buongiorno, avrei bisogno di un appuntamento in settimana.</span></div>
-              <div class="ui-msg ui-msg--bot">
-                <span class="ui-agent ui-msg__av" aria-hidden="true"></span>
-                <span class="ui-msg__col">
-                  <span class="ui-chat__answer">Buongiorno Maria, ho posto <b>giovedì alle 17:30</b> oppure venerdì alle 9:00: quale preferisce?</span>
-                  <span class="ui-chat__srcs"><span class="ui-chat__src"><svg class="ui-icon" viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg>Bozza approvata da te</span></span>
-                </span>
+
+          <div id="screen-3" class="at-rise fit to-edge fid-screen" style="--fit-max:440px;--ax:max(24px, 50% - 220px);--ay:28px;--ay-sm:16px" hidden>
+            <div class="ui ui-panel" role="img" aria-label="Schermata consenso privacy e ammissione paziente con notifica push protetta">
+              <div class="ui-head">
+                <span class="ui-avatar" data-tone="4" aria-hidden="true">LV</span>
+                <div class="ui-title">Lorenzo Villa</div>
+                <span class="ui-spacer"></span>
+                <span class="fid-pill fid-pill--green">Pacchetto legale attivo</span>
               </div>
-              <div class="ui-msg ui-msg--me"><span class="ui-msg__text">Giovedì, grazie.</span></div>
-              <div class="ui-msg ui-msg--bot" data-chat-a>
-                <span class="ui-agent ui-msg__av" aria-hidden="true"></span>
-                <span class="ui-msg__col">
-                  <span class="ui-chat__typing" aria-hidden="true"><i></i><i></i><i></i></span>
-                  <span class="ui-chat__answer">Perfetto, la aspetto <b>giovedì alle 17:30</b>. Il giorno prima le mando un promemoria.</span>
-                  <span class="ui-chat__srcs"><span class="ui-chat__src"><svg class="ui-icon" viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></svg>Scritto sul Google Calendar</span></span>
-                </span>
+              <ul class="fid-consent-list">
+                <li class="fid-consent-item">
+                  <span class="fid-consent-tick"><svg viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg></span>
+                  <span><b>Informativa privacy inviata</b><span class="fid-consent-meta">Al primo contatto su WhatsApp · Oggi, 08:40</span></span>
+                </li>
+                <li class="fid-consent-item">
+                  <span class="fid-consent-tick"><svg viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg></span>
+                  <span><b>Consenso registrato in chat</b><span class="fid-consent-meta">Cronologia conservata nella scheda paziente · Oggi, 08:43</span></span>
+                </li>
+                <li class="fid-consent-item">
+                  <span class="fid-consent-tick"><svg viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg></span>
+                  <span><b>Paziente ammesso nello studio</b><span class="fid-consent-meta">Bozza Copilota e agenda abilitate · Oggi, 08:44</span></span>
+                </li>
+              </ul>
+              <div class="fid-push">
+                <div class="fid-push__head">
+                  <span>Notifica push sul telefono</span>
+                  <span class="fid-pill fid-pill--copilot">Testo protetto</span>
+                </div>
+                <div class="fid-push__msg">fid.ai · Nuovo messaggio da verificare nell'app</div>
+                <span style="font-size:12px;color:#595b5d">Nessun testo dei pazienti né dettaglio sanitario compare nella schermata di blocco.</span>
               </div>
             </div>
-            <div class="ui-chat__input"><span class="ui-chat__ph">Scrivi un messaggio</span><span class="ui-chat__send" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M8 13V3.5M3.8 7.5 8 3.3l4.2 4.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          </div>
+
+          <div id="screen-4" class="at-rise fit to-edge fid-screen" style="--fit-max:440px;--ax:max(24px, 50% - 220px);--ay:28px;--ay-sm:16px" hidden>
+            <div class="ui ui-panel" role="img" aria-label="Assistente personale dello studio con task in scadenza, scheda paziente e archivio documenti">
+              <div class="ui-head">
+                <span class="ui-agent" aria-hidden="true"></span>
+                <div class="ui-title">Assistente studio</div>
+                <span class="ui-spacer"></span>
+                <span class="fid-pill fid-pill--copilot">Chat diretta</span>
+              </div>
+              <div class="fid-block">
+                <div class="fid-copilot-box">
+                  <b>Hai 2 task in scadenza oggi</b><br>
+                  <span>La scheda di Maria R. e l'archivio dello studio sono aggiornati.</span>
+                </div>
+                <div class="fid-task-row">
+                  <span>Richiamare lista d'attesa slot 17:00</span>
+                  <span class="fid-pill fid-pill--amber"><span class="fid-dot-amber" aria-hidden="true"></span>Oggi, 12:30</span>
+                </div>
+                <div class="fid-task-row">
+                  <span>Aggiornare orari settimana prossima</span>
+                  <span class="fid-pill fid-pill--copilot">Domani, 09:00</span>
+                </div>
+              </div>
+              <div class="fid-block">
+                <div class="fid-meta-grid">
+                  <span><b>Scheda paziente:</b> Maria R. · Tono: Dare del Lei</span>
+                  <span><b>Listino prestazioni:</b> Seduta controllo · 50 min</span>
+                </div>
+                <div class="fid-files">
+                  <span class="fid-file-chip">Informativa_GDPR_Studio.pdf</span>
+                  <span class="fid-file-chip">Regole_Disdette_24h.pdf</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -271,17 +515,17 @@
   <section class="section g2m" id="come" aria-labelledby="come-h">
     <div class="wrap grid">
         <div class="span-5">
-          <h2 id="come-h">Cinque passi, con il tuo numero WhatsApp</h2>
+          <h2 id="come-h">Cinque passi per alleggerire lo studio</h2>
           <ol class="rows" style="margin-top: var(--s-6)">
-            <li><span class="rows__name">1. Imposti regole, orari e servizi</span><p>Impara le tue abitudini e il tuo stile.</p></li>
-            <li><span class="rows__name">2. Colleghi Google Calendar</span><p>Così vede i tuoi orari liberi.</p></li>
-            <li><span class="rows__name">3. Riceve messaggi e vocali</span><p>Li trascrive sul nostro server in Europa.</p></li>
-            <li><span class="rows__name">4. Prepara la bozza</span><p>Con l'orario libero più adatto.</p></li>
-            <li><span class="rows__name">5. Confermi con un tocco</span><p>Oppure attivi le risposte automatiche.</p></li>
+            <li><span class="rows__name">1. Configuri orari, prestazioni e pacchetto legale</span><p>Imposti durate delle sedute, regole dello studio e stile di risposta.</p></li>
+            <li><span class="rows__name">2. Colleghi Google Calendar, WhatsApp e Telegram</span><p>L'assistente legge le disponibilità reali senza sovrapposizioni.</p></li>
+            <li><span class="rows__name">3. Raccoglie il consenso e trascrive i vocali</span><p>Informativa al primo contatto e trascrizione audio locale in Europa.</p></li>
+            <li><span class="rows__name">4. Prepara la bozza e gestisce le disdette</span><p>Propone lo slot libero o richiama i pazienti in lista d'attesa.</p></li>
+            <li><span class="rows__name">5. Confermi con un tocco tra una seduta e l'altra</span><p>Approvi in Copilota, metti in pausa o attivi l'invio automatico per contatto.</p></li>
           </ol>
         </div>
-        <div class="frame frame--split span-6 start-7">
-          <div class="dg" data-diagram data-dg-still><script type="application/json">{"layout":"lanes","motion":{"pulse":"none"},"alt":"Un messaggio o un vocale su WhatsApp arriva a fid.ai, che trascrive il vocale sul server in Europa, trova l'orario libero sul Google Calendar e prepara la bozza che aspetta il tuo sì.","input":{"label":"WhatsApp","icon":"whatsapp","sub":"Messaggi e vocali"},"core":{"label":"fid.ai","icon":"ui:bot"},"lanes":[{"label":"Vocale trascritto","icon":"ui:mic","done":true,"sub":"Server in Europa"},{"label":"Orario libero","icon":"google-calendar","done":true,"sub":"Google Calendar"},{"label":"Bozza pronta","icon":"ui:pen-line","done":true,"sub":"Aspetta il tuo sì"}]}</script></div>
+        <div class="frame span-6 start-7 privacy-frame">
+          <div class="dg" data-diagram data-dg-still><script type="application/json">{"layout":"lanes","motion":{"pulse":"none"},"alt":"I messaggi su WhatsApp e Telegram arrivano a fid.ai, che gestisce consenso e vocali sul server in Europa, trova slot e disdette su Google Calendar e prepara la bozza in Copilota da confermare con un tocco.","input":{"label":"WhatsApp e Telegram","icon":"whatsapp","sub":"Canali dello studio"},"core":{"label":"fid.ai","icon":"ui:bot"},"lanes":[{"label":"Consenso e vocali","icon":"ui:mic","done":true,"sub":"Server in Europa"},{"label":"Slot e disdette","icon":"google-calendar","done":true,"sub":"Google Calendar"},{"label":"Bozza in Copilota","icon":"ui:pen-line","done":true,"sub":"Confermi con un tocco"}]}</script></div>
         </div>
     </div>
   </section>
@@ -289,38 +533,38 @@
   <section class="section" id="per-chi" style="--hm: 2" aria-labelledby="per-chi-h">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="per-chi-h">Per professionisti senza segreteria</h2>
-        <p>Medici, psicologhe, avvocati, estetiste, commercialisti, nutrizioniste, fisioterapisti, dentiste, artigiani, consulenti, veterinarie. Anche (soprattutto) se pensi che una cosa così non ti servirebbe.</p>
+        <h2 id="per-chi-h">Costruito per i professionisti sanitari italiani</h2>
+        <p>Medici specialisti, psicologhe e psicoterapeuti, fisioterapisti, odontoiatre, nutrizioniste, osteopati. Pensato per chi lavora a contatto con il paziente e a fine giornata si ritrova sommerso dalla burocrazia di studio.</p>
       </div>
       <div class="grid">
         <article class="card card--row card--open span-6 m-nolift">
-          <h3>Fissa gli appuntamenti sul Google Calendar</h3>
-          <p>Dopo il sì del cliente scrive l'appuntamento nella tua agenda, con il promemoria.</p>
+          <h3>Protegge le ore di seduta e riempie i buchi</h3>
+          <p>Gestisce disdette dell'ultimo minuto, lista d'attesa e spostamenti sul tuo Google Calendar mentre visiti.</p>
           <div class="panel">
-            <div class="stage stage--fade-b"><div class="at-rise fit to-edge" style="--fit-max:420px;--ax:max(24px, 50% - 210px);--ay:40px;--ay-sm:16px">
-              <div class="ui ui-panel ag" role="img" aria-label="L'agenda di giovedì in fid.ai: cinque appuntamenti, alle 17:30 quello di Maria R.">
-                <div class="ui-head"><div class="ui-title">Giovedì</div><span class="ui-spacer"></span><div class="ui-meta">5 appuntamenti</div></div>
+            <div class="stage stage--fade-b"><div class="at-rise fit to-edge" style="--fit-max:420px;--ax:max(24px, 50% - 210px);--ay:20px;--ay-sm:16px">
+              <div class="ui ui-panel ag" role="img" aria-label="L'agenda di giovedì in fid.ai: cinque sedute e un recupero dalla lista d'attesa">
+                <div class="ui-head"><div class="ui-title">Giovedì</div><span class="ui-spacer"></span><div class="ui-meta">5 sedute</div></div>
                 <ul class="ag__list">
-                  <li class="ag__row"><time>11:00</time><span class="ui-avatar" data-tone="2">EM</span><span class="ag__text"><b>Igiene dentale</b><span>Elena Marchetti</span></span><span class="ag__dur">45 min</span></li>
-                  <li class="ag__row"><time>12:30</time><span class="ui-avatar" data-tone="3">SB</span><span class="ag__text"><b>Prima visita</b><span>Sara Belotti</span></span><span class="ag__dur">45 min</span></li>
-                  <li class="ag__row"><time>14:00</time><span class="ui-avatar" data-tone="5">DC</span><span class="ag__text"><b>Controllo annuale</b><span>Davide Conti</span></span><span class="ag__dur">30 min</span></li>
-                  <li class="ag__row is-on"><time>17:30</time><span class="ui-avatar" data-tone="1">MR</span><span class="ag__text"><b>Appuntamento</b><span>Maria R., promemoria il giorno prima</span></span><span class="ag__dur">Nuovo</span></li>
-                  <li class="ag__row"><time>18:30</time><span class="ui-avatar" data-tone="4">PF</span><span class="ag__text"><b>Controllo</b><span>Paolo Ferretti</span></span><span class="ag__dur">30 min</span></li>
+                  <li class="ag__row"><time>11:00</time><span class="ui-avatar" data-tone="2">EM</span><span class="ag__text"><b>Prima seduta</b><span>Elena Marchetti</span></span><span class="ag__dur">45 min</span></li>
+                  <li class="ag__row"><time>12:30</time><span class="ui-avatar" data-tone="3">SB</span><span class="ag__text"><b>Controllo periodico</b><span>Sara Belotti</span></span><span class="ag__dur">45 min</span></li>
+                  <li class="ag__row"><time>14:00</time><span class="ui-avatar" data-tone="5">DC</span><span class="ag__text"><b>Colloquio conoscitivo</b><span>Davide Conti</span></span><span class="ag__dur">30 min</span></li>
+                  <li class="ag__row is-on"><time>17:30</time><span class="ui-avatar" data-tone="1">MR</span><span class="ag__text"><b>Recupero da lista d'attesa</b><span>Maria R., promemoria attivo</span></span><span class="ag__dur">Nuovo</span></li>
+                  <li class="ag__row"><time>18:30</time><span class="ui-avatar" data-tone="4">PF</span><span class="ag__text"><b>Seduta programmata</b><span>Paolo Ferretti</span></span><span class="ag__dur">30 min</span></li>
                 </ul>
               </div>
             </div></div>
           </div>
         </article>
         <article class="card card--row card--open span-6 m-nolift">
-          <h3>Riepiloga le chat di WhatsApp</h3>
-          <p>Mette in cima le conversazioni da guardare e le bozze in attesa.</p>
+          <h3>Tiene in ordine pazienti, task e canali</h3>
+          <p>Raggruppa in un solo posto le bozze WhatsApp e Telegram, le scadenze dello studio e le schede anagrafiche.</p>
           <div class="panel">
-            <div class="stage stage--fade-b"><div class="at-rise fit" style="--fit-max:400px;--ax:max(24px, 50% - 200px);--ay:calc(100% - 196px);--ay-sm:calc(100% - 196px)">
+            <div class="stage stage--fade-b"><div class="at-rise fit" style="--fit-max:400px;--ax:max(24px, 50% - 200px);--ay:calc(100% - 224px);--ay-sm:calc(100% - 224px)">
               <div class="ui ui-notify" data-ui="notify">
                 <ul class="ui-notify__list" data-notify-list>
-                  <li class="ui-note"><span class="ui-agent ui-note__av" aria-hidden="true"></span><span class="ui-note__text"><span class="ui-note__title">2 conversazioni da guardare<time>ora</time></span><span class="ui-note__body">Elena Marchetti vuole spostare giovedì</span></span><span class="ui-btn ui-btn--sm ui-note__btn">Apri</span></li>
-                  <li class="ui-note"><span class="ui-avatar ui-note__av" data-tone="3">SB</span><span class="ui-note__text"><span class="ui-note__title">1 bozza in attesa<time>8:49</time></span><span class="ui-note__body">Sara Belotti, la durata della prima visita</span></span></li>
-                  <li class="ui-note"><span class="ui-note__ico"><svg class="ui-icon" viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg></span><span class="ui-note__text"><span class="ui-note__title">Davide Conti ha confermato<time>ieri</time></span><span class="ui-note__body">Martedì alle 15</span></span></li>
+                  <li class="ui-note"><span class="ui-agent ui-note__av" aria-hidden="true"></span><span class="ui-note__text"><span class="ui-note__title">2 bozze in attesa<time>ora</time></span><span class="ui-note__body">Elena Marchetti sposta giovedì su Telegram</span></span><span class="ui-btn ui-btn--sm ui-note__btn">Apri</span></li>
+                  <li class="ui-note"><span class="ui-avatar ui-note__av" data-tone="4">PF</span><span class="ui-note__text"><span class="ui-note__title">Recupero disdetta proposto<time>8:49</time></span><span class="ui-note__body">Paolo Ferretti dalla lista d'attesa</span></span></li>
+                  <li class="ui-note"><span class="ui-note__ico"><svg class="ui-icon" viewBox="0 0 16 16"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg></span><span class="ui-note__text"><span class="ui-note__title">Consensi verificati<time>ieri</time></span><span class="ui-note__body">4 pazienti ammessi su WhatsApp</span></span></li>
                 </ul>
               </div>
             </div></div>
@@ -333,8 +577,8 @@
   <section class="section statement" id="approvazione" aria-labelledby="appr-h">
     <div class="wrap">
       <div data-moment="liquid-type" data-moment-opts='{"strength": 0.6}'>
-        <h2 class="mo-lt__type" id="appr-h">fid.ai lavora per te, ma solo con la tua approvazione.</h2>
-        <p class="t-lead" style="margin-top: var(--s-7)">Di default scrive una bozza, e tu leggi e mandi. L'invio automatico lo accendi tu.</p>
+        <h2 class="mo-lt__type" id="appr-h">fid.ai lavora per il tuo studio, ma solo con la tua approvazione.</h2>
+        <p class="t-lead" style="margin-top: var(--s-7)">Di default opera in Copilota: prepara la bozza e tu confermi con un tocco. Per ogni paziente puoi scegliere anche In pausa o Autopilota.</p>
       </div>
     </div>
   </section>
@@ -342,26 +586,26 @@
   <section class="section g2m" id="privacy" aria-labelledby="privacy-h">
     <div class="wrap grid">
         <div class="span-5 stack-4">
-          <h2 id="privacy-h">La privacy è la prima obiezione. <span class="muted">Ed è giusta.</span></h2>
-          <p class="t-lead">Zero addestramento: le conversazioni non addestrano nessun modello, nostro o di terzi.</p>
-          <p>I vocali si trascrivono in locale sul nostro server in Europa: l'audio non va a servizi esterni.</p>
+          <h2 id="privacy-h">La tutela dei dati sanitari viene prima di tutto. <span class="muted">Senza scorciatoie.</span></h2>
+          <p class="t-lead">Zero addestramento: le conversazioni non addestrano nessun modello, né nostro né di terzi, e ogni studio ha dati isolati a livello di database.</p>
+          <p>I vocali si trascrivono in locale sul nostro server in Europa, le notifiche push non espongono mai testi clinici e operiamo su canali ufficiali con fatturazione italiana diretta, senza portali pubblicitari esteri o autofatture TD17.</p>
           <p><a class="link" href="../legal/informativa-privacy.html">Leggi l'informativa sulla privacy</a></p>
         </div>
-        <div class="frame frame--split span-6 start-7">
+        <div class="frame span-6 start-7 privacy-frame">
           <div class="stage stage--fade-br"><div class="at-corner fit" style="--fit-max:560px;--ax:max(24px, 50% - 280px);--ay:56px">
             <div class="ui ui-panel ui-toggles" data-ui="toggles">
               <div class="ui-head">
                 <svg class="ui-icon ui-toggles__ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8 13 4v3.6c0 3-2.1 5.4-5 6.6-2.9-1.2-5-3.6-5-6.6V4z"/><path d="m5.8 8 1.6 1.6 3-3.2"/></svg>
-                <div class="ui-title">Cosa fa fid.ai</div>
+                <div class="ui-title">Garanzie dello studio</div>
                 <span class="ui-spacer"></span>
-                <div class="ui-meta" data-tg-count>2 di 5</div>
+                <div class="ui-meta" data-tg-count>3 di 5</div>
               </div>
               <ul class="ui-toggles__list">
-                <li class="ui-tg"><span class="ui-tg__text"><span class="ui-tg__label">Scrive le bozze delle risposte</span><span class="ui-tg__sub">Tu leggi e mandi</span></span><button class="ui-switch is-on" type="button" role="switch" aria-checked="true" aria-label="Scrive le bozze delle risposte"><i></i></button></li>
-                <li class="ui-tg"><span class="ui-tg__text"><span class="ui-tg__label">Trascrive i vocali</span><span class="ui-tg__sub">In locale, sul nostro server in Europa</span></span><button class="ui-switch is-on" type="button" role="switch" aria-checked="true" aria-label="Trascrive i vocali"><i></i></button></li>
-                <li class="ui-tg"><span class="ui-tg__text"><span class="ui-tg__label">Invia le risposte senza chiederti</span><span class="ui-tg__sub">Spento finché non lo accendi tu</span></span><button class="ui-switch" type="button" role="switch" aria-checked="false" aria-label="Invia le risposte senza chiederti"><i></i></button></li>
-                <li class="ui-tg"><span class="ui-tg__text"><span class="ui-tg__label">Addestra modelli con le tue chat</span><span class="ui-tg__sub">Mai, né nostri né di terzi</span></span><button class="ui-switch" type="button" role="switch" aria-checked="false" aria-label="Addestra modelli con le tue chat" disabled><i></i></button></li>
-                <li class="ui-tg"><span class="ui-tg__text"><span class="ui-tg__label">Manda l'audio a servizi esterni</span><span class="ui-tg__sub">Mai</span></span><button class="ui-switch" type="button" role="switch" aria-checked="false" aria-label="Manda l'audio a servizi esterni" disabled><i></i></button></li>
+                <li class="ui-tg"><span class="ui-tg__text"><span class="ui-tg__label">Modalità Copilota predefinita</span><span class="ui-tg__sub">Prepariamo la bozza, tu approvi</span></span><button class="ui-switch is-on" type="button" role="switch" aria-checked="true" aria-label="Modalità Copilota predefinita"><i></i></button></li>
+                <li class="ui-tg"><span class="ui-tg__text"><span class="ui-tg__label">Consenso al primo contatto e push protette</span><span class="ui-tg__sub">Nessun testo sanitario nelle notifiche</span></span><button class="ui-switch is-on" type="button" role="switch" aria-checked="true" aria-label="Consenso al primo contatto e push protette"><i></i></button></li>
+                <li class="ui-tg"><span class="ui-tg__text"><span class="ui-tg__label">Trascrizione vocali in Europa</span><span class="ui-tg__sub">Elaborazione locale, dati isolati per studio</span></span><button class="ui-switch is-on" type="button" role="switch" aria-checked="true" aria-label="Trascrizione vocali in Europa"><i></i></button></li>
+                <li class="ui-tg"><span class="ui-tg__text"><span class="ui-tg__label">Addestramento modelli sulle chat</span><span class="ui-tg__sub">Mai, né nostri né di terzi</span></span><button class="ui-switch" type="button" role="switch" aria-checked="false" aria-label="Addestramento modelli sulle chat" disabled><i></i></button></li>
+                <li class="ui-tg"><span class="ui-tg__text"><span class="ui-tg__label">Audio inviato a servizi extra-UE</span><span class="ui-tg__sub">Mai</span></span><button class="ui-switch" type="button" role="switch" aria-checked="false" aria-label="Audio inviato a servizi extra-UE" disabled><i></i></button></li>
               </ul>
             </div>
           </div></div>
@@ -372,14 +616,14 @@
   <section class="section" id="aiuta" style="--hm: 2" aria-labelledby="aiuta-h">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="aiuta-h">Tre modi per aiutare il pilota. <span class="muted">Dal più impegnativo al più veloce.</span></h2>
+        <h2 id="aiuta-h">3 modi per aiutare il pilota. <span class="muted">Dal più impegnativo al più veloce.</span></h2>
       </div>
       <div class="grid">
         <a class="card card--row card--open span-4" href="https://calendar.app.google/BSCFrTZiFVUPNc6TA">
           <h3>Un'intervista di 15 minuti</h3>
-          <p>In videochiamata con Luca Bertaggia, che costruisce fid.ai a Torino con un socio tecnico.</p>
+          <p>In videochiamata con Luca Bertaggia, per raccontare come gestisci bozze, agende e disdette in studio.</p>
           <div class="panel">
-            <div class="stage stage--fade-b"><div class="at-rise fit to-edge" style="--fit-max:320px;--ax:max(24px, 50% - 160px);--ay:40px;--ay-sm:16px">
+            <div class="stage stage--fade-b"><div class="at-rise fit to-edge" style="--fit-max:320px;--ax:max(24px, 50% - 160px);--ay:24px;--ay-sm:16px">
               <div class="ui ui-panel mini">
                 <div class="mini__row" style="border-top:0"><span class="m-zoom mini__face"><img class="frame__img" src="img/luca.jpg" alt="Luca Bertaggia" width="48" height="48" data-source="client" data-subject="il fondatore"></span><span><b>Luca Bertaggia</b><br><span class="mini__sub">fid.ai, Torino</span></span></div>
                 <div class="mini__row"><svg class="ui-icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 1.5"/></svg>15 minuti</div>
@@ -391,15 +635,15 @@
         </a>
         <a class="card card--row card--open span-4" href="../questionario.html">
           <h3>Un questionario di 3 minuti</h3>
-          <p>16 domande, quasi tutte a crocette. Puoi restare anonimo: l'email è facoltativa.</p>
+          <p>16 domande pensate per professionisti sanitari. Puoi restare anonimo: l'email è facoltativa.</p>
           <div class="panel">
-            <div class="stage stage--fade-b"><div class="at-rise fit to-edge" style="--fit-max:320px;--ax:max(24px, 50% - 160px);--ay:40px;--ay-sm:16px">
-              <div class="ui ui-panel mini ui-checks" role="img" aria-label="Le quattro sezioni del questionario: la tua attività, il problema, il concept, prezzo e prova">
+            <div class="stage stage--fade-b"><div class="at-rise fit to-edge" style="--fit-max:320px;--ax:max(24px, 50% - 160px);--ay:20px;--ay-sm:16px">
+              <div class="ui ui-panel mini ui-checks" role="img" aria-label="Le quattro sezioni del questionario per studi sanitari: il tuo studio, agenda e disdette, consensi e bozza, accesso al pilota">
                 <div class="ui-head"><div class="ui-title">Questionario</div><span class="ui-spacer"></span><div class="ui-meta">16 domande</div></div>
-                <div class="mini__row ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span>La tua attività</div>
-                <div class="mini__row ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span>Il problema</div>
-                <div class="mini__row ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span>Il concept</div>
-                <div class="mini__row ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span>Prezzo e prova</div>
+                <div class="mini__row ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span>Il tuo studio</div>
+                <div class="mini__row ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span>Agenda e disdette</div>
+                <div class="mini__row ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span>Consensi e bozza</div>
+                <div class="mini__row ui-check"><span class="ui-check__box"><svg viewBox="0 0 16 16"><path d="m4.5 8.2 2.3 2.3 4.7-5"/></svg></span>Accesso al pilota</div>
               </div>
             </div></div>
           </div>
@@ -407,14 +651,14 @@
         </a>
         <a class="card card--row card--open span-4" href="../lista-attesa.html">
           <h3>La lista d'attesa, in 1 minuto</h3>
-          <p>Il pilota parte con pochi professionisti seguiti uno per uno: ti scriviamo quando c'è un posto vero.</p>
+          <p>Il pilota parte con pochi professionisti sanitari seguiti uno per uno: ti scriviamo quando c'è un posto vero.</p>
           <div class="panel">
-            <div class="stage stage--fade-b"><div class="at-rise fit to-edge" style="--fit-max:320px;--ax:max(24px, 50% - 160px);--ay:40px;--ay-sm:16px">
-              <div class="ui ui-panel mini" role="img" aria-label="Il modulo della lista d'attesa del pilota: nome e cognome, email, tipo di attività">
+            <div class="stage stage--fade-b"><div class="at-rise fit to-edge" style="--fit-max:320px;--ax:max(24px, 50% - 160px);--ay:20px;--ay-sm:16px">
+              <div class="ui ui-panel mini" role="img" aria-label="Il modulo della lista d'attesa del pilota: nome e cognome, email, professione sanitaria">
                 <div class="ui-head"><div class="ui-title">Lista d'attesa del pilota</div></div>
                 <div class="mini__field">Nome e cognome<span></span></div>
                 <div class="mini__field">Email<span></span></div>
-                <div class="mini__field">Che tipo di attività gestisci?<span></span></div>
+                <div class="mini__field">Che professione sanitaria svolgi?<span></span></div>
               </div>
             </div></div>
           </div>
@@ -429,7 +673,7 @@
   <div class="wrap">
     <div class="closing__cta close--word">
       <div class="section-head--split">
-        <div><h2 id="close-h">La segreteria AI per professionisti, in costruzione, con voi.</h2><p class="t-lead">Il pilota parte con pochi professionisti seguiti uno per uno.</p></div>
+        <div><h2 id="close-h">L'assistente amministrativo per gli studi sanitari, in costruzione con voi.</h2><p class="t-lead">Il pilota parte con pochi professionisti sanitari italiani seguiti uno per uno.</p></div>
         <a class="btn btn--primary" href="../lista-attesa.html">Entra in lista d'attesa<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
       </div>
       <p class="close__word" aria-hidden="true">fid.ai</p>
@@ -438,10 +682,10 @@
       <div class="grid">
         <div class="span-4 stack-4">
           <a class="nav__logo" href="#top"><img src="img/logo-nome-azienda.png" alt="fid.ai" width="64" height="24"></a>
-          <p class="footer__lede">Segreteria AI su WhatsApp, da Torino.</p>
+          <p class="footer__lede">Assistente amministrativo AI per studi sanitari, da Torino.</p>
         </div>
-        <div class="span-2 footer__col"><h3>App</h3><ul><li><a href="#app">Le chat</a></li><li><a href="#come">Come funziona</a></li><li><a href="#per-chi">Per chi è</a></li></ul></div>
-        <div class="span-2 footer__col"><h3>Pilota</h3><ul><li><a href="#aiuta">Tre modi per aiutare</a></li><li><a href="#privacy">Privacy</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>App</h3><ul><li><a href="#app">I moduli</a></li><li><a href="#come">Come funziona</a></li><li><a href="#per-chi">Studi sanitari</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Pilota</h3><ul><li><a href="#aiuta">Partecipa al pilota</a></li><li><a href="#privacy">Dati sanitari e GDPR</a></li></ul></div>
         <div class="span-2 footer__col"><h3>Risorse</h3><ul><li><a href="../resources/partner.html">Fornitori</a></li><li><a href="../resources/faq.html">Domande frequenti</a></li></ul></div>
         <div class="span-2 footer__col"><h3>Contatti</h3><ul><li><a href="mailto:info@fidai.it">info@fidai.it</a></li><li>Torino, Italia</li></ul></div>
       </div>
